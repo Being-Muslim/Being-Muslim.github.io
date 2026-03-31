@@ -92,13 +92,13 @@
 
 <div style="font-family: 'DM Sans', sans-serif; color: #2a2018;">
 	<!-- ===== ABOUT US SECTION ===== -->
-	<section class="pt-28 pb-20 lg:pt-36 lg:pb-24" style="background: #f0ebe3;">
+	<section class="pt-28 pb-20 lg:pt-36 lg:pb-24" style="background: #faf9f5;">
 		<div class="max-w-[1400px] mx-auto px-6 lg:px-10">
 			<!-- Section label -->
 			<div class="flex items-center gap-2 mb-6">
-				<Star class="w-3.5 h-3.5 text-[#5c6e4f]" />
+				<Star class="w-3.5 h-3.5 text-[#2a2018]" />
 				<span
-					class="text-[12px] font-medium text-[#5c6e4f] uppercase tracking-[0.12em]"
+					class="text-[12px] font-medium text-[#2a2018] uppercase tracking-[0.12em]"
 					>About Us</span
 				>
 			</div>
@@ -111,7 +111,7 @@
 						style="font-family: 'Source Serif 4', serif;"
 					>
 						The Being Muslim
-						<span class="italic" style="color: #5c6e4f;">Project</span>
+						<span class="italic" style="color: #2a2018;">Project</span>
 					</h1>
 
 					<p class="text-[15px] leading-[1.75] mb-5" style="color: #8a7e70;">
@@ -155,7 +155,7 @@
 						] as stat}
 							<div
 								class="flex items-center justify-between py-4"
-								style="border-bottom: 1px solid #d6cfc5;"
+								style="border-bottom: 1px solid #d8d2c8;"
 							>
 								<span
 									class="text-[28px] font-bold tracking-tight"
@@ -185,9 +185,9 @@
 		<div class="max-w-[1400px] mx-auto px-6 lg:px-10">
 			<!-- Section label -->
 			<div class="flex items-center gap-2 mb-6">
-				<Star class="w-3.5 h-3.5 text-[#5c6e4f]" />
+				<Star class="w-3.5 h-3.5 text-[#2a2018]" />
 				<span
-					class="text-[12px] font-medium text-[#5c6e4f] uppercase tracking-[0.12em]"
+					class="text-[12px] font-medium text-[#2a2018] uppercase tracking-[0.12em]"
 					>Speaker Requests</span
 				>
 			</div>
@@ -198,7 +198,7 @@
 					style="font-family: 'Source Serif 4', serif;"
 				>
 					Bring Being Muslim
-					<span class="italic" style="color: #5c6e4f;">to Your Community</span>
+					<span class="italic" style="color: #2a2018;">to Your Community</span>
 				</h2>
 				<p
 					class="text-[14px] leading-[1.7] lg:pt-3 self-end"
@@ -215,11 +215,11 @@
 				{#each speakerOfferings as offering}
 					<div
 						class="p-7 transition-all hover:shadow-lg"
-						style="background: #e9e3da; border-radius: 10px;"
+						style="background: #f4f1eb; border-radius: 10px;"
 					>
 						<div
 							class="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
-							style="background: #5c6e4f;"
+							style="background: #2a2018;"
 						>
 							<offering.icon class="w-5 h-5 text-white" />
 						</div>
@@ -238,7 +238,7 @@
 						<a
 							href="#contact-form"
 							class="inline-flex items-center gap-2 px-6 py-2.5 text-white text-[13px] font-medium rounded-full hover:opacity-90 transition-opacity"
-							style="background: #5c6e4f;"
+							style="background: #2a2018;"
 						>
 							Inquire
 							<ArrowRight class="w-3.5 h-3.5" />
@@ -250,14 +250,14 @@
 	</section>
 
 	<!-- ===== CONTACT FORM SECTION ===== -->
-	<section id="contact-form" class="py-20 lg:py-24" style="background: #f0ebe3;">
+	<section id="contact-form" class="py-20 lg:py-24" style="background: #faf9f5;">
 		<div class="max-w-[1400px] mx-auto px-6 lg:px-10">
 			<div class="max-w-[780px] mx-auto">
 				<!-- Section label -->
 				<div class="flex items-center gap-2 mb-6">
-					<Star class="w-3.5 h-3.5 text-[#5c6e4f]" />
+					<Star class="w-3.5 h-3.5 text-[#2a2018]" />
 					<span
-						class="text-[12px] font-medium text-[#5c6e4f] uppercase tracking-[0.12em]"
+						class="text-[12px] font-medium text-[#2a2018] uppercase tracking-[0.12em]"
 						>Contact</span
 					>
 				</div>
@@ -277,11 +277,11 @@
 				{#if formSuccess}
 					<div
 						class="p-8 text-center mb-10"
-						style="background: #e9e3da; border-radius: 10px;"
+						style="background: #f4f1eb; border-radius: 10px;"
 					>
 						<div
 							class="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4"
-							style="background: #5c6e4f;"
+							style="background: #2a2018;"
 						>
 							<Send class="w-6 h-6 text-white" />
 						</div>
@@ -297,7 +297,7 @@
 						</p>
 						<button
 							class="mt-5 text-[13px] font-medium underline underline-offset-4 hover:opacity-70 transition-opacity cursor-pointer"
-							style="color: #5c6e4f;"
+							style="color: #2a2018;"
 							onclick={() => (formSuccess = false)}
 						>
 							Send another message
@@ -318,8 +318,8 @@
 									id="firstName"
 									bind:value={firstName}
 									placeholder="Your first name"
-									class="w-full px-4 py-3 bg-white text-[14px] placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#5c6e4f]/30 transition-shadow"
-									style="border: 1px solid #d6cfc5; border-radius: 8px;"
+									class="w-full px-4 py-3 bg-white text-[14px] placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#2a2018]/30 transition-shadow"
+									style="border: 1px solid #d8d2c8; border-radius: 8px;"
 								/>
 							</div>
 							<div>
@@ -333,8 +333,8 @@
 									id="lastName"
 									bind:value={lastName}
 									placeholder="Your last name"
-									class="w-full px-4 py-3 bg-white text-[14px] placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#5c6e4f]/30 transition-shadow"
-									style="border: 1px solid #d6cfc5; border-radius: 8px;"
+									class="w-full px-4 py-3 bg-white text-[14px] placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#2a2018]/30 transition-shadow"
+									style="border: 1px solid #d8d2c8; border-radius: 8px;"
 								/>
 							</div>
 						</div>
@@ -350,8 +350,8 @@
 								bind:value={email}
 								required
 								placeholder="you@example.com"
-								class="w-full px-4 py-3 bg-white text-[14px] placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#5c6e4f]/30 transition-shadow"
-								style="border: 1px solid #d6cfc5; border-radius: 8px;"
+								class="w-full px-4 py-3 bg-white text-[14px] placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#2a2018]/30 transition-shadow"
+								style="border: 1px solid #d8d2c8; border-radius: 8px;"
 							/>
 						</div>
 
@@ -366,8 +366,8 @@
 								id="subject"
 								bind:value={subject}
 								required
-								class="w-full px-4 py-3 bg-white text-[14px] focus:outline-none focus:ring-2 focus:ring-[#5c6e4f]/30 transition-shadow appearance-none cursor-pointer"
-								style="border: 1px solid #d6cfc5; border-radius: 8px; color: {subject ? '#2a2018' : '#a8a29e'};"
+								class="w-full px-4 py-3 bg-white text-[14px] focus:outline-none focus:ring-2 focus:ring-[#2a2018]/30 transition-shadow appearance-none cursor-pointer"
+								style="border: 1px solid #d8d2c8; border-radius: 8px; color: {subject ? '#2a2018' : '#a8a29e'};"
 							>
 								<option value="" disabled>Select a subject</option>
 								{#each subjectOptions as option}
@@ -389,8 +389,8 @@
 								required
 								rows="5"
 								placeholder="Tell us how we can help..."
-								class="w-full px-4 py-3 bg-white text-[14px] placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#5c6e4f]/30 transition-shadow resize-y"
-								style="border: 1px solid #d6cfc5; border-radius: 8px;"
+								class="w-full px-4 py-3 bg-white text-[14px] placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#2a2018]/30 transition-shadow resize-y"
+								style="border: 1px solid #d8d2c8; border-radius: 8px;"
 							></textarea>
 						</div>
 
@@ -399,7 +399,7 @@
 							type="submit"
 							disabled={formSubmitting}
 							class="inline-flex items-center gap-2 px-8 py-3 text-white text-[14px] font-medium rounded-full hover:opacity-90 transition-opacity disabled:opacity-60 cursor-pointer"
-							style="background: #5c6e4f;"
+							style="background: #2a2018;"
 						>
 							{#if formSubmitting}
 								<span
@@ -416,22 +416,22 @@
 
 				<!-- Divider -->
 				<div class="my-14 flex items-center gap-4">
-					<div class="flex-1 h-px" style="background: #d6cfc5;"></div>
+					<div class="flex-1 h-px" style="background: #d8d2c8;"></div>
 					<span class="text-[12px] uppercase tracking-[0.1em]" style="color: #8a7e70;"
 						>Or</span
 					>
-					<div class="flex-1 h-px" style="background: #d6cfc5;"></div>
+					<div class="flex-1 h-px" style="background: #d8d2c8;"></div>
 				</div>
 
 				<!-- Newsletter Signup -->
 				<div
 					class="p-8 md:p-10"
-					style="background: #e9e3da; border-radius: 10px;"
+					style="background: #f4f1eb; border-radius: 10px;"
 				>
 					<div class="flex items-center gap-3 mb-4">
 						<div
 							class="w-10 h-10 rounded-full flex items-center justify-center"
-							style="background: #5c6e4f;"
+							style="background: #2a2018;"
 						>
 							<Mail class="w-4 h-4 text-white" />
 						</div>
@@ -449,7 +449,7 @@
 
 					{#if newsletterSuccess}
 						<div class="text-center py-4">
-							<p class="text-[14px] font-medium" style="color: #5c6e4f;">
+							<p class="text-[14px] font-medium" style="color: #2a2018;">
 								You are subscribed! Welcome to the Being Muslim community.
 							</p>
 						</div>
@@ -462,22 +462,22 @@
 								type="text"
 								bind:value={newsletterName}
 								placeholder="Your name"
-								class="flex-1 px-4 py-3 bg-white text-[14px] placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#5c6e4f]/30 transition-shadow"
-								style="border: 1px solid #d6cfc5; border-radius: 8px;"
+								class="flex-1 px-4 py-3 bg-white text-[14px] placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#2a2018]/30 transition-shadow"
+								style="border: 1px solid #d8d2c8; border-radius: 8px;"
 							/>
 							<input
 								type="email"
 								bind:value={newsletterEmail}
 								required
 								placeholder="Your email"
-								class="flex-1 px-4 py-3 bg-white text-[14px] placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#5c6e4f]/30 transition-shadow"
-								style="border: 1px solid #d6cfc5; border-radius: 8px;"
+								class="flex-1 px-4 py-3 bg-white text-[14px] placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#2a2018]/30 transition-shadow"
+								style="border: 1px solid #d8d2c8; border-radius: 8px;"
 							/>
 							<button
 								type="submit"
 								disabled={newsletterSubmitting}
 								class="px-6 py-3 text-white text-[13px] font-medium rounded-full hover:opacity-90 transition-opacity disabled:opacity-60 cursor-pointer whitespace-nowrap"
-								style="background: #5c6e4f;"
+								style="background: #2a2018;"
 							>
 								{#if newsletterSubmitting}
 									Subscribing...

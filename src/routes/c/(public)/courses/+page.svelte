@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { courses, type Course } from '$lib/data/mock.js';
 	import {
 		ArrowRight,
@@ -70,7 +71,7 @@
 {#if featuredCourse}
 	<section style="background: #faf9f5; padding: 0;">
 		<div class="mx-auto max-w-[1400px] px-6 lg:px-10" style="margin-top: -32px; position: relative; z-index: 10;">
-			<a href="/c/courses/{featuredCourse.slug}" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
+			<a href="{base}/c/courses/{featuredCourse.slug}" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
 				<div class="bm-card-hover" style="background: #e2dcd2; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.08);">
 					<div style="display: grid; grid-template-columns: 2fr 3fr;">
 						<!-- Image area -->
@@ -180,7 +181,7 @@
 		<!-- Course Grid -->
 		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px;">
 			{#each filteredCourses as course (course.slug)}
-				<a href="/c/courses/{course.slug}" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
+				<a href="{base}/c/courses/{course.slug}" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
 					<div class="bm-card-hover" style="display: flex; flex-direction: column; height: 100%; border-radius: 14px; overflow: hidden; background: #e2dcd2;">
 						<!-- Image placeholder -->
 						<div style="position: relative; aspect-ratio: 16/9; background: linear-gradient(135deg, rgba(200,184,160,0.4), rgba(226,220,210,0.6)); display: flex; align-items: center; justify-content: center;">

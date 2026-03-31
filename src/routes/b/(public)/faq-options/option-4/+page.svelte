@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { ChevronDown } from 'lucide-svelte';
 
 	let openFaq = $state<number | null>(null);
@@ -48,10 +49,10 @@
 				{/each}
 
 				<div style="margin-top: 24px; display: flex; gap: 12px;">
-					<a href="/b/convert" class="bm-btn-dark" style="padding: 10px 24px;">
+					<a href="{base}/b/convert" class="bm-btn-dark" style="padding: 10px 24px;">
 						Ready to Convert
 					</a>
-					<a href="/b/contact" class="bm-btn-outline" style="padding: 10px 24px;">
+					<a href="{base}/b/contact" class="bm-btn-outline" style="padding: 10px 24px;">
 						Ask a Question
 					</a>
 				</div>
@@ -66,7 +67,7 @@
 					<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; margin: 0 0 24px;">
 						Taking the step toward Islam is a deeply personal and beautiful decision. Whether you have been thinking about it for years or are just now feeling the pull, we are here to walk with you through every step.
 					</p>
-					<a href="/b/convert" class="bm-btn-white" style="padding: 12px 24px; width: 100%; text-align: center; justify-content: center;">
+					<a href="{base}/b/convert" class="bm-btn-white" style="padding: 12px 24px; width: 100%; text-align: center; justify-content: center;">
 						Start Your Journey
 					</a>
 				</div>

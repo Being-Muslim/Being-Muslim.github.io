@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { ArrowLeft, ShoppingCart, Star, Heart } from 'lucide-svelte';
 </script>
 
@@ -16,7 +17,7 @@
 <section style="background: #f4f1eb; padding-top: 110px;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10" style="padding-top: 16px; padding-bottom: 16px;">
 		<nav style="display: flex; align-items: center; gap: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px;">
-			<a href="/c/shop" style="color: #8a7e70; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;" class="bm-view-all">
+			<a href="{base}/c/shop" style="color: #8a7e70; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;" class="bm-view-all">
 				<ArrowLeft style="width: 16px; height: 16px;" />
 				Back to Shop
 			</a>
@@ -107,9 +108,9 @@
 		</h2>
 		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;" class="max-md:!grid-cols-1 max-lg:!grid-cols-2">
 			{#each [
-				{ title: 'Being Muslim: A Practical Guide', price: '$14.95', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg', href: '/c/shop/book' },
-				{ title: 'The Complete Boxed Set', price: '$85.00', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg', href: '/c/shop/boxed-set' },
-				{ title: 'Prayer Reference Cards', price: '$37.50', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-prayer-card-900x610.jpeg', href: '/c/shop/prayer-cards' }
+				{ title: 'Being Muslim: A Practical Guide', price: '$14.95', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg', href: `${base}/c/shop/book` },
+				{ title: 'The Complete Boxed Set', price: '$85.00', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg', href: `${base}/c/shop/boxed-set` },
+				{ title: 'Prayer Reference Cards', price: '$37.50', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-prayer-card-900x610.jpeg', href: `${base}/c/shop/prayer-cards` }
 			] as product}
 				<a href={product.href} style="text-decoration: none; display: block;" class="bm-title-underline-parent group">
 					<div class="bm-card-hover" style="background: #fff; border-radius: 12px; overflow: hidden; height: 100%; display: flex; flex-direction: column;">
@@ -148,7 +149,7 @@
 					Many new Muslims cannot afford the resources they need. Your sponsorship puts a complete Being Muslim boxed set in their hands — a gift that transforms lives.
 				</p>
 			</div>
-			<a href="/c/give" class="bm-btn-white" style="flex-shrink: 0;">
+			<a href="{base}/c/give" class="bm-btn-white" style="flex-shrink: 0;">
 				Sponsor Now <Heart style="width: 14px; height: 14px;" />
 			</a>
 		</div>

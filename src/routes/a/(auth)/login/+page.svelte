@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Separator } from '$lib/components/ui/separator/index.js';
@@ -49,7 +50,7 @@
 			<div class="space-y-2">
 				<div class="flex items-center justify-between">
 					<label for="password" class="text-sm font-medium text-text-primary">Password</label>
-					<a href="/forgot-password" class="text-xs font-medium text-accent-primary hover:underline">
+					<a href="{base}/forgot-password" class="text-xs font-medium text-accent-primary hover:underline">
 						Forgot password?
 					</a>
 				</div>
@@ -120,7 +121,7 @@
 		<!-- Register Link -->
 		<p class="mt-6 text-center text-sm text-text-secondary">
 			New to Being Muslim?
-			<a href="/register" class="font-medium text-accent-primary hover:underline">Create an account</a>
+			<a href="{base}/register" class="font-medium text-accent-primary hover:underline">Create an account</a>
 		</p>
 	</div>
 </div>

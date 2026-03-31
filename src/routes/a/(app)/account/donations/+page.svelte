@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
 	import { Separator } from '$lib/components/ui/separator/index.js';
@@ -115,7 +116,7 @@
 			new Muslims around the world. Each set includes the Being Muslim book, prayer cards, and a quick-reference
 			guide -- everything a new Muslim needs to begin their journey with confidence.
 		</p>
-		<a href="/give" class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent-primary hover:underline">
+		<a href="{base}/give" class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent-primary hover:underline">
 			Sponsor another set
 			<ArrowRight class="h-3.5 w-3.5" />
 		</a>

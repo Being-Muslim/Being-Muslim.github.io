@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { Section } from '$lib/components/layout/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
@@ -145,7 +146,7 @@
 							Gift a boxed set to someone beginning their Islamic journey.
 						</p>
 						<a
-							href="/give"
+							href="{base}/give"
 							class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent-primary hover:underline"
 						>
 							Learn more
@@ -155,7 +156,7 @@
 				{/if}
 
 				<!-- Product Card -->
-				<a href="/shop/{product.handle}" class="group">
+				<a href="{base}/shop/{product.handle}" class="group">
 					<div
 						class="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface transition-all duration-200 hover:border-accent-primary/30 hover:shadow-lg"
 					>
@@ -268,7 +269,7 @@
 					Being Muslim boxed set in their hands — a gift that transforms lives.
 				</p>
 			</div>
-			<a href="/give">
+			<a href="{base}/give">
 				<Button size="lg" class="shrink-0 bg-accent-gold text-bg-dark hover:bg-accent-gold/90">
 					{#snippet children()}
 						Sponsor Now

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { articles, articleCategories } from '$lib/data/mock.js';
 	import {
 		Search,
@@ -125,7 +126,7 @@
 		{:else}
 			<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
 				{#each filteredArticles as article}
-					<a href="/b/articles/{article.slug}" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
+					<a href="{base}/b/articles/{article.slug}" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
 						<div style="background: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; height: 100%; transition: box-shadow 0.2s;" class="bm-card-hover">
 							<!-- Image Placeholder -->
 							<div style="aspect-ratio: 16/10; background: linear-gradient(135deg, #e9e3da, #d4ccc0); display: flex; align-items: center; justify-content: center;">

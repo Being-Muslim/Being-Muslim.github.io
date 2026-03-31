@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Mail, ArrowLeft, CheckCircle } from 'lucide-svelte';
@@ -79,7 +80,7 @@
 		<!-- Back to Sign In -->
 		<div class="mt-6 text-center">
 			<a
-				href="/login"
+				href="{base}/login"
 				class="inline-flex items-center gap-1 text-sm font-medium text-text-secondary hover:text-text-primary"
 			>
 				<ArrowLeft class="h-4 w-4" />

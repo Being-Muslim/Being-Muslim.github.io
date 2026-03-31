@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { Section } from '$lib/components/layout/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
@@ -76,7 +77,7 @@
 	<!-- Background Image -->
 	<div class="absolute inset-0">
 		<img
-			src="/images/hero-bg.jpg"
+			src="{base}/images/hero-bg.jpg"
 			alt=""
 			class="h-full w-full object-cover"
 		/>
@@ -117,7 +118,7 @@
 	<div class="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-10 mt-10 pb-8">
 		<div class="grid grid-cols-1 sm:grid-cols-3 rounded-2xl border border-white/15 bg-white/10 backdrop-blur-xl overflow-hidden">
 			<!-- Learn — expanded card -->
-			<a href="/c/learn" class="group relative p-6 sm:p-8 border-b sm:border-b-0 sm:border-r border-white/10 hover:bg-white/5 transition-colors">
+			<a href="{base}/c/learn" class="group relative p-6 sm:p-8 border-b sm:border-b-0 sm:border-r border-white/10 hover:bg-white/5 transition-colors">
 				<h3 class="font-display text-xl font-bold text-white mb-2">Learn</h3>
 				<p class="text-[13px] text-white/60 leading-relaxed max-w-[260px] mb-5">
 					Expand your understanding with our courses and resources. Dive into Islam's depths on your terms.
@@ -128,7 +129,7 @@
 			</a>
 
 			<!-- Convert -->
-			<a href="/c/convert" class="group flex items-center justify-between p-6 sm:p-8 border-b sm:border-b-0 sm:border-r border-white/10 hover:bg-white/5 transition-colors">
+			<a href="{base}/c/convert" class="group flex items-center justify-between p-6 sm:p-8 border-b sm:border-b-0 sm:border-r border-white/10 hover:bg-white/5 transition-colors">
 				<h3 class="font-display text-xl font-bold text-white">Convert</h3>
 				<div class="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 text-white/70 group-hover:bg-white/10 group-hover:text-white transition-all">
 					<ArrowRight class="h-4 w-4 -rotate-45" />
@@ -136,7 +137,7 @@
 			</a>
 
 			<!-- Shop -->
-			<a href="/c/shop" class="group flex items-center justify-between p-6 sm:p-8 hover:bg-white/5 transition-colors">
+			<a href="{base}/c/shop" class="group flex items-center justify-between p-6 sm:p-8 hover:bg-white/5 transition-colors">
 				<h3 class="font-display text-xl font-bold text-white">Shop</h3>
 				<div class="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 text-white/70 group-hover:bg-white/10 group-hover:text-white transition-all">
 					<ArrowRight class="h-4 w-4 -rotate-45" />
@@ -154,7 +155,7 @@
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0;">
 				Latest Resources
 			</h2>
-			<a href="/c/learn" class="bm-view-all" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+			<a href="{base}/c/learn" class="bm-view-all" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
 				View all <ArrowRight class="h-3.5 w-3.5" />
 			</a>
 		</div>
@@ -162,12 +163,12 @@
 		<!-- Bento grid: left image spans 2 rows, right cards share those rows, left text in row 3 -->
 		<div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr auto; gap: 35px;">
 			<!-- Left: featured image spanning rows 1–2 -->
-			<a href="/c/learn" style="grid-column: 1; grid-row: 1 / 3; display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: #e2dcd2;" class="bm-title-underline-parent">
+			<a href="{base}/c/learn" style="grid-column: 1; grid-row: 1 / 3; display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: #e2dcd2;" class="bm-title-underline-parent">
 				<img src="https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png" alt="Brief Overview of Islam" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
 			</a>
 
 			<!-- Right top card (row 1) -->
-			<a href="/c/learn" style="grid-column: 2; grid-row: 1; text-decoration: none; display: grid; grid-template-columns: 29% 1fr; gap: 24px; align-items: center;" class="bm-title-underline-parent">
+			<a href="{base}/c/learn" style="grid-column: 2; grid-row: 1; text-decoration: none; display: grid; grid-template-columns: 29% 1fr; gap: 24px; align-items: center;" class="bm-title-underline-parent">
 				<div style="background: #e2dcd2; border-radius: 10px; overflow: hidden; height: 100%;">
 					<img src="https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg" alt="A Beginner's Guide to Being a Muslim" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
 				</div>
@@ -182,7 +183,7 @@
 			</a>
 
 			<!-- Right bottom card (row 2) -->
-			<a href="/c/learn" style="grid-column: 2; grid-row: 2; text-decoration: none; display: grid; grid-template-columns: 29% 1fr; gap: 24px; align-items: center;" class="bm-title-underline-parent">
+			<a href="{base}/c/learn" style="grid-column: 2; grid-row: 2; text-decoration: none; display: grid; grid-template-columns: 29% 1fr; gap: 24px; align-items: center;" class="bm-title-underline-parent">
 				<div style="background: #e2dcd2; border-radius: 10px; overflow: hidden; height: 100%;">
 					<img src="https://www.beingmuslim.org/wp-content/uploads/2022/02/foundationsofIsam_YT.jpeg" alt="Islam and Other Faiths" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
 				</div>
@@ -220,10 +221,10 @@
 
 		<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
 			{#each [
-				{ title: 'Being Muslim: A Practical Guide', price: '$14.95', badge: 'Bestseller', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg', href: '/c/shop/book' },
-				{ title: 'The Complete Boxed Set', price: '$85.00', badge: 'Most Popular', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg', href: '/c/shop/boxed-set' },
-				{ title: 'Prayer Reference Cards', price: '$37.50', badge: '', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-prayer-card-900x610.jpeg', href: '/c/shop/prayer-cards' },
-				{ title: 'Digital Edition (eBook)', price: '$9.00', badge: '', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/BM-E-Book-900x1200.png', href: '/c/shop/ebook' }
+				{ title: 'Being Muslim: A Practical Guide', price: '$14.95', badge: 'Bestseller', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg', href: `${base}/c/shop/book` },
+				{ title: 'The Complete Boxed Set', price: '$85.00', badge: 'Most Popular', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg', href: `${base}/c/shop/boxed-set` },
+				{ title: 'Prayer Reference Cards', price: '$37.50', badge: '', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-prayer-card-900x610.jpeg', href: `${base}/c/shop/prayer-cards` },
+				{ title: 'Digital Edition (eBook)', price: '$9.00', badge: '', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/BM-E-Book-900x1200.png', href: `${base}/c/shop/ebook` }
 			] as product}
 				<a href={product.href} style="text-decoration: none; display: block;" class="bm-title-underline-parent group">
 					<div style="aspect-ratio: 1; background: #e2dcd2; border-radius: 12px; overflow: hidden; margin-bottom: 16px; position: relative;">
@@ -245,7 +246,7 @@
 		</div>
 
 		<div style="text-align: center; margin-top: 32px;">
-			<a href="/c/shop" class="bm-btn-outline" style="padding: 10px 24px;">
+			<a href="{base}/c/shop" class="bm-btn-outline" style="padding: 10px 24px;">
 				Browse All Products <ArrowRight class="h-3.5 w-3.5" />
 			</a>
 		</div>
@@ -287,7 +288,7 @@
 				{ title: 'Ramadan Preparation', instructor: 'Imam Hassan', lessons: 12, duration: '3 hours', level: 'Beginner', img: 'https://images.unsplash.com/photo-1574246604907-db69e30ddb97?w=600&q=80&auto=format&fit=crop' },
 				{ title: 'Islamic History & Civilisation', instructor: 'Dr. Amira Khan', lessons: 28, duration: '9 hours', level: 'Intermediate', img: 'https://images.unsplash.com/photo-1473177104440-ffee2f376098?w=600&q=80&auto=format&fit=crop' }
 			] as course}
-				<a href="/c/courses" style="text-decoration: none; display: block; flex: 0 0 calc(25% - 15px); min-width: 220px; scroll-snap-align: start;" class="bm-title-underline-parent">
+				<a href="{base}/c/courses" style="text-decoration: none; display: block; flex: 0 0 calc(25% - 15px); min-width: 220px; scroll-snap-align: start;" class="bm-title-underline-parent">
 					<div style="aspect-ratio: 1; background: #e2dcd2; border-radius: 14px; overflow: hidden; margin-bottom: 14px; position: relative;">
 						<img src={course.img} alt={course.title} style="width: 100%; height: 100%; object-fit: cover; display: block;" />
 						<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
@@ -333,7 +334,7 @@
 							<span style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: rgba(255,255,255,0.8);"><strong style="color: #c8b8a0;">1,200+</strong> discussions</span>
 						</div>
 					</div>
-					<a href="/c/community" class="bm-btn-white">
+					<a href="{base}/c/community" class="bm-btn-white">
 						Join the Community <ArrowRight class="h-3.5 w-3.5" />
 					</a>
 				</div>
@@ -376,7 +377,7 @@
 				<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: #8a7e70; line-height: 1.6; margin: 0 0 28px;">
 					Many new Muslims can't afford the resources they need. Your sponsorship puts a complete Being Muslim boxed set in their hands — a gift that transforms lives.
 				</p>
-				<a href="/c/support" class="bm-btn-outline" style="padding: 10px 24px;">
+				<a href="{base}/c/support" class="bm-btn-outline" style="padding: 10px 24px;">
 					Support the Mission <ArrowRight class="h-3.5 w-3.5" />
 				</a>
 			</div>
@@ -457,10 +458,10 @@
 			{/each}
 
 			<div style="margin-top: 24px; display: flex; gap: 12px; justify-content: center;">
-				<a href="/c/convert" class="bm-btn-dark" style="padding: 10px 24px;">
+				<a href="{base}/c/convert" class="bm-btn-dark" style="padding: 10px 24px;">
 					Ready to Convert
 				</a>
-				<a href="/c/contact" class="bm-btn-outline" style="padding: 10px 24px;">
+				<a href="{base}/c/contact" class="bm-btn-outline" style="padding: 10px 24px;">
 					Ask a Question
 				</a>
 			</div>

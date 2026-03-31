@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
 	import { Progress } from '$lib/components/ui/progress/index.js';
@@ -93,7 +94,7 @@
 		<!-- Left: Back + Course title -->
 		<div class="flex items-center gap-3 min-w-0">
 			<a
-				href="/courses/{course.slug}"
+				href="{base}/courses/{course.slug}"
 				class="flex items-center gap-1.5 shrink-0 rounded-lg px-2 py-1.5 text-sm text-text-secondary transition-colors hover:bg-secondary hover:text-text-primary"
 			>
 				<ArrowLeft class="h-4 w-4" />
@@ -202,7 +203,7 @@
 								{@const LessonIcon = lessonIcons[lesson.type]}
 								<li>
 									<a
-										href="/learn/{course.slug}/{lesson.slug}"
+										href="{base}/learn/{course.slug}/{lesson.slug}"
 										class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors {isActive
 											? 'bg-accent-primary/10 text-accent-primary font-medium'
 											: lesson.completed
@@ -357,7 +358,7 @@
 			<div class="mt-8 flex items-stretch gap-4 border-t border-border pt-8 pb-8">
 				{#if prevLesson}
 					<a
-						href="/learn/{course.slug}/{prevLesson.slug}"
+						href="{base}/learn/{course.slug}/{prevLesson.slug}"
 						class="group flex flex-1 items-center gap-3 rounded-xl border border-border bg-surface p-4 transition-all hover:border-accent-primary/30 hover:shadow-sm"
 					>
 						<ChevronLeft class="h-5 w-5 shrink-0 text-text-secondary transition-transform group-hover:-translate-x-0.5" />
@@ -374,7 +375,7 @@
 
 				{#if nextLesson}
 					<a
-						href="/learn/{course.slug}/{nextLesson.slug}"
+						href="{base}/learn/{course.slug}/{nextLesson.slug}"
 						class="group flex flex-1 items-center justify-end gap-3 rounded-xl border border-border bg-surface p-4 text-right transition-all hover:border-accent-primary/30 hover:shadow-sm"
 					>
 						<div class="min-w-0">
@@ -505,7 +506,7 @@
 								{@const isActive = lesson.slug === currentLesson.slug}
 								<li>
 									<a
-										href="/learn/{course.slug}/{lesson.slug}"
+										href="{base}/learn/{course.slug}/{lesson.slug}"
 										class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm {isActive
 											? 'bg-accent-primary/10 text-accent-primary font-medium'
 											: lesson.completed

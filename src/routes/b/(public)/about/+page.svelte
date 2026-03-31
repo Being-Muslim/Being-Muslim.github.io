@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { stats, teamMembers, testimonials } from '$lib/data/mock.js';
 	import {
 		ArrowRight,
@@ -365,7 +366,7 @@
 					Help us create content, mentor new Muslims, moderate community spaces, or translate
 					resources into new languages.
 				</p>
-				<a href="/b/contact" class="bm-btn-outline" style="border-color: rgba(240,235,227,0.3); color: #f0ebe3; padding: 10px 24px;">
+				<a href="{base}/b/contact" class="bm-btn-outline" style="border-color: rgba(240,235,227,0.3); color: #f0ebe3; padding: 10px 24px;">
 					Get Involved <ArrowRight class="h-3.5 w-3.5" />
 				</a>
 			</div>
@@ -380,7 +381,7 @@
 					Sponsor a boxed set for a new Muslim, fund education programs, or become a monthly
 					supporter of our mission.
 				</p>
-				<a href="/b/support" class="bm-btn-white" style="padding: 10px 24px;">
+				<a href="{base}/b/support" class="bm-btn-white" style="padding: 10px 24px;">
 					Give Now <Heart class="h-3.5 w-3.5" />
 				</a>
 			</div>
@@ -395,7 +396,7 @@
 					Are you a mosque, organization, or educator? Partner with us to bring Being Muslim
 					resources to your community.
 				</p>
-				<a href="/b/contact" class="bm-btn-outline" style="border-color: rgba(240,235,227,0.3); color: #f0ebe3; padding: 10px 24px;">
+				<a href="{base}/b/contact" class="bm-btn-outline" style="border-color: rgba(240,235,227,0.3); color: #f0ebe3; padding: 10px 24px;">
 					Become a Partner <ArrowRight class="h-3.5 w-3.5" />
 				</a>
 			</div>

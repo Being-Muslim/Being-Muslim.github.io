@@ -10,6 +10,9 @@ const config = {
 			precompress: false,
 			strict: false
 		}),
+		paths: {
+			base: '/being-muslim'
+		},
 		prerender: {
 			handleHttpError: 'warn',
 			handleMissingId: 'warn',

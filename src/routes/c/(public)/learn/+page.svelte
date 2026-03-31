@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { ArrowRight, BookOpen, ExternalLink, MessageCircle, Play } from 'lucide-svelte';
 
 	const featuredArticles = [
@@ -6,7 +7,7 @@
 			title: 'Brief Overview of Islam',
 			excerpt: 'A concise introduction to the core beliefs, practices, and history of Islam — perfect for anyone beginning to explore the faith.',
 			img: 'https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png',
-			href: '/c/learn/brief-overview-of-islam',
+			href: `${base}/c/learn/brief-overview-of-islam`,
 			category: 'Foundations',
 			time: '10 min read'
 		},
@@ -14,7 +15,7 @@
 			title: "A Beginner's Guide to Being a Muslim",
 			excerpt: 'Practical guidance for new Muslims covering daily prayers, fasting, community life, and building a meaningful relationship with God.',
 			img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg',
-			href: '/c/learn/beginners-guide',
+			href: `${base}/c/learn/beginners-guide`,
 			category: 'New Muslims',
 			time: '12 min read'
 		},
@@ -22,7 +23,7 @@
 			title: 'Islam and Other Faiths',
 			excerpt: 'Understanding how Islam relates to Christianity, Judaism, and other religious traditions — and the shared values that connect them.',
 			img: 'https://www.beingmuslim.org/wp-content/uploads/2022/02/foundationsofIsam_YT.jpeg',
-			href: '/c/learn/islam-and-other-faiths',
+			href: `${base}/c/learn/islam-and-other-faiths`,
 			category: 'Belief',
 			time: '8 min read'
 		}
@@ -83,7 +84,7 @@
 					Whether you're curious or taking your first steps, these are a welcoming introduction.
 				</p>
 			</div>
-			<a href="/c/articles" class="bm-view-all" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+			<a href="{base}/c/articles" class="bm-view-all" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
 				All articles <ArrowRight class="h-3.5 w-3.5" />
 			</a>
 		</div>
@@ -123,14 +124,14 @@
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0;">
 				Courses
 			</h2>
-			<a href="/c/courses" class="bm-view-all" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+			<a href="{base}/c/courses" class="bm-view-all" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
 				All courses <ArrowRight class="h-3.5 w-3.5" />
 			</a>
 		</div>
 
 		<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
 			{#each courses as course}
-				<a href="/c/courses" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
+				<a href="{base}/c/courses" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
 					<div style="aspect-ratio: 4/3; background: #e2dcd2; border-radius: 14px; overflow: hidden; margin-bottom: 14px; position: relative;">
 						<img src={course.img} alt={course.title} style="width: 100%; height: 100%; object-fit: cover; display: block;" />
 						<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
@@ -204,7 +205,7 @@
 					No question is too simple. We're here to help you find thoughtful, reliable answers.
 				</p>
 			</div>
-			<a href="/c/community" class="bm-btn-white" style="flex-shrink: 0; padding: 12px 28px;">
+			<a href="{base}/c/community" class="bm-btn-white" style="flex-shrink: 0; padding: 12px 28px;">
 				Ask a Question <ArrowRight class="h-3.5 w-3.5" />
 			</a>
 		</div>

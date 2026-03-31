@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { products, type Product } from '$lib/data/mock.js';
 	import {
 		Star,
@@ -178,7 +179,7 @@
 <div style="background: #f4f1eb; padding: 110px 0 12px;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<nav style="display: flex; align-items: center; gap: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: #8a7e70;">
-			<a href="/c/shop" class="bm-view-all" style="display: inline-flex; align-items: center; gap: 4px; color: #8a7e70; text-decoration: none;">
+			<a href="{base}/c/shop" class="bm-view-all" style="display: inline-flex; align-items: center; gap: 4px; color: #8a7e70; text-decoration: none;">
 				<ChevronLeft style="width: 16px; height: 16px;" />
 				Back to Shop
 			</a>
@@ -436,7 +437,7 @@
 
 		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
 			{#each relatedProducts as related}
-				<a href="/c/shop/{related.handle}" style="text-decoration: none; display: block;" class="bm-title-underline-parent group">
+				<a href="{base}/c/shop/{related.handle}" style="text-decoration: none; display: block;" class="bm-title-underline-parent group">
 					<div class="bm-card-hover" style="background: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
 						<div style="aspect-ratio: 4/3; background: #e2dcd2; position: relative; overflow: hidden;">
 							{#if productGalleries[related.handle]?.[0]}
@@ -468,7 +469,7 @@
 		</div>
 
 		<div style="text-align: center; margin-top: 32px;">
-			<a href="/c/shop" class="bm-view-all" style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+			<a href="{base}/c/shop" class="bm-view-all" style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
 				View all products <ArrowRight style="width: 16px; height: 16px;" />
 			</a>
 		</div>

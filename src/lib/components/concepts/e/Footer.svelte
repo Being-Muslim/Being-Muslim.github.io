@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { footerLinks } from '$lib/data/mock.js';
 	import { withPrefix } from '$lib/data/utils.js';
 
@@ -70,9 +71,9 @@
 				&copy; {new Date().getFullYear()} The Being Muslim Project. All rights reserved.
 			</p>
 			<div class="flex gap-4">
-				<a href="/privacy" class="text-xs text-white/30 hover:text-white">Privacy</a>
-				<a href="/terms" class="text-xs text-white/30 hover:text-white">Terms</a>
-				<a href="/contact" class="text-xs text-white/30 hover:text-white">Contact</a>
+				<a href="{base}/privacy" class="text-xs text-white/30 hover:text-white">Privacy</a>
+				<a href="{base}/terms" class="text-xs text-white/30 hover:text-white">Terms</a>
+				<a href="{base}/contact" class="text-xs text-white/30 hover:text-white">Contact</a>
 			</div>
 		</div>
 	</div>

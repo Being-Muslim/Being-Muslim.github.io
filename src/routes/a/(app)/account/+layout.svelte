@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import type { Snippet } from 'svelte';
 	import { page } from '$app/state';
 	import { cn } from '$lib/utils/cn.js';
@@ -18,12 +19,12 @@
 	let mobileMenuOpen = $state(false);
 
 	const sidebarLinks = [
-		{ href: '/account', label: 'Dashboard', icon: LayoutDashboard },
-		{ href: '/account/learning', label: 'My Learning', icon: BookOpen },
-		{ href: '/account/orders', label: 'Orders', icon: ShoppingBag },
-		{ href: '/account/donations', label: 'Donations', icon: Heart },
-		{ href: '/account/profile', label: 'Profile', icon: UserCircle },
-		{ href: '/account/settings', label: 'Settings', icon: Settings }
+		{ href: `${base}/account`, label: 'Dashboard', icon: LayoutDashboard },
+		{ href: `${base}/account/learning`, label: 'My Learning', icon: BookOpen },
+		{ href: `${base}/account/orders`, label: 'Orders', icon: ShoppingBag },
+		{ href: `${base}/account/donations`, label: 'Donations', icon: Heart },
+		{ href: `${base}/account/profile`, label: 'Profile', icon: UserCircle },
+		{ href: `${base}/account/settings`, label: 'Settings', icon: Settings }
 	] as const;
 
 	function isActive(href: string): boolean {

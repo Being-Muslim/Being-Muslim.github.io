@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { ArrowLeft, ShoppingCart } from 'lucide-svelte';
 </script>
 
@@ -14,7 +15,7 @@
 <section style="background: #e9e3da; padding-top: 72px;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10 py-4">
 		<a
-			href="/b/shop"
+			href="{base}/b/shop"
 			style="color: #8a7e70; font-family: 'DM Sans', sans-serif;"
 			class="inline-flex items-center gap-2 text-sm transition-colors hover:text-[#2a2018]"
 		>
@@ -87,9 +88,9 @@
 		</h2>
 		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
 			{#each [
-				{ title: 'Being Muslim: A Practical Guide', price: '$14.95', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg', href: '/b/shop/book' },
-				{ title: 'The Complete Boxed Set', price: '$85.00', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg', href: '/b/shop/boxed-set' },
-				{ title: 'Prayer Reference Cards', price: '$37.50', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-prayer-card-900x610.jpeg', href: '/b/shop/prayer-cards' }
+				{ title: 'Being Muslim: A Practical Guide', price: '$14.95', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg', href: `${base}/b/shop/book` },
+				{ title: 'The Complete Boxed Set', price: '$85.00', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg', href: `${base}/b/shop/boxed-set` },
+				{ title: 'Prayer Reference Cards', price: '$37.50', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-prayer-card-900x610.jpeg', href: `${base}/b/shop/prayer-cards` }
 			] as product}
 				<a href={product.href} style="text-decoration: none;" class="bm-title-underline-parent group">
 					<div style="aspect-ratio: 1; background: #e2dcd2; border-radius: 12px; overflow: hidden; margin-bottom: 12px;">

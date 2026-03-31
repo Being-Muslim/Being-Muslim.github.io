@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { Section } from '$lib/components/layout/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
@@ -98,7 +99,7 @@
 <div class="bg-secondary/50 py-3">
 	<div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
 		<nav class="flex items-center gap-2 text-sm text-text-secondary">
-			<a href="/shop" class="inline-flex items-center gap-1 transition-colors hover:text-accent-primary">
+			<a href="{base}/shop" class="inline-flex items-center gap-1 transition-colors hover:text-accent-primary">
 				<ChevronLeft class="h-4 w-4" />
 				Back to Shop
 			</a>
@@ -396,7 +397,7 @@
 
 	<div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 		{#each relatedProducts as related}
-			<a href="/shop/{related.handle}" class="group">
+			<a href="{base}/shop/{related.handle}" class="group">
 				<div
 					class="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface transition-all duration-200 hover:border-accent-primary/30 hover:shadow-lg"
 				>
@@ -445,7 +446,7 @@
 
 	<div class="mt-8 text-center">
 		<a
-			href="/shop"
+			href="{base}/shop"
 			class="inline-flex items-center gap-1 text-sm font-medium text-accent-primary hover:underline"
 		>
 			View all products

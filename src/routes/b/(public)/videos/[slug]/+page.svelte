@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { Section } from '$lib/components/layout/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
@@ -38,7 +39,7 @@
 	<div class="mx-auto max-w-[1280px] px-4 pt-8 sm:px-6 lg:px-8">
 		<!-- Back Link -->
 		<a
-			href="/b/videos"
+			href="{base}/b/videos"
 			class="mb-6 inline-flex items-center gap-2 text-sm text-text-cream/60 transition-colors hover:text-text-cream"
 		>
 			<ArrowLeft class="h-4 w-4" />
@@ -146,7 +147,7 @@
 
 		<div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
 			{#each relatedVideos as related}
-				<a href="/b/videos/{related.slug}" class="group">
+				<a href="{base}/b/videos/{related.slug}" class="group">
 					<article class="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface transition-all duration-200 hover:border-accent-primary/30 hover:shadow-lg">
 						<!-- Thumbnail -->
 						<div class="relative aspect-video bg-gradient-to-br from-bg-dark to-accent-primary/30">
@@ -183,7 +184,7 @@
 		</div>
 
 		<div class="mt-10 text-center">
-			<a href="/b/videos">
+			<a href="{base}/b/videos">
 				<Button variant="outline">
 					{#snippet children()}
 						Browse All Videos

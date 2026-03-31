@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import {
 		Heart,
 		ArrowRight,
@@ -661,7 +662,7 @@
 						your skills, availability, and passions.
 					</p>
 				</div>
-				<a href="/c/contact?interest=volunteer" class="bm-btn-white" style="flex-shrink: 0; padding: 12px 28px;">
+				<a href="{base}/c/contact?interest=volunteer" class="bm-btn-white" style="flex-shrink: 0; padding: 12px 28px;">
 					Volunteer Interest Form <ArrowRight class="h-3.5 w-3.5" />
 				</a>
 			</div>

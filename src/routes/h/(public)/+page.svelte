@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import {
 		testimonials,
 		teamMembers,
@@ -71,7 +72,7 @@
 	<!-- ===== NAVBAR ===== -->
 	<nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-200/50">
 		<div class="max-w-[1280px] mx-auto px-6 lg:px-10 flex items-center justify-between h-[64px]">
-			<a href="/h" class="flex items-center gap-2.5">
+			<a href="{base}/h" class="flex items-center gap-2.5">
 				<div class="w-7 h-7 rounded-full bg-[#5c6e4f] flex items-center justify-center">
 					<BookOpen class="w-3.5 h-3.5 text-white" />
 				</div>

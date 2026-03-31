@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { stats, teamMembers, testimonials } from '$lib/data/mock.js';
 	import {
 		ArrowRight,
@@ -383,7 +384,7 @@
 					Help us create content, mentor new Muslims, moderate community spaces, or translate
 					resources into new languages.
 				</p>
-				<a href="/c/about" class="bm-btn-glass" style="font-size: 13px; padding: 10px 22px;">
+				<a href="{base}/c/about" class="bm-btn-glass" style="font-size: 13px; padding: 10px 22px;">
 					Get Involved <ArrowRight class="h-3.5 w-3.5" />
 				</a>
 			</div>
@@ -398,7 +399,7 @@
 					Sponsor a boxed set for a new Muslim, fund education programs, or become a monthly
 					supporter of our mission.
 				</p>
-				<a href="/c/give" class="bm-btn-white" style="font-size: 13px; padding: 10px 22px;">
+				<a href="{base}/c/give" class="bm-btn-white" style="font-size: 13px; padding: 10px 22px;">
 					Give Now <Heart class="h-3.5 w-3.5" />
 				</a>
 			</div>
@@ -413,7 +414,7 @@
 					Are you a mosque, organization, or educator? Partner with us to bring Being Muslim
 					resources to your community.
 				</p>
-				<a href="/c/about" class="bm-btn-glass" style="font-size: 13px; padding: 10px 22px;">
+				<a href="{base}/c/about" class="bm-btn-glass" style="font-size: 13px; padding: 10px 22px;">
 					Become a Partner <ArrowRight class="h-3.5 w-3.5" />
 				</a>
 			</div>

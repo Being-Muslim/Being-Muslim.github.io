@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { Section } from '$lib/components/layout/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
@@ -127,7 +128,7 @@
 			<p class="mt-3 text-text-secondary">
 				Discover beautifully crafted resources to support your Islamic journey.
 			</p>
-			<a href="/b/shop">
+			<a href="{base}/b/shop">
 				<Button size="lg" class="mt-8 bg-accent-primary text-text-cream hover:bg-accent-hover">
 					{#snippet children()}
 						Start Shopping
@@ -180,7 +181,7 @@
 						>
 							<!-- Product Image Placeholder -->
 							<a
-								href="/b/shop/{item.handle}"
+								href="{base}/b/shop/{item.handle}"
 								class="flex h-24 w-24 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-accent-primary/10 to-accent-gold/10 sm:h-28 sm:w-28"
 							>
 								<BookOpen class="h-8 w-8 text-accent-primary/30" />
@@ -190,7 +191,7 @@
 							<div class="flex min-w-0 flex-1 flex-col">
 								<div class="flex items-start justify-between gap-2">
 									<a
-										href="/b/shop/{item.handle}"
+										href="{base}/b/shop/{item.handle}"
 										class="font-display text-base font-semibold leading-snug hover:text-accent-primary sm:text-lg"
 									>
 										{item.title}
@@ -248,7 +249,7 @@
 				<!-- Continue Shopping -->
 				<div class="mt-6">
 					<a
-						href="/b/shop"
+						href="{base}/b/shop"
 						class="inline-flex items-center gap-1.5 text-sm font-medium text-accent-primary hover:underline"
 					>
 						<ArrowLeft class="h-4 w-4" />

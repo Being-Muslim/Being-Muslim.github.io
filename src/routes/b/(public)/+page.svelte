@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { Section } from '$lib/components/layout/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
@@ -73,7 +74,7 @@
 	<!-- Background Image -->
 	<div class="absolute inset-0">
 		<img
-			src="/images/hero-bg.jpg"
+			src="{base}/images/hero-bg.jpg"
 			alt=""
 			class="h-full w-full object-cover"
 		/>
@@ -95,7 +96,7 @@
 			<div class="mt-8 flex flex-wrap items-center gap-4">
 				<!-- White button -->
 				<a
-					href="/b"
+					href="{base}/b"
 					class="bm-btn-white"
 				style="padding: 14px 28px; font-weight: 600;"
 				>
@@ -104,7 +105,7 @@
 				</a>
 				<!-- Glass button -->
 				<a
-					href="/b"
+					href="{base}/b"
 					class="bm-btn-glass"
 				style="padding: 14px 28px; font-weight: 600;"
 				>
@@ -146,14 +147,14 @@
 					</p>
 				</div>
 				<div style="margin-top: 24px;">
-					<a href="/b/learn" class="bm-btn-outline" style="padding: 10px 24px;">
+					<a href="{base}/b/learn" class="bm-btn-outline" style="padding: 10px 24px;">
 						See all resources
 					</a>
 				</div>
 			</div>
 
 			<!-- Card: Learn -->
-			<a href="/b/learn" class="bm-card-hover" style="background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
+			<a href="{base}/b/learn" class="bm-card-hover" style="background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
 				<div>
 					<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #6a6258; margin: 0 0 8px; letter-spacing: 0.02em;">Learn</p>
 					<p style="font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0; line-height: 1.2;">Courses &amp; Resources</p>
@@ -164,7 +165,7 @@
 			</a>
 
 			<!-- Card: Convert -->
-			<a href="/b/convert" class="bm-card-hover" style="background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
+			<a href="{base}/b/convert" class="bm-card-hover" style="background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
 				<div>
 					<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #6a6258; margin: 0 0 8px; letter-spacing: 0.02em;">Convert</p>
 					<p style="font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0; line-height: 1.2;">Start Your Journey</p>
@@ -186,16 +187,16 @@
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0;">
 				Latest Resources
 			</h2>
-			<a href="/b/learn" class="bm-view-all" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+			<a href="{base}/b/learn" class="bm-view-all" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
 				View all <ArrowRight class="h-3.5 w-3.5" />
 			</a>
 		</div>
 
 		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
 			{#each [
-				{ title: 'Brief Overview of Islam', category: 'Foundations', time: '10 min read', href: '/b/learn/brief-overview-of-islam', img: 'https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png' },
-				{ title: "A Beginner's Guide to Being a Muslim", category: 'New Muslims', time: '12 min read', href: '/b/learn/beginners-guide', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg' },
-				{ title: 'Islam and Other Faiths', category: 'Belief', time: '8 min read', href: '/b/learn/islam-and-other-faiths', img: 'https://www.beingmuslim.org/wp-content/uploads/2022/03/oneGodmanynames.jpeg' }
+				{ title: 'Brief Overview of Islam', category: 'Foundations', time: '10 min read', href: `${base}/b/learn/brief-overview-of-islam`, img: 'https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png' },
+				{ title: "A Beginner's Guide to Being a Muslim", category: 'New Muslims', time: '12 min read', href: `${base}/b/learn/beginners-guide`, img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg' },
+				{ title: 'Islam and Other Faiths', category: 'Belief', time: '8 min read', href: `${base}/b/learn/islam-and-other-faiths`, img: 'https://www.beingmuslim.org/wp-content/uploads/2022/03/oneGodmanynames.jpeg' }
 			] as article}
 				<a href={article.href} style="text-decoration: none; display: block;" class="bm-title-underline-parent">
 					<div style="aspect-ratio: 4/3; background: #e2dcd2; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
@@ -223,10 +224,10 @@
 
 		<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
 			{#each [
-				{ title: 'Being Muslim: A Practical Guide', price: '$14.95', badge: 'Bestseller', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg', href: '/b/shop/book' },
-				{ title: 'The Complete Boxed Set', price: '$85.00', badge: 'Most Popular', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg', href: '/b/shop/boxed-set' },
-				{ title: 'Prayer Reference Cards', price: '$37.50', badge: '', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-prayer-card-900x610.jpeg', href: '/b/shop/prayer-cards' },
-				{ title: 'Digital Edition (eBook)', price: '$9.00', badge: '', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/BM-E-Book-900x1200.png', href: '/b/shop/ebook' }
+				{ title: 'Being Muslim: A Practical Guide', price: '$14.95', badge: 'Bestseller', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg', href: `${base}/b/shop/book` },
+				{ title: 'The Complete Boxed Set', price: '$85.00', badge: 'Most Popular', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg', href: `${base}/b/shop/boxed-set` },
+				{ title: 'Prayer Reference Cards', price: '$37.50', badge: '', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-prayer-card-900x610.jpeg', href: `${base}/b/shop/prayer-cards` },
+				{ title: 'Digital Edition (eBook)', price: '$9.00', badge: '', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/BM-E-Book-900x1200.png', href: `${base}/b/shop/ebook` }
 			] as product}
 				<a href={product.href} style="text-decoration: none; display: block;" class="bm-title-underline-parent group">
 					<div style="aspect-ratio: 1; background: #e2dcd2; border-radius: 12px; overflow: hidden; margin-bottom: 16px; position: relative;">
@@ -248,7 +249,7 @@
 		</div>
 
 		<div style="text-align: center; margin-top: 32px;">
-			<a href="/b/shop" class="bm-btn-outline" style="padding: 10px 24px;">
+			<a href="{base}/b/shop" class="bm-btn-outline" style="padding: 10px 24px;">
 				Browse All Products <ArrowRight class="h-3.5 w-3.5" />
 			</a>
 		</div>
@@ -275,7 +276,7 @@
 				{ title: 'Prayer Mastery', instructor: 'Imam Ahmad', lessons: 16, duration: '4 hours', level: 'Beginner', img: 'https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=600&q=80&auto=format&fit=crop' },
 				{ title: 'Your Quran Journey', instructor: 'Ustadha Fatima', lessons: 32, duration: '10 hours', level: 'Beginner', img: 'https://images.unsplash.com/photo-1567443024551-f3e3cc2be870?w=600&q=80&auto=format&fit=crop' }
 			] as course}
-				<a href="/b/learn" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
+				<a href="{base}/b/learn" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
 					<div style="aspect-ratio: 4/3; background: #e2dcd2; border-radius: 12px; overflow: hidden; position: relative; margin-bottom: 16px;">
 						<img src={course.img} alt={course.title} style="width: 100%; height: 100%; object-fit: cover;" />
 						<!-- Play icon overlay -->
@@ -322,7 +323,7 @@
 							<span style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: rgba(255,255,255,0.8);"><strong style="color: #c8b8a0;">1,200+</strong> discussions</span>
 						</div>
 					</div>
-					<a href="/b/community" class="bm-btn-white">
+					<a href="{base}/b/community" class="bm-btn-white">
 						Join the Community <ArrowRight class="h-3.5 w-3.5" />
 					</a>
 				</div>
@@ -365,7 +366,7 @@
 				<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: #8a7e70; line-height: 1.6; margin: 0 0 28px;">
 					Many new Muslims can't afford the resources they need. Your sponsorship puts a complete Being Muslim boxed set in their hands — a gift that transforms lives.
 				</p>
-				<a href="/b/support" class="bm-btn-outline" style="padding: 10px 24px;">
+				<a href="{base}/b/support" class="bm-btn-outline" style="padding: 10px 24px;">
 					Support the Mission <ArrowRight class="h-3.5 w-3.5" />
 				</a>
 			</div>
@@ -448,10 +449,10 @@
 			{/each}
 
 			<div style="margin-top: 24px; display: flex; gap: 12px;">
-				<a href="/b/convert" class="bm-btn-dark" style="padding: 10px 24px;">
+				<a href="{base}/b/convert" class="bm-btn-dark" style="padding: 10px 24px;">
 					Ready to Convert
 				</a>
-				<a href="/b/contact" class="bm-btn-outline" style="padding: 10px 24px;">
+				<a href="{base}/b/contact" class="bm-btn-outline" style="padding: 10px 24px;">
 					Ask a Question
 				</a>
 			</div>

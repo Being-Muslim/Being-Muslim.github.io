@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { products } from '$lib/data/mock.js';
 	import {
 		Star,
@@ -58,7 +59,7 @@
 			Beautifully crafted resources to support your journey — from bestselling books to prayer essentials.
 		</p>
 		<div style="margin-top: 20px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-			<a href="/c/contact" class="bm-btn-glass" style="padding: 10px 24px; font-size: 13px;">
+			<a href="{base}/c/contact" class="bm-btn-glass" style="padding: 10px 24px; font-size: 13px;">
 				Bulk &amp; Institutional Orders <ArrowRight class="h-3.5 w-3.5" />
 			</a>
 		</div>
@@ -126,14 +127,14 @@
 							</div>
 							<h3 style="font-family: 'Source Serif 4', serif; font-size: 18px; color: #2a2018; margin: 0 0 8px;">Sponsor a New Muslim</h3>
 							<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #8a7e70; line-height: 1.5; margin: 0 0 16px;">Gift a boxed set to someone beginning their journey.</p>
-							<a href="/c/give" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;" class="bm-view-all">
+							<a href="{base}/c/give" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;" class="bm-view-all">
 								Learn more <ArrowRight class="h-3.5 w-3.5" />
 							</a>
 						</div>
 					{/if}
 
 					<!-- Product Card -->
-					<a href="/c/shop/{product.handle}" style="text-decoration: none; display: block;" class="bm-title-underline-parent group">
+					<a href="{base}/c/shop/{product.handle}" style="text-decoration: none; display: block;" class="bm-title-underline-parent group">
 						<div class="bm-card-hover" style="background: #fff; border-radius: 12px; overflow: hidden; height: 100%; display: flex; flex-direction: column;">
 							<!-- Image -->
 							<div style="aspect-ratio: 4/3; background: #e2dcd2; position: relative; overflow: hidden;">
@@ -209,7 +210,7 @@
 					Many new Muslims cannot afford the resources they need. Your sponsorship puts a complete Being Muslim boxed set in their hands — a gift that transforms lives.
 				</p>
 			</div>
-			<a href="/c/give" class="bm-btn-white" style="flex-shrink: 0;">
+			<a href="{base}/c/give" class="bm-btn-white" style="flex-shrink: 0;">
 				Sponsor Now <Heart class="h-3.5 w-3.5" />
 			</a>
 		</div>

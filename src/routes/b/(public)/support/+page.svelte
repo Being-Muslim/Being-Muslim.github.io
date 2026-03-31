@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { Section } from '$lib/components/layout/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
@@ -668,7 +669,7 @@
 				Fill out our volunteer interest form and we will match you with an opportunity that fits
 				your skills, availability, and passions.
 			</p>
-			<a href="/b/contact?interest=volunteer">
+			<a href="{base}/b/contact?interest=volunteer">
 				<Button size="lg" class="mt-6 bg-accent-primary text-text-cream hover:bg-accent-hover">
 					{#snippet children()}
 						Volunteer Interest Form

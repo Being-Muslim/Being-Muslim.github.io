@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import type { Snippet } from 'svelte';
 	import '$lib/styles/concept-c.css';
 	let { children }: { children: Snippet } = $props();
@@ -6,7 +7,7 @@
 
 <div class="concept-c flex min-h-screen flex-col items-center justify-center bg-[#F2F2F7] px-4 py-12">
 	<!-- Logo -->
-	<a href="/c" class="mb-10 flex items-center gap-2">
+	<a href="{base}/c" class="mb-10 flex items-center gap-2">
 		<span class="flex h-10 w-10 items-center justify-center rounded-full bg-[#007AFF]">
 			<span class="text-sm font-bold text-white">BM</span>
 		</span>

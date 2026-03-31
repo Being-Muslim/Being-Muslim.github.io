@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
 	import { Progress } from '$lib/components/ui/progress/index.js';
@@ -121,7 +122,7 @@
 	<div>
 		<div class="flex items-center justify-between">
 			<h2 class="font-display text-lg font-semibold text-text-primary">Continue Learning</h2>
-			<a href="/account/learning" class="inline-flex items-center gap-1 text-sm font-medium text-accent-primary hover:underline">
+			<a href="{base}/account/learning" class="inline-flex items-center gap-1 text-sm font-medium text-accent-primary hover:underline">
 				View all
 				<ArrowRight class="h-3.5 w-3.5" />
 			</a>
@@ -167,7 +168,7 @@
 	<div>
 		<div class="flex items-center justify-between">
 			<h2 class="font-display text-lg font-semibold text-text-primary">Recent Orders</h2>
-			<a href="/account/orders" class="inline-flex items-center gap-1 text-sm font-medium text-accent-primary hover:underline">
+			<a href="{base}/account/orders" class="inline-flex items-center gap-1 text-sm font-medium text-accent-primary hover:underline">
 				View all
 				<ArrowRight class="h-3.5 w-3.5" />
 			</a>
@@ -202,7 +203,7 @@
 	<div>
 		<div class="flex items-center justify-between">
 			<h2 class="font-display text-lg font-semibold text-text-primary">Community Activity</h2>
-			<a href="/community" class="inline-flex items-center gap-1 text-sm font-medium text-accent-primary hover:underline">
+			<a href="{base}/community" class="inline-flex items-center gap-1 text-sm font-medium text-accent-primary hover:underline">
 				View all
 				<ArrowRight class="h-3.5 w-3.5" />
 			</a>

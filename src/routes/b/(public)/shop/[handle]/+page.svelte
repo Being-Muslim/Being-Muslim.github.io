@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { products, type Product } from '$lib/data/mock.js';
 	import {
 		Star,
@@ -155,7 +156,7 @@
 <div style="background: #2a2018; padding-top: 72px;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10" style="padding: 14px 0;">
 		<nav style="display: flex; align-items: center; gap: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: rgba(255,255,255,0.5);">
-			<a href="/b/shop" style="display: inline-flex; align-items: center; gap: 4px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s;" class="bm-view-all">
+			<a href="{base}/b/shop" style="display: inline-flex; align-items: center; gap: 4px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s;" class="bm-view-all">
 				<ChevronLeft style="width: 14px; height: 14px;" />
 				Shop
 			</a>
@@ -235,7 +236,7 @@
 					<Heart style="width: 18px; height: 18px; color: #c8b8a0; flex-shrink: 0;" />
 					<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #5a5248; margin: 0; line-height: 1.4;">
 						<strong style="color: #2a2018;">Sponsor this for a new Muslim</strong> — add ${product.price.toFixed(2)} to gift this to someone beginning their journey.
-						<a href="/b/support" style="color: #2a2018; text-decoration: underline; text-underline-offset: 2px;">Learn more</a>
+						<a href="{base}/b/support" style="color: #2a2018; text-decoration: underline; text-underline-offset: 2px;">Learn more</a>
 					</p>
 				</div>
 
@@ -379,13 +380,13 @@
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="display: flex; justify-content: space-between; align-items: end; margin-bottom: 28px;">
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(24px, 3vw, 30px); font-weight: 400; color: #2a2018; margin: 0;">You might also like</h2>
-			<a href="/b/shop" class="bm-view-all" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+			<a href="{base}/b/shop" class="bm-view-all" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
 				All products <ArrowRight style="width: 14px; height: 14px;" />
 			</a>
 		</div>
 		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
 			{#each relatedProducts as related}
-				<a href="/b/shop/{related.handle}" style="text-decoration: none; display: block;" class="bm-title-underline-parent group">
+				<a href="{base}/b/shop/{related.handle}" style="text-decoration: none; display: block;" class="bm-title-underline-parent group">
 					<div class="bm-card-hover" style="background: #fff; border-radius: 12px; overflow: hidden;">
 						<div style="aspect-ratio: 4/3; background: #e2dcd2; overflow: hidden;">
 							{#if productGalleries[related.handle]?.[0]}

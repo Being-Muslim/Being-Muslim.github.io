@@ -3,7 +3,7 @@
 		<div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 48px;">
 			<!-- Brand -->
 			<div>
-				<a href="/c" style="display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 16px;">
+				<a href="{base}/c" style="display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 16px;">
 					<img src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png" alt="Being Muslim" style="height: 32px; width: 32px;" />
 					<span style="font-family: 'Source Serif 4', serif; font-size: 18px; color: #fff;">Being Muslim</span>
 				</a>
@@ -31,9 +31,9 @@
 			<div>
 				<h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Learn</h4>
 				{#each [
-					{ label: 'Articles', href: '/c/learn' },
-					{ label: 'Courses', href: '/c/learn' },
-					{ label: 'Resources', href: '/c/learn' }
+					{ label: 'Articles', href: `${base}/c/learn` },
+					{ label: 'Courses', href: `${base}/c/learn` },
+					{ label: 'Resources', href: `${base}/c/learn` }
 				] as link}
 					<a href={link.href} class="bm-footer-link">{link.label}</a>
 				{/each}
@@ -43,10 +43,10 @@
 			<div>
 				<h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Shop</h4>
 				{#each [
-					{ label: 'The Book', href: '/c/shop' },
-					{ label: 'Boxed Set', href: '/c/shop' },
-					{ label: 'Prayer Cards', href: '/c/shop' },
-					{ label: 'eBook', href: '/c/shop' }
+					{ label: 'The Book', href: `${base}/c/shop` },
+					{ label: 'Boxed Set', href: `${base}/c/shop` },
+					{ label: 'Prayer Cards', href: `${base}/c/shop` },
+					{ label: 'eBook', href: `${base}/c/shop` }
 				] as link}
 					<a href={link.href} class="bm-footer-link">{link.label}</a>
 				{/each}
@@ -56,9 +56,9 @@
 			<div>
 				<h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Support</h4>
 				{#each [
-					{ label: 'Donate', href: '/c/support' },
-					{ label: 'Request Donation', href: '/c/support' },
-					{ label: 'Volunteer', href: '/c/support' }
+					{ label: 'Donate', href: `${base}/c/support` },
+					{ label: 'Request Donation', href: `${base}/c/support` },
+					{ label: 'Volunteer', href: `${base}/c/support` }
 				] as link}
 					<a href={link.href} class="bm-footer-link">{link.label}</a>
 				{/each}
@@ -68,10 +68,10 @@
 			<div>
 				<h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Company</h4>
 				{#each [
-					{ label: 'About Us', href: '/c/about' },
-					{ label: 'Contact', href: '/c/contact' },
-					{ label: 'Convert', href: '/c/convert' },
-					{ label: 'Privacy Policy', href: '/c' }
+					{ label: 'About Us', href: `${base}/c/about` },
+					{ label: 'Contact', href: `${base}/c/contact` },
+					{ label: 'Convert', href: `${base}/c/convert` },
+					{ label: 'Privacy Policy', href: `${base}/c` }
 				] as link}
 					<a href={link.href} class="bm-footer-link">{link.label}</a>
 				{/each}
@@ -82,9 +82,9 @@
 		<div style="border-top: 1px solid rgba(255,255,255,0.08); padding: 20px 0; display: flex; justify-content: space-between; align-items: center;">
 			<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(255,255,255,0.3);">&copy; 2026 The Being Muslim Project. All rights reserved.</p>
 			<div style="display: flex; gap: 24px;">
-				<a href="/c" class="bm-footer-link" style="font-size: 12px; color: rgba(255,255,255,0.3);">Privacy</a>
-				<a href="/c" class="bm-footer-link" style="font-size: 12px; color: rgba(255,255,255,0.3);">Terms</a>
-				<a href="/c/contact" class="bm-footer-link" style="font-size: 12px; color: rgba(255,255,255,0.3);">Contact</a>
+				<a href="{base}/c" class="bm-footer-link" style="font-size: 12px; color: rgba(255,255,255,0.3);">Privacy</a>
+				<a href="{base}/c" class="bm-footer-link" style="font-size: 12px; color: rgba(255,255,255,0.3);">Terms</a>
+				<a href="{base}/c/contact" class="bm-footer-link" style="font-size: 12px; color: rgba(255,255,255,0.3);">Contact</a>
 			</div>
 		</div>
 	</div>

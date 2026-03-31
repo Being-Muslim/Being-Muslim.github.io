@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { Section } from '$lib/components/layout/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
@@ -96,7 +97,7 @@
 			<div class="flex-1 divide-y divide-border">
 				{#each forumCategories.slice(0, 4) as category}
 					{@const Icon = iconMap[category.icon] || MessageCircle}
-					<a href="/community/forums" class="group flex items-center gap-4 px-6 py-4 transition-colors hover:bg-secondary/50">
+					<a href="{base}/community/forums" class="group flex items-center gap-4 px-6 py-4 transition-colors hover:bg-secondary/50">
 						<div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent-primary/10 text-accent-primary transition-colors group-hover:bg-accent-primary group-hover:text-text-cream">
 							<Icon class="h-4 w-4" />
 						</div>
@@ -116,7 +117,7 @@
 			</div>
 
 			<div class="border-t border-border p-4">
-				<a href="/community/forums">
+				<a href="{base}/community/forums">
 					<Button variant="outline" class="w-full">
 						{#snippet children()}
 							Browse Forums
@@ -143,7 +144,7 @@
 
 			<div class="flex-1 divide-y divide-border">
 				{#each chatChannels as channel}
-					<a href="/community/chat" class="group flex items-center gap-4 px-6 py-4 transition-colors hover:bg-secondary/50">
+					<a href="{base}/community/chat" class="group flex items-center gap-4 px-6 py-4 transition-colors hover:bg-secondary/50">
 						<Hash class="h-4 w-4 shrink-0 text-text-secondary" />
 						<div class="min-w-0 flex-1">
 							<h3 class="text-sm font-semibold text-text-primary group-hover:text-accent-primary">
@@ -161,7 +162,7 @@
 			</div>
 
 			<div class="border-t border-border p-4">
-				<a href="/community/chat">
+				<a href="{base}/community/chat">
 					<Button variant="outline" class="w-full">
 						{#snippet children()}
 							Join Chat

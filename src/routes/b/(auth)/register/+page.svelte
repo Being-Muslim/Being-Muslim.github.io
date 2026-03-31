@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { withPrefix } from '$lib/data/utils';
 	import { Eye, EyeOff } from 'lucide-svelte';
 
@@ -120,9 +121,9 @@
 				/>
 				<span class="text-sm text-text-secondary">
 					I agree to the
-					<a href="/terms" class="font-bold text-accent-primary hover:text-red-700">Terms of Service</a>
+					<a href="{base}/terms" class="font-bold text-accent-primary hover:text-red-700">Terms of Service</a>
 					and
-					<a href="/privacy" class="font-bold text-accent-primary hover:text-red-700">Privacy Policy</a>
+					<a href="{base}/privacy" class="font-bold text-accent-primary hover:text-red-700">Privacy Policy</a>
 				</span>
 			</label>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { Section } from '$lib/components/layout/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
@@ -51,7 +52,7 @@
 <section class="bg-bg-dark py-16 sm:py-20">
 	<div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
 		<a
-			href="/guides"
+			href="{base}/guides"
 			class="mb-6 inline-flex items-center gap-2 text-sm text-text-cream/60 transition-colors hover:text-text-cream"
 		>
 			<ArrowLeft class="h-4 w-4" />
@@ -242,7 +243,7 @@
 
 		<div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
 			{#each otherGuides as other}
-				<a href="/guides/{other.slug}" class="group">
+				<a href="{base}/guides/{other.slug}" class="group">
 					<article class="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface transition-all duration-200 hover:border-accent-primary/30 hover:shadow-lg">
 						<div class="relative aspect-[2/1] bg-gradient-to-br from-accent-primary/15 to-accent-gold/15">
 							<div class="flex h-full items-center justify-center">
@@ -278,7 +279,7 @@
 		</div>
 
 		<div class="mt-10 text-center">
-			<a href="/guides">
+			<a href="{base}/guides">
 				<Button variant="outline">
 					{#snippet children()}
 						View All Guides

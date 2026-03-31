@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { ArrowRight, BookOpen, ExternalLink, MessageCircle } from 'lucide-svelte';
 
 	const featuredArticles = [
@@ -7,21 +8,21 @@
 			excerpt:
 				'A concise introduction to the core beliefs, practices, and history of Islam — perfect for anyone beginning to explore the faith.',
 			image: null,
-			href: '/b/learn/brief-overview-of-islam'
+			href: `${base}/b/learn/brief-overview-of-islam`
 		},
 		{
 			title: "A Beginner's Guide to Being a Muslim",
 			excerpt:
 				'Practical guidance for new Muslims covering daily prayers, fasting, community life, and building a meaningful relationship with God.',
 			image: null,
-			href: '/b/learn/beginners-guide'
+			href: `${base}/b/learn/beginners-guide`
 		},
 		{
 			title: 'The Final Testament: Islam and Other Faiths',
 			excerpt:
 				'Understanding how Islam relates to Christianity, Judaism, and other religious traditions — and the shared values that connect them.',
 			image: null,
-			href: '/b/learn/islam-and-other-faiths'
+			href: `${base}/b/learn/islam-and-other-faiths`
 		}
 	];
 
@@ -221,7 +222,7 @@
 				No question is too simple or too small. We're here to help you find thoughtful, reliable answers.
 			</p>
 			<a
-				href="/b/community/ask"
+				href="{base}/b/community/ask"
 				class="inline-flex items-center gap-2 mt-8 px-8 py-3.5 rounded-full text-[15px] font-semibold transition-all hover:shadow-lg hover:scale-[1.02]"
 				style="background: #f0ebe3; color: #2a2018;"
 			>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { cn } from '$lib/utils/cn.js';
 	import { navLinks } from '$lib/data/mock.js';
 	import { Button } from '$lib/components/ui/button/index.js';
@@ -27,7 +28,7 @@
 >
 	<nav class="mx-auto flex h-16 max-w-[1280px] items-center justify-between px-4 sm:px-6 lg:px-8">
 		<!-- Logo -->
-		<a href="/" class="flex items-center gap-2">
+		<a href="{base}/" class="flex items-center gap-2">
 			<img
 				src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png"
 				alt="Being Muslim"

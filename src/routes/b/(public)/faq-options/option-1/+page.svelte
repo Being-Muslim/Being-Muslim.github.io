@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { ChevronDown } from 'lucide-svelte';
 
 	let openFaq = $state<number | null>(null);
@@ -48,10 +49,10 @@
 				{/each}
 
 				<div style="margin-top: 24px; display: flex; gap: 12px;">
-					<a href="/b/convert" class="bm-btn-dark" style="padding: 10px 24px;">
+					<a href="{base}/b/convert" class="bm-btn-dark" style="padding: 10px 24px;">
 						Ready to Convert
 					</a>
-					<a href="/b/contact" class="bm-btn-outline" style="padding: 10px 24px;">
+					<a href="{base}/b/contact" class="bm-btn-outline" style="padding: 10px 24px;">
 						Ask a Question
 					</a>
 				</div>
@@ -67,10 +68,10 @@
 						We're here to help you every step of the way. Whether you're curious about Islam or ready to take the next step, our team is happy to assist.
 					</p>
 					<div style="display: flex; flex-direction: column; gap: 10px;">
-						<a href="/b/contact" class="bm-btn-dark" style="padding: 12px 24px; text-align: center; justify-content: center;">
+						<a href="{base}/b/contact" class="bm-btn-dark" style="padding: 12px 24px; text-align: center; justify-content: center;">
 							Ask a Question
 						</a>
-						<a href="/b/contact" class="bm-btn-outline" style="padding: 12px 24px; text-align: center; justify-content: center;">
+						<a href="{base}/b/contact" class="bm-btn-outline" style="padding: 12px 24px; text-align: center; justify-content: center;">
 							Contact Us
 						</a>
 					</div>

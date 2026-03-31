@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { ChevronDown } from 'lucide-svelte';
 
 	let openFaq = $state<number | null>(null);
@@ -48,10 +49,10 @@
 				{/each}
 
 				<div style="margin-top: 24px; display: flex; gap: 12px;">
-					<a href="/b/convert" class="bm-btn-dark" style="padding: 10px 24px;">
+					<a href="{base}/b/convert" class="bm-btn-dark" style="padding: 10px 24px;">
 						Ready to Convert
 					</a>
-					<a href="/b/contact" class="bm-btn-outline" style="padding: 10px 24px;">
+					<a href="{base}/b/contact" class="bm-btn-outline" style="padding: 10px 24px;">
 						Ask a Question
 					</a>
 				</div>

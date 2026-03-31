@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { ArrowLeft, BookOpen, Clock } from 'lucide-svelte';
 </script>
 
@@ -15,7 +16,7 @@
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10 py-16 sm:py-24">
 		<div class="mx-auto max-w-3xl">
 			<a
-				href="/c/learn"
+				href="{base}/c/learn"
 				style="color: rgba(240,235,227,0.6); font-family: 'DM Sans', sans-serif;"
 				class="mb-6 inline-flex items-center gap-2 text-sm transition-colors hover:text-[#f0ebe3]"
 			>
@@ -87,7 +88,7 @@
 			<!-- Back to Learn -->
 			<div style="border-top: 1px solid #d8d2c8;" class="mt-12 pt-8">
 				<a
-					href="/c/learn"
+					href="{base}/c/learn"
 					class="bm-btn-outline"
 					style="padding: 10px 24px;"
 				>

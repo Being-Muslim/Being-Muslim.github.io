@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { Section } from '$lib/components/layout/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
@@ -78,7 +79,7 @@
 {#if featuredCourse}
 	<section class="-mt-8 relative z-10">
 		<div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-			<a href="/courses/{featuredCourse.slug}" class="group block">
+			<a href="{base}/courses/{featuredCourse.slug}" class="group block">
 				<div
 					class="overflow-hidden rounded-2xl border border-border bg-surface shadow-lg transition-all hover:shadow-xl"
 				>
@@ -211,7 +212,7 @@
 	<!-- Course Grid -->
 	<div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 		{#each filteredCourses as course (course.slug)}
-			<a href="/courses/{course.slug}" class="group">
+			<a href="{base}/courses/{course.slug}" class="group">
 				<div
 					class="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface transition-all hover:border-accent-primary/30 hover:shadow-lg"
 				>

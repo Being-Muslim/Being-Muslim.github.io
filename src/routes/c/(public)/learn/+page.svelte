@@ -6,7 +6,7 @@
 			title: 'Brief Overview of Islam',
 			excerpt: 'A concise introduction to the core beliefs, practices, and history of Islam — perfect for anyone beginning to explore the faith.',
 			img: 'https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png',
-			href: `$/c/learn/brief-overview-of-islam`,
+			href: '/c/learn/brief-overview-of-islam',
 			category: 'Foundations',
 			time: '10 min read'
 		},
@@ -14,7 +14,7 @@
 			title: "A Beginner's Guide to Being a Muslim",
 			excerpt: 'Practical guidance for new Muslims covering daily prayers, fasting, community life, and building a meaningful relationship with God.',
 			img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg',
-			href: `$/c/learn/beginners-guide`,
+			href: '/c/learn/beginners-guide',
 			category: 'New Muslims',
 			time: '12 min read'
 		},
@@ -22,7 +22,7 @@
 			title: 'Islam and Other Faiths',
 			excerpt: 'Understanding how Islam relates to Christianity, Judaism, and other religious traditions — and the shared values that connect them.',
 			img: 'https://www.beingmuslim.org/wp-content/uploads/2022/02/foundationsofIsam_YT.jpeg',
-			href: `$/c/learn/islam-and-other-faiths`,
+			href: '/c/learn/islam-and-other-faiths',
 			category: 'Belief',
 			time: '8 min read'
 		}

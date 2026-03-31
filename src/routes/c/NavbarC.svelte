@@ -45,11 +45,11 @@
 		<!-- Desktop Nav -->
 		<div class="hidden md:flex" style="align-items: center; gap: 28px;">
 			{#each [
-				{ label: 'Home', href: `$/c` },
-				{ label: 'Learn', href: `$/c/learn` },
-				{ label: 'Convert', href: `$/c/convert` },
-				{ label: 'Shop', href: `$/c/shop` },
-				{ label: 'Support', href: `$/c/support` }
+				{ label: 'Home', href: '/c' },
+				{ label: 'Learn', href: '/c/learn' },
+				{ label: 'Convert', href: '/c/convert' },
+				{ label: 'Shop', href: '/c/shop' },
+				{ label: 'Support', href: '/c/support' }
 			] as link}
 				<a
 					href={link.href}
@@ -105,11 +105,11 @@
 			box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 		">
 			{#each [
-				{ label: 'Home', href: `$/c` },
-				{ label: 'Learn', href: `$/c/learn` },
-				{ label: 'Convert', href: `$/c/convert` },
-				{ label: 'Shop', href: `$/c/shop` },
-				{ label: 'Support', href: `$/c/support` }
+				{ label: 'Home', href: '/c' },
+				{ label: 'Learn', href: '/c/learn' },
+				{ label: 'Convert', href: '/c/convert' },
+				{ label: 'Shop', href: '/c/shop' },
+				{ label: 'Support', href: '/c/support' }
 			] as link}
 				<a href={link.href} style="display: block; padding: 10px 0; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #2a2018; text-decoration: none;" onclick={() => (mobileOpen = false)}>{link.label}</a>
 			{/each}

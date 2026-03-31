@@ -7,21 +7,21 @@
 			excerpt:
 				'A concise introduction to the core beliefs, practices, and history of Islam — perfect for anyone beginning to explore the faith.',
 			image: null,
-			href: `$/b/learn/brief-overview-of-islam`
+			href: '/b/learn/brief-overview-of-islam'
 		},
 		{
 			title: "A Beginner's Guide to Being a Muslim",
 			excerpt:
 				'Practical guidance for new Muslims covering daily prayers, fasting, community life, and building a meaningful relationship with God.',
 			image: null,
-			href: `$/b/learn/beginners-guide`
+			href: '/b/learn/beginners-guide'
 		},
 		{
 			title: 'The Final Testament: Islam and Other Faiths',
 			excerpt:
 				'Understanding how Islam relates to Christianity, Judaism, and other religious traditions — and the shared values that connect them.',
 			image: null,
-			href: `$/b/learn/islam-and-other-faiths`
+			href: '/b/learn/islam-and-other-faiths'
 		}
 	];
 

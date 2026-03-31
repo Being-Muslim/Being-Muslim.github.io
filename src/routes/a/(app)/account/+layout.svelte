@@ -18,12 +18,12 @@
 	let mobileMenuOpen = $state(false);
 
 	const sidebarLinks = [
-		{ href: `$/account`, label: 'Dashboard', icon: LayoutDashboard },
-		{ href: `$/account/learning`, label: 'My Learning', icon: BookOpen },
-		{ href: `$/account/orders`, label: 'Orders', icon: ShoppingBag },
-		{ href: `$/account/donations`, label: 'Donations', icon: Heart },
-		{ href: `$/account/profile`, label: 'Profile', icon: UserCircle },
-		{ href: `$/account/settings`, label: 'Settings', icon: Settings }
+		{ href: '/account', label: 'Dashboard', icon: LayoutDashboard },
+		{ href: '/account/learning', label: 'My Learning', icon: BookOpen },
+		{ href: '/account/orders', label: 'Orders', icon: ShoppingBag },
+		{ href: '/account/donations', label: 'Donations', icon: Heart },
+		{ href: '/account/profile', label: 'Profile', icon: UserCircle },
+		{ href: '/account/settings', label: 'Settings', icon: Settings }
 	] as const;
 
 	function isActive(href: string): boolean {

@@ -31,9 +31,9 @@
 			<div>
 				<h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Learn</h4>
 				{#each [
-					{ label: 'Articles', href: `$/c/learn` },
-					{ label: 'Courses', href: `$/c/learn` },
-					{ label: 'Resources', href: `$/c/learn` }
+					{ label: 'Articles', href: '/c/learn' },
+					{ label: 'Courses', href: '/c/learn' },
+					{ label: 'Resources', href: '/c/learn' }
 				] as link}
 					<a href={link.href} class="bm-footer-link">{link.label}</a>
 				{/each}
@@ -43,10 +43,10 @@
 			<div>
 				<h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Shop</h4>
 				{#each [
-					{ label: 'The Book', href: `$/c/shop` },
-					{ label: 'Boxed Set', href: `$/c/shop` },
-					{ label: 'Prayer Cards', href: `$/c/shop` },
-					{ label: 'eBook', href: `$/c/shop` }
+					{ label: 'The Book', href: '/c/shop' },
+					{ label: 'Boxed Set', href: '/c/shop' },
+					{ label: 'Prayer Cards', href: '/c/shop' },
+					{ label: 'eBook', href: '/c/shop' }
 				] as link}
 					<a href={link.href} class="bm-footer-link">{link.label}</a>
 				{/each}
@@ -56,9 +56,9 @@
 			<div>
 				<h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Support</h4>
 				{#each [
-					{ label: 'Donate', href: `$/c/support` },
-					{ label: 'Request Donation', href: `$/c/support` },
-					{ label: 'Volunteer', href: `$/c/support` }
+					{ label: 'Donate', href: '/c/support' },
+					{ label: 'Request Donation', href: '/c/support' },
+					{ label: 'Volunteer', href: '/c/support' }
 				] as link}
 					<a href={link.href} class="bm-footer-link">{link.label}</a>
 				{/each}
@@ -68,10 +68,10 @@
 			<div>
 				<h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Company</h4>
 				{#each [
-					{ label: 'About Us', href: `$/c/about` },
-					{ label: 'Contact', href: `$/c/contact` },
-					{ label: 'Convert', href: `$/c/convert` },
-					{ label: 'Privacy Policy', href: `$/c` }
+					{ label: 'About Us', href: '/c/about' },
+					{ label: 'Contact', href: '/c/contact' },
+					{ label: 'Convert', href: '/c/convert' },
+					{ label: 'Privacy Policy', href: '/c' }
 				] as link}
 					<a href={link.href} class="bm-footer-link">{link.label}</a>
 				{/each}

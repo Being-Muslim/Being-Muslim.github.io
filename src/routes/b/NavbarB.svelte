@@ -31,24 +31,24 @@
 				{
 					heading: 'Resources',
 					links: [
-						{ label: 'Articles', href: `$/b/learn`, desc: 'In-depth guides on faith and practice' },
-						{ label: 'Courses', href: `$/b/learn`, desc: 'Structured learning at your own pace' },
-						{ label: 'Brief Overview of Islam', href: `$/b/learn/brief-overview-of-islam`, desc: 'Core beliefs, practices, and history' }
+						{ label: 'Articles', href: '/b/learn', desc: 'In-depth guides on faith and practice' },
+						{ label: 'Courses', href: '/b/learn', desc: 'Structured learning at your own pace' },
+						{ label: 'Brief Overview of Islam', href: '/b/learn/brief-overview-of-islam', desc: 'Core beliefs, practices, and history' }
 					]
 				},
 				{
 					heading: 'Popular Topics',
 					links: [
-						{ label: "Beginner's Guide", href: `$/b/learn/beginners-guide`, desc: 'First steps for new Muslims' },
-						{ label: 'Islam and Other Faiths', href: `$/b/learn/islam-and-other-faiths`, desc: 'Common ground and key differences' },
-						{ label: 'View All Resources', href: `$/b/learn` }
+						{ label: "Beginner's Guide", href: '/b/learn/beginners-guide', desc: 'First steps for new Muslims' },
+						{ label: 'Islam and Other Faiths', href: '/b/learn/islam-and-other-faiths', desc: 'Common ground and key differences' },
+						{ label: 'View All Resources', href: '/b/learn' }
 					]
 				}
 			],
 			featured: {
 				title: 'Foundations of Faith',
 				desc: 'A 24-lesson course covering the essentials.',
-				href: `$/b/learn`,
+				href: '/b/learn',
 				img: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&q=80&auto=format&fit=crop'
 			}
 		},
@@ -57,17 +57,17 @@
 				{
 					heading: 'Your Journey',
 					links: [
-						{ label: 'Ready to Convert?', href: `$/b/convert`, desc: 'Take the next step with guidance and support' },
-						{ label: 'What to Expect', href: `$/b/convert`, desc: 'Understanding the process and what comes after' },
-						{ label: 'FAQ for New Muslims', href: `$/b/convert`, desc: 'Answers to the most common questions' }
+						{ label: 'Ready to Convert?', href: '/b/convert', desc: 'Take the next step with guidance and support' },
+						{ label: 'What to Expect', href: '/b/convert', desc: 'Understanding the process and what comes after' },
+						{ label: 'FAQ for New Muslims', href: '/b/convert', desc: 'Answers to the most common questions' }
 					]
 				},
 				{
 					heading: 'Support',
 					links: [
-						{ label: 'Find a Community', href: `$/b/convert`, desc: 'Connect with Muslims near you' },
-						{ label: 'Mentorship Program', href: `$/b/convert`, desc: 'One-on-one guidance from experienced Muslims' },
-						{ label: 'Start Your Journey', href: `$/b/convert` }
+						{ label: 'Find a Community', href: '/b/convert', desc: 'Connect with Muslims near you' },
+						{ label: 'Mentorship Program', href: '/b/convert', desc: 'One-on-one guidance from experienced Muslims' },
+						{ label: 'Start Your Journey', href: '/b/convert' }
 					]
 				}
 			]
@@ -77,17 +77,17 @@
 				{
 					heading: 'Products',
 					links: [
-						{ label: 'Being Muslim: A Practical Guide', href: `$/b/shop/book`, desc: 'The bestselling book' },
-						{ label: 'The Complete Boxed Set', href: `$/b/shop/boxed-set`, desc: 'Book, prayer cards, and more' },
-						{ label: 'Prayer Reference Cards', href: `$/b/shop/prayer-cards`, desc: 'Keep by your prayer mat' },
-						{ label: 'Digital Edition (eBook)', href: `$/b/shop/ebook`, desc: 'Read anywhere, instantly' }
+						{ label: 'Being Muslim: A Practical Guide', href: '/b/shop/book', desc: 'The bestselling book' },
+						{ label: 'The Complete Boxed Set', href: '/b/shop/boxed-set', desc: 'Book, prayer cards, and more' },
+						{ label: 'Prayer Reference Cards', href: '/b/shop/prayer-cards', desc: 'Keep by your prayer mat' },
+						{ label: 'Digital Edition (eBook)', href: '/b/shop/ebook', desc: 'Read anywhere, instantly' }
 					]
 				}
 			],
 			featured: {
 				title: 'The Complete Boxed Set',
 				desc: 'Everything you need in one beautiful package.',
-				href: `$/b/shop/boxed-set`,
+				href: '/b/shop/boxed-set',
 				img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg'
 			}
 		},
@@ -96,10 +96,10 @@
 				{
 					heading: 'Get Involved',
 					links: [
-						{ label: 'Donate', href: `$/b/support`, desc: 'Help fund resources for new Muslims' },
-						{ label: 'Sponsor a Boxed Set', href: `$/b/support`, desc: 'Gift a set to someone in need' },
-						{ label: 'Volunteer', href: `$/b/support`, desc: 'Join our team of contributors' },
-						{ label: 'Support the Mission', href: `$/b/support` }
+						{ label: 'Donate', href: '/b/support', desc: 'Help fund resources for new Muslims' },
+						{ label: 'Sponsor a Boxed Set', href: '/b/support', desc: 'Gift a set to someone in need' },
+						{ label: 'Volunteer', href: '/b/support', desc: 'Join our team of contributors' },
+						{ label: 'Support the Mission', href: '/b/support' }
 					]
 				}
 			]
@@ -133,11 +133,11 @@
 		<!-- Desktop Nav -->
 		<div class="hidden items-center gap-8 md:flex">
 			{#each [
-				{ label: 'Home', href: `$/b` },
-				{ label: 'Learn', href: `$/b/learn` },
-				{ label: 'Convert', href: `$/b/convert` },
-				{ label: 'Shop', href: `$/b/shop` },
-				{ label: 'Support', href: `$/b/support` }
+				{ label: 'Home', href: '/b' },
+				{ label: 'Learn', href: '/b/learn' },
+				{ label: 'Convert', href: '/b/convert' },
+				{ label: 'Shop', href: '/b/shop' },
+				{ label: 'Support', href: '/b/support' }
 			] as link}
 				<div
 					class="relative"
@@ -228,11 +228,11 @@
 	{#if mobileOpen}
 		<div class="md:hidden bg-white border-t border-border px-6 py-4 shadow-lg">
 			{#each [
-				{ label: 'Home', href: `$/b` },
-				{ label: 'Learn', href: `$/b/learn` },
-				{ label: 'Convert', href: `$/b/convert` },
-				{ label: 'Shop', href: `$/b/shop` },
-				{ label: 'Support', href: `$/b/support` }
+				{ label: 'Home', href: '/b' },
+				{ label: 'Learn', href: '/b/learn' },
+				{ label: 'Convert', href: '/b/convert' },
+				{ label: 'Shop', href: '/b/shop' },
+				{ label: 'Support', href: '/b/support' }
 			] as link}
 				<a href={link.href} class="block py-2.5 text-text-primary font-medium" onclick={() => (mobileOpen = false)}>{link.label}</a>
 			{/each}

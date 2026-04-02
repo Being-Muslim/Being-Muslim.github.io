@@ -165,7 +165,7 @@
 <!-- ============================== -->
 <!-- 4. FEATURED ARTICLES           -->
 <!-- ============================== -->
-<section style="background: #f4f1eb; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="display: flex; justify-content: space-between; align-items: end; margin-bottom: 32px;">
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0;">
@@ -177,14 +177,14 @@
 		</div>
 
 		<!-- Bento grid: left image spans 2 rows, right cards share those rows, left text in row 3 -->
-		<div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr auto; gap: 35px;">
+		<div class="bm-grid-bento">
 			<!-- Left: featured image spanning rows 1–2 -->
-			<a href="/c/learn" style="grid-column: 1; grid-row: 1 / 3; display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: #e2dcd2;" class="bm-title-underline-parent">
+			<a href="/c/learn" style="display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: #e2dcd2;" class="bm-title-underline-parent">
 				<img src="https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png" alt="Brief Overview of Islam" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
 			</a>
 
 			<!-- Right top card (row 1) -->
-			<a href="/c/learn" style="grid-column: 2; grid-row: 1; text-decoration: none; display: grid; grid-template-columns: 29% 1fr; gap: 24px; align-items: center;" class="bm-title-underline-parent">
+			<a href="/c/learn" class="bm-grid-article-card bm-title-underline-parent" style="text-decoration: none;">
 				<div style="background: #e2dcd2; border-radius: 10px; overflow: hidden; height: 100%;">
 					<img src="https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg" alt="A Beginner's Guide to Being a Muslim" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
 				</div>
@@ -199,7 +199,7 @@
 			</a>
 
 			<!-- Right bottom card (row 2) -->
-			<a href="/c/learn" style="grid-column: 2; grid-row: 2; text-decoration: none; display: grid; grid-template-columns: 29% 1fr; gap: 24px; align-items: center;" class="bm-title-underline-parent">
+			<a href="/c/learn" class="bm-grid-article-card bm-title-underline-parent" style="text-decoration: none;">
 				<div style="background: #e2dcd2; border-radius: 10px; overflow: hidden; height: 100%;">
 					<img src="https://www.beingmuslim.org/wp-content/uploads/2022/02/foundationsofIsam_YT.jpeg" alt="Islam and Other Faiths" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
 				</div>
@@ -214,7 +214,7 @@
 			</a>
 
 			<!-- Left: text below image (row 3) -->
-			<div style="grid-column: 1; grid-row: 3;">
+			<div>
 				<h3 style="font-size: 24px; color: #2a2018; margin: 0 0 6px; line-height: 1.3;">Brief Overview of Islam</h3>
 				<p style="font-size: 15px; color: #8a7e70; line-height: 1.5; margin: 0 0 8px;">A clear and accessible introduction to the core beliefs, practices, and history of Islam for those just beginning to learn.</p>
 				<div style="display: flex; align-items: center; gap: 10px;">
@@ -229,13 +229,13 @@
 <!-- ============================== -->
 <!-- 5. PRODUCTS                    -->
 <!-- ============================== -->
-<section style="background: #faf9f5; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px; text-align: center;">
 			Everything you need to begin
 		</h2>
 
-		<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+		<div class="bm-grid-4">
 			{#each [
 				{ title: 'Being Muslim: A Practical Guide', price: '$14.95', badge: 'Bestseller', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg', href: '/c/shop/book' },
 				{ title: 'The Complete Boxed Set', price: '$85.00', badge: 'Most Popular', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg', href: '/c/shop/boxed-set' },
@@ -272,7 +272,7 @@
 <!-- ============================== -->
 <!-- 6. COURSES                     -->
 <!-- ============================== -->
-<section style="background: #f4f1eb; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #f4f1eb;">
 	<div bind:this={coursesHeaderRef} class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<!-- Header: title + description left, arrows right -->
 		<div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 32px;">
@@ -328,12 +328,12 @@
 <!-- ============================== -->
 <!-- 7. COMMUNITY                   -->
 <!-- ============================== -->
-<section style="padding: 64px 0; background: #faf9f5;">
+<section class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="background: #2a2018; border-radius: 16px; overflow: hidden;">
-			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0;">
+			<div class="bm-grid-2">
 				<!-- Left -->
-				<div style="padding: 48px;">
+				<div class="bm-community-panel">
 					<h2 style="font-family: 'Source Serif 4', serif; font-size: 36px; font-weight: 400; color: #fff; margin: 0 0 16px; line-height: 1.15;">
 						You're not on this journey alone
 					</h2>
@@ -355,7 +355,7 @@
 					</a>
 				</div>
 				<!-- Right: chat preview -->
-				<div style="padding: 48px; background: rgba(255,255,255,0.03); border-left: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; justify-content: center;">
+				<div class="bm-community-panel bm-community-chat" style="background: rgba(255,255,255,0.03); display: flex; flex-direction: column; justify-content: center;">
 					{#each [
 						{ name: 'Aminah', msg: 'Salaam everyone! Just took my shahada yesterday', time: '2m ago' },
 						{ name: 'Omar', msg: 'MashaAllah! Welcome to the family, sister!', time: '1m ago' },
@@ -383,9 +383,9 @@
 <!-- ============================== -->
 <!-- 8. SUPPORT CTA                 -->
 <!-- ============================== -->
-<section style="background: #f4f1eb; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+		<div class="bm-grid-2-gap">
 			<div>
 				<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 16px;">
 					Help a new Muslim begin their journey
@@ -397,7 +397,7 @@
 					Support the Mission <ArrowRight class="h-3.5 w-3.5" />
 				</a>
 			</div>
-			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+			<div class="bm-grid-stats">
 				{#each [
 					{ value: '3,247', label: 'Sets Sponsored' },
 					{ value: '520', label: 'Communities Reached' },
@@ -417,13 +417,13 @@
 <!-- ============================== -->
 <!-- 9. TESTIMONIALS                -->
 <!-- ============================== -->
-<section style="background: #faf9f5; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 40px; text-align: center;">
 			What people are saying
 		</h2>
 
-		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px;">
+		<div class="bm-grid-3-testimonials">
 			{#each testimonials.slice(0, 3) as testimonial, i}
 				<div style="padding: 32px 0; display: flex; flex-direction: column;">
 					<blockquote style="font-size: 15px; line-height: 1.55; color: #2a2018; margin: 0 0 20px; flex: 1;">
@@ -445,7 +445,7 @@
 <!-- ============================== -->
 <!-- 10. FAQ                        -->
 <!-- ============================== -->
-<section style="background: #f4f1eb; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="max-width: 800px; margin: 0 auto;">
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px; text-align: center;">
@@ -473,7 +473,7 @@
 				{/if}
 			{/each}
 
-			<div style="margin-top: 24px; display: flex; gap: 12px; justify-content: center;">
+			<div style="margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
 				<a href="/c/convert" class="bm-btn-dark" style="padding: 10px 24px;">
 					Ready to Convert
 				</a>
@@ -488,9 +488,9 @@
 <!-- ============================== -->
 <!-- 11. NEWSLETTER                 -->
 <!-- ============================== -->
-<section style="background: #191918; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #191918;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+		<div class="bm-grid-newsletter">
 			<!-- Left: text -->
 			<div>
 				<h2 style="font-size: 28px; color: #fff; margin: 0 0 12px;">

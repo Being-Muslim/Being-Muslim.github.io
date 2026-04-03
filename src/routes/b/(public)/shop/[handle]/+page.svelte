@@ -172,10 +172,10 @@
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div class="bm-grid-product">
 			<!-- LEFT: Vertical thumbnails + main image -->
-			<div style="display: flex; gap: 16px;">
-				<!-- Vertical thumbnail strip -->
+			<div class="bm-gallery-layout">
+				<!-- Vertical thumbnail strip (desktop only) -->
 				{#if gallery.length > 1}
-					<div style="display: flex; flex-direction: column; gap: 10px;">
+					<div class="bm-gallery-thumbs-vertical">
 						{#each gallery as thumb, idx}
 							<button
 								onclick={() => (selectedImageIndex = idx)}
@@ -188,7 +188,7 @@
 				{/if}
 
 				<!-- Main Image -->
-				<div style="width: 480px; aspect-ratio: 1; overflow: hidden; border-radius: 12px; background: #e2dcd2; flex-shrink: 0;">
+				<div class="bm-gallery-main" style="aspect-ratio: 1; overflow: hidden; border-radius: 12px; background: #e2dcd2;">
 					{#if currentImage}
 						<img src={currentImage} alt={product.title} style="width: 100%; height: 100%; object-fit: cover; display: block;" />
 					{:else}
@@ -197,6 +197,20 @@
 						</div>
 					{/if}
 				</div>
+
+				<!-- Horizontal thumbnail strip (mobile only) -->
+				{#if gallery.length > 1}
+					<div class="bm-gallery-thumbs-horizontal">
+						{#each gallery as thumb, idx}
+							<button
+								onclick={() => (selectedImageIndex = idx)}
+								style="width: 60px; height: 60px; overflow: hidden; border-radius: 8px; border: 2px solid {selectedImageIndex === idx ? '#2a2018' : '#d8d2c8'}; background: #e2dcd2; cursor: pointer; transition: border-color 0.2s; flex-shrink: 0;"
+							>
+								<img src={thumb} alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+							</button>
+						{/each}
+					</div>
+				{/if}
 			</div>
 
 			<!-- RIGHT: Product Details -->

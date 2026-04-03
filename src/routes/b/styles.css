@@ -379,6 +379,40 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* Gallery layout: stacked on mobile, side-by-side on desktop */
+.bm-gallery-layout {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+.bm-gallery-main {
+	width: 100%;
+	flex-shrink: 0;
+}
+.bm-gallery-thumbs-vertical {
+	display: none;
+	flex-direction: column;
+	gap: 10px;
+}
+.bm-gallery-thumbs-horizontal {
+	display: flex;
+	gap: 10px;
+}
+@media (min-width: 768px) {
+	.bm-gallery-layout {
+		flex-direction: row;
+	}
+	.bm-gallery-main {
+		width: 480px;
+	}
+	.bm-gallery-thumbs-vertical {
+		display: flex;
+	}
+	.bm-gallery-thumbs-horizontal {
+		display: none;
+	}
+}
+
 /* Timeline item: stacked → date + content */
 .bm-grid-timeline {
 	display: grid;

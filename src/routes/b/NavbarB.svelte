@@ -113,7 +113,7 @@
 	class="fixed top-0 left-0 right-0 z-50 border-b {activeMenu
 		? 'bg-white/95 backdrop-blur-md shadow-sm border-border'
 		: mobileOpen
-			? 'bg-white/80 backdrop-blur-md border-transparent'
+			? 'bg-white/60 backdrop-blur-xl border-transparent'
 			: scrolled
 				? 'bg-white/95 backdrop-blur-md shadow-sm border-border transition-all duration-300'
 				: 'bg-transparent border-transparent transition-all duration-300'}"
@@ -228,7 +228,7 @@
 	{/if}
 
 	{#if mobileOpen}
-		<div class="md:hidden bg-white/80 backdrop-blur-md px-6 py-4 shadow-lg">
+		<div class="md:hidden bg-white/60 backdrop-blur-xl px-6 py-4 shadow-lg">
 			{#each [
 				{ label: 'Home', href: '/b' },
 				{ label: 'Learn', href: '/b/learn' },

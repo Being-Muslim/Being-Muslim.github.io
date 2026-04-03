@@ -200,6 +200,144 @@ p, a, li, label, input, textarea, select, button {
 	background: rgba(255, 255, 255, 0.15);
 }
 
+/* ---------- Responsive grids ---------- */
+
+/* Explore path: stacked → 3-col */
+.bm-grid-explore {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 20px;
+	align-items: stretch;
+}
+@media (min-width: 768px) {
+	.bm-grid-explore {
+		grid-template-columns: 1fr 280px 280px;
+		padding: 48px !important;
+	}
+}
+
+/* 3-column grid: 1-col → 3-col */
+.bm-grid-3 {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 20px;
+}
+@media (min-width: 640px) {
+	.bm-grid-3 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+@media (min-width: 1024px) {
+	.bm-grid-3 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* 4-column grid: 1-col → 2-col → 4-col */
+.bm-grid-4 {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 20px;
+}
+@media (min-width: 1024px) {
+	.bm-grid-4 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+/* 2-column grid: stacked → 2-col */
+.bm-grid-2 {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 24px;
+}
+@media (min-width: 768px) {
+	.bm-grid-2 {
+		grid-template-columns: 1fr 1fr;
+		gap: 0;
+	}
+}
+
+/* 2-column with gap for support/newsletter */
+.bm-grid-2-gap {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 32px;
+}
+@media (min-width: 768px) {
+	.bm-grid-2-gap {
+		grid-template-columns: 1fr 1fr;
+		gap: 48px;
+		align-items: center;
+	}
+}
+
+/* Newsletter 2-col */
+.bm-grid-newsletter {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 24px;
+}
+@media (min-width: 768px) {
+	.bm-grid-newsletter {
+		grid-template-columns: 1fr 1fr;
+		gap: 64px;
+		align-items: center;
+	}
+}
+
+/* Courses header: stacked → side-by-side */
+.bm-grid-courses-header {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 12px;
+	margin-bottom: 32px;
+}
+@media (min-width: 768px) {
+	.bm-grid-courses-header {
+		grid-template-columns: 1fr 300px;
+		gap: 24px;
+	}
+}
+
+/* 2x2 stats grid */
+.bm-grid-stats {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+}
+
+/* Community inner padding — reduced on mobile */
+.bm-community-panel {
+	padding: 28px 20px;
+}
+@media (min-width: 768px) {
+	.bm-community-panel {
+		padding: 48px;
+	}
+}
+
+/* Community chat panel: border-top on mobile, border-left on desktop */
+.bm-community-chat {
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+@media (min-width: 768px) {
+	.bm-community-chat {
+		border-top: none;
+		border-left: 1px solid rgba(255, 255, 255, 0.08);
+	}
+}
+
+/* Section padding — reduced on mobile */
+.bm-section-padding {
+	padding: 40px 0;
+}
+@media (min-width: 768px) {
+	.bm-section-padding {
+		padding: 64px 0;
+	}
+}
+
 /* ---------- Section spacing ---------- */
 .bm-section {
 	padding: 64px 0;

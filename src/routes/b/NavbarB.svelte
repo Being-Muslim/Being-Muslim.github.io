@@ -225,8 +225,8 @@
 		</div>
 	{/if}
 
-	{#if mobileOpen}
-		<div class="md:hidden bg-white border-t border-border px-6 py-4 shadow-lg">
+	<div class="mobile-menu md:hidden" class:open={mobileOpen}>
+		<div class="border-t border-border px-6 py-4">
 			{#each [
 				{ label: 'Home', href: '/b' },
 				{ label: 'Learn', href: '/b/learn' },
@@ -238,7 +238,7 @@
 			{/each}
 			<a href="/b/contact" class="block mt-3 text-center bg-text-primary text-white py-2.5 rounded-full font-medium">Contact</a>
 		</div>
-	{/if}
+	</div>
 </header>
 
 <style>
@@ -248,5 +248,14 @@
 	}
 	:global(.mega-link:hover) {
 		opacity: 0.7;
+	}
+	.mobile-menu {
+		max-height: 0;
+		overflow: hidden;
+		background: white;
+		transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+	.mobile-menu.open {
+		max-height: 350px;
 	}
 </style>

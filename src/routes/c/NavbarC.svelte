@@ -90,16 +90,12 @@
 	.mobile-shell {
 		max-width: 1100px;
 		margin: 0 auto;
-		border-radius: 999px;
+		border-radius: 24px;
 		backdrop-filter: blur(20px);
 		-webkit-backdrop-filter: blur(20px);
 		border: 1px solid rgba(255,255,255,0.15);
 		background: rgba(255,255,255,0.08);
 		overflow: hidden;
-		transition: border-radius 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-	}
-	.mobile-shell.open {
-		border-radius: 24px;
 	}
 	.mobile-links {
 		max-height: 0;

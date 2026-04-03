@@ -170,7 +170,7 @@
 <!-- ============================== -->
 <section style="background: #faf9f5; padding: 48px 0 64px;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="display: grid; grid-template-columns: auto 1fr; gap: 48px;">
+		<div class="bm-grid-product">
 			<!-- LEFT: Vertical thumbnails + main image -->
 			<div style="display: flex; gap: 16px;">
 				<!-- Vertical thumbnail strip -->
@@ -383,7 +383,7 @@
 				All products <ArrowRight style="width: 14px; height: 14px;" />
 			</a>
 		</div>
-		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+		<div class="bm-grid-3" style="gap: 24px;">
 			{#each relatedProducts as related}
 				<a href="/b/shop/{related.handle}" style="text-decoration: none; display: block;" class="bm-title-underline-parent group">
 					<div class="bm-card-hover" style="background: #fff; border-radius: 12px; overflow: hidden;">

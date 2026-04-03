@@ -123,7 +123,7 @@
 				</button>
 			</div>
 		{:else}
-			<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+			<div class="bm-grid-3" style="gap: 24px;">
 				{#each filteredArticles as article}
 					<a href="/b/articles/{article.slug}" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
 						<div style="background: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; height: 100%; transition: box-shadow 0.2s;" class="bm-card-hover">

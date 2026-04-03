@@ -22,12 +22,12 @@
 	<title>FAQ Option 1: CTA Card — Being Muslim</title>
 </svelte:head>
 
-<section style="background: #fff; padding: 64px 0;">
+<section style="background: #fff;" class="bm-section-padding">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #8a7e70; letter-spacing: 0.05em; text-transform: uppercase; margin: 0 0 8px;">Layout Comparison</p>
 		<h1 style="font-family: 'Source Serif 4', serif; font-size: 28px; font-weight: 400; color: #2a2018; margin: 0 0 48px;">FAQ Option 1: CTA Card</h1>
 
-		<div style="display: grid; grid-template-columns: 1fr 380px; gap: 48px; align-items: start;">
+		<div class="bm-grid-sidebar">
 			<!-- Left: FAQ Accordion -->
 			<div>
 				<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px;">

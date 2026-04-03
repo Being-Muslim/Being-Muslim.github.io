@@ -193,7 +193,7 @@
 <!-- ============================== -->
 <section style="background: #faf9f5; padding: 40px 0 64px;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px;">
+		<div class="bm-grid-product">
 			<!-- LEFT: Image Gallery -->
 			<div>
 				<!-- Main Image -->
@@ -333,7 +333,7 @@
 				<div style="height: 1px; background: #e8e3da; margin: 24px 0;"></div>
 
 				<!-- Trust Signals -->
-				<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+				<div class="bm-grid-3" style="gap: 16px;">
 					{#each [
 						{ icon: Truck, label: 'Free Shipping' },
 						{ icon: Shield, label: 'Secure Checkout' },
@@ -353,12 +353,12 @@
 <!-- ============================== -->
 <!-- PRODUCT FEATURES               -->
 <!-- ============================== -->
-<section style="background: #f4f1eb; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(24px, 3vw, 30px); font-weight: 400; color: #2a2018; margin: 0 0 28px;">
 			{product.handle === 'being-muslim-boxed-set' ? "What's Inside" : 'Product Features'}
 		</h2>
-		<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px 40px;">
+		<div class="bm-grid-2-gap" style="gap: 16px 40px;">
 			{#each features as feature}
 				<div style="display: flex; align-items: start; gap: 12px;">
 					<div style="width: 22px; height: 22px; border-radius: 999px; background: rgba(200,184,160,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">
@@ -374,7 +374,7 @@
 <!-- ============================== -->
 <!-- REVIEWS SECTION                -->
 <!-- ============================== -->
-<section id="reviews" style="background: #faf9f5; padding: 64px 0;">
+<section id="reviews" class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div>
 			<div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
@@ -430,11 +430,11 @@
 <!-- ============================== -->
 <!-- RELATED PRODUCTS               -->
 <!-- ============================== -->
-<section style="background: #f4f1eb; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(24px, 3vw, 30px); font-weight: 400; color: #2a2018; margin: 0 0 28px;">You might also like</h2>
 
-		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+		<div class="bm-grid-3" style="gap: 24px;">
 			{#each relatedProducts as related}
 				<a href="/c/shop/{related.handle}" style="text-decoration: none; display: block;" class="bm-title-underline-parent group">
 					<div class="bm-card-hover" style="background: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">

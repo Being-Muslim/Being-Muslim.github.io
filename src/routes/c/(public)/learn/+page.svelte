@@ -72,7 +72,7 @@
 <!-- ============================== -->
 <!-- FEATURED ARTICLES              -->
 <!-- ============================== -->
-<section style="background: #faf9f5; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="display: flex; justify-content: space-between; align-items: end; margin-bottom: 40px;">
 			<div>
@@ -90,7 +90,7 @@
 
 		<!-- Full-width stacked article cards -->
 		{#each featuredArticles as article, i}
-			<a href={article.href} style="text-decoration: none; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding: 32px 0; {i > 0 ? 'border-top: 1px solid #e8e3da;' : ''}" class="bm-title-underline-parent">
+			<a href={article.href} class="bm-grid-article-list bm-title-underline-parent" style="text-decoration: none; padding: 32px 0; {i > 0 ? 'border-top: 1px solid #e8e3da;' : ''}">
 				<div style="border-radius: 14px; overflow: hidden; aspect-ratio: 16/10; background: #e2dcd2; {i % 2 === 1 ? 'order: 2;' : ''}">
 					<img src={article.img} alt={article.title} style="width: 100%; height: 100%; object-fit: cover; display: block;" />
 				</div>
@@ -117,7 +117,7 @@
 <!-- ============================== -->
 <!-- COURSES                        -->
 <!-- ============================== -->
-<section style="background: #f4f1eb; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="display: flex; justify-content: space-between; align-items: end; margin-bottom: 32px;">
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0;">
@@ -128,7 +128,7 @@
 			</a>
 		</div>
 
-		<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
+		<div class="bm-grid-4" style="gap: 24px;">
 			{#each courses as course}
 				<a href="/c/courses" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
 					<div style="aspect-ratio: 4/3; background: #e2dcd2; border-radius: 14px; overflow: hidden; margin-bottom: 14px; position: relative;">
@@ -154,7 +154,7 @@
 <!-- ============================== -->
 <!-- RECOMMENDED RESOURCES          -->
 <!-- ============================== -->
-<section style="background: #faf9f5; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 8px;">
 			Trusted resources
@@ -163,7 +163,7 @@
 			Handpicked from scholars and educators we trust.
 		</p>
 
-		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+		<div class="bm-grid-3" style="gap: 16px;">
 			{#each resources as resource}
 				<a
 					href={resource.url}
@@ -190,7 +190,7 @@
 <!-- ============================== -->
 <!-- ASK A QUESTION CTA             -->
 <!-- ============================== -->
-<section style="background: #f4f1eb; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="background: #2a2018; border-radius: 16px; padding: 56px; display: flex; align-items: center; gap: 48px;">
 			<div style="width: 64px; height: 64px; border-radius: 999px; background: rgba(200,184,160,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">

@@ -72,7 +72,7 @@
 		<div class="mx-auto max-w-[1400px] px-6 lg:px-10" style="margin-top: -32px; position: relative; z-index: 10;">
 			<a href="/c/courses/{featuredCourse.slug}" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
 				<div class="bm-card-hover" style="background: #e2dcd2; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.08);">
-					<div style="display: grid; grid-template-columns: 2fr 3fr;">
+					<div class="bm-grid-course-detail">
 						<!-- Image area -->
 						<div style="position: relative; background: linear-gradient(135deg, rgba(200,184,160,0.4), rgba(226,220,210,0.6)); min-height: 280px; display: flex; align-items: center; justify-content: center;">
 							<Play class="h-14 w-14" style="color: rgba(138,126,112,0.35);" />
@@ -125,7 +125,7 @@
 {/if}
 
 <!-- Filter Bar + Grid -->
-<section style="background: #faf9f5; padding: 48px 0 64px;">
+<section class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<!-- Search & Filters -->
 		<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
@@ -178,7 +178,7 @@
 		</p>
 
 		<!-- Course Grid -->
-		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px;">
+		<div class="bm-grid-3" style="gap: 24px; margin-top: 24px;">
 			{#each filteredCourses as course (course.slug)}
 				<a href="/c/courses/{course.slug}" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
 					<div class="bm-card-hover" style="display: flex; flex-direction: column; height: 100%; border-radius: 14px; overflow: hidden; background: #e2dcd2;">

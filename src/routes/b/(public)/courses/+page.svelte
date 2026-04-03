@@ -93,7 +93,7 @@
 		<div class="mx-auto max-w-[1400px] px-6 lg:px-10" style="margin-top: -32px; position: relative; z-index: 10;">
 			<a href="/b/courses/{featuredCourse.slug}" style="text-decoration: none; display: block;" class="group">
 				<div style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08); transition: box-shadow 0.2s;">
-					<div style="display: grid; grid-template-columns: 2fr 3fr;">
+					<div class="bm-grid-course-detail">
 						<!-- Image area -->
 						<div style="background: linear-gradient(135deg, rgba(200,184,160,0.25), rgba(226,220,210,0.4)); display: flex; align-items: center; justify-content: center; position: relative; min-height: 280px;">
 							<Play class="h-16 w-16" style="color: rgba(42,32,24,0.3);" />
@@ -200,7 +200,7 @@
 		</div>
 
 		<!-- Course Grid -->
-		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 20px;">
+		<div class="bm-grid-3" style="gap: 24px; margin-top: 20px;">
 			{#each filteredCourses as course (course.slug)}
 				<a href="/b/courses/{course.slug}" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
 					<div style="background: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; height: 100%; transition: box-shadow 0.2s;" class="bm-card-hover">

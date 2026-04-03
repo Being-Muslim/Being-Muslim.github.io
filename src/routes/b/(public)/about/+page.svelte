@@ -100,9 +100,9 @@
 <!-- ============================== -->
 <!-- 2. MISSION & VISION            -->
 <!-- ============================== -->
-<section style="background: #faf9f5; padding: 64px 0;">
+<section style="background: #faf9f5;" class="bm-section-padding">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px;">
+		<div class="bm-grid-2-gap">
 			<!-- Mission -->
 			<div>
 				<div style="width: 48px; height: 3px; background: #c8b8a0; border-radius: 2px; margin-bottom: 24px;"></div>
@@ -140,7 +140,7 @@
 <!-- ============================== -->
 <!-- 3. THE STORY                   -->
 <!-- ============================== -->
-<section style="background: #f4f1eb; padding: 64px 0;">
+<section style="background: #f4f1eb;" class="bm-section-padding">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="max-width: 900px; margin: 0 auto;">
 			<div style="text-align: center; margin-bottom: 40px;">
@@ -148,7 +148,7 @@
 				<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #8a7e70; margin: 0;">The story behind Being Muslim</p>
 			</div>
 
-			<div style="display: grid; grid-template-columns: 160px 1fr; gap: 40px; align-items: start;">
+			<div class="bm-grid-timeline" style="align-items: start;">
 				<!-- Author Avatar -->
 				<div style="display: flex; justify-content: center;">
 					<div style="width: 140px; height: 140px; border-radius: 999px; background: linear-gradient(135deg, rgba(200,184,160,0.25), rgba(226,220,210,0.4)); display: flex; align-items: center; justify-content: center; border: 3px solid rgba(200,184,160,0.3);">
@@ -204,7 +204,7 @@
 <!-- ============================== -->
 <!-- 4. IMPACT NUMBERS              -->
 <!-- ============================== -->
-<section style="background: #2a2018; padding: 64px 0;">
+<section style="background: #2a2018;" class="bm-section-padding">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="text-align: center; margin-bottom: 40px;">
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #f0ebe3; margin: 0 0 12px;">Our Impact in Numbers</h2>
@@ -213,7 +213,7 @@
 			</p>
 		</div>
 
-		<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;">
+		<div class="bm-grid-4" style="gap: 32px;">
 			{#each stats as stat}
 				<div style="text-align: center;">
 					<p style="font-family: 'Source Serif 4', serif; font-size: clamp(32px, 4vw, 48px); font-weight: 400; color: #c8b8a0; margin: 0; line-height: 1;">
@@ -229,7 +229,7 @@
 <!-- ============================== -->
 <!-- 5. TEAM                        -->
 <!-- ============================== -->
-<section id="team" style="background: #faf9f5; padding: 64px 0;">
+<section id="team" style="background: #faf9f5;" class="bm-section-padding">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="text-align: center; margin-bottom: 40px;">
 			<p style="color: #c4a97d; font-family: 'DM Sans', sans-serif; letter-spacing: 0.08em; font-size: 13px; font-weight: 500; text-transform: uppercase; margin: 0 0 12px;">
@@ -242,7 +242,7 @@
 			</p>
 		</div>
 
-		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+		<div class="bm-grid-3" style="gap: 24px;">
 			{#each teamMembers as member}
 				<div style="background: #fff; border-radius: 12px; padding: 32px; text-align: center;">
 					<!-- Avatar -->
@@ -267,7 +267,7 @@
 <!-- ============================== -->
 <!-- 6. TIMELINE                    -->
 <!-- ============================== -->
-<section style="background: #f4f1eb; padding: 64px 0;">
+<section style="background: #f4f1eb;" class="bm-section-padding">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="text-align: center; margin-bottom: 40px;">
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #2a2018; margin: 0 0 12px;">Our Journey</h2>
@@ -301,7 +301,7 @@
 <!-- ============================== -->
 <!-- 7. PARTNERS & ENDORSEMENTS     -->
 <!-- ============================== -->
-<section style="background: #faf9f5; padding: 64px 0;">
+<section style="background: #faf9f5;" class="bm-section-padding">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="text-align: center; margin-bottom: 40px;">
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #2a2018; margin: 0 0 12px;">Partners & Endorsements</h2>
@@ -311,7 +311,7 @@
 		</div>
 
 		<!-- Partner Grid -->
-		<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+		<div class="bm-grid-4" style="gap: 16px;">
 			{#each partners as partner}
 				<div style="background: #fff; border-radius: 10px; padding: 24px; display: flex; align-items: center; justify-content: center; min-height: 80px; text-align: center; transition: box-shadow 0.2s;" class="bm-card-hover">
 					<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #8a7e70; margin: 0;">{partner}</p>
@@ -342,7 +342,7 @@
 <!-- ============================== -->
 <!-- 8. CTA SECTION                 -->
 <!-- ============================== -->
-<section style="background: #2a2018; padding: 64px 0;">
+<section style="background: #2a2018;" class="bm-section-padding">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="text-align: center; margin-bottom: 40px;">
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #f0ebe3; margin: 0 0 12px;">
@@ -354,7 +354,7 @@
 			</p>
 		</div>
 
-		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+		<div class="bm-grid-3">
 			<!-- Volunteer -->
 			<div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 32px; text-align: center;">
 				<div style="width: 52px; height: 52px; border-radius: 10px; background: rgba(200,184,160,0.15); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">

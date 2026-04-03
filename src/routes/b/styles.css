@@ -404,22 +404,23 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
-/* Footer grid: 1-col → 2-col → 5-col */
+/* Footer grid: brand full-width + 2x2 links → 5-col on desktop */
 .bm-grid-footer {
 	display: grid;
-	grid-template-columns: 1fr;
-	gap: 32px;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 24px 20px;
 	padding-bottom: 48px;
 }
-@media (min-width: 640px) {
-	.bm-grid-footer {
-		grid-template-columns: repeat(2, 1fr);
-		gap: 40px;
-	}
+.bm-grid-footer > :first-child {
+	grid-column: 1 / -1;
 }
 @media (min-width: 1024px) {
 	.bm-grid-footer {
 		grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+		gap: 40px;
+	}
+	.bm-grid-footer > :first-child {
+		grid-column: auto;
 	}
 }
 

@@ -27,7 +27,7 @@
 <!-- Product Detail -->
 <section style="background: #f0ebe3;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10 py-12">
-		<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
+		<div class="bm-grid-detail">
 			<!-- Image -->
 			<div style="background: #e2dcd2; border-radius: 16px; overflow: hidden; aspect-ratio: 3/4;">
 				<img
@@ -87,12 +87,12 @@
 </section>
 
 <!-- Related Products -->
-<section style="background: #fff; padding: 64px 0;">
+<section style="background: #fff;" class="bm-section-padding">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<h2 style="font-family: 'Source Serif 4', serif; font-size: 28px; font-weight: 400; color: #2a2018; margin: 0 0 24px;">
 			You might also like
 		</h2>
-		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+		<div class="bm-grid-3">
 			{#each [
 				{ title: 'Being Muslim: A Practical Guide', price: '$14.95', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg', href: '/b/shop/book' },
 				{ title: 'Prayer Reference Cards', price: '$37.50', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-prayer-card-900x610.jpeg', href: '/b/shop/prayer-cards' },

@@ -112,9 +112,9 @@
 <!-- ============================== -->
 <!-- 2. MISSION & VISION            -->
 <!-- ============================== -->
-<section style="background: #faf9f5; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px;">
+		<div class="bm-grid-2-gap">
 			<!-- Mission -->
 			<div>
 				<div style="height: 3px; width: 48px; border-radius: 999px; background: #c8b8a0; margin-bottom: 24px;"></div>
@@ -152,7 +152,7 @@
 <!-- ============================== -->
 <!-- 3. THE STORY                   -->
 <!-- ============================== -->
-<section style="background: #f4f1eb; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="max-width: 900px; margin: 0 auto;">
 			<div style="text-align: center; margin-bottom: 48px;">
@@ -160,7 +160,7 @@
 				<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: #8a7e70;">The story behind Being Muslim</p>
 			</div>
 
-			<div style="display: grid; grid-template-columns: 180px 1fr; gap: 48px; align-items: start;">
+			<div class="bm-grid-timeline">
 				<!-- Author Avatar -->
 				<div style="display: flex; justify-content: center;">
 					<div style="width: 160px; height: 160px; border-radius: 999px; background: linear-gradient(135deg, rgba(200,184,160,0.3), rgba(226,220,210,0.5)); display: flex; align-items: center; justify-content: center; border: 4px solid rgba(200,184,160,0.25);">
@@ -216,7 +216,7 @@
 <!-- ============================== -->
 <!-- 4. IMPACT NUMBERS              -->
 <!-- ============================== -->
-<section style="background: #2a2018; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #2a2018;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="text-align: center; margin-bottom: 48px;">
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #faf9f5; margin: 0 0 12px;">Our Impact in Numbers</h2>
@@ -225,7 +225,7 @@
 			</p>
 		</div>
 
-		<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;">
+		<div class="bm-grid-4" style="gap: 32px;">
 			{#each stats as stat}
 				<div style="text-align: center;">
 					<p style="font-family: 'Source Serif 4', serif; font-size: clamp(28px, 4vw, 48px); font-weight: 400; color: #c8b8a0; margin: 0;">
@@ -243,7 +243,7 @@
 <!-- ============================== -->
 <!-- 5. TEAM                        -->
 <!-- ============================== -->
-<section id="team" style="background: #faf9f5; padding: 64px 0;">
+<section id="team" class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="text-align: center; margin-bottom: 48px;">
 			<span style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #c8b8a0; text-transform: uppercase; letter-spacing: 1.5px;">Our Team</span>
@@ -254,7 +254,7 @@
 			</p>
 		</div>
 
-		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+		<div class="bm-grid-3" style="gap: 24px;">
 			{#each teamMembers as member}
 				<div class="bm-card-hover" style="background: #e2dcd2; border-radius: 14px; padding: 32px; text-align: center;">
 					<!-- Avatar -->
@@ -279,7 +279,7 @@
 <!-- ============================== -->
 <!-- 6. TIMELINE                    -->
 <!-- ============================== -->
-<section style="background: #f4f1eb; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="text-align: center; margin-bottom: 48px;">
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #2a2018; margin: 0 0 12px;">Our Journey</h2>
@@ -319,7 +319,7 @@
 <!-- ============================== -->
 <!-- 7. PARTNERS & ENDORSEMENTS     -->
 <!-- ============================== -->
-<section style="background: #faf9f5; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="text-align: center; margin-bottom: 48px;">
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #2a2018; margin: 0 0 12px;">Partners & Endorsements</h2>
@@ -329,7 +329,7 @@
 		</div>
 
 		<!-- Partner Grid -->
-		<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 64px;">
+		<div class="bm-grid-4" style="gap: 16px; margin-bottom: 64px;">
 			{#each partners as partner}
 				<div class="bm-card-hover" style="display: flex; height: 80px; align-items: center; justify-content: center; border-radius: 12px; background: #e2dcd2; padding: 0 20px; text-align: center;">
 					<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #8a7e70; margin: 0;">{partner}</p>
@@ -360,7 +360,7 @@
 <!-- ============================== -->
 <!-- 8. CTA SECTION                 -->
 <!-- ============================== -->
-<section style="background: #2a2018; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #2a2018;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="text-align: center; margin-bottom: 48px;">
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #faf9f5; margin: 0 0 16px;">
@@ -372,7 +372,7 @@
 			</p>
 		</div>
 
-		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+		<div class="bm-grid-3">
 			<!-- Volunteer -->
 			<div style="border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); border-radius: 14px; padding: 32px; text-align: center; transition: background 0.2s;">
 				<div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(200,184,160,0.15); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">

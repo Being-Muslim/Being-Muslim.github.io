@@ -338,6 +338,105 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* Product/content detail: stacked → side-by-side */
+.bm-grid-detail {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 32px;
+}
+@media (min-width: 768px) {
+	.bm-grid-detail {
+		grid-template-columns: 1fr 1fr;
+		gap: 48px;
+		align-items: start;
+	}
+}
+
+/* Sidebar layout: stacked → content + sidebar */
+.bm-grid-sidebar {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 32px;
+}
+@media (min-width: 768px) {
+	.bm-grid-sidebar {
+		grid-template-columns: 1fr 380px;
+		gap: 48px;
+		align-items: start;
+	}
+}
+
+/* Product page layout: stacked → image + info */
+.bm-grid-product {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 32px;
+}
+@media (min-width: 768px) {
+	.bm-grid-product {
+		grid-template-columns: auto 1fr;
+		gap: 48px;
+	}
+}
+
+/* Timeline item: stacked → date + content */
+.bm-grid-timeline {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 16px;
+}
+@media (min-width: 768px) {
+	.bm-grid-timeline {
+		grid-template-columns: 160px 1fr;
+		gap: 40px;
+		align-items: start;
+	}
+}
+
+/* Course detail: stacked → 2fr 3fr */
+.bm-grid-course-detail {
+	display: grid;
+	grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+	.bm-grid-course-detail {
+		grid-template-columns: 2fr 3fr;
+	}
+}
+
+/* Footer grid: 1-col → 2-col → 5-col */
+.bm-grid-footer {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 32px;
+	padding-bottom: 48px;
+}
+@media (min-width: 640px) {
+	.bm-grid-footer {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 40px;
+	}
+}
+@media (min-width: 1024px) {
+	.bm-grid-footer {
+		grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+	}
+}
+
+/* Article list item: stacked → side-by-side */
+.bm-grid-article-list {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 20px;
+	align-items: center;
+}
+@media (min-width: 640px) {
+	.bm-grid-article-list {
+		grid-template-columns: 1fr 1fr;
+		gap: 40px;
+	}
+}
+
 /* ---------- Section spacing ---------- */
 .bm-section {
 	padding: 64px 0;

@@ -159,7 +159,7 @@
 <!-- ============================== -->
 <!-- KEY POINTS — WHAT ISLAM OFFERS -->
 <!-- ============================== -->
-<section style="background: #f4f1eb; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="text-align: center; margin-bottom: 40px;">
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 8px;">
@@ -171,7 +171,7 @@
 			</p>
 		</div>
 
-		<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+		<div class="bm-grid-4">
 			{#each keyPoints as point}
 				{@const Icon = point.icon}
 				<div style="background: #faf9f5; border-radius: 12px; padding: 28px;">
@@ -193,7 +193,7 @@
 <!-- ============================== -->
 <!-- 2. READY TO CONVERT — FORM     -->
 <!-- ============================== -->
-<section id="ready-form" style="background: #faf9f5; padding: 64px 0;">
+<section id="ready-form" class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="max-width: 680px; margin: 0 auto;">
 			<div style="text-align: center; margin-bottom: 40px;">
@@ -231,7 +231,7 @@
 					onsubmit={handleSubmit}
 				>
 					<!-- Name & Email -->
-					<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+					<div class="bm-grid-stats">
 						<div>
 							<label
 								for="convert-name"
@@ -269,7 +269,7 @@
 					</div>
 
 					<!-- Phone & Location -->
-					<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 16px;">
+					<div class="bm-grid-3" style="gap: 16px; margin-top: 16px;">
 						<div>
 							<label
 								for="convert-phone"
@@ -393,7 +393,7 @@
 <!-- ============================== -->
 <!-- 3. FAQ — BUTTON + IF TOGGLE    -->
 <!-- ============================== -->
-<section id="faq" style="background: #f4f1eb; padding: 64px 0;">
+<section id="faq" class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="max-width: 800px; margin: 0 auto;">
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 8px; text-align: center;">

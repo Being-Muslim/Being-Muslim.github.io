@@ -188,7 +188,7 @@
 <!-- ============================== -->
 <!-- 1. DONATE                      -->
 <!-- ============================== -->
-<section id="donate" style="background: #f4f1eb; padding: 64px 0;">
+<section id="donate" class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="max-width: 720px; margin: 0 auto;">
 			<div style="text-align: center;">
@@ -209,7 +209,7 @@
 				<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #8a7e70; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 16px;">
 					What would you like to support?
 				</p>
-				<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+				<div class="bm-grid-3" style="gap: 12px;">
 					{#each donationCategories as cat}
 						{@const Icon = cat.icon}
 						<button
@@ -243,7 +243,7 @@
 
 				<!-- General: preset amounts + custom -->
 				{#if !isItemDonation}
-					<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+					<div class="bm-grid-4" style="gap: 12px;">
 						{#each presetAmounts as amount}
 							<button
 								style="font-family: 'Source Serif 4', serif; font-size: 18px; font-weight: 600; padding: 14px; border-radius: 10px; cursor: pointer; transition: all 0.2s; text-align: center; {selectedAmount === amount
@@ -340,7 +340,7 @@
 <!-- ============================== -->
 <!-- 2. REQUEST A DONATION          -->
 <!-- ============================== -->
-<section id="request" style="background: #faf9f5; padding: 64px 0;">
+<section id="request" class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="max-width: 720px; margin: 0 auto;">
 			<div style="text-align: center;">
@@ -395,7 +395,7 @@
 					<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #8a7e70; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 16px;">
 						Organization Information
 					</p>
-					<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+					<div class="bm-grid-stats">
 						<div>
 							<label for="org-name" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; display: block; margin-bottom: 6px;">
 								Organization Name <span style="color: #c0392b;">*</span>
@@ -480,7 +480,7 @@
 								/>
 							</div>
 						</div>
-						<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+						<div class="bm-grid-3" style="gap: 16px;">
 							<div>
 								<label for="city" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; display: block; margin-bottom: 6px;">City</label>
 								<input
@@ -517,7 +517,7 @@
 					<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #8a7e70; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 16px;">
 						Resources Needed
 					</p>
-					<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+					<div class="bm-grid-3" style="gap: 12px;">
 						<label
 							style="display: flex; align-items: center; gap: 12px; padding: 16px; border-radius: 12px; cursor: pointer; transition: all 0.2s; {requestForm.resources.books
 								? 'background: #2a2018; border: 1px solid #2a2018;'
@@ -613,7 +613,7 @@
 <!-- ============================== -->
 <!-- 3. VOLUNTEER                   -->
 <!-- ============================== -->
-<section id="volunteer" style="background: #f4f1eb; padding: 64px 0;">
+<section id="volunteer" class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="max-width: 900px; margin: 0 auto;">
 			<div style="text-align: center;">
@@ -630,7 +630,7 @@
 				</p>
 			</div>
 
-			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px;">
+			<div class="bm-grid-stats" style="margin-top: 48px;">
 				{#each volunteerOpportunities as opp}
 					{@const Icon = opp.icon}
 					<div style="background: #faf9f5; border-radius: 14px; padding: 28px; transition: all 0.2s;" class="bm-card-hover">

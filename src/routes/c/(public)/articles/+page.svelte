@@ -94,7 +94,7 @@
 </section>
 
 <!-- Articles Grid -->
-<section style="background: #faf9f5; padding: 48px 0 64px;">
+<section class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		{#if filteredArticles.length === 0}
 			<div style="text-align: center; padding: 64px 0;">
@@ -114,7 +114,7 @@
 				</button>
 			</div>
 		{:else}
-			<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+			<div class="bm-grid-3" style="gap: 24px;">
 				{#each filteredArticles as article}
 					<a href="/c/articles/{article.slug}" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
 						<article class="bm-card-hover" style="display: flex; flex-direction: column; height: 100%; border-radius: 14px; overflow: hidden; background: #e2dcd2;">

@@ -71,7 +71,7 @@
 <!-- Products Grid -->
 <section style="background-color: #f0ebe3;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10 py-20">
-		<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
+		<div class="bm-grid-4" style="gap: 24px;">
 			{#each products as product}
 				<a href={product.href} style="text-decoration: none; display: block;" class="bm-title-underline-parent group">
 					<div style="aspect-ratio: 1; background: #e2dcd2; border-radius: 12px; overflow: hidden; margin-bottom: 16px; position: relative;">
@@ -96,9 +96,9 @@
 </section>
 
 <!-- Sponsor CTA -->
-<section style="background: #fff; padding: 64px 0;">
+<section style="background: #fff;" class="bm-section-padding">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+		<div class="bm-grid-2-gap">
 			<div>
 				<h2 style="font-family: 'Source Serif 4', serif; font-size: 36px; line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 16px;">
 					Sponsor a new Muslim
@@ -110,7 +110,7 @@
 					Support the Mission <ArrowRight class="h-3.5 w-3.5" />
 				</a>
 			</div>
-			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+			<div class="bm-grid-stats">
 				{#each [
 					{ value: '3,247', label: 'Sets Sponsored' },
 					{ value: '520', label: 'Communities Reached' },

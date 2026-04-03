@@ -116,7 +116,7 @@
 				</button>
 			</div>
 		{:else}
-			<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 8px;">
+			<div class="bm-grid-4" style="gap: 24px; margin-top: 8px;">
 				{#each filteredProducts as product, i}
 					<!-- Sponsor Banner (after 2nd product) -->
 					{#if i === 2}
@@ -195,7 +195,7 @@
 <!-- ============================== -->
 <!-- SPONSOR CALLOUT BANNER         -->
 <!-- ============================== -->
-<section style="background: #2a2018; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #2a2018;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="display: flex; align-items: center; gap: 48px; flex-wrap: wrap; justify-content: center;">
 			<div style="width: 80px; height: 80px; border-radius: 999px; background: rgba(200,184,160,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">

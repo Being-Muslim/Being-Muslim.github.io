@@ -110,7 +110,7 @@
 <svelte:window onscroll={handleScroll} />
 
 <header
-	class="fixed top-0 left-0 right-0 z-50 border-b {activeMenu
+	class="fixed top-0 left-0 right-0 z-50 border-b {activeMenu || mobileOpen
 		? 'bg-white/95 backdrop-blur-md shadow-sm border-border'
 		: scrolled
 			? 'bg-white/95 backdrop-blur-md shadow-sm border-border transition-all duration-300'
@@ -122,10 +122,10 @@
 			<img
 				src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png"
 				alt="Being Muslim"
-				class="h-8 w-8 {scrolled || activeMenu ? 'invert' : ''}"
+				class="h-8 w-8 {scrolled || activeMenu || mobileOpen ? 'invert' : ''}"
 				style="transition: filter 0.3s;"
 			/>
-			<span class="text-lg font-bold transition-colors font-display {scrolled || activeMenu ? 'text-text-primary' : 'text-white'}">
+			<span class="text-lg font-bold transition-colors font-display {scrolled || activeMenu || mobileOpen ? 'text-text-primary' : 'text-white'}">
 				Being Muslim
 			</span>
 		</a>
@@ -170,7 +170,7 @@
 
 		<!-- Mobile Menu Button -->
 		<button
-			class="rounded-lg p-2 md:hidden {scrolled || activeMenu ? 'text-text-primary' : 'text-white'}"
+			class="rounded-lg p-2 md:hidden {scrolled || activeMenu || mobileOpen ? 'text-text-primary' : 'text-white'}"
 			onclick={() => (mobileOpen = !mobileOpen)}
 			aria-label="Toggle menu"
 		>

@@ -43,7 +43,14 @@ const config = {
 				'/c/guides',
 				'/c/videos',
 				'/c/community',
-				'/c/cart'
+				'/c/cart',
+				'/admin',
+				'/admin/articles',
+				'/admin/articles/new',
+				'/admin/courses',
+				'/admin/community',
+				'/admin/media',
+				'/admin/settings'
 			]
 		}
 	}

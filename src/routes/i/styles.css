@@ -1,0 +1,93 @@
+:root {
+	--bm-black: #0a0a0a;
+	--bm-white: #ffffff;
+	--bm-amber: #e8a838;
+	--bm-cream: #f5f0e8;
+	--bm-muted: #888888;
+	--bm-font-display: 'Playfair Display', serif;
+	--bm-font-body: 'Inter', sans-serif;
+}
+
+.bm-root {
+	font-family: var(--bm-font-body);
+	color: var(--bm-white);
+	background: var(--bm-black);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+/* Sticky scene container */
+.scene {
+	position: relative;
+	min-height: 100vh;
+}
+
+.scene-sticky {
+	position: sticky;
+	top: 0;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+/* Fade transitions */
+.fade-in {
+	opacity: 0;
+	transform: translateY(40px);
+	transition:
+		opacity 0.8s ease,
+		transform 0.8s ease;
+}
+
+.fade-in.visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Slide from left */
+.slide-left {
+	opacity: 0;
+	transform: translateX(-60px);
+	transition:
+		opacity 0.8s ease,
+		transform 0.8s ease;
+}
+
+.slide-left.visible {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+/* Scale in */
+.scale-in {
+	opacity: 0;
+	transform: scale(0.8);
+	transition:
+		opacity 0.8s ease,
+		transform 0.8s ease;
+}
+
+.scale-in.visible {
+	opacity: 1;
+	transform: scale(1);
+}
+
+/* Stagger children */
+.fade-in.visible.delay-1 {
+	transition-delay: 0.15s;
+}
+.fade-in.visible.delay-2 {
+	transition-delay: 0.3s;
+}
+.fade-in.visible.delay-3 {
+	transition-delay: 0.45s;
+}
+.fade-in.visible.delay-4 {
+	transition-delay: 0.6s;
+}

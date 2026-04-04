@@ -47,6 +47,8 @@ const config = {
 				'/d',
 				'/e',
 				'/g',
+				'/i',
+				'/j',
 				'/admin',
 				'/admin/articles',
 				'/admin/articles/new',

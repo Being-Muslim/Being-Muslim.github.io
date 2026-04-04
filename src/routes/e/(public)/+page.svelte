@@ -99,24 +99,27 @@
 <!-- ============================== -->
 <section class="bm-section-padding" style="background: #EDE4D3;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div class="bm-grid-2-gap" style="align-items: start;">
-			<!-- Featured image -->
-			<a href="/e" style="text-decoration: none; display: block;">
-				<div style="aspect-ratio: 4/3; border-radius: 12px; overflow: hidden;">
-					<img src="https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png" alt="Brief Overview of Islam" style="width: 100%; height: 100%; object-fit: cover;" />
-				</div>
-			</a>
-			<!-- Pull quote + meta -->
-			<div style="padding-top: 12px;">
+		<div class="bm-grid-featured" style="align-items: start;">
+			<!-- Featured image + drop cap preview -->
+			<div>
+				<a href="/e" style="text-decoration: none; display: block;">
+					<div style="aspect-ratio: 16/10; border-radius: 12px; overflow: hidden; margin-bottom: 24px;">
+						<img src="https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png" alt="Brief Overview of Islam" style="width: 100%; height: 100%; object-fit: cover;" />
+					</div>
+				</a>
 				<p style="font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 600; color: #C1604E; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 8px;">Featured</p>
-				<h3 style="font-family: 'Fraunces', serif; font-size: 32px; font-weight: 400; color: #1C1917; margin: 0 0 20px; line-height: 1.2;">Brief Overview of Islam</h3>
-				<!-- Pull quote -->
-				<blockquote class="bm-pull-quote">
+				<h3 style="font-family: 'Fraunces', serif; font-size: clamp(28px, 3.5vw, 38px); font-weight: 400; color: #1C1917; margin: 0 0 16px; line-height: 1.2;">Brief Overview of Islam</h3>
+				<p class="bm-drop-cap" style="font-family: 'Outfit', sans-serif; font-size: 15px; color: #5a5248; line-height: 1.7; margin: 0;">
+					Islam is the world's second-largest religion, with over 1.8 billion followers. At its core, Islam calls for submission to one God and living a life of purpose, compassion, and justice. The word "Islam" itself means peace and surrender, reflecting the faith's emphasis on finding tranquility through a relationship with the Divine.
+				</p>
+			</div>
+			<!-- Pull quote sidebar -->
+			<div style="padding-top: 12px;">
+				<blockquote class="bm-pull-quote" style="margin-bottom: 28px;">
 					"Islam is a comprehensive way of life that guides its followers in every aspect — from worship and morality to family, community, and personal growth."
 				</blockquote>
-				<p style="font-family: 'Outfit', sans-serif; font-size: 14px; color: #8a7e6a; line-height: 1.6; margin: 0 0 24px;">
-					A foundational article covering the core beliefs, five pillars, and the spiritual framework that guides over a billion Muslims worldwide.
-				</p>
+				<p style="font-family: 'Outfit', sans-serif; font-size: 14px; color: #8a7e6a; line-height: 1.6; margin: 0 0 8px;">By Dr. Asad Tarsin</p>
+				<p style="font-family: 'Outfit', sans-serif; font-size: 12px; color: #a8a090; margin: 0 0 24px;">10 min read</p>
 				<a href="/e" class="bm-btn-accent" style="padding: 10px 24px;">
 					Read Article <ArrowRight class="h-3.5 w-3.5" />
 				</a>

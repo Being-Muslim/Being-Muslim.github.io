@@ -1,0 +1,337 @@
+/* ============================================
+   Being Muslim — Concept L Design System
+   charity:water-inspired, warm & impact-driven
+   ============================================ */
+
+/* ---------- Design Tokens ---------- */
+:root {
+	--bm-bg: #FAFAF7;
+	--bm-bg-alt: #F0EDE8;
+	--bm-dark: #1E1E1E;
+	--bm-burgundy: #8B2E36;
+	--bm-gold: #C9A84C;
+	--bm-warm-gray: #F0EDE8;
+	--bm-muted: #6B6B6B;
+	--bm-border: #E8E4DE;
+	--bm-font-serif: 'DM Serif Display', serif;
+	--bm-font-sans: 'DM Sans', sans-serif;
+}
+
+/* ---------- Global Reset ---------- */
+.bm-root {
+	font-family: var(--bm-font-sans);
+	color: var(--bm-dark);
+	background: var(--bm-bg);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+html {
+	scroll-behavior: auto !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--bm-font-serif);
+	font-weight: 400;
+}
+
+p, a, li, label, input, textarea, select, button, span {
+	font-family: var(--bm-font-sans);
+}
+
+/* ---------- Buttons ---------- */
+.bm-btn-primary,
+.bm-btn-outline,
+.bm-btn-gold {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-family: var(--bm-font-sans);
+	font-size: 15px;
+	font-weight: 500;
+	border-radius: 999px;
+	padding: 13px 30px;
+	text-decoration: none;
+	border: none;
+	cursor: pointer;
+	transition: all 0.25s;
+	line-height: 1;
+}
+
+/* Burgundy primary */
+.bm-btn-primary {
+	background: var(--bm-burgundy);
+	color: #fff;
+}
+.bm-btn-primary:hover {
+	background: #7A2730;
+	box-shadow: 0 4px 16px rgba(139, 46, 54, 0.3);
+}
+
+/* Outline */
+.bm-btn-outline {
+	background: transparent;
+	color: #fff;
+	border: 1.5px solid rgba(255, 255, 255, 0.7);
+}
+.bm-btn-outline:hover {
+	background: rgba(255, 255, 255, 0.12);
+	border-color: #fff;
+}
+
+/* Outline dark variant */
+.bm-btn-outline-dark {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-family: var(--bm-font-sans);
+	font-size: 15px;
+	font-weight: 500;
+	border-radius: 999px;
+	padding: 13px 30px;
+	text-decoration: none;
+	cursor: pointer;
+	transition: all 0.25s;
+	line-height: 1;
+	background: transparent;
+	color: var(--bm-burgundy);
+	border: 1.5px solid var(--bm-burgundy);
+}
+.bm-btn-outline-dark:hover {
+	background: var(--bm-burgundy);
+	color: #fff;
+}
+
+/* Gold CTA */
+.bm-btn-gold {
+	background: var(--bm-gold);
+	color: var(--bm-dark);
+	font-weight: 600;
+}
+.bm-btn-gold:hover {
+	background: #B8993F;
+	box-shadow: 0 4px 16px rgba(201, 168, 76, 0.35);
+}
+
+/* ---------- Typography ---------- */
+.bm-heading {
+	font-family: var(--bm-font-serif);
+	font-weight: 400;
+	color: var(--bm-dark);
+}
+
+.bm-body {
+	font-family: var(--bm-font-sans);
+	color: var(--bm-muted);
+	line-height: 1.7;
+}
+
+.bm-label {
+	font-family: var(--bm-font-sans);
+	font-size: 12px;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.15em;
+}
+
+/* ---------- Card hover effects ---------- */
+.bm-card-hover {
+	transition: transform 0.3s, box-shadow 0.3s;
+}
+.bm-card-hover:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+.bm-img-zoom img,
+.bm-img-zoom > div {
+	transition: transform 500ms;
+}
+.bm-img-zoom:hover img,
+.bm-img-zoom:hover > div {
+	transform: scale(1.05);
+}
+
+/* ---------- Footer links ---------- */
+.bm-footer-link {
+	font-family: var(--bm-font-sans);
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.55);
+	text-decoration: none;
+	display: block;
+	padding: 5px 0;
+	transition: color 0.2s;
+}
+.bm-footer-link:hover {
+	color: #fff !important;
+	text-decoration: underline !important;
+	text-underline-offset: 3px;
+}
+
+/* ---------- Social icons ---------- */
+.bm-social-icon {
+	width: 36px;
+	height: 36px;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.08);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.2s;
+}
+.bm-social-icon:hover {
+	background: rgba(255, 255, 255, 0.18);
+}
+
+/* ---------- Responsive grids ---------- */
+
+/* 2-column grid */
+.bm-grid-2 {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 24px;
+}
+@media (min-width: 768px) {
+	.bm-grid-2 {
+		grid-template-columns: 1fr 1fr;
+		gap: 0;
+	}
+}
+
+/* 2-column with gap */
+.bm-grid-2-gap {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 32px;
+}
+@media (min-width: 768px) {
+	.bm-grid-2-gap {
+		grid-template-columns: 1fr 1fr;
+		gap: 48px;
+		align-items: center;
+	}
+}
+
+/* 3-column grid */
+.bm-grid-3 {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 24px;
+}
+@media (min-width: 640px) {
+	.bm-grid-3 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+@media (min-width: 1024px) {
+	.bm-grid-3 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* 4-column grid */
+.bm-grid-4 {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 20px;
+}
+@media (min-width: 1024px) {
+	.bm-grid-4 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+/* Stats grid: 2x2 on mobile, 4 on desktop */
+.bm-grid-stats {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 32px;
+}
+@media (min-width: 768px) {
+	.bm-grid-stats {
+		grid-template-columns: repeat(4, 1fr);
+		gap: 48px;
+	}
+}
+
+/* Footer grid */
+.bm-grid-footer {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 24px 20px;
+	padding-bottom: 48px;
+}
+.bm-grid-footer > :first-child {
+	grid-column: 1 / -1;
+}
+@media (min-width: 1024px) {
+	.bm-grid-footer {
+		grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+		gap: 40px;
+	}
+	.bm-grid-footer > :first-child {
+		grid-column: auto;
+	}
+}
+
+/* ---------- Section & Container ---------- */
+.bm-section {
+	padding: 64px 0;
+}
+@media (min-width: 768px) {
+	.bm-section {
+		padding: 80px 0;
+	}
+}
+@media (min-width: 1024px) {
+	.bm-section {
+		padding: 100px 0;
+	}
+}
+
+.bm-container {
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 24px;
+	padding-right: 24px;
+}
+@media (min-width: 1024px) {
+	.bm-container {
+		padding-left: 40px;
+		padding-right: 40px;
+	}
+}
+
+/* ---------- Community panels ---------- */
+.bm-community-panel {
+	padding: 28px 20px;
+}
+@media (min-width: 768px) {
+	.bm-community-panel {
+		padding: 48px;
+	}
+}
+
+.bm-community-chat {
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+@media (min-width: 768px) {
+	.bm-community-chat {
+		border-top: none;
+		border-left: 1px solid rgba(255, 255, 255, 0.08);
+	}
+}
+
+/* ---------- Link arrow hover ---------- */
+.bm-link-arrow {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	text-decoration: none;
+	font-weight: 500;
+	transition: gap 0.2s;
+}
+.bm-link-arrow:hover {
+	gap: 10px;
+}

@@ -56,7 +56,10 @@ const config = {
 				'/admin/community',
 				'/admin/media',
 				'/admin/settings',
-				'/k'
+				'/k',
+				'/l',
+				'/m',
+				'/n'
 			]
 		}
 	}

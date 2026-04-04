@@ -1,0 +1,250 @@
+/* ── Concept M: Masterclass-inspired Dark Cinematic ── */
+
+:root {
+  --bm-black: #0D0D0D;
+  --bm-surface: #1A1A1A;
+  --bm-white: #F5F0E8;
+  --bm-gold: #D4A853;
+  --bm-gray: #888888;
+  --bm-font-heading: 'Lora', Georgia, serif;
+  --bm-font-body: 'Inter', -apple-system, sans-serif;
+  --bm-border: rgba(255, 255, 255, 0.06);
+  --bm-border-hover: rgba(255, 255, 255, 0.15);
+  --bm-max-width: 1200px;
+}
+
+/* ── Base ── */
+.bm-root {
+  font-family: var(--bm-font-body);
+  background: var(--bm-black);
+  color: var(--bm-white);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bm-root *,
+.bm-root *::before,
+.bm-root *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.bm-root img {
+  display: block;
+  max-width: 100%;
+}
+
+.bm-root a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Typography ── */
+.bm-root h1,
+.bm-root h2,
+.bm-root h3,
+.bm-root h4 {
+  font-family: var(--bm-font-heading);
+  font-weight: 500;
+  line-height: 1.2;
+  color: rgba(245, 240, 232, 0.9);
+}
+
+/* ── Buttons ── */
+.bm-btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--bm-gold);
+  color: #0D0D0D;
+  font-family: var(--bm-font-body);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 14px 32px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  letter-spacing: 0.01em;
+}
+
+.bm-btn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(212, 168, 83, 0.3);
+  background: #dcb463;
+}
+
+.bm-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--bm-white);
+  font-family: var(--bm-font-body);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 14px 32px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.bm-btn-outline:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.bm-btn-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--bm-white);
+  font-family: var(--bm-font-body);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 14px 32px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.bm-btn-glass:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Cards ── */
+.bm-card-dark {
+  background: var(--bm-surface);
+  border: 1px solid var(--bm-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.bm-card-dark:hover {
+  border-color: var(--bm-border-hover);
+  transform: scale(1.02);
+}
+
+/* ── Grid ── */
+.bm-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.bm-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.bm-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+/* ── Section ── */
+.bm-section {
+  padding: 100px 24px;
+  max-width: var(--bm-max-width);
+  margin: 0 auto;
+}
+
+.bm-section-full {
+  padding: 100px 24px;
+}
+
+/* ── Gold link ── */
+.bm-link-gold {
+  color: var(--bm-gold);
+  font-family: var(--bm-font-body);
+  font-weight: 500;
+  font-size: 14px;
+  transition: opacity 0.2s ease;
+}
+
+.bm-link-gold:hover {
+  opacity: 0.8;
+}
+
+/* ── Label ── */
+.bm-label {
+  font-family: var(--bm-font-body);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--bm-gold);
+}
+
+/* ── Footer ── */
+.bm-footer {
+  border-top: 1px solid var(--bm-border);
+  background: var(--bm-black);
+  padding: 60px 24px 32px;
+}
+
+.bm-footer a {
+  color: rgba(245, 240, 232, 0.5);
+  transition: color 0.2s ease;
+}
+
+.bm-footer a:hover {
+  color: var(--bm-white);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .bm-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bm-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bm-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .bm-section {
+    padding: 72px 20px;
+  }
+
+  .bm-section-full {
+    padding: 72px 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .bm-grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .bm-grid-4 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .bm-section {
+    padding: 56px 16px;
+  }
+
+  .bm-section-full {
+    padding: 56px 16px;
+  }
+}

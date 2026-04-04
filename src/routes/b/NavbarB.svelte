@@ -110,11 +110,11 @@
 <svelte:window onscroll={handleScroll} />
 
 <header
-	class="fixed top-0 left-0 right-0 z-50 border-b {activeMenu || mobileOpen
+	class="fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 {activeMenu || mobileOpen
 		? 'bg-white/95 backdrop-blur-md shadow-sm border-border'
 		: scrolled
-			? 'bg-white/95 backdrop-blur-md shadow-sm border-border transition-all duration-300'
-			: 'bg-transparent border-transparent transition-all duration-300'}"
+			? 'bg-white/95 backdrop-blur-md shadow-sm border-border'
+			: 'bg-transparent border-transparent'}"
 >
 	<nav class="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between px-6 lg:px-10">
 		<!-- Logo -->
@@ -225,8 +225,8 @@
 		</div>
 	{/if}
 
-	{#if mobileOpen}
-		<div class="md:hidden bg-white border-t border-border px-6 py-4 shadow-lg">
+	<div class="mobile-menu md:hidden" class:open={mobileOpen}>
+		<div class="border-t border-border px-6 py-4">
 			{#each [
 				{ label: 'Home', href: '/b' },
 				{ label: 'Learn', href: '/b/learn' },
@@ -238,7 +238,7 @@
 			{/each}
 			<a href="/b/contact" class="block mt-3 text-center bg-text-primary text-white py-2.5 rounded-full font-medium">Contact</a>
 		</div>
-	{/if}
+	</div>
 </header>
 
 <style>
@@ -248,5 +248,14 @@
 	}
 	:global(.mega-link:hover) {
 		opacity: 0.7;
+	}
+	.mobile-menu {
+		max-height: 0;
+		overflow: hidden;
+		background: white;
+		transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+	.mobile-menu.open {
+		max-height: 350px;
 	}
 </style>

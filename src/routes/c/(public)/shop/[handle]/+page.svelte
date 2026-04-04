@@ -210,7 +210,7 @@
 
 				<!-- Thumbnail Strip -->
 				{#if gallery.length > 1}
-					<div style="margin-top: 16px; display: flex; gap: 12px;">
+					<div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap;">
 						{#each gallery as thumb, idx}
 							<button
 								onclick={() => (selectedImageIndex = idx)}

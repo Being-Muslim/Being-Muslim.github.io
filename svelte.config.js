@@ -53,7 +53,8 @@ const config = {
 				'/admin/courses',
 				'/admin/community',
 				'/admin/media',
-				'/admin/settings'
+				'/admin/settings',
+				'/k'
 			]
 		}
 	}

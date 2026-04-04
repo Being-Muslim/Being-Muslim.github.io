@@ -1,0 +1,28 @@
+:root {
+  --bm-midnight: #0C1220;
+  --bm-white: #FAFAF8;
+  --bm-gold: #F0C75E;
+  --bm-slate: #64748B;
+  --bm-font: 'Outfit', sans-serif;
+}
+
+.bm-root {
+  font-family: var(--bm-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  background: var(--bm-midnight);
+  color: var(--bm-white);
+}
+
+html {
+  scroll-behavior: auto !important;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

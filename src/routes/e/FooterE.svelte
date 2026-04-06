@@ -8,7 +8,7 @@
 					<span style="font-family: 'Fraunces', serif; font-size: 18px; color: #FAF5EB;">Being Muslim</span>
 				</a>
 				<p style="font-family: 'Outfit', sans-serif; font-size: 13px; color: rgba(250,245,235,0.5); line-height: 1.6; max-width: 260px; margin-bottom: 20px;">
-					A practical guide to understanding and living Islam — for new Muslims, curious minds, and those reconnecting with their faith.
+					Empowering converts and beginners on their Islamic journey through education, community, and support.
 				</p>
 				<!-- Social Icons -->
 				<div style="display: flex; gap: 10px;">
@@ -31,10 +31,9 @@
 			<div>
 				<h4 style="font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 600; color: #FAF5EB; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Learn</h4>
 				{#each [
-					{ label: 'Articles', href: '/e' },
-					{ label: 'Courses', href: '/e' },
-					{ label: 'Resources', href: '/e' },
-					{ label: 'Guides', href: '/e' }
+					{ label: 'Articles', href: '/e/learn' },
+					{ label: 'Courses', href: '/e/learn' },
+					{ label: 'Resources', href: '/e/learn' }
 				] as link}
 					<a href={link.href} class="bm-footer-link">{link.label}</a>
 				{/each}
@@ -44,10 +43,10 @@
 			<div>
 				<h4 style="font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 600; color: #FAF5EB; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Shop</h4>
 				{#each [
-					{ label: 'The Book', href: '/e' },
-					{ label: 'Boxed Set', href: '/e' },
-					{ label: 'Prayer Cards', href: '/e' },
-					{ label: 'eBook', href: '/e' }
+					{ label: 'The Book', href: '/e/shop' },
+					{ label: 'Boxed Set', href: '/e/shop' },
+					{ label: 'Prayer Cards', href: '/e/shop' },
+					{ label: 'eBook', href: '/e/shop' }
 				] as link}
 					<a href={link.href} class="bm-footer-link">{link.label}</a>
 				{/each}
@@ -57,9 +56,9 @@
 			<div>
 				<h4 style="font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 600; color: #FAF5EB; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Support</h4>
 				{#each [
-					{ label: 'Donate', href: '/e' },
-					{ label: 'Sponsor a Set', href: '/e' },
-					{ label: 'Volunteer', href: '/e' }
+					{ label: 'Donate', href: '/e/support' },
+					{ label: 'Request Donation', href: '/e/support' },
+					{ label: 'Volunteer', href: '/e/support' }
 				] as link}
 					<a href={link.href} class="bm-footer-link">{link.label}</a>
 				{/each}
@@ -69,9 +68,9 @@
 			<div>
 				<h4 style="font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 600; color: #FAF5EB; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Company</h4>
 				{#each [
-					{ label: 'About Us', href: '/e' },
-					{ label: 'Contact', href: '/e' },
-					{ label: 'Convert', href: '/e' },
+					{ label: 'About Us', href: '/e/contact' },
+					{ label: 'Contact', href: '/e/contact' },
+					{ label: 'Convert', href: '/e/convert' },
 					{ label: 'Privacy Policy', href: '/e' }
 				] as link}
 					<a href={link.href} class="bm-footer-link">{link.label}</a>
@@ -85,7 +84,7 @@
 			<div style="display: flex; gap: 24px;">
 				<a href="/e" class="bm-footer-link" style="font-size: 12px; color: rgba(250,245,235,0.3);">Privacy</a>
 				<a href="/e" class="bm-footer-link" style="font-size: 12px; color: rgba(250,245,235,0.3);">Terms</a>
-				<a href="/e" class="bm-footer-link" style="font-size: 12px; color: rgba(250,245,235,0.3);">Contact</a>
+				<a href="/e/contact" class="bm-footer-link" style="font-size: 12px; color: rgba(250,245,235,0.3);">Contact</a>
 			</div>
 		</div>
 	</div>

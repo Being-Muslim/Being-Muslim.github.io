@@ -16,7 +16,7 @@
 						<span style="font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: #F4EDE4;">Being Muslim</span>
 					</a>
 					<p style="font-family: 'Manrope', sans-serif; font-size: 13px; color: rgba(244, 237, 228, 0.5); line-height: 1.7; max-width: 260px; margin-bottom: 24px;">
-						Nurturing faith through knowledge, community, and compassion. A garden where every soul can grow.
+						Empowering converts and beginners on their Islamic journey through education, community, and support.
 					</p>
 					<!-- Social Icons -->
 					<div style="display: flex; gap: 10px;">
@@ -39,10 +39,9 @@
 				<div>
 					<h4 style="font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; color: #F4EDE4; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Learn</h4>
 					{#each [
-						{ label: 'Articles', href: '/g' },
-						{ label: 'Courses', href: '/g' },
-						{ label: 'Guides', href: '/g' },
-						{ label: 'Resources', href: '/g' }
+						{ label: 'Articles', href: '/g/learn' },
+						{ label: 'Courses', href: '/g/learn' },
+						{ label: 'Resources', href: '/g/learn' }
 					] as link}
 						<a href={link.href} class="bm-footer-link">{link.label}</a>
 					{/each}
@@ -52,35 +51,34 @@
 				<div>
 					<h4 style="font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; color: #F4EDE4; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Shop</h4>
 					{#each [
-						{ label: 'The Book', href: '/g' },
-						{ label: 'Boxed Set', href: '/g' },
-						{ label: 'Prayer Cards', href: '/g' },
-						{ label: 'eBook', href: '/g' }
+						{ label: 'The Book', href: '/g/shop' },
+						{ label: 'Boxed Set', href: '/g/shop' },
+						{ label: 'Prayer Cards', href: '/g/shop' },
+						{ label: 'eBook', href: '/g/shop' }
 					] as link}
 						<a href={link.href} class="bm-footer-link">{link.label}</a>
 					{/each}
 				</div>
 
-				<!-- Community -->
+				<!-- Support -->
 				<div>
-					<h4 style="font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; color: #F4EDE4; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Community</h4>
+					<h4 style="font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; color: #F4EDE4; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Support</h4>
 					{#each [
-						{ label: 'Forums', href: '/g' },
-						{ label: 'Chat', href: '/g' },
-						{ label: 'Events', href: '/g' },
-						{ label: 'Donate', href: '/g' }
+						{ label: 'Donate', href: '/g/support' },
+						{ label: 'Request Donation', href: '/g/support' },
+						{ label: 'Volunteer', href: '/g/support' }
 					] as link}
 						<a href={link.href} class="bm-footer-link">{link.label}</a>
 					{/each}
 				</div>
 
-				<!-- About -->
+				<!-- Company -->
 				<div>
-					<h4 style="font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; color: #F4EDE4; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">About</h4>
+					<h4 style="font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; color: #F4EDE4; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Company</h4>
 					{#each [
-						{ label: 'Our Mission', href: '/g' },
-						{ label: 'Team', href: '/g' },
-						{ label: 'Contact', href: '/g' },
+						{ label: 'About Us', href: '/g/contact' },
+						{ label: 'Contact', href: '/g/contact' },
+						{ label: 'Convert', href: '/g/convert' },
 						{ label: 'Privacy Policy', href: '/g' }
 					] as link}
 						<a href={link.href} class="bm-footer-link">{link.label}</a>
@@ -94,7 +92,7 @@
 				<div style="display: flex; gap: 24px;">
 					<a href="/g" class="bm-footer-link" style="font-size: 12px; color: rgba(244, 237, 228, 0.3);">Privacy</a>
 					<a href="/g" class="bm-footer-link" style="font-size: 12px; color: rgba(244, 237, 228, 0.3);">Terms</a>
-					<a href="/g" class="bm-footer-link" style="font-size: 12px; color: rgba(244, 237, 228, 0.3);">Contact</a>
+					<a href="/g/contact" class="bm-footer-link" style="font-size: 12px; color: rgba(244, 237, 228, 0.3);">Contact</a>
 				</div>
 			</div>
 		</div>

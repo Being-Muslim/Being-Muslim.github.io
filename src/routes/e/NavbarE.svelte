@@ -42,11 +42,11 @@
 		<!-- Desktop Nav -->
 		<div style="display: none; align-items: center; gap: 36px;" class="desktop-nav">
 			{#each [
-				{ label: 'Learn', href: '/e' },
-				{ label: 'Convert', href: '/e' },
-				{ label: 'Shop', href: '/e' },
-				{ label: 'Support', href: '/e' },
-				{ label: 'About', href: '/e' }
+				{ label: 'Home', href: '/e' },
+				{ label: 'Learn', href: '/e/learn' },
+				{ label: 'Convert', href: '/e/convert' },
+				{ label: 'Shop', href: '/e/shop' },
+				{ label: 'Support', href: '/e/support' }
 			] as link}
 				<a
 					href={link.href}
@@ -68,7 +68,7 @@
 
 		<!-- Desktop CTA -->
 		<a
-			href="/e"
+			href="/e/contact"
 			class="desktop-nav"
 			style="
 				display: none;
@@ -86,7 +86,7 @@
 			onmouseenter={(e) => { const t = e.currentTarget as HTMLElement; t.style.background = '#b3553f'; t.style.boxShadow = '0 4px 16px rgba(193,96,78,0.35)'; }}
 			onmouseleave={(e) => { const t = e.currentTarget as HTMLElement; t.style.background = '#C1604E'; t.style.boxShadow = 'none'; }}
 		>
-			Start Reading
+			Contact
 		</a>
 
 		<!-- Mobile Menu Button -->
@@ -114,11 +114,11 @@
 	{#if mobileOpen}
 		<div style="background: #FAF5EB; border-top: 1px solid rgba(28,25,23,0.08); padding: 16px 24px;" class="mobile-menu-panel">
 			{#each [
-				{ label: 'Learn', href: '/e' },
-				{ label: 'Convert', href: '/e' },
-				{ label: 'Shop', href: '/e' },
-				{ label: 'Support', href: '/e' },
-				{ label: 'About', href: '/e' }
+				{ label: 'Home', href: '/e' },
+				{ label: 'Learn', href: '/e/learn' },
+				{ label: 'Convert', href: '/e/convert' },
+				{ label: 'Shop', href: '/e/shop' },
+				{ label: 'Support', href: '/e/support' }
 			] as link}
 				<a
 					href={link.href}
@@ -133,7 +133,7 @@
 				style="display: block; margin-top: 16px; text-align: center; padding: 12px 24px; border-radius: 999px; background: #C1604E; color: #fff; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 500; text-decoration: none;"
 				onclick={() => (mobileOpen = false)}
 			>
-				Start Reading
+				Contact
 			</a>
 		</div>
 	{/if}

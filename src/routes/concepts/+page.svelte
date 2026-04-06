@@ -25,6 +25,22 @@
 			primary: '#2a2018',
 			fonts: 'Source Serif 4 + DM Sans',
 			description: 'Modern, airy, and explorable. Floating glass-effect pill navbar, bento grid layouts, horizontal scroll course carousels, alternating warm backgrounds, and generous whitespace with the same warm earth palette.'
+		},
+		{
+			id: 'D',
+			subtitle: 'Premium Editorial',
+			href: '/e',
+			primary: '#C1604E',
+			fonts: 'Fraunces + Outfit',
+			description: 'Literary, premium, and cinematic. Dark hero with floating book cover, terracotta accents, Volume/Chapter structure, pull quotes, drop caps, and magazine-quality editorial typography.'
+		},
+		{
+			id: 'E',
+			subtitle: 'Organic & Immersive',
+			href: '/g',
+			primary: '#1A5653',
+			fonts: 'Cormorant Garamond + Manrope',
+			description: 'Organic, meditative, and nature-inspired. Flowing SVG wave dividers between sections, deep teal and rose palette, rounded cards, garden metaphors, and a floating pill-style navbar.'
 		}
 	];
 </script>
@@ -38,7 +54,7 @@
 		<div class="text-center">
 			<h1 class="font-display text-4xl font-bold sm:text-5xl">Design Concepts</h1>
 			<p class="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
-				Three design approaches for BeingMuslim.org. A is the base design — B and C explore different visual identities and layout patterns.
+				Five design approaches for BeingMuslim.org. Each explores a different visual identity, layout pattern, and aesthetic direction.
 			</p>
 		</div>
 

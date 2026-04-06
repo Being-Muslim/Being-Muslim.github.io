@@ -49,10 +49,10 @@
 	<!-- Desktop Nav -->
 	<nav style="display: flex; align-items: center; gap: 28px;" class="nav-desktop">
 		{#each [
-			{ label: 'Learn', href: '/g' },
-			{ label: 'Convert', href: '/g' },
-			{ label: 'Shop', href: '/g' },
-			{ label: 'Community', href: '/g' }
+			{ label: 'Learn', href: '/g/learn' },
+			{ label: 'Convert', href: '/g/convert' },
+			{ label: 'Shop', href: '/g/shop' },
+			{ label: 'Support', href: '/g/support' }
 		] as link}
 			<a
 				href={link.href}
@@ -130,10 +130,10 @@
 		"
 	>
 		{#each [
-			{ label: 'Learn', href: '/g' },
-			{ label: 'Convert', href: '/g' },
-			{ label: 'Shop', href: '/g' },
-			{ label: 'Community', href: '/g' }
+			{ label: 'Learn', href: '/g/learn' },
+			{ label: 'Convert', href: '/g/convert' },
+			{ label: 'Shop', href: '/g/shop' },
+			{ label: 'Support', href: '/g/support' }
 		] as link}
 			<a
 				href={link.href}

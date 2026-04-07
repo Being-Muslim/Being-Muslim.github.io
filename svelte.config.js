@@ -59,7 +59,9 @@ const config = {
 				'/k',
 				'/l',
 				'/m',
-				'/n'
+				'/n',
+				'/b-staging',
+				'/c-staging'
 			]
 		}
 	}

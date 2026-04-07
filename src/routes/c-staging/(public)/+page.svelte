@@ -99,7 +99,7 @@
 		</div>
 
 		<!-- Trust bar -->
-		<div class="mt-8 flex items-center">
+		<div class="mt-8 flex items-center pb-12">
 			<div class="flex items-center gap-3">
 				<div class="flex -space-x-2">
 					{#each ['#7a8b6e', '#a08b6e', '#6e7a8b', '#8b6e7a'] as color}
@@ -113,41 +113,60 @@
 			</div>
 		</div>
 	</div>
+</section>
 
-	<!-- Explore your path section -->
-	<div class="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-10 mt-10 pb-8">
-		<div class="grid grid-cols-1 sm:grid-cols-3 rounded-2xl border border-white/15 bg-white/10 backdrop-blur-xl overflow-hidden">
-			<!-- Learn — expanded card -->
-			<a href="/c-staging/learn" class="group relative p-6 sm:p-8 border-b sm:border-b-0 sm:border-r border-white/10 hover:bg-white/5 transition-colors">
-				<h3 class="font-display text-xl font-bold text-white mb-2">Learn</h3>
-				<p class="text-[13px] text-white/60 leading-relaxed max-w-[260px] mb-5">
-					Explore articles, guides, and resources on Islamic faith and practice
-				</p>
-				<span class="inline-flex items-center gap-1.5 rounded-full border border-white/25 px-4 py-1.5 text-[12px] font-medium text-white transition-all group-hover:bg-white/10">
-					Discover More
-				</span>
+<!-- ============================== -->
+<!-- LEARN / CONVERT / BUY          -->
+<!-- ============================== -->
+<section style="background: #faf9f5; padding: 24px 0;">
+	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
+		<div class="bm-grid-explore" style="background: #e3dacc; border-radius: 16px; padding: 28px 20px;">
+			<!-- Left: title + description + CTA -->
+			<div style="display: flex; flex-direction: column; justify-content: space-between; padding-right: 24px;">
+				<div>
+					<h2 style="font-family: 'Source Serif 4', serif; font-size: 36px; font-weight: 400; color: #2a2018; margin: 0 0 16px; line-height: 1.15;">Explore your path</h2>
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: #5a5248; line-height: 1.6; margin: 0;">
+						Discover Islam through courses, articles, and guides. Whether you're curious, converting, or deepening your practice — find resources made for you.
+					</p>
+				</div>
+				<div style="margin-top: 24px;">
+					<a href="/c-staging/learn" class="bm-btn-outline" style="padding: 10px 24px;">
+						See all resources
+					</a>
+				</div>
+			</div>
+
+			<!-- Card: Learn -->
+			<a href="/c-staging/learn" class="bm-card-hover" style="background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
+				<div>
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #6a6258; margin: 0 0 8px; letter-spacing: 0.02em;">Learn</p>
+					<p style="font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0; line-height: 1.2;">Explore articles, guides, and resources on Islamic faith and practice</p>
+				</div>
+				<div style="margin-top: 24px; text-align: right;">
+					<ArrowRight class="h-5 w-5" style="color: #2a2018;" />
+				</div>
 			</a>
 
-			<!-- Convert -->
-			<a href="/c-staging/convert" class="group relative p-6 sm:p-8 border-b sm:border-b-0 sm:border-r border-white/10 hover:bg-white/5 transition-colors">
-				<h3 class="font-display text-xl font-bold text-white mb-2">Convert</h3>
-				<p class="text-[13px] text-white/60 leading-relaxed max-w-[260px] mb-5">
-					Take the next step on your journey with guidance and support
-				</p>
-				<span class="inline-flex items-center gap-1.5 rounded-full border border-white/25 px-4 py-1.5 text-[12px] font-medium text-white transition-all group-hover:bg-white/10">
-					Start Journey
-				</span>
+			<!-- Card: Convert -->
+			<a href="/c-staging/convert" class="bm-card-hover" style="background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
+				<div>
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #6a6258; margin: 0 0 8px; letter-spacing: 0.02em;">Convert</p>
+					<p style="font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0; line-height: 1.2;">Take the next step on your journey with guidance and support</p>
+				</div>
+				<div style="margin-top: 24px; text-align: right;">
+					<ArrowRight class="h-5 w-5" style="color: #2a2018;" />
+				</div>
 			</a>
 
-			<!-- Buy -->
-			<a href="/c-staging/shop" class="group relative p-6 sm:p-8 hover:bg-white/5 transition-colors">
-				<h3 class="font-display text-xl font-bold text-white mb-2">Buy</h3>
-				<p class="text-[13px] text-white/60 leading-relaxed max-w-[260px] mb-5">
-					Books, prayer cards, and resources for your journey
-				</p>
-				<span class="inline-flex items-center gap-1.5 rounded-full border border-white/25 px-4 py-1.5 text-[12px] font-medium text-white transition-all group-hover:bg-white/10">
-					Browse Products
-				</span>
+			<!-- Card: Buy -->
+			<a href="/c-staging/shop" class="bm-card-hover" style="background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
+				<div>
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #6a6258; margin: 0 0 8px; letter-spacing: 0.02em;">Buy</p>
+					<p style="font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0; line-height: 1.2;">Books, prayer cards, and resources for your journey</p>
+				</div>
+				<div style="margin-top: 24px; text-align: right;">
+					<ArrowRight class="h-5 w-5" style="color: #2a2018;" />
+				</div>
 			</a>
 		</div>
 	</div>

@@ -165,6 +165,20 @@ p, a, li, label, input, textarea, select, button {
 	text-underline-offset: 3px;
 }
 
+/* ---------- Explore path grid ---------- */
+.bm-grid-explore {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 20px;
+	align-items: stretch;
+}
+@media (min-width: 768px) {
+	.bm-grid-explore {
+		grid-template-columns: 1fr 280px 280px;
+		padding: 48px !important;
+	}
+}
+
 /* ---------- Footer links ---------- */
 .bm-footer-link {
 	font-family: var(--bm-font-sans);

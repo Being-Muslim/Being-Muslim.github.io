@@ -5,8 +5,11 @@
 		Heart,
 		BookOpen,
 		Users,
+		Globe,
 		Star,
 		Quote,
+		HandHeart,
+		GraduationCap,
 		Handshake
 	} from 'lucide-svelte';
 
@@ -74,22 +77,31 @@
 <!-- ============================== -->
 <!-- 1. HERO                        -->
 <!-- ============================== -->
-<section style="background-color: #2a2018;" class="pt-[72px]">
-	<div class="mx-auto max-w-[1400px] px-6 lg:px-10 py-20 sm:py-28">
-		<div class="mx-auto max-w-2xl text-center">
-			<p
-				style="color: #c4a97d; font-family: 'DM Sans', sans-serif; letter-spacing: 0.08em;"
-				class="text-sm font-medium uppercase mb-4"
-			>
-				&#9670; Our Story
-			</p>
-			<h1
-				style="font-family: 'Source Serif 4', serif; color: #f0ebe3;"
-				class="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.1]"
-			>
+<section style="background: #2a2018; padding: 100px 0 80px; position: relative; overflow: hidden;">
+	<!-- Background Pattern -->
+	<div style="position: absolute; inset: 0; opacity: 0.03;">
+		<svg style="width: 100%; height: 100%;" xmlns="http://www.w3.org/2000/svg">
+			<defs>
+				<pattern id="geo-about" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+					<path
+						d="M30 0L60 30L30 60L0 30Z"
+						fill="none"
+						stroke="#faf9f5"
+						stroke-width="0.5"
+					/>
+				</pattern>
+			</defs>
+			<rect width="100%" height="100%" fill="url(#geo-about)" />
+		</svg>
+	</div>
+
+	<div class="mx-auto max-w-[1400px] px-6 lg:px-10" style="position: relative; z-index: 1;">
+		<div style="max-width: 640px; margin: 0 auto; text-align: center;">
+			<span style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #c8b8a0; text-transform: uppercase; letter-spacing: 1.5px;">Our Story</span>
+			<h1 style="font-family: 'Source Serif 4', serif; font-size: clamp(36px, 5vw, 56px); font-weight: 400; line-height: 1.1; color: #faf9f5; margin: 20px 0 0;">
 				About Being Muslim
 			</h1>
-			<p style="color: #f0ebe3; font-family: 'DM Sans', sans-serif;" class="mt-5 text-lg leading-relaxed opacity-70 max-w-lg mx-auto">
+			<p style="font-family: 'DM Sans', sans-serif; font-size: 17px; line-height: 1.65; color: rgba(250,249,245,0.7); margin: 20px auto 0; max-width: 520px;">
 				We believe that every person who embraces Islam deserves access to beautiful, accurate,
 				and compassionate resources. Being Muslim exists to make that a reality.
 			</p>
@@ -100,19 +112,19 @@
 <!-- ============================== -->
 <!-- 2. MISSION & VISION            -->
 <!-- ============================== -->
-<section style="background: #faf9f5;" class="bm-section-padding">
+<section class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div class="bm-grid-2-gap">
 			<!-- Mission -->
 			<div>
-				<div style="width: 48px; height: 3px; background: #c8b8a0; border-radius: 2px; margin-bottom: 24px;"></div>
-				<h2 style="font-family: 'Source Serif 4', serif; font-size: 32px; font-weight: 400; color: #2a2018; margin: 0 0 16px;">Our Mission</h2>
-				<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #8a7e70; line-height: 1.65; margin: 0 0 16px;">
+				<div style="height: 3px; width: 48px; border-radius: 999px; background: #c8b8a0; margin-bottom: 24px;"></div>
+				<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(24px, 3vw, 32px); font-weight: 400; color: #2a2018; margin: 0 0 16px;">Our Mission</h2>
+				<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.65; color: #8a7e70; margin: 0 0 16px;">
 					To empower new and returning Muslims with the knowledge, resources, and community they
 					need to live Islam with understanding, confidence, and joy. We create educational content
 					that is warm, rigorous, and deeply human — meeting people wherever they are on their journey.
 				</p>
-				<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #8a7e70; line-height: 1.65; margin: 0;">
+				<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.65; color: #8a7e70; margin: 0;">
 					We serve converts taking their first steps, lifelong Muslims seeking deeper understanding,
 					and curious seekers exploring the faith. No one is turned away, and no question is too basic.
 				</p>
@@ -120,14 +132,14 @@
 
 			<!-- Vision -->
 			<div>
-				<div style="width: 48px; height: 3px; background: #2a2018; border-radius: 2px; margin-bottom: 24px;"></div>
-				<h2 style="font-family: 'Source Serif 4', serif; font-size: 32px; font-weight: 400; color: #2a2018; margin: 0 0 16px;">Our Vision</h2>
-				<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #8a7e70; line-height: 1.65; margin: 0 0 16px;">
+				<div style="height: 3px; width: 48px; border-radius: 999px; background: #2a2018; margin-bottom: 24px;"></div>
+				<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(24px, 3vw, 32px); font-weight: 400; color: #2a2018; margin: 0 0 16px;">Our Vision</h2>
+				<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.65; color: #8a7e70; margin: 0 0 16px;">
 					A world where every new Muslim has a supportive community, accessible resources, and
 					the confidence to practice their faith without feeling lost or alone. We envision Islamic
 					education that is as beautiful and inviting as the faith itself.
 				</p>
-				<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #8a7e70; line-height: 1.65; margin: 0;">
+				<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.65; color: #8a7e70; margin: 0;">
 					We are building a global platform that connects learners with knowledge, mentors with
 					students, and communities with one another — bridging the gap between the moment of
 					conversion and a lifetime of confident practice.
@@ -140,25 +152,25 @@
 <!-- ============================== -->
 <!-- 3. THE STORY                   -->
 <!-- ============================== -->
-<section style="background: #f4f1eb;" class="bm-section-padding">
+<section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div style="max-width: 900px; margin: 0 auto;">
-			<div style="text-align: center; margin-bottom: 40px;">
+			<div style="text-align: center; margin-bottom: 48px;">
 				<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #2a2018; margin: 0 0 12px;">How It All Began</h2>
-				<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #8a7e70; margin: 0;">The story behind Being Muslim</p>
+				<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: #8a7e70;">The story behind Being Muslim</p>
 			</div>
 
-			<div class="bm-grid-timeline" style="align-items: start;">
+			<div class="bm-grid-timeline">
 				<!-- Author Avatar -->
 				<div style="display: flex; justify-content: center;">
-					<div style="width: 140px; height: 140px; border-radius: 999px; background: linear-gradient(135deg, rgba(200,184,160,0.25), rgba(226,220,210,0.4)); display: flex; align-items: center; justify-content: center; border: 3px solid rgba(200,184,160,0.3);">
-						<span style="font-family: 'Source Serif 4', serif; font-size: 36px; font-weight: 400; color: #2a2018;">AT</span>
+					<div style="width: 160px; height: 160px; border-radius: 999px; background: linear-gradient(135deg, rgba(200,184,160,0.3), rgba(226,220,210,0.5)); display: flex; align-items: center; justify-content: center; border: 4px solid rgba(200,184,160,0.25);">
+						<span style="font-family: 'Source Serif 4', serif; font-size: 36px; font-weight: 600; color: #2a2018;">AT</span>
 					</div>
 				</div>
 
 				<!-- Story -->
 				<div>
-					<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #8a7e70; line-height: 1.65; margin: 0 0 20px;">
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.65; color: #8a7e70; margin: 0 0 24px;">
 						Dr. Asad Tarsin's journey began in the hallways of a hospital, where as a physician
 						he witnessed something that troubled him deeply: new Muslims, filled with the light of
 						faith, but left without guidance. Time and again, he met converts who had been welcomed
@@ -166,7 +178,7 @@
 						how to pray, what to eat, and how to navigate a new identity.
 					</p>
 
-					<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #8a7e70; line-height: 1.65; margin: 0 0 24px;">
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.65; color: #8a7e70; margin: 0 0 24px;">
 						The existing resources were either too academic, too narrow, or simply not inviting enough
 						for someone taking their first steps. Dr. Tarsin envisioned something different: a guide
 						that felt like a conversation with a trusted friend, one that was comprehensive yet
@@ -174,24 +186,24 @@
 					</p>
 
 					<!-- Pull Quote -->
-					<div style="background: #faf9f5; border-left: 3px solid #c8b8a0; border-radius: 8px; padding: 24px; margin-bottom: 24px;">
+					<div style="background: #e2dcd2; border-radius: 12px; padding: 28px; border-left: 4px solid #c8b8a0; margin-bottom: 24px;">
 						<Quote class="h-7 w-7" style="color: rgba(200,184,160,0.5); margin-bottom: 12px;" />
-						<p style="font-family: 'Source Serif 4', serif; font-size: 19px; font-style: italic; line-height: 1.5; color: #2a2018; margin: 0 0 12px;">
+						<p style="font-family: 'Source Serif 4', serif; font-size: 19px; line-height: 1.55; color: #2a2018; font-style: italic; margin: 0 0 16px;">
 							"I kept meeting new Muslims who were overwhelmed and under-resourced. They had
 							taken the most courageous step of their lives, and we were failing them. I wrote
 							Being Muslim because they deserved better."
 						</p>
-						<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #c8b8a0; margin: 0;">— Dr. Asad Tarsin</p>
+						<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: #2a2018; margin: 0;">— Dr. Asad Tarsin</p>
 					</div>
 
-					<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #8a7e70; line-height: 1.65; margin: 0 0 20px;">
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.65; color: #8a7e70; margin: 0 0 24px;">
 						What started as a single book written on nights and weekends has grown into a comprehensive
 						ecosystem of education and support. The Being Muslim book has been distributed to over
 						10,000 people in more than 50 countries. The boxed set — complete with prayer cards and
 						a quick-reference guide — has become the go-to gift for mosques welcoming new members.
 					</p>
 
-					<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #8a7e70; line-height: 1.65; margin: 0;">
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.65; color: #8a7e70; margin: 0;">
 						Today, Being Muslim is more than a book. It is a platform, a community, and a movement
 						built on the belief that good education can transform lives. And we are just getting started.
 					</p>
@@ -204,11 +216,11 @@
 <!-- ============================== -->
 <!-- 4. IMPACT NUMBERS              -->
 <!-- ============================== -->
-<section style="background: #2a2018;" class="bm-section-padding">
+<section class="bm-section-padding" style="background: #2a2018;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="text-align: center; margin-bottom: 40px;">
-			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #f0ebe3; margin: 0 0 12px;">Our Impact in Numbers</h2>
-			<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: rgba(240,235,227,0.6); margin: 0;">
+		<div style="text-align: center; margin-bottom: 48px;">
+			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #faf9f5; margin: 0 0 12px;">Our Impact in Numbers</h2>
+			<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: rgba(250,249,245,0.6);">
 				Every number represents a real person on their journey.
 			</p>
 		</div>
@@ -216,10 +228,12 @@
 		<div class="bm-grid-4" style="gap: 32px;">
 			{#each stats as stat}
 				<div style="text-align: center;">
-					<p style="font-family: 'Source Serif 4', serif; font-size: clamp(32px, 4vw, 48px); font-weight: 400; color: #c8b8a0; margin: 0; line-height: 1;">
+					<p style="font-family: 'Source Serif 4', serif; font-size: clamp(28px, 4vw, 48px); font-weight: 400; color: #c8b8a0; margin: 0;">
 						{stat.value}
 					</p>
-					<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: rgba(240,235,227,0.55); margin: 8px 0 0;">{stat.label}</p>
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: rgba(250,249,245,0.55); margin: 8px 0 0;">
+						{stat.label}
+					</p>
 				</div>
 			{/each}
 		</div>
@@ -229,14 +243,12 @@
 <!-- ============================== -->
 <!-- 5. TEAM                        -->
 <!-- ============================== -->
-<section id="team" style="background: #faf9f5;" class="bm-section-padding">
+<section id="team" class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="text-align: center; margin-bottom: 40px;">
-			<p style="color: #c4a97d; font-family: 'DM Sans', sans-serif; letter-spacing: 0.08em; font-size: 13px; font-weight: 500; text-transform: uppercase; margin: 0 0 12px;">
-				&#9670; Our Team
-			</p>
-			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #2a2018; margin: 0 0 12px;">The People Behind the Mission</h2>
-			<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #8a7e70; line-height: 1.6; margin: 0 auto; max-width: 640px;">
+		<div style="text-align: center; margin-bottom: 48px;">
+			<span style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #c8b8a0; text-transform: uppercase; letter-spacing: 1.5px;">Our Team</span>
+			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #2a2018; margin: 16px 0 0;">The People Behind the Mission</h2>
+			<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; color: #8a7e70; max-width: 560px; margin: 16px auto 0;">
 				A dedicated team of educators, converts, and community builders working to make Islamic
 				education accessible to everyone.
 			</p>
@@ -244,20 +256,20 @@
 
 		<div class="bm-grid-3" style="gap: 24px;">
 			{#each teamMembers as member}
-				<div style="background: #fff; border-radius: 12px; padding: 32px; text-align: center;">
+				<div class="bm-card-hover" style="background: #e2dcd2; border-radius: 14px; padding: 32px; text-align: center;">
 					<!-- Avatar -->
-					<div style="width: 80px; height: 80px; border-radius: 999px; background: linear-gradient(135deg, rgba(200,184,160,0.2), rgba(226,220,210,0.3)); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 3px solid rgba(200,184,160,0.15);">
-						<span style="font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 400; color: #2a2018;">
+					<div style="width: 80px; height: 80px; border-radius: 999px; background: linear-gradient(135deg, rgba(200,184,160,0.35), rgba(250,249,245,0.5)); display: flex; align-items: center; justify-content: center; margin: 0 auto; border: 3px solid rgba(200,184,160,0.2);">
+						<span style="font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 600; color: #2a2018;">
 							{member.name
 								.split(' ')
 								.map((n) => n[0])
 								.join('')}
 						</span>
 					</div>
-					<h3 style="font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 400; color: #2a2018; margin: 0 0 4px;">{member.name}</h3>
+					<h3 style="font-family: 'Source Serif 4', serif; font-size: 18px; font-weight: 400; color: #2a2018; margin: 20px 0 4px;">{member.name}</h3>
 					<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #c8b8a0; margin: 0 0 16px;">{member.role}</p>
-					<div style="width: 100%; height: 1px; background: #e8e3da; margin: 0 0 16px;"></div>
-					<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #8a7e70; line-height: 1.6; margin: 0;">{member.bio}</p>
+					<div style="height: 1px; background: rgba(200,184,160,0.3); margin: 0 0 16px;"></div>
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; line-height: 1.6; color: #8a7e70; margin: 0;">{member.bio}</p>
 				</div>
 			{/each}
 		</div>
@@ -267,30 +279,36 @@
 <!-- ============================== -->
 <!-- 6. TIMELINE                    -->
 <!-- ============================== -->
-<section style="background: #f4f1eb;" class="bm-section-padding">
+<section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="text-align: center; margin-bottom: 40px;">
+		<div style="text-align: center; margin-bottom: 48px;">
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #2a2018; margin: 0 0 12px;">Our Journey</h2>
-			<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #8a7e70; margin: 0;">
+			<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: #8a7e70;">
 				From a single book to a global platform — milestones along the way.
 			</p>
 		</div>
 
-		<div style="max-width: 800px; margin: 0 auto; position: relative;">
-			<!-- Vertical line -->
-			<div style="position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; background: #d8d2c8;"></div>
+		<div style="position: relative; max-width: 800px; margin: 0 auto;">
+			<!-- Vertical Line -->
+			<div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: #d8d2c8; transform: translateX(-50%);"></div>
 
-			<div style="display: flex; flex-direction: column; gap: 32px;">
-				{#each milestones as milestone}
-					<div style="position: relative; padding-left: 48px;">
-						<!-- Dot -->
-						<div style="position: absolute; left: 8px; top: 4px; width: 16px; height: 16px; border-radius: 999px; background: #2a2018; border: 3px solid #f4f1eb;"></div>
+			<div style="display: flex; flex-direction: column; gap: 48px;">
+				{#each milestones as milestone, i}
+					{@const isLeft = i % 2 === 0}
+					<div style="position: relative; display: flex; align-items: flex-start;">
+						<!-- Dot on timeline -->
+						<div style="position: absolute; left: 50%; z-index: 2; transform: translateX(-50%); width: 32px; height: 32px; border-radius: 999px; background: #2a2018; border: 4px solid #f4f1eb; display: flex; align-items: center; justify-content: center;">
+							<div style="width: 8px; height: 8px; border-radius: 999px; background: #faf9f5;"></div>
+						</div>
 
-						<span style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: #c8b8a0; letter-spacing: 0.06em; text-transform: uppercase;">{milestone.year}</span>
-						<h3 style="font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 400; color: #2a2018; margin: 6px 0 8px;">{milestone.title}</h3>
-						<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #8a7e70; line-height: 1.6; margin: 0;">
-							{milestone.description}
-						</p>
+						<!-- Content -->
+						<div style="width: 50%; {isLeft ? 'padding-right: 40px; text-align: right;' : 'margin-left: auto; padding-left: 40px; text-align: left;'}">
+							<span style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: #c8b8a0; background: #e2dcd2; padding: 3px 12px; border-radius: 999px; display: inline-block; margin-bottom: 10px;">{milestone.year}</span>
+							<h3 style="font-family: 'Source Serif 4', serif; font-size: 18px; font-weight: 400; color: #2a2018; margin: 0 0 8px;">{milestone.title}</h3>
+							<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; line-height: 1.6; color: #8a7e70; margin: 0;">
+								{milestone.description}
+							</p>
+						</div>
 					</div>
 				{/each}
 			</div>
@@ -301,38 +319,38 @@
 <!-- ============================== -->
 <!-- 7. PARTNERS & ENDORSEMENTS     -->
 <!-- ============================== -->
-<section style="background: #faf9f5;" class="bm-section-padding">
+<section class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="text-align: center; margin-bottom: 40px;">
+		<div style="text-align: center; margin-bottom: 48px;">
 			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #2a2018; margin: 0 0 12px;">Partners & Endorsements</h2>
-			<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #8a7e70; margin: 0;">
+			<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: #8a7e70;">
 				Trusted by leading Islamic organizations and educators worldwide.
 			</p>
 		</div>
 
 		<!-- Partner Grid -->
-		<div class="bm-grid-4" style="gap: 16px;">
+		<div class="bm-grid-4" style="gap: 16px; margin-bottom: 64px;">
 			{#each partners as partner}
-				<div style="background: #fff; border-radius: 10px; padding: 24px; display: flex; align-items: center; justify-content: center; min-height: 80px; text-align: center; transition: box-shadow 0.2s;" class="bm-card-hover">
-					<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #8a7e70; margin: 0;">{partner}</p>
+				<div class="bm-card-hover" style="display: flex; height: 80px; align-items: center; justify-content: center; border-radius: 12px; background: #e2dcd2; padding: 0 20px; text-align: center;">
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #8a7e70; margin: 0;">{partner}</p>
 				</div>
 			{/each}
 		</div>
 
 		<!-- Scholar Endorsement -->
-		<div style="max-width: 720px; margin: 48px auto 0;">
-			<div style="background: #fff; border-radius: 12px; padding: 40px; text-align: center;">
-				<div style="display: flex; justify-content: center; gap: 3px; margin-bottom: 20px;">
+		<div style="max-width: 720px; margin: 0 auto;">
+			<div style="background: #e2dcd2; border-radius: 16px; padding: 48px; text-align: center;">
+				<div style="display: flex; justify-content: center; gap: 4px; margin-bottom: 24px;">
 					{#each Array(5) as _}
-						<Star class="h-5 w-5 fill-amber-400 text-amber-400" />
+						<Star class="h-5 w-5" style="color: #c8b8a0; fill: #c8b8a0;" />
 					{/each}
 				</div>
-				<blockquote style="font-family: 'Source Serif 4', serif; font-size: 20px; line-height: 1.5; color: #2a2018; margin: 0 0 20px;">
+				<blockquote style="font-family: 'Source Serif 4', serif; font-size: clamp(18px, 2.5vw, 22px); line-height: 1.5; color: #2a2018; margin: 0 0 24px; font-style: normal;">
 					"Being Muslim is exactly what our community has needed for decades. Dr. Tarsin has created
 					a resource that is both intellectually honest and deeply compassionate — a rare combination.
 					I recommend it without reservation to every mosque, chaplain, and convert support program."
 				</blockquote>
-				<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; color: #2a2018; margin: 0;">Dr. Yasmin Ahmed</p>
+				<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: #2a2018; margin: 0;">Dr. Yasmin Ahmed</p>
 				<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #8a7e70; margin: 4px 0 0;">Professor of Islamic Studies, Georgetown University</p>
 			</div>
 		</div>
@@ -342,13 +360,13 @@
 <!-- ============================== -->
 <!-- 8. CTA SECTION                 -->
 <!-- ============================== -->
-<section style="background: #2a2018;" class="bm-section-padding">
+<section class="bm-section-padding" style="background: #2a2018;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="text-align: center; margin-bottom: 40px;">
-			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #f0ebe3; margin: 0 0 12px;">
+		<div style="text-align: center; margin-bottom: 48px;">
+			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); font-weight: 400; color: #faf9f5; margin: 0 0 16px;">
 				Join the Mission
 			</h2>
-			<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: rgba(240,235,227,0.6); max-width: 640px; margin: 0 auto; line-height: 1.6;">
+			<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.65; color: rgba(250,249,245,0.6); max-width: 560px; margin: 0 auto;">
 				There are many ways to be part of this work. Whether you volunteer your time, support
 				with a donation, or partner with us — your contribution makes a difference.
 			</p>
@@ -356,46 +374,46 @@
 
 		<div class="bm-grid-3">
 			<!-- Volunteer -->
-			<div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 32px; text-align: center;">
-				<div style="width: 52px; height: 52px; border-radius: 10px; background: rgba(200,184,160,0.15); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+			<div style="border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); border-radius: 14px; padding: 32px; text-align: center; transition: background 0.2s;">
+				<div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(200,184,160,0.15); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
 					<Users class="h-6 w-6" style="color: #c8b8a0;" />
 				</div>
-				<h3 style="font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 400; color: #f0ebe3; margin: 0 0 10px;">Volunteer</h3>
-				<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: rgba(240,235,227,0.55); line-height: 1.6; margin: 0 0 20px;">
+				<h3 style="font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 400; color: #faf9f5; margin: 0 0 12px;">Volunteer</h3>
+				<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; line-height: 1.6; color: rgba(250,249,245,0.55); margin: 0 0 24px;">
 					Help us create content, mentor new Muslims, moderate community spaces, or translate
 					resources into new languages.
 				</p>
-				<a href="/b-staging/contact" class="bm-btn-outline" style="border-color: rgba(240,235,227,0.3); color: #f0ebe3; padding: 10px 24px;">
+				<a href="/b-staging/about" class="bm-btn-glass" style="font-size: 13px; padding: 10px 22px;">
 					Get Involved <ArrowRight class="h-3.5 w-3.5" />
 				</a>
 			</div>
 
 			<!-- Donate -->
-			<div style="background: rgba(200,184,160,0.1); border: 1px solid rgba(200,184,160,0.3); border-radius: 12px; padding: 32px; text-align: center;">
-				<div style="width: 52px; height: 52px; border-radius: 10px; background: rgba(200,184,160,0.15); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+			<div style="border: 1px solid rgba(200,184,160,0.3); background: rgba(200,184,160,0.08); border-radius: 14px; padding: 32px; text-align: center; transition: background 0.2s;">
+				<div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(200,184,160,0.15); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
 					<Heart class="h-6 w-6" style="color: #c8b8a0;" />
 				</div>
-				<h3 style="font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 400; color: #f0ebe3; margin: 0 0 10px;">Donate</h3>
-				<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: rgba(240,235,227,0.55); line-height: 1.6; margin: 0 0 20px;">
+				<h3 style="font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 400; color: #faf9f5; margin: 0 0 12px;">Donate</h3>
+				<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; line-height: 1.6; color: rgba(250,249,245,0.55); margin: 0 0 24px;">
 					Sponsor a boxed set for a new Muslim, fund education programs, or become a monthly
 					supporter of our mission.
 				</p>
-				<a href="/b-staging/support" class="bm-btn-white" style="padding: 10px 24px;">
+				<a href="/b-staging/give" class="bm-btn-white" style="font-size: 13px; padding: 10px 22px;">
 					Give Now <Heart class="h-3.5 w-3.5" />
 				</a>
 			</div>
 
 			<!-- Partner -->
-			<div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 32px; text-align: center;">
-				<div style="width: 52px; height: 52px; border-radius: 10px; background: rgba(200,184,160,0.15); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+			<div style="border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); border-radius: 14px; padding: 32px; text-align: center; transition: background 0.2s;">
+				<div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(200,184,160,0.15); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
 					<Handshake class="h-6 w-6" style="color: #c8b8a0;" />
 				</div>
-				<h3 style="font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 400; color: #f0ebe3; margin: 0 0 10px;">Partner</h3>
-				<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: rgba(240,235,227,0.55); line-height: 1.6; margin: 0 0 20px;">
+				<h3 style="font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 400; color: #faf9f5; margin: 0 0 12px;">Partner</h3>
+				<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; line-height: 1.6; color: rgba(250,249,245,0.55); margin: 0 0 24px;">
 					Are you a mosque, organization, or educator? Partner with us to bring Being Muslim
 					resources to your community.
 				</p>
-				<a href="/b-staging/contact" class="bm-btn-outline" style="border-color: rgba(240,235,227,0.3); color: #f0ebe3; padding: 10px 24px;">
+				<a href="/b-staging/about" class="bm-btn-glass" style="font-size: 13px; padding: 10px 22px;">
 					Become a Partner <ArrowRight class="h-3.5 w-3.5" />
 				</a>
 			</div>

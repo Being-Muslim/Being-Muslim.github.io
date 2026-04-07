@@ -1,10 +1,9 @@
 <script lang="ts">
-	import '$lib/styles/concept-b.css';
 	import type { Snippet } from 'svelte';
+	import '$lib/styles/concept-c.css';
 	let { children }: { children: Snippet } = $props();
 </script>
 
-<!-- Layout reset — minimal chrome for lesson player -->
-<div class="concept-b min-h-screen bg-bg-primary">
+<div class="concept-c min-h-screen bg-[#F2F2F7]">
 	{@render children()}
 </div>

@@ -1,118 +1,85 @@
 <script lang="ts">
-	import { withPrefix } from '$lib/data/utils';
-	import { Heart, Gift, Repeat, Calendar, ArrowRight } from 'lucide-svelte';
+	import { withPrefix } from '$lib/data/utils.js';
+	import { Heart, ArrowRight, Repeat, Gift } from 'lucide-svelte';
 
 	const p = (href: string) => withPrefix('/b-staging', href);
 
 	const donations = [
-		{
-			id: 'DON-456',
-			date: '2026-02-01',
-			amount: 85,
-			type: 'Sponsor 1 Boxed Set',
-			recurring: false
-		},
-		{
-			id: 'DON-412',
-			date: '2026-01-15',
-			amount: 50,
-			type: 'Custom Donation',
-			recurring: true
-		},
-		{
-			id: 'DON-389',
-			date: '2025-12-20',
-			amount: 400,
-			type: 'Sponsor 5 Boxed Sets',
-			recurring: false
-		}
+		{ date: 'Feb 1, 2026', amount: 85, type: 'Sponsor 1 Boxed Set', recurring: false },
+		{ date: 'Jan 1, 2026', amount: 50, type: 'Monthly Donation', recurring: true },
+		{ date: 'Dec 1, 2025', amount: 50, type: 'Monthly Donation', recurring: true },
+		{ date: 'Nov 15, 2025', amount: 400, type: 'Sponsor 5 Boxed Sets', recurring: false },
+		{ date: 'Nov 1, 2025', amount: 50, type: 'Monthly Donation', recurring: true }
 	];
 
 	const totalDonated = donations.reduce((sum, d) => sum + d.amount, 0);
-	const boxesSponsored = 6;
 </script>
 
 <svelte:head>
-	<title>Donations - Being Muslim</title>
+	<title>Donations — Being Muslim</title>
 </svelte:head>
 
-<div>
-	<h1 class="font-display text-2xl font-bold">Donation <span class="highlight">History</span></h1>
-	<p class="mono mt-2 text-text-secondary">TRACK YOUR CONTRIBUTIONS AND IMPACT</p>
+<div class="space-y-6">
+	<div>
+		<h1 class="font-display text-2xl font-bold text-[#1C1C1E]">Donations</h1>
+		<p class="mt-1 text-sm text-[#8E8E93]">View your giving history and impact.</p>
+	</div>
 
-	<!-- Summary Stats -->
-	<div class="mt-8 grid grid-cols-3 gap-0 border-[3px] border-border">
-		<div class="border-r-[3px] border-border p-4 text-center">
-			<Heart class="mx-auto h-5 w-5 text-accent-primary" />
-			<p class="mt-2 font-display text-2xl font-bold">${totalDonated}</p>
-			<p class="mono text-text-secondary">TOTAL DONATED</p>
+	<!-- Summary bento -->
+	<div class="grid grid-cols-3 gap-3">
+		<div class="rounded-[20px] bg-gradient-to-br from-[#FF9F0A] to-[#FF3B30] p-6 text-center">
+			<p class="font-display text-3xl font-bold text-white">${totalDonated}</p>
+			<p class="mt-1 text-sm text-white/70">Total Given</p>
 		</div>
-		<div class="border-r-[3px] border-border p-4 text-center">
-			<Gift class="mx-auto h-5 w-5 text-accent-primary" />
-			<p class="mt-2 font-display text-2xl font-bold">{boxesSponsored}</p>
-			<p class="mono text-text-secondary">SETS SPONSORED</p>
+		<div class="rounded-[20px] bg-white p-6 text-center">
+			<div class="mx-auto flex h-10 w-10 items-center justify-center rounded-[14px] bg-[#FF9F0A]/10">
+				<Gift class="h-5 w-5 text-[#FF9F0A]" />
+			</div>
+			<p class="mt-2 font-display text-2xl font-bold text-[#1C1C1E]">7</p>
+			<p class="mt-0.5 text-xs text-[#8E8E93]">Boxed Sets Sponsored</p>
 		</div>
-		<div class="p-4 text-center">
-			<Repeat class="mx-auto h-5 w-5 text-accent-primary" />
-			<p class="mt-2 font-display text-2xl font-bold">$50/mo</p>
-			<p class="mono text-text-secondary">RECURRING</p>
+		<div class="rounded-[20px] bg-white p-6 text-center">
+			<div class="mx-auto flex h-10 w-10 items-center justify-center rounded-[14px] bg-[#30D158]/10">
+				<Repeat class="h-5 w-5 text-[#30D158]" />
+			</div>
+			<p class="mt-2 font-display text-2xl font-bold text-[#1C1C1E]">$50/mo</p>
+			<p class="mt-0.5 text-xs text-[#8E8E93]">Monthly Donation</p>
 		</div>
 	</div>
 
-	<!-- Donation List -->
-	{#if donations.length === 0}
-		<div class="mt-10 border-[3px] border-border py-16 text-center">
-			<div class="mx-auto flex h-20 w-20 items-center justify-center border-[3px] border-border">
-				<Heart class="h-10 w-10 text-text-secondary/30" />
-			</div>
-			<p class="mt-6 font-display text-xl font-bold">No donations yet</p>
-			<p class="mono mt-2 text-text-secondary">YOUR GENEROSITY HELPS NEW MUSLIMS</p>
-			<a
-				href={p('/give')}
-				class="mt-6 inline-block border-[3px] border-border bg-accent-primary px-8 py-3 font-bold text-white transition-colors hover:bg-red-700"
-			>
-				Make a Donation
-			</a>
-		</div>
-	{:else}
-		<div class="mt-8 border-[3px] border-border">
+	<!-- Donation History -->
+	<div>
+		<h2 class="font-display text-xl font-bold text-[#1C1C1E]">Giving History</h2>
+		<div class="mt-4 space-y-3">
 			{#each donations as donation}
-				<div class="flex items-center justify-between border-b-[3px] border-border px-4 py-4 last:border-b-0">
+				<div class="flex items-center justify-between rounded-[20px] bg-white p-5">
 					<div class="flex items-center gap-4">
-						<div class="flex h-12 w-12 shrink-0 items-center justify-center border-[3px] border-border bg-accent-primary/10">
-							<Heart class="h-5 w-5 text-accent-primary" />
+						<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] {donation.recurring ? 'bg-[#30D158]/10' : 'bg-[#FF9F0A]/10'}">
+							{#if donation.recurring}
+								<Repeat class="h-5 w-5 text-[#30D158]" />
+							{:else}
+								<Heart class="h-5 w-5 text-[#FF9F0A]" />
+							{/if}
 						</div>
 						<div>
-							<p class="font-display font-bold">{donation.type}</p>
-							<div class="flex items-center gap-3">
-								<span class="mono text-text-secondary">{donation.id}</span>
-								<div class="flex items-center gap-1 text-text-secondary">
-									<Calendar class="h-3 w-3" />
-									<span class="mono">{donation.date}</span>
-								</div>
-								{#if donation.recurring}
-									<span class="border-[3px] border-border bg-accent-gold px-2 py-0.5 text-xs font-bold text-text-primary">
-										RECURRING
-									</span>
-								{/if}
-							</div>
+							<p class="text-sm font-medium text-[#1C1C1E]">{donation.type}</p>
+							<p class="mt-0.5 text-xs text-[#8E8E93]">{donation.date}</p>
 						</div>
 					</div>
-					<span class="font-display text-xl font-bold text-accent-primary">
-						${donation.amount.toFixed(2)}
-					</span>
+					<div class="text-right">
+						<p class="font-display text-lg font-bold text-[#1C1C1E]">${donation.amount}</p>
+						{#if donation.recurring}
+							<span class="text-xs font-medium text-[#30D158]">Recurring</span>
+						{/if}
+					</div>
 				</div>
 			{/each}
 		</div>
+	</div>
 
-		<div class="mt-6">
-			<a
-				href={p('/give')}
-				class="group inline-flex items-center gap-2 font-display font-bold text-accent-primary transition-colors hover:text-red-700"
-			>
-				Make Another Donation
-				<ArrowRight class="h-4 w-4 transition-transform group-hover:translate-x-1" />
-			</a>
-		</div>
-	{/if}
+	<div class="text-center">
+		<a href={p('/give')} class="inline-flex items-center gap-2 rounded-[14px] bg-[#007AFF] px-6 py-3 text-sm font-semibold text-white hover:opacity-90">
+			Make a Donation <ArrowRight class="h-4 w-4" />
+		</a>
+	</div>
 </div>

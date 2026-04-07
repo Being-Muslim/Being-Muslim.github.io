@@ -28,11 +28,14 @@
 		ChevronLeft,
 		ChevronRight,
 		Mail,
+		Menu,
+		X,
 		Fingerprint,
 		Wrench,
 		ShieldCheck,
 		Diamond,
-		ChevronDown
+		ChevronDown,
+		CircleUserRound
 	} from 'lucide-svelte';
 
 	const featuredArticles = articles.filter((a) => a.featured).slice(0, 3);
@@ -56,6 +59,23 @@
 	const audienceIcons = { compass: Compass, sunrise: Sunrise, refresh: RefreshCw } as const;
 
 	let email = $state('');
+
+	let coursesHeaderRef: HTMLElement | undefined = $state();
+	let coursesInset = $state(40);
+
+	$effect(() => {
+		if (coursesHeaderRef) {
+			const sync = () => {
+				const rect = coursesHeaderRef!.getBoundingClientRect();
+				const pad = parseFloat(getComputedStyle(coursesHeaderRef!).paddingLeft);
+				coursesInset = rect.left + pad;
+			};
+			sync();
+			const ro = new ResizeObserver(sync);
+			ro.observe(coursesHeaderRef);
+			return () => ro.disconnect();
+		}
+	});
 </script>
 
 <svelte:head>
@@ -69,7 +89,7 @@
 <!-- ============================== -->
 <!-- 1. HERO SECTION                -->
 <!-- ============================== -->
-<section class="relative flex min-h-[83vh] flex-col justify-end overflow-hidden">
+<section class="relative flex min-h-screen flex-col justify-end overflow-hidden">
 	<!-- Background Image -->
 	<div class="absolute inset-0">
 		<img
@@ -81,7 +101,7 @@
 		<div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(40,35,28,0.3) 0%, rgba(40,35,28,0.1) 40%, rgba(40,35,28,0.55) 100%);"></div>
 	</div>
 
-	<div class="relative z-10 mx-auto w-full max-w-[1400px] px-6 pt-32 pb-12 lg:px-10">
+	<div class="relative z-10 mx-auto w-full max-w-[1400px] px-6 pt-32 lg:px-10">
 		<div class="max-w-[680px]">
 			<h1 class="font-display text-[44px] font-bold leading-[1.05] tracking-[-0.02em] text-white sm:text-[56px] lg:text-[68px]">
 				Your guide to a meaningful
@@ -92,25 +112,6 @@
 				Whether you're exploring Islam, newly converted, or reconnecting with your faith — find the knowledge, community, and support you need.
 			</p>
 
-			<div class="mt-8 flex flex-wrap items-center gap-4">
-				<!-- White button -->
-				<a
-					href="/b-staging"
-					class="bm-btn-white"
-				style="padding: 14px 28px; font-weight: 600;"
-				>
-					Start Learning
-					<ArrowRight class="h-4 w-4" />
-				</a>
-				<!-- Glass button -->
-				<a
-					href="/b-staging"
-					class="bm-btn-glass"
-				style="padding: 14px 28px; font-weight: 600;"
-				>
-					Explore Resources
-				</a>
-			</div>
 		</div>
 
 		<!-- Trust bar -->
@@ -129,54 +130,38 @@
 		</div>
 	</div>
 
-</section>
+	<!-- Glass Navigation Bar -->
+	<div class="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-10 mt-10 pb-8">
+		<div class="grid grid-cols-1 sm:grid-cols-3 rounded-2xl border border-white/15 bg-white/10 backdrop-blur-xl overflow-hidden">
+			<!-- Learn — expanded card -->
+			<a href="/b-staging/learn" class="group relative p-6 sm:p-8 border-b sm:border-b-0 sm:border-r border-white/10 hover:bg-white/5 transition-colors">
+				<h3 class="font-display text-xl font-bold text-white mb-2">Learn</h3>
+				<p class="text-[13px] text-white/60 leading-relaxed max-w-[260px] mb-5">
+					Expand your understanding with our courses and resources. Dive into Islam's depths on your terms.
+				</p>
+				<span class="inline-flex items-center gap-1.5 rounded-full border border-white/25 px-4 py-1.5 text-[12px] font-medium text-white transition-all group-hover:bg-white/10">
+					Discover More
+				</span>
+			</a>
 
-<!-- ============================== -->
-<!-- LEARN / CONVERT / SHOP         -->
-<!-- ============================== -->
-<section style="background: #faf9f5; padding: 24px 0;">
-	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div class="bm-grid-explore" style="background: #e3dacc; border-radius: 16px; padding: 28px 20px;">
-			<!-- Left: title + description + CTA -->
-			<div style="display: flex; flex-direction: column; justify-content: space-between; padding-right: 24px;">
-				<div>
-					<h2 style="font-family: 'Source Serif 4', serif; font-size: 36px; font-weight: 400; color: #2a2018; margin: 0 0 16px; line-height: 1.15;">Explore your path</h2>
-					<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: #5a5248; line-height: 1.6; margin: 0;">
-						Discover Islam through courses, articles, and guides. Whether you're curious, converting, or deepening your practice — find resources made for you.
-					</p>
-				</div>
-				<div style="margin-top: 24px;">
-					<a href="/b-staging/learn" class="bm-btn-outline" style="padding: 10px 24px;">
-						See all resources
-					</a>
-				</div>
-			</div>
-
-			<!-- Card: Learn -->
-			<a href="/b-staging/learn" class="bm-card-hover" style="background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
-				<div>
-					<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #6a6258; margin: 0 0 8px; letter-spacing: 0.02em;">Learn</p>
-					<p style="font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0; line-height: 1.2;">Courses &amp; Resources</p>
-				</div>
-				<div style="margin-top: 24px; text-align: right;">
-					<ArrowRight class="h-5 w-5" style="color: #2a2018;" />
+			<!-- Convert -->
+			<a href="/b-staging/convert" class="group flex items-center justify-between p-6 sm:p-8 border-b sm:border-b-0 sm:border-r border-white/10 hover:bg-white/5 transition-colors">
+				<h3 class="font-display text-xl font-bold text-white">Convert</h3>
+				<div class="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 text-white/70 group-hover:bg-white/10 group-hover:text-white transition-all">
+					<ArrowRight class="h-4 w-4 -rotate-45" />
 				</div>
 			</a>
 
-			<!-- Card: Convert -->
-			<a href="/b-staging/convert" class="bm-card-hover" style="background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
-				<div>
-					<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #6a6258; margin: 0 0 8px; letter-spacing: 0.02em;">Convert</p>
-					<p style="font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0; line-height: 1.2;">Start Your Journey</p>
-				</div>
-				<div style="margin-top: 24px; text-align: right;">
-					<ArrowRight class="h-5 w-5" style="color: #2a2018;" />
+			<!-- Shop -->
+			<a href="/b-staging/shop" class="group flex items-center justify-between p-6 sm:p-8 hover:bg-white/5 transition-colors">
+				<h3 class="font-display text-xl font-bold text-white">Shop</h3>
+				<div class="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 text-white/70 group-hover:bg-white/10 group-hover:text-white transition-all">
+					<ArrowRight class="h-4 w-4 -rotate-45" />
 				</div>
 			</a>
 		</div>
 	</div>
 </section>
-
 <!-- ============================== -->
 <!-- 4. FEATURED ARTICLES           -->
 <!-- ============================== -->
@@ -191,23 +176,52 @@
 			</a>
 		</div>
 
-		<div class="bm-grid-3">
-			{#each [
-				{ title: 'Brief Overview of Islam', category: 'Foundations', time: '10 min read', href: '/b-staging/learn/brief-overview-of-islam', img: 'https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png' },
-				{ title: "A Beginner's Guide to Being a Muslim", category: 'New Muslims', time: '12 min read', href: '/b-staging/learn/beginners-guide', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg' },
-				{ title: 'Islam and Other Faiths', category: 'Belief', time: '8 min read', href: '/b-staging/learn/islam-and-other-faiths', img: 'https://www.beingmuslim.org/wp-content/uploads/2022/03/oneGodmanynames.jpeg' }
-			] as article}
-				<a href={article.href} style="text-decoration: none; display: block;" class="bm-title-underline-parent">
-					<div style="aspect-ratio: 4/3; background: #e2dcd2; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-						<img src={article.img} alt={article.title} style="width: 100%; height: 100%; object-fit: cover;" />
+		<!-- Bento grid: left image spans 2 rows, right cards share those rows, left text in row 3 -->
+		<div class="bm-grid-bento">
+			<!-- Left: featured image spanning rows 1–2 -->
+			<a href="/b-staging/learn" style="display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: #e2dcd2;" class="bm-title-underline-parent">
+				<img src="https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png" alt="Brief Overview of Islam" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+			</a>
+
+			<!-- Right top card (row 1) -->
+			<a href="/b-staging/learn" class="bm-grid-article-card bm-title-underline-parent" style="text-decoration: none;">
+				<div style="background: #e2dcd2; border-radius: 10px; overflow: hidden; height: 100%;">
+					<img src="https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg" alt="A Beginner's Guide to Being a Muslim" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+				</div>
+				<div>
+					<h3 class="bm-title-underline" style="font-size: 22px; color: #2a2018; margin: 0 0 14px; line-height: 1.3;">A Beginner's Guide to Being a Muslim</h3>
+					<p style="font-size: 15px; color: #8a7e70; line-height: 1.45; margin: 0 0 16px;">Practical advice and important first steps for those who have recently embraced Islam.</p>
+					<div style="display: flex; align-items: center; gap: 8px;">
+						<span style="font-size: 15px; font-weight: 500; color: #2a2018;">New Muslims</span>
+						<span style="font-size: 15px; color: #a09888;">12 min read</span>
 					</div>
-					<h3 class="bm-title-underline" style="font-family: 'Source Serif 4', serif; font-size: 18px; font-weight: 400; color: #2a2018; margin: 0 0 8px; line-height: 1.3;">{article.title}</h3>
-					<div style="display: flex; align-items: center; gap: 12px;">
-						<span style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #2a2018;">{article.category}</span>
-						<span style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #a09888;">{article.time}</span>
+				</div>
+			</a>
+
+			<!-- Right bottom card (row 2) -->
+			<a href="/b-staging/learn" class="bm-grid-article-card bm-title-underline-parent" style="text-decoration: none;">
+				<div style="background: #e2dcd2; border-radius: 10px; overflow: hidden; height: 100%;">
+					<img src="https://www.beingmuslim.org/wp-content/uploads/2022/02/foundationsofIsam_YT.jpeg" alt="Islam and Other Faiths" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+				</div>
+				<div>
+					<h3 class="bm-title-underline" style="font-size: 22px; color: #2a2018; margin: 0 0 14px; line-height: 1.3;">Islam and Other Faiths</h3>
+					<p style="font-size: 15px; color: #8a7e70; line-height: 1.45; margin: 0 0 16px;">Understanding common ground and key differences with Christianity, Judaism, and other faiths.</p>
+					<div style="display: flex; align-items: center; gap: 8px;">
+						<span style="font-size: 15px; font-weight: 500; color: #2a2018;">Belief</span>
+						<span style="font-size: 15px; color: #a09888;">8 min read</span>
 					</div>
-				</a>
-			{/each}
+				</div>
+			</a>
+
+			<!-- Left: text below image (row 3) -->
+			<div>
+				<h3 style="font-size: 24px; color: #2a2018; margin: 0 0 6px; line-height: 1.3;">Brief Overview of Islam</h3>
+				<p style="font-size: 15px; color: #8a7e70; line-height: 1.5; margin: 0 0 8px;">A clear and accessible introduction to the core beliefs, practices, and history of Islam for those just beginning to learn.</p>
+				<div style="display: flex; align-items: center; gap: 10px;">
+					<span style="font-size: 15px; font-weight: 500; color: #2a2018;">Foundations</span>
+					<span style="font-size: 15px; color: #a09888;">10 min read</span>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
@@ -259,40 +273,54 @@
 <!-- 6. COURSES                     -->
 <!-- ============================== -->
 <section class="bm-section-padding" style="background: #f4f1eb;">
-	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div class="bm-grid-courses-header">
-			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0;">
-				Learn at your own pace
-			</h2>
-			<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #8a7e70; line-height: 1.55; align-self: end; margin: 0;">
-				Structured courses designed by scholars and educators to guide you step by step.
-			</p>
+	<div bind:this={coursesHeaderRef} class="mx-auto max-w-[1400px] px-6 lg:px-10">
+		<!-- Header: title + description left, arrows right -->
+		<div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 32px;">
+			<div>
+				<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 8px;">
+					Learn at your own pace
+				</h2>
+				<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #8a7e70; line-height: 1.55; margin: 0;">
+					Structured courses designed by scholars and educators to guide you step by step.
+				</p>
+			</div>
+			<div style="display: flex; gap: 8px; flex-shrink: 0; margin-left: 24px;">
+				<button onclick={(e) => e.currentTarget.closest('section')?.querySelector('.courses-scroll')?.scrollBy({ left: -300, behavior: 'smooth' })} style="width: 40px; height: 40px; border-radius: 999px; border: 1.5px solid #c8c0b4; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s;">
+					<ChevronLeft class="h-5 w-5" style="color: #2a2018;" />
+				</button>
+				<button onclick={(e) => e.currentTarget.closest('section')?.querySelector('.courses-scroll')?.scrollBy({ left: 300, behavior: 'smooth' })} style="width: 40px; height: 40px; border-radius: 999px; border: 1.5px solid #c8c0b4; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s;">
+					<ChevronRight class="h-5 w-5" style="color: #2a2018;" />
+				</button>
+			</div>
 		</div>
 
-		<div class="bm-grid-3">
+		<!-- Horizontal scroll row — bleeds to both screen edges -->
+		<div class="courses-scroll" style="display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 4px; margin-left: -{coursesInset}px; margin-right: calc(-1 * (100vw - 100%) / 2); padding-left: {coursesInset}px; scroll-padding-left: {coursesInset}px; padding-right: 48px;">
 			{#each [
-				{ title: 'Foundations of Faith', instructor: 'Dr. Asad Tarsin', lessons: 24, duration: '6 hours', level: 'Beginner', img: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?w=600&q=80&auto=format&fit=crop' },
-				{ title: 'Prayer Mastery', instructor: 'Imam Ahmad', lessons: 16, duration: '4 hours', level: 'Beginner', img: 'https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=600&q=80&auto=format&fit=crop' },
-				{ title: 'Your Quran Journey', instructor: 'Ustadha Fatima', lessons: 32, duration: '10 hours', level: 'Beginner', img: 'https://images.unsplash.com/photo-1567443024551-f3e3cc2be870?w=600&q=80&auto=format&fit=crop' }
-			] as course}
-				<a href="/b-staging/learn" style="text-decoration: none; display: block;" class="bm-title-underline-parent">
-					<div style="aspect-ratio: 4/3; background: #e2dcd2; border-radius: 12px; overflow: hidden; position: relative; margin-bottom: 16px;">
-						<img src={course.img} alt={course.title} style="width: 100%; height: 100%; object-fit: cover;" />
-						<!-- Play icon overlay -->
-						<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
-							<div style="width: 56px; height: 56px; border-radius: 999px; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center;">
-								<Play class="h-6 w-6" style="color: #2a2018; margin-left: 2px;" />
-							</div>
+			{ title: 'Foundations of Faith', instructor: 'Dr. Asad Tarsin', lessons: 24, duration: '6 hours', level: 'Beginner', img: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?w=600&q=80&auto=format&fit=crop' },
+			{ title: 'Prayer Mastery', instructor: 'Imam Ahmad', lessons: 16, duration: '4 hours', level: 'Beginner', img: 'https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=600&q=80&auto=format&fit=crop' },
+			{ title: 'Your Quran Journey', instructor: 'Ustadha Fatima', lessons: 32, duration: '10 hours', level: 'Beginner', img: 'https://images.unsplash.com/photo-1567443024551-f3e3cc2be870?w=600&q=80&auto=format&fit=crop' },
+			{ title: 'Understanding the Seerah', instructor: 'Dr. Omar Suleiman', lessons: 20, duration: '8 hours', level: 'Intermediate', img: 'https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=600&q=80&auto=format&fit=crop' },
+			{ title: 'Ramadan Preparation', instructor: 'Imam Hassan', lessons: 12, duration: '3 hours', level: 'Beginner', img: 'https://images.unsplash.com/photo-1574246604907-db69e30ddb97?w=600&q=80&auto=format&fit=crop' },
+			{ title: 'Islamic History & Civilisation', instructor: 'Dr. Amira Khan', lessons: 28, duration: '9 hours', level: 'Intermediate', img: 'https://images.unsplash.com/photo-1473177104440-ffee2f376098?w=600&q=80&auto=format&fit=crop' }
+		] as course}
+			<a href="/b-staging/courses" style="text-decoration: none; display: block; flex: 0 0 280px; scroll-snap-align: start;" class="bm-title-underline-parent">
+				<div style="aspect-ratio: 1; background: #e2dcd2; border-radius: 14px; overflow: hidden; margin-bottom: 14px; position: relative;">
+					<img src={course.img} alt={course.title} style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+					<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+						<div style="width: 56px; height: 56px; border-radius: 999px; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center;">
+							<Play class="h-6 w-6" style="color: #2a2018; margin-left: 2px;" />
 						</div>
-						<span style="position: absolute; top: 12px; left: 12px; font-size: 10px; font-weight: 600; color: #2a2018; background: #fff; padding: 3px 10px; border-radius: 999px;">{course.level}</span>
 					</div>
-					<h3 class="bm-title-underline" style="font-size: 18px; color: #2a2018; margin: 0 0 8px; line-height: 1.3;">{course.title}</h3>
-					<div style="display: flex; align-items: center; gap: 12px;">
-						<span style="font-size: 12px; font-weight: 500; color: #2a2018;">{course.instructor}</span>
-						<span style="font-size: 12px; color: #a09888;">{course.lessons} lessons · {course.duration}</span>
-					</div>
-				</a>
-			{/each}
+					<span style="position: absolute; top: 12px; left: 12px; font-size: 10px; font-weight: 600; color: #2a2018; background: #fff; padding: 3px 10px; border-radius: 999px;">{course.level}</span>
+				</div>
+				<h3 class="bm-title-underline" style="font-size: 16px; color: #2a2018; margin: 0 0 8px; line-height: 1.3;">{course.title}</h3>
+				<div style="display: flex; align-items: center; gap: 12px;">
+					<span style="font-size: 12px; font-weight: 500; color: #2a2018;">{course.instructor}</span>
+					<span style="font-size: 12px; color: #a09888;">{course.lessons} lessons · {course.duration}</span>
+				</div>
+			</a>
+		{/each}
 		</div>
 	</div>
 </section>
@@ -395,20 +423,18 @@
 			What people are saying
 		</h2>
 
-		<div class="bm-grid-3">
-			{#each testimonials.slice(0, 3) as testimonial}
-				<div style="background: #fff; border-radius: 12px; padding: 32px; display: flex; flex-direction: column;">
-					<div style="display: flex; gap: 3px; margin-bottom: 16px;">
-						{#each Array(5) as _}
-							<Star class="h-4 w-4 fill-amber-400 text-amber-400" />
-						{/each}
-					</div>
+		<div class="bm-grid-3-testimonials">
+			{#each testimonials.slice(0, 3) as testimonial, i}
+				<div style="padding: 32px 0; display: flex; flex-direction: column;">
 					<blockquote style="font-size: 15px; line-height: 1.55; color: #2a2018; margin: 0 0 20px; flex: 1;">
 						"{testimonial.quote}"
 					</blockquote>
-					<div>
-						<p style="font-size: 14px; font-weight: 600; color: #2a2018; margin: 0;">{testimonial.name}</p>
-						<p style="font-size: 13px; color: #8a7e70; margin: 4px 0 0;">{testimonial.role}</p>
+					<div style="display: flex; align-items: center; gap: 12px;">
+						<div style="width: 40px; height: 40px; border-radius: 999px; flex-shrink: 0; background: {['#7a8b6e', '#a08b6e', '#6e7a8b'][i]};"></div>
+						<div>
+							<p style="font-size: 14px; font-weight: 600; color: #2a2018; margin: 0;">{testimonial.name}</p>
+							<p style="font-size: 13px; color: #8a7e70; margin: 4px 0 0;">{testimonial.role}</p>
+						</div>
 					</div>
 				</div>
 			{/each}
@@ -421,8 +447,8 @@
 <!-- ============================== -->
 <section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="max-width: 800px;">
-			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px;">
+		<div style="max-width: 800px; margin: 0 auto;">
+			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px; text-align: center;">
 				Frequently Asked Questions
 			</h2>
 
@@ -447,7 +473,7 @@
 				{/if}
 			{/each}
 
-			<div style="margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px;">
+			<div style="margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
 				<a href="/b-staging/convert" class="bm-btn-dark" style="padding: 10px 24px;">
 					Ready to Convert
 				</a>
@@ -499,4 +525,3 @@
 	</div>
 </section>
 
-<!-- Styles now in /src/routes/b/styles.css -->

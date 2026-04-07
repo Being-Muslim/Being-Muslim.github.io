@@ -28,11 +28,14 @@
 		ChevronLeft,
 		ChevronRight,
 		Mail,
+		Menu,
+		X,
 		Fingerprint,
 		Wrench,
 		ShieldCheck,
 		Diamond,
-		ChevronDown
+		ChevronDown,
+		CircleUserRound
 	} from 'lucide-svelte';
 
 	const featuredArticles = articles.filter((a) => a.featured).slice(0, 3);
@@ -69,7 +72,7 @@
 <!-- ============================== -->
 <!-- 1. HERO SECTION                -->
 <!-- ============================== -->
-<section class="relative flex min-h-[83vh] flex-col justify-end overflow-hidden">
+<section class="relative flex min-h-screen flex-col justify-end overflow-hidden">
 	<!-- Background Image -->
 	<div class="absolute inset-0">
 		<img
@@ -81,7 +84,7 @@
 		<div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(40,35,28,0.3) 0%, rgba(40,35,28,0.1) 40%, rgba(40,35,28,0.55) 100%);"></div>
 	</div>
 
-	<div class="relative z-10 mx-auto w-full max-w-[1400px] px-6 pt-32 pb-12 lg:px-10">
+	<div class="relative z-10 mx-auto w-full max-w-[1400px] px-6 pt-32 lg:px-10">
 		<div class="max-w-[680px]">
 			<h1 class="font-display text-[44px] font-bold leading-[1.05] tracking-[-0.02em] text-white sm:text-[56px] lg:text-[68px]">
 				Navigating the
@@ -89,33 +92,14 @@
 				to Islam
 			</h1>
 
-			<p class="mt-6 max-w-[480px] text-[16px] leading-[1.65] text-white/80">
+			<p class="mt-6 max-w-[520px] text-[16px] leading-[1.65] text-white/80">
 				Empowering new and beginner Muslims with comprehensive education and support to navigate your journey and deepen your understanding and connection with faith.
 			</p>
 
-			<div class="mt-8 flex flex-wrap items-center gap-4">
-				<!-- White button -->
-				<a
-					href="/b/learn"
-					class="bm-btn-white"
-				style="padding: 14px 28px; font-weight: 600;"
-				>
-					Start Learning
-					<ArrowRight class="h-4 w-4" />
-				</a>
-				<!-- Glass button -->
-				<a
-					href="/b/learn"
-					class="bm-btn-glass"
-				style="padding: 14px 28px; font-weight: 600;"
-				>
-					Explore Resources
-				</a>
-			</div>
 		</div>
 
 		<!-- Trust bar -->
-		<div class="mt-8 flex items-center">
+		<div class="mt-8 flex items-center pb-12">
 			<div class="flex items-center gap-3">
 				<div class="flex -space-x-2">
 					{#each ['#7a8b6e', '#a08b6e', '#6e7a8b', '#8b6e7a'] as color}
@@ -130,14 +114,9 @@
 		</div>
 	</div>
 
-</section>
-
-<!-- ============================== -->
-<!-- LEARN / CONVERT / SHOP         -->
-<!-- ============================== -->
-<section style="background: #faf9f5; padding: 24px 0;">
-	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div class="bm-grid-explore" style="background: #e3dacc; border-radius: 16px; padding: 28px 20px;">
+	<!-- Explore your path — inside hero -->
+	<div class="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-10 pb-10">
+		<div class="bm-grid-explore" style="background: rgba(227,218,204,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 16px; padding: 28px 20px;">
 			<!-- Left: title + description + CTA -->
 			<div style="display: flex; flex-direction: column; justify-content: space-between; padding-right: 24px;">
 				<div>
@@ -154,7 +133,7 @@
 			</div>
 
 			<!-- Card: Learn -->
-			<a href="/b/learn" class="bm-card-hover" style="background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
+			<a href="/b/learn" class="bm-card-hover" style="background: rgba(240,238,230,0.9); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
 				<div>
 					<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #6a6258; margin: 0 0 8px; letter-spacing: 0.02em;">Learn</p>
 					<p style="font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0; line-height: 1.2;">Explore articles, guides, and resources on Islamic faith and practice</p>
@@ -165,7 +144,7 @@
 			</a>
 
 			<!-- Card: Convert -->
-			<a href="/b/convert" class="bm-card-hover" style="background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
+			<a href="/b/convert" class="bm-card-hover" style="background: rgba(240,238,230,0.9); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
 				<div>
 					<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #6a6258; margin: 0 0 8px; letter-spacing: 0.02em;">Convert</p>
 					<p style="font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0; line-height: 1.2;">Take the next step on your journey with guidance and support</p>
@@ -176,7 +155,7 @@
 			</a>
 
 			<!-- Card: Buy -->
-			<a href="/b/shop" class="bm-card-hover" style="background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
+			<a href="/b/shop" class="bm-card-hover" style="background: rgba(240,238,230,0.9); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
 				<div>
 					<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #6a6258; margin: 0 0 8px; letter-spacing: 0.02em;">Buy</p>
 					<p style="font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0; line-height: 1.2;">Books, prayer cards, and resources for your journey</p>
@@ -203,25 +182,55 @@
 			</a>
 		</div>
 
-		<div class="bm-grid-3">
-			{#each [
-				{ title: 'Brief Overview of Islam', category: 'Foundations', time: '10 min read', href: '/b/learn/brief-overview-of-islam', img: 'https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png' },
-				{ title: "A Beginner's Guide to Being a Muslim", category: 'New Muslims', time: '12 min read', href: '/b/learn/beginners-guide', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg' },
-				{ title: 'Islam and Other Faiths', category: 'Belief', time: '8 min read', href: '/b/learn/islam-and-other-faiths', img: 'https://www.beingmuslim.org/wp-content/uploads/2022/03/oneGodmanynames.jpeg' }
-			] as article}
-				<a href={article.href} style="text-decoration: none; display: block;" class="bm-title-underline-parent">
-					<div style="aspect-ratio: 4/3; background: #e2dcd2; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-						<img src={article.img} alt={article.title} style="width: 100%; height: 100%; object-fit: cover;" />
+		<!-- Bento grid: left image spans 2 rows, right cards share those rows, left text in row 3 -->
+		<div class="bm-grid-bento">
+			<!-- Left: featured image spanning rows 1-2 -->
+			<a href="/b/learn" style="display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: #e2dcd2;" class="bm-title-underline-parent">
+				<img src="https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png" alt="Brief Overview of Islam" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+			</a>
+
+			<!-- Right top card (row 1) -->
+			<a href="/b/learn" class="bm-grid-article-card bm-title-underline-parent" style="text-decoration: none;">
+				<div style="background: #e2dcd2; border-radius: 10px; overflow: hidden; height: 100%;">
+					<img src="https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg" alt="A Beginner's Guide to Being a Muslim" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+				</div>
+				<div>
+					<h3 class="bm-title-underline" style="font-size: 22px; color: #2a2018; margin: 0 0 14px; line-height: 1.3;">A Beginner's Guide to Being a Muslim</h3>
+					<p style="font-size: 15px; color: #8a7e70; line-height: 1.45; margin: 0 0 16px;">Practical advice and important first steps for those who have recently embraced Islam.</p>
+					<div style="display: flex; align-items: center; gap: 8px;">
+						<span style="font-size: 15px; font-weight: 500; color: #2a2018;">New Muslims</span>
+						<span style="font-size: 15px; color: #a09888;">12 min read</span>
 					</div>
-					<h3 class="bm-title-underline" style="font-family: 'Source Serif 4', serif; font-size: 18px; font-weight: 400; color: #2a2018; margin: 0 0 8px; line-height: 1.3;">{article.title}</h3>
-					<div style="display: flex; align-items: center; gap: 12px;">
-						<span style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #2a2018;">{article.category}</span>
-						<span style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #a09888;">{article.time}</span>
+				</div>
+			</a>
+
+			<!-- Right bottom card (row 2) -->
+			<a href="/b/learn" class="bm-grid-article-card bm-title-underline-parent" style="text-decoration: none;">
+				<div style="background: #e2dcd2; border-radius: 10px; overflow: hidden; height: 100%;">
+					<img src="https://www.beingmuslim.org/wp-content/uploads/2022/02/foundationsofIsam_YT.jpeg" alt="Islam and Other Faiths" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+				</div>
+				<div>
+					<h3 class="bm-title-underline" style="font-size: 22px; color: #2a2018; margin: 0 0 14px; line-height: 1.3;">Islam and Other Faiths</h3>
+					<p style="font-size: 15px; color: #8a7e70; line-height: 1.45; margin: 0 0 16px;">Understanding common ground and key differences with Christianity, Judaism, and other faiths.</p>
+					<div style="display: flex; align-items: center; gap: 8px;">
+						<span style="font-size: 15px; font-weight: 500; color: #2a2018;">Belief</span>
+						<span style="font-size: 15px; color: #a09888;">8 min read</span>
 					</div>
-				</a>
-			{/each}
+				</div>
+			</a>
+
+			<!-- Left: text below image (row 3) -->
+			<div>
+				<h3 style="font-size: 24px; color: #2a2018; margin: 0 0 6px; line-height: 1.3;">Brief Overview of Islam</h3>
+				<p style="font-size: 15px; color: #8a7e70; line-height: 1.5; margin: 0 0 8px;">A clear and accessible introduction to the core beliefs, practices, and history of Islam for those just beginning to learn.</p>
+				<div style="display: flex; align-items: center; gap: 10px;">
+					<span style="font-size: 15px; font-weight: 500; color: #2a2018;">Foundations</span>
+					<span style="font-size: 15px; color: #a09888;">10 min read</span>
+				</div>
+			</div>
 		</div>
 
+		<!-- Additional Resources button -->
 		<div style="text-align: center; margin-top: 32px;">
 			<a href="/b/learn" class="bm-btn-outline" style="padding: 10px 24px;">
 				Additional Resources <ArrowRight class="h-3.5 w-3.5" />
@@ -246,7 +255,7 @@
 				{ title: 'Prayer Reference Cards', price: '$37.50', badge: '', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-prayer-card-900x610.jpeg', href: '/b/shop/prayer-cards' },
 				{ title: 'Digital Edition (eBook)', price: '$9.00', badge: '', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/BM-E-Book-900x1200.png', href: '/b/shop/ebook' }
 			] as product}
-				<a href={product.href} style="flex: 0 0 280px; scroll-snap-align: start; text-decoration: none; display: block;" class="bm-title-underline-parent group">
+				<a href={product.href} style="text-decoration: none; display: block; flex: 0 0 280px; scroll-snap-align: start;" class="bm-title-underline-parent group">
 					<div style="aspect-ratio: 1; background: #e2dcd2; border-radius: 12px; overflow: hidden; margin-bottom: 16px; position: relative;">
 						{#if product.img}
 							<img src={product.img} alt={product.title} class="transition-transform duration-500 group-hover:scale-105" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
@@ -278,8 +287,8 @@
 <!-- ============================== -->
 <section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="max-width: 800px;">
-			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px;">
+		<div style="max-width: 800px; margin: 0 auto;">
+			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px; text-align: center;">
 				Frequently Asked Questions
 			</h2>
 
@@ -289,7 +298,7 @@
 				{ q: 'My previous faith was very dear to me. If I am now a Muslim, do I have to reject it entirely?', a: 'Islam acknowledges and respects the earlier prophets and scriptures. Many of the values you cherished in your previous faith are shared in Islam. Your journey enriches rather than erases your spiritual history.' },
 				{ q: 'My spouse or significant other is not a Muslim. How does becoming Muslim impact my marriage?', a: 'This is a nuanced topic that depends on your specific situation. We recommend speaking with a knowledgeable scholar who can provide guidance tailored to your circumstances. Reach out through our Contact page.' },
 				{ q: 'I just converted, what do I do next?', a: 'Congratulations and may God bless your path ahead! We have written an article that offers some advice and important first steps: "A Beginner\'s Guide to Being a Muslim." You can find it on our Learn page.' },
-				{ q: 'I believe Islam to be true and revealed by God, but I can\'t live up to its teachings. What should I do?', a: 'This feeling is more common than you might think. Islam teaches that God is the Most Merciful and that no one is expected to be perfect. Begin with what you can, be sincere in your intention, and trust that growth comes with time. The door to God is always open.' },
+				{ q: 'I believe Islam to be true and revealed by God, but I can\'t live up to its teachings. What should I do?', a: 'This is a feeling many Muslims experience, both new and lifelong. Islam teaches that God is the Most Merciful and that perfection is not expected. What matters is sincerity, effort, and turning back to God when you fall short. Start with what you can, and trust that growth comes with time and patience.' },
 				{ q: 'I want to convert, but I am finding it difficult to change my lifestyle including the way that I dress, what I eat/drink, relationships. Can I still become Muslim?', a: 'Absolutely. Islam teaches that faith is a journey, not a destination. You do not need to be perfect to begin. Start with the essentials and grow at your own pace — God is patient and merciful.' },
 				{ q: 'Do I need to change my name now that I have become Muslim?', a: 'No, changing your name is not required in Islam. Many Muslims keep their birth names. Some choose to adopt a new name as a personal expression of their new identity, but this is entirely optional.' }
 			] as faq, i}
@@ -305,7 +314,7 @@
 				{/if}
 			{/each}
 
-			<div style="margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px;">
+			<div style="margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
 				<a href="/b/convert" class="bm-btn-dark" style="padding: 10px 24px;">
 					Ready to Convert
 				</a>
@@ -316,5 +325,3 @@
 		</div>
 	</div>
 </section>
-
-<!-- Styles now in /src/routes/b/styles.css -->

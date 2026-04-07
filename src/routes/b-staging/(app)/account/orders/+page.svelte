@@ -1,114 +1,68 @@
 <script lang="ts">
-	import { withPrefix } from '$lib/data/utils';
-	import { ShoppingBag, Package, ArrowRight } from 'lucide-svelte';
+	import { withPrefix } from '$lib/data/utils.js';
+	import { ShoppingBag, ArrowRight, Package, Truck, Check } from 'lucide-svelte';
 
 	const p = (href: string) => withPrefix('/b-staging', href);
 
 	const orders = [
-		{
-			id: 'ORD-1234',
-			date: '2026-02-15',
-			total: 24.99,
-			status: 'Delivered',
-			items: [{ title: 'Being Muslim: A Practical Guide', quantity: 1, price: 24.99 }]
-		},
-		{
-			id: 'ORD-1198',
-			date: '2026-01-28',
-			total: 29.98,
-			status: 'Delivered',
-			items: [{ title: 'Prayer Reference Cards', quantity: 2, price: 14.99 }]
-		},
-		{
-			id: 'ORD-1150',
-			date: '2026-01-10',
-			total: 84.99,
-			status: 'Delivered',
-			items: [{ title: 'Being Muslim Boxed Set', quantity: 1, price: 84.99 }]
-		}
+		{ id: 'BM-2024-0142', date: 'Feb 10, 2026', items: ['Being Muslim Boxed Set', 'Prayer Cards'], status: 'Shipped' as const, total: 99.98 },
+		{ id: 'BM-2024-0118', date: 'Jan 25, 2026', items: ['Being Muslim: Digital Edition'], status: 'Delivered' as const, total: 12.99 },
+		{ id: 'BM-2024-0095', date: 'Dec 15, 2025', items: ['Being Muslim: A Practical Guide'], status: 'Delivered' as const, total: 24.99 },
+		{ id: 'BM-2024-0072', date: 'Nov 3, 2025', items: ['Prayer Reference Cards'], status: 'Delivered' as const, total: 14.99 }
 	];
 
-	const statusStyles = (status: string) => {
-		if (status === 'Delivered') return 'bg-accent-green text-white';
-		if (status === 'Shipped') return 'bg-accent-gold text-text-primary';
-		if (status === 'Processing') return 'bg-text-secondary text-white';
-		return 'bg-border text-text-secondary';
-	};
+	function statusIcon(status: string) {
+		if (status === 'Shipped') return Truck;
+		if (status === 'Delivered') return Check;
+		return Package;
+	}
 </script>
 
 <svelte:head>
-	<title>Orders - Being Muslim</title>
+	<title>Orders — Being Muslim</title>
 </svelte:head>
 
-<div>
-	<h1 class="font-display text-2xl font-bold">Order <span class="highlight">History</span></h1>
-	<p class="mono mt-2 text-text-secondary">VIEW AND TRACK YOUR PAST ORDERS</p>
+<div class="space-y-6">
+	<div>
+		<h1 class="font-display text-2xl font-bold text-[#1C1C1E]">Orders</h1>
+		<p class="mt-1 text-sm text-[#8E8E93]">Track and manage your purchases.</p>
+	</div>
 
 	{#if orders.length === 0}
-		<!-- Empty State -->
-		<div class="mt-10 border-[3px] border-border py-16 text-center">
-			<div class="mx-auto flex h-20 w-20 items-center justify-center border-[3px] border-border">
-				<ShoppingBag class="h-10 w-10 text-text-secondary/30" />
-			</div>
-			<p class="mt-6 font-display text-xl font-bold">No orders yet</p>
-			<p class="mono mt-2 text-text-secondary">VISIT OUR SHOP TO FIND RESOURCES</p>
-			<a
-				href={p('/shop')}
-				class="mt-6 inline-block border-[3px] border-border bg-accent-primary px-8 py-3 font-bold text-white transition-colors hover:bg-red-700"
-			>
-				Browse Shop
+		<div class="rounded-[20px] bg-white p-12 text-center">
+			<ShoppingBag class="mx-auto h-14 w-14 text-[#8E8E93]/20" />
+			<h2 class="mt-4 font-display text-xl font-bold text-[#1C1C1E]">No orders yet</h2>
+			<p class="mt-2 text-sm text-[#8E8E93]">When you make a purchase, it will appear here.</p>
+			<a href={p('/shop')} class="mt-6 inline-flex items-center gap-2 rounded-[14px] bg-[#007AFF] px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90">
+				Browse Shop <ArrowRight class="h-4 w-4" />
 			</a>
 		</div>
 	{:else}
-		<!-- Orders -->
-		<div class="mt-8 border-[3px] border-border">
+		<div class="space-y-3">
 			{#each orders as order}
-				<div class="border-b-[3px] border-border last:border-b-0">
-					<!-- Order Header -->
-					<div class="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-border bg-bg-primary px-4 py-3">
-						<div class="flex items-center gap-3">
-							<Package class="h-5 w-5 text-text-secondary" />
+				{@const Icon = statusIcon(order.status)}
+				<div class="rounded-[20px] bg-white p-5">
+					<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+						<div class="flex items-start gap-4">
+							<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] {order.status === 'Delivered' ? 'bg-[#30D158]/10' : 'bg-[#FF9F0A]/10'}">
+								<Icon class="h-5 w-5 {order.status === 'Delivered' ? 'text-[#30D158]' : 'text-[#FF9F0A]'}" />
+							</div>
 							<div>
-								<span class="font-display font-bold">{order.id}</span>
-								<span class="mono ml-3 text-text-secondary">{order.date}</span>
+								<div class="flex items-center gap-2">
+									<p class="font-display text-base font-bold text-[#1C1C1E]">#{order.id}</p>
+									<span class="rounded-full px-2.5 py-0.5 text-xs font-medium {order.status === 'Delivered' ? 'bg-[#30D158]/10 text-[#30D158]' : 'bg-[#FF9F0A]/10 text-[#FF9F0A]'}">{order.status}</span>
+								</div>
+								<p class="mt-1 text-xs text-[#8E8E93]">{order.date}</p>
+								<p class="mt-0.5 text-sm text-[#8E8E93]">{order.items.join(', ')}</p>
 							</div>
 						</div>
 						<div class="flex items-center gap-4">
-							<span class="border-[3px] border-border px-3 py-1 text-xs font-bold {statusStyles(order.status)}">
-								{order.status}
-							</span>
-							<span class="font-display text-lg font-bold">${order.total.toFixed(2)}</span>
+							<p class="font-display text-xl font-bold text-[#1C1C1E]">${order.total.toFixed(2)}</p>
+							<button class="rounded-[10px] bg-[#F2F2F7] px-4 py-2 text-xs font-medium text-[#1C1C1E] hover:bg-[#E5E5EA]">View Details</button>
 						</div>
 					</div>
-
-					<!-- Order Items -->
-					{#each order.items as item}
-						<div class="flex items-center justify-between px-4 py-3">
-							<div class="flex items-center gap-4">
-								<div class="flex h-12 w-12 shrink-0 items-center justify-center border-[3px] border-border">
-									<ShoppingBag class="h-5 w-5 text-text-secondary/30" />
-								</div>
-								<div>
-									<p class="font-display font-bold">{item.title}</p>
-									<p class="mono text-text-secondary">QTY: {item.quantity}</p>
-								</div>
-							</div>
-							<span class="font-display font-bold">${(item.price * item.quantity).toFixed(2)}</span>
-						</div>
-					{/each}
 				</div>
 			{/each}
-		</div>
-
-		<!-- Continue Shopping -->
-		<div class="mt-6">
-			<a
-				href={p('/shop')}
-				class="group inline-flex items-center gap-2 font-display font-bold text-accent-primary transition-colors hover:text-red-700"
-			>
-				Continue Shopping
-				<ArrowRight class="h-4 w-4 transition-transform group-hover:translate-x-1" />
-			</a>
 		</div>
 	{/if}
 </div>

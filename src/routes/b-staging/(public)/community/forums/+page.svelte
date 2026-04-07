@@ -36,7 +36,7 @@
 	<div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
 		<!-- Breadcrumb -->
 		<nav class="mb-6 flex items-center gap-2 text-sm text-text-cream/50">
-			<a href="/b-staging/community" class="transition-colors hover:text-text-cream">Community</a>
+			<a href="/community" class="transition-colors hover:text-text-cream">Community</a>
 			<ChevronRight class="h-3.5 w-3.5" />
 			<span class="text-text-cream">Forums</span>
 		</nav>
@@ -62,7 +62,7 @@
 	<div class="space-y-4">
 		{#each forumCategories as category}
 			{@const Icon = iconMap[category.icon] || MessageCircle}
-			<a href="/b-staging/community/forums/{category.slug}" class="group block">
+			<a href="/community/forums/{category.slug}" class="group block">
 				<div class="flex items-center gap-5 rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:border-accent-primary/30 hover:shadow-lg sm:p-6">
 					<!-- Icon -->
 					<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent-primary/10 text-accent-primary transition-colors group-hover:bg-accent-primary group-hover:text-text-cream">

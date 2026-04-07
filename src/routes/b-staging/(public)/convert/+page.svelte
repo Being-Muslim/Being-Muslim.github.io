@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { Section } from '$lib/components/layout/index.js';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import * as Accordion from '$lib/components/ui/accordion/index.js';
 	import {
 		ChevronDown,
 		ArrowRight,
@@ -27,6 +24,13 @@
 	let additionalInfo = $state('');
 	let isSubmitting = $state(false);
 	let isSubmitted = $state(false);
+
+	// FAQ toggle state
+	let openFaq = $state<number | null>(null);
+
+	function toggleFaq(index: number) {
+		openFaq = openFaq === index ? null : index;
+	}
 
 	const backgroundOptions = [
 		'I have been studying Islam and am ready to convert',
@@ -120,64 +124,32 @@
 </svelte:head>
 
 <!-- ============================== -->
-<!-- 1. HERO — CONSIDERING CONVERTING -->
+<!-- 1. HERO — LIGHT STYLE          -->
 <!-- ============================== -->
-<section class="relative flex min-h-[70vh] items-center overflow-hidden" style="background: #f0ebe3;">
-	<!-- Subtle geometric pattern -->
-	<div class="absolute inset-0 opacity-[0.04]">
-		<svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg">
-			<defs>
-				<pattern id="geo-convert" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
-					<circle cx="40" cy="40" r="30" fill="none" stroke="currentColor" stroke-width="0.5" style="color: #2a2018" />
-					<circle cx="40" cy="40" r="15" fill="none" stroke="currentColor" stroke-width="0.3" style="color: #2a2018" />
-				</pattern>
-			</defs>
-			<rect width="100%" height="100%" fill="url(#geo-convert)" />
-		</svg>
-	</div>
-
-	<div class="relative mx-auto max-w-[1400px] px-6 py-28 lg:px-10">
-		<div class="mx-auto max-w-3xl text-center">
-			<div
-				class="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm"
-				style="background: #e9e3da; color: #8a7e70; font-family: 'DM Sans', sans-serif;"
-			>
-				<Heart class="h-4 w-4" style="color: #8b2e36;" />
-				<span>You are welcome here</span>
+<section style="background: #faf9f5; padding: 100px 0 64px;">
+	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
+		<div style="max-width: 680px; margin: 0 auto; text-align: center;">
+			<div style="display: inline-flex; align-items: center; gap: 8px; background: #f4f1eb; border-radius: 999px; padding: 6px 16px; margin-bottom: 24px;">
+				<Heart class="h-4 w-4" style="color: #c8b8a0;" />
+				<span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #8a7e70;">You are welcome here</span>
 			</div>
 
-			<h1
-				class="text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl"
-				style="font-family: 'Source Serif 4', serif; color: #2a2018;"
-			>
+			<h1 style="font-family: 'Source Serif 4', serif; font-size: clamp(40px, 6vw, 64px); font-weight: 400; color: #2a2018; margin: 0 0 16px; line-height: 1.05;">
 				Your Journey to Islam
 			</h1>
 
-			<p
-				class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed sm:text-xl"
-				style="font-family: 'DM Sans', sans-serif; color: #8a7e70;"
-			>
+			<p style="font-family: 'DM Sans', sans-serif; font-size: 17px; color: #8a7e70; max-width: 540px; line-height: 1.65; margin: 0 auto 40px;">
 				Whether you have been exploring Islam for years or are just beginning to wonder, there is
 				no rush and no pressure. This is a deeply personal journey, and we are honored to walk it
 				with you — at whatever pace feels right.
 			</p>
 
-			<div class="mt-10 flex flex-wrap justify-center gap-4">
-				<a
-					href="#ready-form"
-					class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-medium transition-all hover:opacity-90"
-					style="background: #8b2e36; color: #faf2e3; font-family: 'DM Sans', sans-serif;"
-				>
-					I'm Ready to Connect
-					<ArrowRight class="h-5 w-5" />
+			<div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+				<a href="#ready-form" class="bm-btn-dark" style="padding: 12px 28px;">
+					I'm Ready to Connect <ArrowRight class="h-3.5 w-3.5" />
 				</a>
-				<a
-					href="#faq"
-					class="inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-base font-medium transition-all hover:opacity-80"
-					style="border-color: #2a2018; color: #2a2018; font-family: 'DM Sans', sans-serif;"
-				>
-					I Have Questions
-					<ChevronDown class="h-5 w-5" />
+				<a href="#faq" class="bm-btn-outline" style="padding: 12px 28px;">
+					I Have Questions <ChevronDown class="h-3.5 w-3.5" />
 				</a>
 			</div>
 		</div>
@@ -187,47 +159,29 @@
 <!-- ============================== -->
 <!-- KEY POINTS — WHAT ISLAM OFFERS -->
 <!-- ============================== -->
-<section class="py-16 md:py-24" style="background: #f0ebe3;">
+<section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div class="text-center">
-			<h2
-				class="text-3xl font-bold sm:text-4xl"
-				style="font-family: 'Source Serif 4', serif; color: #2a2018;"
-			>
+		<div style="text-align: center; margin-bottom: 40px;">
+			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 8px;">
 				What draws people to Islam
 			</h2>
-			<p
-				class="mx-auto mt-4 max-w-2xl text-lg"
-				style="font-family: 'DM Sans', sans-serif; color: #8a7e70;"
-			>
+			<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: #8a7e70; max-width: 540px; margin: 0 auto; line-height: 1.6;">
 				Every person's path is unique, but these are some of the things that resonate most deeply
 				with those exploring the faith.
 			</p>
 		</div>
 
-		<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+		<div class="bm-grid-4">
 			{#each keyPoints as point}
 				{@const Icon = point.icon}
-				<div
-					class="rounded-[10px] p-6 transition-all hover:shadow-md"
-					style="background: #e9e3da;"
-				>
-					<div
-						class="flex h-12 w-12 items-center justify-center rounded-lg"
-						style="background: rgba(139, 46, 54, 0.1);"
-					>
-						<Icon class="h-6 w-6" style="color: #8b2e36;" />
+				<div style="background: #faf9f5; border-radius: 12px; padding: 28px;">
+					<div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(200,184,160,0.25); display: flex; align-items: center; justify-content: center;">
+						<Icon class="h-5 w-5" style="color: #c8b8a0;" />
 					</div>
-					<h3
-						class="mt-4 text-lg font-bold"
-						style="font-family: 'Source Serif 4', serif; color: #2a2018;"
-					>
+					<h3 style="font-family: 'Source Serif 4', serif; font-size: 17px; font-weight: 400; color: #2a2018; margin: 16px 0 8px; line-height: 1.3;">
 						{point.title}
 					</h3>
-					<p
-						class="mt-2 text-sm leading-relaxed"
-						style="font-family: 'DM Sans', sans-serif; color: #8a7e70;"
-					>
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #8a7e70; line-height: 1.6; margin: 0;">
 						{point.description}
 					</p>
 				</div>
@@ -239,27 +193,18 @@
 <!-- ============================== -->
 <!-- 2. READY TO CONVERT — FORM     -->
 <!-- ============================== -->
-<section id="ready-form" class="py-16 md:py-24" style="background: #e9e3da;">
+<section id="ready-form" class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div class="mx-auto max-w-2xl">
-			<div class="text-center">
-				<div
-					class="mb-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm"
-					style="background: rgba(139, 46, 54, 0.1); color: #8b2e36; font-family: 'DM Sans', sans-serif;"
-				>
-					<Send class="h-4 w-4" />
-					<span>Take the next step</span>
+		<div style="max-width: 680px; margin: 0 auto;">
+			<div style="text-align: center; margin-bottom: 40px;">
+				<div style="display: inline-flex; align-items: center; gap: 8px; background: #f4f1eb; border-radius: 999px; padding: 6px 16px; margin-bottom: 16px;">
+					<Send class="h-4 w-4" style="color: #c8b8a0;" />
+					<span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #8a7e70;">Take the next step</span>
 				</div>
-				<h2
-					class="text-3xl font-bold sm:text-4xl"
-					style="font-family: 'Source Serif 4', serif; color: #2a2018;"
-				>
+				<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 8px;">
 					Ready to connect?
 				</h2>
-				<p
-					class="mt-4 text-lg leading-relaxed"
-					style="font-family: 'DM Sans', sans-serif; color: #8a7e70;"
-				>
+				<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: #8a7e70; line-height: 1.6; margin: 0;">
 					Fill out the form below and someone from our team will email you within 48 hours.
 					There is absolutely no obligation — we are simply here to help.
 				</p>
@@ -267,26 +212,14 @@
 
 			{#if isSubmitted}
 				<!-- Success State -->
-				<div
-					class="mt-10 rounded-[10px] p-8 text-center sm:p-12"
-					style="background: #f0ebe3;"
-				>
-					<div
-						class="mx-auto flex h-16 w-16 items-center justify-center rounded-full"
-						style="background: rgba(45, 106, 79, 0.1);"
-					>
-						<Heart class="h-8 w-8" style="color: #2d6a4f;" />
+				<div style="background: #f4f1eb; border-radius: 12px; padding: 48px 32px; text-align: center;">
+					<div style="width: 56px; height: 56px; border-radius: 999px; background: rgba(45, 106, 79, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+						<Heart class="h-7 w-7" style="color: #2d6a4f;" />
 					</div>
-					<h3
-						class="mt-6 text-2xl font-bold"
-						style="font-family: 'Source Serif 4', serif; color: #2a2018;"
-					>
+					<h3 style="font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0 0 10px;">
 						Thank you for reaching out
 					</h3>
-					<p
-						class="mt-3 text-base leading-relaxed"
-						style="font-family: 'DM Sans', sans-serif; color: #8a7e70;"
-					>
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: #8a7e70; line-height: 1.6; margin: 0; max-width: 420px; margin: 0 auto;">
 						We have received your information and someone from our team will be in touch within
 						48 hours. In the meantime, feel free to explore our resources and articles.
 					</p>
@@ -294,20 +227,18 @@
 			{:else}
 				<!-- Form -->
 				<form
-					class="mt-10 rounded-[10px] p-6 sm:p-8"
-					style="background: #f0ebe3;"
+					style="background: #f4f1eb; border-radius: 12px; padding: 32px;"
 					onsubmit={handleSubmit}
 				>
 					<!-- Name & Email -->
-					<div class="grid gap-5 sm:grid-cols-2">
+					<div class="bm-grid-stats">
 						<div>
 							<label
 								for="convert-name"
-								class="mb-1.5 flex items-center gap-1.5 text-sm font-medium"
-								style="color: #2a2018; font-family: 'DM Sans', sans-serif;"
+								style="display: flex; align-items: center; gap: 6px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; margin-bottom: 6px;"
 							>
-								<User class="h-4 w-4" style="color: #8a7e70;" />
-								Name <span style="color: #8b2e36;">*</span>
+								<User class="h-3.5 w-3.5" style="color: #8a7e70;" />
+								Name <span style="color: #c8b8a0;">*</span>
 							</label>
 							<input
 								id="convert-name"
@@ -315,18 +246,16 @@
 								required
 								bind:value={name}
 								placeholder="Your full name"
-								class="w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition-all focus:ring-2"
-								style="border-color: #d4cec4; background: #ffffff; color: #2a2018; font-family: 'DM Sans', sans-serif; --tw-ring-color: rgba(139, 46, 54, 0.3);"
+								style="width: 100%; border: 1px solid #d8d2c8; border-radius: 8px; padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: #2a2018; background: #fff; outline: none; box-sizing: border-box;"
 							/>
 						</div>
 						<div>
 							<label
 								for="convert-email"
-								class="mb-1.5 flex items-center gap-1.5 text-sm font-medium"
-								style="color: #2a2018; font-family: 'DM Sans', sans-serif;"
+								style="display: flex; align-items: center; gap: 6px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; margin-bottom: 6px;"
 							>
-								<Mail class="h-4 w-4" style="color: #8a7e70;" />
-								Email <span style="color: #8b2e36;">*</span>
+								<Mail class="h-3.5 w-3.5" style="color: #8a7e70;" />
+								Email <span style="color: #c8b8a0;">*</span>
 							</label>
 							<input
 								id="convert-email"
@@ -334,39 +263,35 @@
 								required
 								bind:value={email}
 								placeholder="you@example.com"
-								class="w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition-all focus:ring-2"
-								style="border-color: #d4cec4; background: #ffffff; color: #2a2018; font-family: 'DM Sans', sans-serif; --tw-ring-color: rgba(139, 46, 54, 0.3);"
+								style="width: 100%; border: 1px solid #d8d2c8; border-radius: 8px; padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: #2a2018; background: #fff; outline: none; box-sizing: border-box;"
 							/>
 						</div>
 					</div>
 
 					<!-- Phone & Location -->
-					<div class="mt-5 grid gap-5 sm:grid-cols-3">
+					<div class="bm-grid-3" style="gap: 16px; margin-top: 16px;">
 						<div>
 							<label
 								for="convert-phone"
-								class="mb-1.5 flex items-center gap-1.5 text-sm font-medium"
-								style="color: #2a2018; font-family: 'DM Sans', sans-serif;"
+								style="display: flex; align-items: center; gap: 6px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; margin-bottom: 6px;"
 							>
-								<Phone class="h-4 w-4" style="color: #8a7e70;" />
-								Phone <span class="text-xs" style="color: #8a7e70;">(optional)</span>
+								<Phone class="h-3.5 w-3.5" style="color: #8a7e70;" />
+								Phone <span style="font-size: 12px; color: #8a7e70; font-weight: 400;">(optional)</span>
 							</label>
 							<input
 								id="convert-phone"
 								type="tel"
 								bind:value={phone}
 								placeholder="(555) 123-4567"
-								class="w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition-all focus:ring-2"
-								style="border-color: #d4cec4; background: #ffffff; color: #2a2018; font-family: 'DM Sans', sans-serif; --tw-ring-color: rgba(139, 46, 54, 0.3);"
+								style="width: 100%; border: 1px solid #d8d2c8; border-radius: 8px; padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: #2a2018; background: #fff; outline: none; box-sizing: border-box;"
 							/>
 						</div>
 						<div>
 							<label
 								for="convert-city"
-								class="mb-1.5 flex items-center gap-1.5 text-sm font-medium"
-								style="color: #2a2018; font-family: 'DM Sans', sans-serif;"
+								style="display: flex; align-items: center; gap: 6px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; margin-bottom: 6px;"
 							>
-								<MapPin class="h-4 w-4" style="color: #8a7e70;" />
+								<MapPin class="h-3.5 w-3.5" style="color: #8a7e70;" />
 								City
 							</label>
 							<input
@@ -374,17 +299,15 @@
 								type="text"
 								bind:value={city}
 								placeholder="Your city"
-								class="w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition-all focus:ring-2"
-								style="border-color: #d4cec4; background: #ffffff; color: #2a2018; font-family: 'DM Sans', sans-serif; --tw-ring-color: rgba(139, 46, 54, 0.3);"
+								style="width: 100%; border: 1px solid #d8d2c8; border-radius: 8px; padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: #2a2018; background: #fff; outline: none; box-sizing: border-box;"
 							/>
 						</div>
 						<div>
 							<label
 								for="convert-state"
-								class="mb-1.5 flex items-center gap-1.5 text-sm font-medium"
-								style="color: #2a2018; font-family: 'DM Sans', sans-serif;"
+								style="display: flex; align-items: center; gap: 6px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; margin-bottom: 6px;"
 							>
-								<MapPin class="h-4 w-4 opacity-0" />
+								<span style="width: 14px;"></span>
 								State
 							</label>
 							<input
@@ -392,38 +315,29 @@
 								type="text"
 								bind:value={stateField}
 								placeholder="Your state"
-								class="w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition-all focus:ring-2"
-								style="border-color: #d4cec4; background: #ffffff; color: #2a2018; font-family: 'DM Sans', sans-serif; --tw-ring-color: rgba(139, 46, 54, 0.3);"
+								style="width: 100%; border: 1px solid #d8d2c8; border-radius: 8px; padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: #2a2018; background: #fff; outline: none; box-sizing: border-box;"
 							/>
 						</div>
 					</div>
 
 					<!-- Background Selection -->
-					<div class="mt-6">
-						<p
-							class="mb-3 text-sm font-medium"
-							style="color: #2a2018; font-family: 'DM Sans', sans-serif;"
-						>
+					<div style="margin-top: 24px;">
+						<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; margin: 0 0 10px;">
 							Which best describes where you are right now?
 						</p>
-						<div class="space-y-2.5">
+						<div style="display: flex; flex-direction: column; gap: 8px;">
 							{#each backgroundOptions as option}
 								<label
-									class="flex cursor-pointer items-start gap-3 rounded-lg border p-3.5 transition-all"
-									style="border-color: {selectedBackground === option ? '#8b2e36' : '#d4cec4'}; background: {selectedBackground === option ? 'rgba(139, 46, 54, 0.05)' : '#ffffff'};"
+									style="display: flex; align-items: flex-start; gap: 10px; border: 1px solid {selectedBackground === option ? '#2a2018' : '#d8d2c8'}; border-radius: 8px; padding: 12px 14px; cursor: pointer; background: {selectedBackground === option ? 'rgba(42,32,24,0.03)' : '#fff'}; transition: all 0.15s;"
 								>
 									<input
 										type="radio"
 										name="background"
 										value={option}
 										bind:group={selectedBackground}
-										class="mt-0.5 h-4 w-4 shrink-0"
-										style="accent-color: #8b2e36;"
+										style="margin-top: 2px; accent-color: #2a2018;"
 									/>
-									<span
-										class="text-sm leading-relaxed"
-										style="color: #2a2018; font-family: 'DM Sans', sans-serif;"
-									>
+									<span style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #2a2018; line-height: 1.5;">
 										{option}
 									</span>
 								</label>
@@ -432,13 +346,12 @@
 					</div>
 
 					<!-- Additional Info -->
-					<div class="mt-6">
+					<div style="margin-top: 24px;">
 						<label
 							for="convert-info"
-							class="mb-1.5 flex items-center gap-1.5 text-sm font-medium"
-							style="color: #2a2018; font-family: 'DM Sans', sans-serif;"
+							style="display: flex; align-items: center; gap: 6px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; margin-bottom: 6px;"
 						>
-							<MessageSquare class="h-4 w-4" style="color: #8a7e70;" />
+							<MessageSquare class="h-3.5 w-3.5" style="color: #8a7e70;" />
 							Is there anything else you would like to share?
 						</label>
 						<textarea
@@ -446,33 +359,28 @@
 							bind:value={additionalInfo}
 							rows={4}
 							placeholder="Feel free to share anything on your mind — questions, concerns, or just a bit about your journey so far..."
-							class="w-full resize-y rounded-lg border px-4 py-2.5 text-sm outline-none transition-all focus:ring-2"
-							style="border-color: #d4cec4; background: #ffffff; color: #2a2018; font-family: 'DM Sans', sans-serif; --tw-ring-color: rgba(139, 46, 54, 0.3);"
+							style="width: 100%; border: 1px solid #d8d2c8; border-radius: 8px; padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: #2a2018; background: #fff; outline: none; resize: vertical; box-sizing: border-box;"
 						></textarea>
 					</div>
 
 					<!-- Note -->
-					<p
-						class="mt-4 text-center text-xs"
-						style="color: #8a7e70; font-family: 'DM Sans', sans-serif;"
-					>
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #8a7e70; text-align: center; margin: 16px 0 0;">
 						Someone from our team will email you within 48 hours. Your information is kept
 						completely private.
 					</p>
 
 					<!-- Submit -->
-					<div class="mt-6 text-center">
+					<div style="text-align: center; margin-top: 20px;">
 						<button
 							type="submit"
 							disabled={isSubmitting || !name || !email}
-							class="inline-flex items-center gap-2 rounded-lg px-8 py-3 text-base font-medium transition-all hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
-							style="background: #8b2e36; color: #faf2e3; font-family: 'DM Sans', sans-serif;"
+							class="bm-btn-dark"
+							style="padding: 12px 32px; opacity: {isSubmitting || !name || !email ? '0.5' : '1'}; cursor: {isSubmitting || !name || !email ? 'not-allowed' : 'pointer'};"
 						>
 							{#if isSubmitting}
 								Sending...
 							{:else}
-								Submit
-								<ArrowRight class="h-5 w-5" />
+								Submit <ArrowRight class="h-3.5 w-3.5" />
 							{/if}
 						</button>
 					</div>
@@ -483,53 +391,31 @@
 </section>
 
 <!-- ============================== -->
-<!-- 3. FAQ ACCORDION               -->
+<!-- 3. FAQ — BUTTON + IF TOGGLE    -->
 <!-- ============================== -->
-<section id="faq" class="py-16 md:py-24" style="background: #f0ebe3;">
+<section id="faq" class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div class="mx-auto max-w-3xl">
-			<div class="text-center">
-				<h2
-					class="text-3xl font-bold sm:text-4xl"
-					style="font-family: 'Source Serif 4', serif; color: #2a2018;"
-				>
-					Common Questions
-				</h2>
-				<p
-					class="mt-4 text-lg"
-					style="font-family: 'DM Sans', sans-serif; color: #8a7e70;"
-				>
-					We hear these questions often from people exploring Islam. There are no wrong
-					questions — and no judgment.
-				</p>
-			</div>
+		<div style="max-width: 800px; margin: 0 auto;">
+			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 8px; text-align: center;">
+				Common Questions
+			</h2>
+			<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: #8a7e70; text-align: center; margin: 0 0 32px; line-height: 1.6;">
+				We hear these questions often from people exploring Islam. There are no wrong
+				questions — and no judgment.
+			</p>
 
-			<div
-				class="mt-10 rounded-[10px] p-6 sm:p-8"
-				style="background: #e9e3da;"
-			>
-				<Accordion.Accordion type="multiple">
-					{#each faqs as faq, i}
-						<Accordion.AccordionItem value="item-{i}">
-							<Accordion.AccordionTrigger class="text-left text-base font-semibold" style="font-family: 'Source Serif 4', serif; color: #2a2018;">
-								{#snippet children()}
-									{faq.question}
-								{/snippet}
-							</Accordion.AccordionTrigger>
-							<Accordion.AccordionContent>
-								{#snippet children()}
-									<p
-										class="leading-relaxed text-sm"
-										style="font-family: 'DM Sans', sans-serif; color: #8a7e70;"
-									>
-										{faq.answer}
-									</p>
-								{/snippet}
-							</Accordion.AccordionContent>
-						</Accordion.AccordionItem>
-					{/each}
-				</Accordion.Accordion>
-			</div>
+			{#each faqs as faq, i}
+				<button
+					onclick={() => toggleFaq(i)}
+					style="width: 100%; text-align: left; padding: 20px 0; border: none; border-top: 1px solid #e8e3da; background: none; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;"
+				>
+					<span style="font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: #2a2018; line-height: 1.4;">{faq.question}</span>
+					<ChevronDown class="h-4 w-4 flex-shrink-0 mt-1 transition-transform duration-200 {openFaq === i ? 'rotate-180' : ''}" style="color: #8a7e70;" />
+				</button>
+				{#if openFaq === i}
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #8a7e70; line-height: 1.6; margin: 0 0 20px; padding-right: 40px;">{faq.answer}</p>
+				{/if}
+			{/each}
 		</div>
 	</div>
 </section>
@@ -537,34 +423,25 @@
 <!-- ============================== -->
 <!-- CLOSING CTA                    -->
 <!-- ============================== -->
-<section class="py-16 sm:py-20" style="background: #2a2018;">
+<section style="background: #f4f1eb; padding: 0 0 64px;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div class="mx-auto max-w-2xl text-center">
-			<Heart class="mx-auto h-10 w-10" style="color: #c4a35a;" />
-			<h2
-				class="mt-6 text-3xl font-bold sm:text-4xl"
-				style="font-family: 'Source Serif 4', serif; color: #faf2e3;"
-			>
-				Wherever you are on this path, you belong
-			</h2>
-			<p
-				class="mt-4 text-lg leading-relaxed"
-				style="font-family: 'DM Sans', sans-serif; color: rgba(250, 242, 227, 0.75);"
-			>
-				The Prophet Muhammad (peace be upon him) said: <em>"God is more merciful to His
-				servants than a mother is to her child."</em> Whatever questions you carry,
-				whatever doubts you hold — you are already taking a brave and beautiful step.
-			</p>
-			<div class="mt-8">
-				<a
-					href="#ready-form"
-					class="inline-flex items-center gap-2 rounded-lg px-8 py-3 text-base font-medium transition-all hover:opacity-90"
-					style="background: #8b2e36; color: #faf2e3; font-family: 'DM Sans', sans-serif;"
-				>
-					Reach Out to Us
-					<ArrowRight class="h-5 w-5" />
-				</a>
+		<div style="background: #2a2018; border-radius: 16px; padding: 56px; display: flex; align-items: center; gap: 48px;">
+			<div style="width: 64px; height: 64px; border-radius: 999px; background: rgba(200,184,160,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+				<Heart class="h-8 w-8" style="color: #c8b8a0;" />
 			</div>
+			<div style="flex: 1;">
+				<h2 style="font-family: 'Source Serif 4', serif; font-size: 28px; font-weight: 400; color: #fff; margin: 0 0 8px; line-height: 1.2;">
+					Wherever you are on this path, you belong
+				</h2>
+				<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: rgba(255,255,255,0.55); margin: 0; line-height: 1.6;">
+					The Prophet Muhammad (peace be upon him) said: <em>"God is more merciful to His
+					servants than a mother is to her child."</em> Whatever questions you carry,
+					whatever doubts you hold — you are already taking a brave and beautiful step.
+				</p>
+			</div>
+			<a href="#ready-form" class="bm-btn-white" style="flex-shrink: 0; padding: 12px 28px;">
+				Reach Out to Us <ArrowRight class="h-3.5 w-3.5" />
+			</a>
 		</div>
 	</div>
 </section>

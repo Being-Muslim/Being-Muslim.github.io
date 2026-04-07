@@ -3,17 +3,17 @@
 
 	const concepts = [
 		{
-			id: 'B',
+			id: 'A',
 			subtitle: 'Warm & Editorial',
-			href: '/b',
+			href: '/a',
 			primary: '#2a2018',
 			fonts: 'Source Serif 4 + DM Sans',
 			description: 'Clean, warm, and editorial. Dark hero with mega-menu navigation, Source Serif 4 headings, DM Sans body text, warm earth tones, and a classic grid-based layout.'
 		},
 		{
-			id: 'C',
+			id: 'B',
 			subtitle: 'Glass & Bento',
-			href: '/c',
+			href: '/b',
 			primary: '#2a2018',
 			fonts: 'Source Serif 4 + DM Sans',
 			description: 'Modern, airy, and explorable. Floating glass-effect pill navbar, bento grid layouts, horizontal scroll carousels, and generous whitespace with the same warm earth palette.'

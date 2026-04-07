@@ -34,11 +34,11 @@
 <section class="border-b border-border bg-secondary/30 py-4">
 	<div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
 		<nav class="flex items-center gap-2 text-sm text-text-secondary">
-			<a href="/b-staging/community" class="transition-colors hover:text-text-primary">Community</a>
+			<a href="/community" class="transition-colors hover:text-text-primary">Community</a>
 			<ChevronRight class="h-3.5 w-3.5" />
-			<a href="/b-staging/community/forums" class="transition-colors hover:text-text-primary">Forums</a>
+			<a href="/community/forums" class="transition-colors hover:text-text-primary">Forums</a>
 			<ChevronRight class="h-3.5 w-3.5" />
-			<a href="/b-staging/community/forums/{data.category.slug}" class="transition-colors hover:text-text-primary">{data.category.title}</a>
+			<a href="/community/forums/{data.category.slug}" class="transition-colors hover:text-text-primary">{data.category.title}</a>
 			<ChevronRight class="h-3.5 w-3.5" />
 			<span class="truncate text-text-primary">{data.thread.title}</span>
 		</nav>
@@ -278,7 +278,7 @@
 						<Separator />
 						<div class="flex items-center justify-between text-sm">
 							<span class="text-text-secondary">Category</span>
-							<a href="/b-staging/community/forums/{data.category.slug}" class="font-semibold text-accent-primary hover:underline">
+							<a href="/community/forums/{data.category.slug}" class="font-semibold text-accent-primary hover:underline">
 								{data.category.title}
 							</a>
 						</div>
@@ -293,7 +293,7 @@
 					<div class="mt-4 space-y-4">
 						{#each data.similarThreads as similar}
 							<a
-								href="/b-staging/community/forums/{data.category.slug}/{similar.slug}"
+								href="/community/forums/{data.category.slug}/{similar.slug}"
 								class="group block"
 							>
 								<h4 class="text-sm font-medium text-text-primary transition-colors group-hover:text-accent-primary">

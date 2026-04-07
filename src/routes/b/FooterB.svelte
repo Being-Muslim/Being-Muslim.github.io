@@ -68,7 +68,7 @@
 			<div>
 				<h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Company</h4>
 				{#each [
-					{ label: 'About Us', href: '/b/contact' },
+					{ label: 'About Us', href: '/b/about' },
 					{ label: 'Contact', href: '/b/contact' },
 					{ label: 'Convert', href: '/b/convert' },
 					{ label: 'Privacy Policy', href: '/b' }

@@ -122,7 +122,7 @@
 			<div class="lg:col-span-3">
 				<div class="flex items-center gap-3">
 					<a
-						href="/b-staging/courses"
+						href="/courses"
 						class="text-sm text-text-cream/60 transition-colors hover:text-text-cream"
 					>
 						Courses
@@ -342,7 +342,7 @@
 							{#each mod.lessons as lesson, lessonIndex}
 								{@const LessonIcon = lessonIcons[lesson.type]}
 								<a
-									href="/b-staging/learn/{course.slug}/{lesson.slug}"
+									href="/learn/{course.slug}/{lesson.slug}"
 									class="flex items-center gap-4 border-b border-border/50 px-5 py-3.5 transition-colors last:border-b-0 hover:bg-secondary/30"
 								>
 									<!-- Completion indicator -->
@@ -520,7 +520,7 @@
 					<ArrowRight class="ml-1 h-5 w-5" />
 				{/snippet}
 			</Button>
-			<a href="/b-staging/courses" class="text-sm font-medium text-text-cream/70 hover:text-text-cream">
+			<a href="/courses" class="text-sm font-medium text-text-cream/70 hover:text-text-cream">
 				Browse all courses
 			</a>
 		</div>

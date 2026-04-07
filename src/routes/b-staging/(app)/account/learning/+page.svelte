@@ -1,151 +1,117 @@
 <script lang="ts">
-	import { withPrefix } from '$lib/data/utils';
-	import { BookOpen, Clock, Play, CheckCircle2, ArrowRight } from 'lucide-svelte';
+	import { withPrefix } from '$lib/data/utils.js';
+	import { Play, Clock, BookOpen, ArrowRight, CheckCircle } from 'lucide-svelte';
 
 	const p = (href: string) => withPrefix('/b-staging', href);
 
+	let activeTab = $state<'progress' | 'completed'>('progress');
+
 	const enrolledCourses = [
-		{
-			slug: 'foundations-of-faith',
-			title: 'Foundations of Faith',
-			instructor: 'Dr. Asad Tarsin',
-			totalLessons: 24,
-			completedLessons: 8,
-			nextLesson: 'The Shahada: Declaration of Faith',
-			lastAccessed: '2 hours ago'
-		},
-		{
-			slug: 'prayer-mastery',
-			title: 'Prayer Mastery',
-			instructor: 'Imam Ahmad',
-			totalLessons: 16,
-			completedLessons: 2,
-			nextLesson: 'Pillar 2: Salah - The Daily Prayers',
-			lastAccessed: '1 day ago'
-		},
-		{
-			slug: 'quran-journey',
-			title: 'Your Quran Journey',
-			instructor: 'Ustadha Fatima',
-			totalLessons: 32,
-			completedLessons: 0,
-			nextLesson: 'Welcome & Course Overview',
-			lastAccessed: 'Not started'
-		}
+		{ title: 'Foundations of Faith', instructor: 'Dr. Asad Tarsin', progress: 65, lessonsCompleted: 16, totalLessons: 24, slug: 'foundations-of-faith', lastAccessed: '2 hours ago' },
+		{ title: 'Prayer Mastery', instructor: 'Imam Ahmad', progress: 30, lessonsCompleted: 5, totalLessons: 16, slug: 'prayer-mastery', lastAccessed: '1 day ago' },
+		{ title: 'Your Quran Journey', instructor: 'Ustadha Fatima', progress: 10, lessonsCompleted: 3, totalLessons: 32, slug: 'quran-journey', lastAccessed: '3 days ago' }
 	];
 
 	const completedCourses = [
-		{
-			slug: 'exploring-islam-intro',
-			title: 'Exploring Islam: An Introduction',
-			instructor: 'Dr. Asad Tarsin',
-			completedDate: '2026-01-15',
-			totalLessons: 8
-		}
+		{ title: 'Introduction to Islam', instructor: 'Dr. Asad Tarsin', completedDate: 'Jan 15, 2026', slug: 'intro-to-islam' }
 	];
+
+	const totalLessons = enrolledCourses.reduce((s, c) => s + c.totalLessons, 0) + completedCourses.length * 20;
+	const completedLessons = enrolledCourses.reduce((s, c) => s + c.lessonsCompleted, 0) + completedCourses.length * 20;
 </script>
 
 <svelte:head>
-	<title>My Learning - Being Muslim</title>
+	<title>My Learning — Being Muslim</title>
 </svelte:head>
 
-<div>
-	<h1 class="font-display text-2xl font-bold">My <span class="highlight">Learning</span></h1>
-	<p class="mono mt-2 text-text-secondary">TRACK YOUR COURSE PROGRESS</p>
+<div class="space-y-6">
+	<div>
+		<h1 class="font-display text-2xl font-bold text-[#1C1C1E]">My Learning</h1>
+		<p class="mt-1 text-sm text-[#8E8E93]">Track your progress across all your courses.</p>
+	</div>
 
-	<!-- Summary Stats -->
-	<div class="mt-8 grid grid-cols-3 gap-0 border-[3px] border-border">
-		<div class="border-r-[3px] border-border p-4 text-center">
-			<p class="font-display text-3xl font-bold">{enrolledCourses.length}</p>
-			<p class="mono text-text-secondary">IN PROGRESS</p>
+	<!-- Stats row -->
+	<div class="grid grid-cols-3 gap-3">
+		<div class="rounded-[20px] bg-white p-5 text-center">
+			<p class="font-display text-3xl font-bold text-[#007AFF]">{enrolledCourses.length}</p>
+			<p class="mt-1 text-xs text-[#8E8E93]">In Progress</p>
 		</div>
-		<div class="border-r-[3px] border-border p-4 text-center">
-			<p class="font-display text-3xl font-bold">{completedCourses.length}</p>
-			<p class="mono text-text-secondary">COMPLETED</p>
+		<div class="rounded-[20px] bg-white p-5 text-center">
+			<p class="font-display text-3xl font-bold text-[#30D158]">{completedCourses.length}</p>
+			<p class="mt-1 text-xs text-[#8E8E93]">Completed</p>
 		</div>
-		<div class="p-4 text-center">
-			<p class="font-display text-3xl font-bold">
-				{enrolledCourses.reduce((s, c) => s + c.completedLessons, 0) + completedCourses.reduce((s, c) => s + c.totalLessons, 0)}
-			</p>
-			<p class="mono text-text-secondary">LESSONS DONE</p>
+		<div class="rounded-[20px] bg-white p-5 text-center">
+			<p class="font-display text-3xl font-bold text-[#FF9F0A]">{completedLessons}</p>
+			<p class="mt-1 text-xs text-[#8E8E93]">Lessons Done</p>
 		</div>
 	</div>
 
-	<!-- In Progress -->
-	<div class="mt-10">
-		<h2 class="font-display text-xl font-bold">In <span class="highlight">Progress</span></h2>
-		<div class="mt-4 border-[3px] border-border">
+	<!-- Segmented control -->
+	<div class="inline-flex rounded-[10px] bg-[#E5E5EA] p-1">
+		<button class="rounded-[8px] px-4 py-1.5 text-sm font-medium transition-all {activeTab === 'progress' ? 'bg-white text-[#1C1C1E] shadow-sm' : 'text-[#8E8E93]'}" onclick={() => (activeTab = 'progress')}>In Progress</button>
+		<button class="rounded-[8px] px-4 py-1.5 text-sm font-medium transition-all {activeTab === 'completed' ? 'bg-white text-[#1C1C1E] shadow-sm' : 'text-[#8E8E93]'}" onclick={() => (activeTab = 'completed')}>Completed</button>
+	</div>
+
+	{#if activeTab === 'progress'}
+		<div class="space-y-3">
 			{#each enrolledCourses as course}
-				{@const progress = Math.round((course.completedLessons / course.totalLessons) * 100)}
-				<a
-					href={p('/courses/' + course.slug)}
-					class="group block border-b-[3px] border-border px-4 py-5 transition-colors last:border-b-0 hover:bg-accent-gold/10"
-				>
-					<div class="flex items-center justify-between">
-						<h3 class="font-display text-lg font-bold group-hover:text-accent-primary">{course.title}</h3>
-						<span class="font-display text-lg font-bold">{progress}%</span>
-					</div>
-
-					<!-- Progress Bar -->
-					<div class="mt-3 h-3 border-[3px] border-border">
-						<div class="h-full bg-accent-primary transition-all" style="width: {progress}%"></div>
-					</div>
-
-					<div class="mt-3 flex flex-wrap items-center gap-4">
-						<span class="mono text-text-secondary">{course.instructor}</span>
-						<span class="mono text-text-secondary">{course.completedLessons}/{course.totalLessons} LESSONS</span>
-						<span class="flex items-center gap-1 text-text-secondary">
-							<Clock class="h-3 w-3" />
-							<span class="mono">{course.lastAccessed.toUpperCase()}</span>
-						</span>
-					</div>
-
-					<div class="mt-3 flex items-center justify-between">
-						<p class="mono text-text-secondary">
-							NEXT: <span class="text-text-primary">{course.nextLesson}</span>
-						</p>
-						<span class="flex items-center gap-1 font-display font-bold text-accent-primary">
-							Continue
-							<Play class="h-4 w-4" />
-						</span>
-					</div>
-				</a>
-			{/each}
-		</div>
-	</div>
-
-	<!-- Completed -->
-	{#if completedCourses.length > 0}
-		<div class="mt-10">
-			<h2 class="font-display text-xl font-bold"><span class="highlight">Completed</span></h2>
-			<div class="mt-4 border-[3px] border-border">
-				{#each completedCourses as course}
-					<div class="flex items-center gap-4 border-b-[3px] border-border bg-accent-green/5 px-4 py-4 last:border-b-0">
-						<div class="flex h-10 w-10 shrink-0 items-center justify-center border-[3px] border-accent-green bg-accent-green">
-							<CheckCircle2 class="h-5 w-5 text-white" />
-						</div>
-						<div class="min-w-0 flex-1">
-							<h3 class="font-display font-bold">{course.title}</h3>
-							<div class="flex items-center gap-3">
-								<span class="mono text-text-secondary">{course.instructor}</span>
-								<span class="mono text-text-secondary">COMPLETED {course.completedDate}</span>
+				<div class="rounded-[20px] bg-white p-5">
+					<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+						<div class="flex items-center gap-4">
+							<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-[14px] bg-[#007AFF]/10">
+								<Play class="h-6 w-6 text-[#007AFF]" />
+							</div>
+							<div>
+								<h3 class="font-display text-base font-bold text-[#1C1C1E]">{course.title}</h3>
+								<p class="text-sm text-[#8E8E93]">{course.instructor}</p>
 							</div>
 						</div>
-						<span class="mono text-text-secondary">{course.totalLessons} LESSONS</span>
+						<div class="flex items-center gap-4">
+							<div class="w-32">
+								<div class="flex items-center justify-between text-xs text-[#8E8E93]">
+									<span>{course.lessonsCompleted}/{course.totalLessons}</span>
+									<span>{course.progress}%</span>
+								</div>
+								<div class="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-[#F2F2F7]">
+									<div class="h-full rounded-full bg-[#007AFF]" style="width: {course.progress}%"></div>
+								</div>
+							</div>
+							<a href={p(`/courses/${course.slug}`)} class="rounded-[10px] bg-[#007AFF] px-5 py-2 text-xs font-semibold text-white hover:opacity-90">
+								Continue
+							</a>
+						</div>
 					</div>
-				{/each}
-			</div>
+					<p class="mt-3 flex items-center gap-1 text-xs text-[#8E8E93]"><Clock class="h-3 w-3" /> Last accessed {course.lastAccessed}</p>
+				</div>
+			{/each}
+		</div>
+	{:else}
+		<div class="space-y-3">
+			{#each completedCourses as course}
+				<div class="rounded-[20px] bg-white p-5">
+					<div class="flex items-center justify-between">
+						<div class="flex items-center gap-4">
+							<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-[14px] bg-[#30D158]/10">
+								<BookOpen class="h-6 w-6 text-[#30D158]" />
+							</div>
+							<div>
+								<h3 class="font-display text-base font-bold text-[#1C1C1E]">{course.title}</h3>
+								<p class="text-sm text-[#8E8E93]">{course.instructor} &middot; Completed {course.completedDate}</p>
+							</div>
+						</div>
+						<div class="flex items-center gap-2 rounded-full bg-[#30D158]/10 px-3 py-1">
+							<CheckCircle class="h-4 w-4 text-[#30D158]" />
+							<span class="text-xs font-medium text-[#30D158]">Completed</span>
+						</div>
+					</div>
+				</div>
+			{/each}
 		</div>
 	{/if}
 
-	<!-- Browse More -->
-	<div class="mt-8">
-		<a
-			href={p('/courses')}
-			class="group inline-flex items-center gap-2 font-display font-bold text-accent-primary transition-colors hover:text-red-700"
-		>
-			Browse More Courses
-			<ArrowRight class="h-4 w-4 transition-transform group-hover:translate-x-1" />
+	<div class="text-center">
+		<a href={p('/courses')} class="inline-flex items-center gap-2 rounded-[14px] bg-[#F2F2F7] px-6 py-3 text-sm font-medium text-[#1C1C1E] hover:bg-[#E5E5EA]">
+			Browse More Courses <ArrowRight class="h-4 w-4" />
 		</a>
 	</div>
 </div>

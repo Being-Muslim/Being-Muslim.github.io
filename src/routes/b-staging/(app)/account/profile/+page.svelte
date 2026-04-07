@@ -1,133 +1,63 @@
 <script lang="ts">
-	import { withPrefix } from '$lib/data/utils';
-	import { Camera, Save } from 'lucide-svelte';
+	import { User, Camera } from 'lucide-svelte';
 
-	const p = (href: string) => withPrefix('/b-staging', href);
-
-	let name = $state('Aminah Roberts');
+	let name = $state('Aminah Rahman');
 	let email = $state('aminah@example.com');
-	let bio = $state('New Muslim on a learning journey. Passionate about understanding the foundations of faith.');
-	let location = $state('Austin, TX');
-	let website = $state('');
-	let journeyType = $state('convert');
-
-	function handleSave() {
-		// Mock save
-	}
+	let bio = $state('A new Muslim on a journey of learning and growth. Based in Chicago. Joined the community in 2025.');
+	let location = $state('Chicago, IL');
 </script>
 
 <svelte:head>
-	<title>Profile - Being Muslim</title>
+	<title>Profile — Being Muslim</title>
 </svelte:head>
 
-<div>
-	<h1 class="font-display text-2xl font-bold">Edit <span class="highlight">Profile</span></h1>
-	<p class="mono mt-2 text-text-secondary">MANAGE YOUR PERSONAL INFORMATION</p>
+<div class="space-y-6">
+	<div>
+		<h1 class="font-display text-2xl font-bold text-[#1C1C1E]">Profile</h1>
+		<p class="mt-1 text-sm text-[#8E8E93]">Manage your personal information.</p>
+	</div>
 
-	<form
-		class="mt-8"
-		onsubmit={(e) => {
-			e.preventDefault();
-			handleSave();
-		}}
-	>
-		<!-- Avatar -->
-		<div class="flex items-center gap-6 border-[3px] border-border p-6">
+	<!-- Avatar tile -->
+	<div class="rounded-[20px] bg-white p-6">
+		<div class="flex items-center gap-5">
 			<div class="relative">
-				<div class="flex h-20 w-20 items-center justify-center border-[3px] border-border bg-accent-primary/10 font-display text-2xl font-bold text-accent-primary">
-					AR
+				<div class="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[#007AFF]/15 to-[#5856D6]/15">
+					<User class="h-10 w-10 text-[#007AFF]/60" />
 				</div>
-				<button
-					type="button"
-					class="absolute -bottom-2 -right-2 flex h-8 w-8 items-center justify-center border-[3px] border-border bg-accent-primary text-white hover:bg-red-700"
-					aria-label="Change avatar"
-				>
+				<button class="absolute -bottom-1 -right-1 flex h-8 w-8 items-center justify-center rounded-full bg-[#007AFF] text-white shadow-md hover:opacity-90" aria-label="Change photo">
 					<Camera class="h-4 w-4" />
 				</button>
 			</div>
 			<div>
-				<p class="font-display text-lg font-bold">{name}</p>
-				<p class="mono text-text-secondary">MEMBER SINCE JANUARY 2026</p>
+				<p class="font-display text-lg font-bold text-[#1C1C1E]">{name}</p>
+				<p class="text-sm text-[#8E8E93]">{email}</p>
+				<p class="mt-1 text-xs text-[#8E8E93]">JPG, PNG, or GIF. Max 2MB.</p>
 			</div>
 		</div>
+	</div>
 
-		<!-- Fields -->
-		<div class="mt-6 grid gap-0 border-[3px] border-border sm:grid-cols-2">
-			<div class="border-b-[3px] border-r-0 border-border p-4 sm:border-r-[3px]">
-				<label for="prof-name" class="mono mb-2 block text-text-primary">FULL NAME</label>
-				<input
-					id="prof-name"
-					type="text"
-					bind:value={name}
-					class="w-full border-[3px] border-border px-4 py-3 text-text-primary focus:outline-none"
-				/>
+	<!-- Form tile -->
+	<div class="rounded-[20px] bg-white p-6 sm:p-8">
+		<form class="space-y-5" onsubmit={(e) => e.preventDefault()}>
+			<div class="grid gap-5 sm:grid-cols-2">
+				<div class="space-y-2">
+					<label for="name" class="text-sm font-medium text-[#1C1C1E]">Full Name</label>
+					<input id="name" type="text" bind:value={name} class="w-full rounded-[14px] bg-[#F2F2F7] px-4 py-3 text-sm text-[#1C1C1E] focus:outline-none focus:ring-2 focus:ring-[#007AFF]/30" />
+				</div>
+				<div class="space-y-2">
+					<label for="email" class="text-sm font-medium text-[#1C1C1E]">Email</label>
+					<input id="email" type="email" bind:value={email} class="w-full rounded-[14px] bg-[#F2F2F7] px-4 py-3 text-sm text-[#1C1C1E] focus:outline-none focus:ring-2 focus:ring-[#007AFF]/30" />
+				</div>
 			</div>
-			<div class="border-b-[3px] border-border p-4">
-				<label for="prof-email" class="mono mb-2 block text-text-primary">EMAIL</label>
-				<input
-					id="prof-email"
-					type="email"
-					bind:value={email}
-					class="w-full border-[3px] border-border px-4 py-3 text-text-primary focus:outline-none"
-				/>
+			<div class="space-y-2">
+				<label for="location" class="text-sm font-medium text-[#1C1C1E]">Location</label>
+				<input id="location" type="text" bind:value={location} class="w-full rounded-[14px] bg-[#F2F2F7] px-4 py-3 text-sm text-[#1C1C1E] focus:outline-none focus:ring-2 focus:ring-[#007AFF]/30" />
 			</div>
-			<div class="border-b-[3px] border-r-0 border-border p-4 sm:border-b-0 sm:border-r-[3px]">
-				<label for="prof-location" class="mono mb-2 block text-text-primary">LOCATION</label>
-				<input
-					id="prof-location"
-					type="text"
-					bind:value={location}
-					placeholder="City, State"
-					class="w-full border-[3px] border-border px-4 py-3 text-text-primary placeholder:text-text-secondary focus:outline-none"
-				/>
+			<div class="space-y-2">
+				<label for="bio" class="text-sm font-medium text-[#1C1C1E]">Bio</label>
+				<textarea id="bio" bind:value={bio} rows="3" class="w-full rounded-[14px] bg-[#F2F2F7] px-4 py-3 text-sm text-[#1C1C1E] focus:outline-none focus:ring-2 focus:ring-[#007AFF]/30"></textarea>
 			</div>
-			<div class="p-4">
-				<label for="prof-website" class="mono mb-2 block text-text-primary">WEBSITE</label>
-				<input
-					id="prof-website"
-					type="url"
-					bind:value={website}
-					placeholder="https://..."
-					class="w-full border-[3px] border-border px-4 py-3 text-text-primary placeholder:text-text-secondary focus:outline-none"
-				/>
-			</div>
-		</div>
-
-		<!-- Journey Type -->
-		<div class="mt-6 border-[3px] border-border p-4">
-			<label for="prof-journey" class="mono mb-2 block text-text-primary">MY JOURNEY</label>
-			<select
-				id="prof-journey"
-				bind:value={journeyType}
-				class="w-full border-[3px] border-border bg-bg-primary px-4 py-3 text-text-primary focus:outline-none sm:w-auto"
-			>
-				<option value="exploring">Exploring Islam</option>
-				<option value="convert">New Muslim / Convert</option>
-				<option value="reconnecting">Reconnecting with Faith</option>
-				<option value="lifelong">Lifelong Muslim</option>
-			</select>
-		</div>
-
-		<!-- Bio -->
-		<div class="mt-6 border-[3px] border-border p-4">
-			<label for="prof-bio" class="mono mb-2 block text-text-primary">BIO</label>
-			<textarea
-				id="prof-bio"
-				bind:value={bio}
-				rows="4"
-				class="w-full resize-none border-[3px] border-border p-4 text-text-primary placeholder:text-text-secondary focus:outline-none"
-			></textarea>
-		</div>
-
-		<!-- Save -->
-		<div class="mt-6 flex justify-end">
-			<button
-				type="submit"
-				class="inline-flex items-center gap-2 border-[3px] border-border bg-accent-primary px-6 py-3 font-bold text-white transition-colors hover:bg-red-700"
-			>
-				<Save class="h-4 w-4" />
-				Save Changes
-			</button>
-		</div>
-	</form>
+			<button type="submit" class="rounded-[14px] bg-[#007AFF] px-6 py-2.5 text-sm font-semibold text-white hover:opacity-90">Save Changes</button>
+		</form>
+	</div>
 </div>

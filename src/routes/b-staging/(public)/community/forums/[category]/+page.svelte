@@ -44,9 +44,9 @@
 	<div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
 		<!-- Breadcrumb -->
 		<nav class="mb-6 flex items-center gap-2 text-sm text-text-cream/50">
-			<a href="/b-staging/community" class="transition-colors hover:text-text-cream">Community</a>
+			<a href="/community" class="transition-colors hover:text-text-cream">Community</a>
 			<ChevronRight class="h-3.5 w-3.5" />
-			<a href="/b-staging/community/forums" class="transition-colors hover:text-text-cream">Forums</a>
+			<a href="/community/forums" class="transition-colors hover:text-text-cream">Forums</a>
 			<ChevronRight class="h-3.5 w-3.5" />
 			<span class="text-text-cream">{data.category.title}</span>
 		</nav>
@@ -108,7 +108,7 @@
 		<div class="divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface">
 			{#each sortedThreads as thread}
 				<a
-					href="/b-staging/community/forums/{data.category.slug}/{thread.slug}"
+					href="/community/forums/{data.category.slug}/{thread.slug}"
 					class="group flex items-center gap-4 px-5 py-4 transition-colors hover:bg-secondary/50"
 				>
 					<!-- Author Avatar -->

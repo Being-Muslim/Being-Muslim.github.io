@@ -55,7 +55,7 @@
 <Section>
 	<div class="grid gap-8 sm:grid-cols-2">
 		{#each guides as guide, i}
-			<a href="/b-staging/guides/{guide.slug}" class="group">
+			<a href="/guides/{guide.slug}" class="group">
 				<article class="relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:border-accent-primary/30 hover:shadow-xl">
 					<!-- Image Placeholder with Journey Feel -->
 					<div class="relative aspect-[2/1] bg-gradient-to-br {i % 4 === 0

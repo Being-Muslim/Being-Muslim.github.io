@@ -116,7 +116,7 @@
 	{:else}
 		<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
 			{#each filteredVideos as video}
-				<a href="/b-staging/videos/{video.slug}" class="group">
+				<a href="/videos/{video.slug}" class="group">
 					<article class="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface transition-all duration-200 hover:border-accent-primary/30 hover:shadow-lg">
 						<!-- Thumbnail with Play Overlay -->
 						<div class="relative aspect-video bg-gradient-to-br from-bg-dark to-accent-primary/30">

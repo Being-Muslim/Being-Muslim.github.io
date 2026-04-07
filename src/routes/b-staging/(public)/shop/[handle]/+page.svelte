@@ -12,7 +12,8 @@
 		ArrowRight,
 		Truck,
 		Shield,
-		RotateCcw
+		RotateCcw,
+		Package
 	} from 'lucide-svelte';
 
 	let { data } = $props();
@@ -20,16 +21,17 @@
 
 	let quantity = $state(1);
 	let selectedImageIndex = $state(0);
+	let sponsorOption = $state(false);
 
-	// Product variants
+	// Product variants from beingmuslim.org
 	interface Variant { label: string; price: number; }
 	interface OptionGroup { name: string; options: Variant[]; }
 
 	const productOptions: Record<string, OptionGroup[]> = {
 		'being-muslim-book': [
 			{ name: 'Format', options: [
-				{ label: 'Paperback — $14.95', price: 14.95 },
-				{ label: 'eBook — $9.00', price: 9.00 }
+				{ label: 'Paperback', price: 14.95 },
+				{ label: 'eBook', price: 9.00 }
 			]},
 			{ name: 'Language', options: [
 				{ label: 'English', price: 0 },
@@ -37,33 +39,51 @@
 			]}
 		],
 		'being-muslim-boxed-set': [
-			{ name: 'Language', options: [{ label: 'English', price: 0 }] }
+			{ name: 'Language', options: [
+				{ label: 'English', price: 0 }
+			]}
 		],
 		'prayer-cards': [
 			{ name: 'Language', options: [
-				{ label: 'English (25-pack) — $37.50', price: 37.50 },
-				{ label: 'Spanish (25-pack) — $37.50', price: 37.50 }
+				{ label: 'English (25-pack)', price: 37.50 },
+				{ label: 'Spanish (25-pack)', price: 37.50 }
 			]}
 		],
 		'being-muslim-ebook': [
 			{ name: 'Language', options: [
-				{ label: 'English — $9.00', price: 9.00 },
-				{ label: 'Spanish — $7.00', price: 7.00 }
+				{ label: 'English', price: 9.00 },
+				{ label: 'Spanish', price: 7.00 }
 			]}
 		],
 		'being-muslim-spanish': [
-			{ name: 'Language', options: [{ label: 'Spanish — $7.00', price: 7.00 }] }
+			{ name: 'Language', options: [
+				{ label: 'Spanish', price: 7.00 }
+			]}
 		]
 	};
 
 	let options = $derived(productOptions[product.handle] ?? []);
+
+	// Track selected option per group
 	let selections = $state<Record<string, number>>({});
-	function getSelection(groupName: string): number { return selections[groupName] ?? 0; }
 
-	function decrementQty() { if (quantity > 1) quantity--; }
-	function incrementQty() { if (quantity < 10) quantity++; }
+	function selectOption(groupName: string, idx: number) {
+		selections = { ...selections, [groupName]: idx };
+	}
 
-	// Per-product gallery images
+	function getSelection(groupName: string): number {
+		return selections[groupName] ?? 0;
+	}
+
+	function decrementQty() {
+		if (quantity > 1) quantity--;
+	}
+
+	function incrementQty() {
+		if (quantity < 10) quantity++;
+	}
+
+	// Per-product gallery images from beingmuslim.org
 	const productGalleries: Record<string, string[]> = {
 		'being-muslim-book': [
 			'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg',
@@ -92,7 +112,7 @@
 	let gallery = $derived(productGalleries[product.handle] ?? []);
 	let currentImage = $derived(gallery[selectedImageIndex] ?? gallery[0] ?? '');
 
-	// Per-product features
+	// Per-product features from beingmuslim.org
 	const productFeatures: Record<string, string[]> = {
 		'being-muslim-book': [
 			'Written by acclaimed Islamic educator Dr. Asad Tarsin',
@@ -133,14 +153,17 @@
 
 	let features = $derived(productFeatures[product.handle] ?? productFeatures['being-muslim-book']);
 
+	// Mock reviews
 	const reviews = [
 		{ id: 1, name: 'Aminah R.', rating: 5, date: 'January 15, 2026', text: 'This book changed my life. As a new Muslim, I was overwhelmed with information from different sources. Being Muslim organized everything beautifully and made me feel like I had a knowledgeable friend guiding me.', verified: true },
-		{ id: 2, name: 'Omar K.', rating: 5, date: 'January 3, 2026', text: 'I bought this for my wife who recently converted, and she reads it every day. The prayer section is especially helpful — clear, step-by-step, and non-judgmental.', verified: true },
-		{ id: 3, name: 'Sarah M.', rating: 4, date: 'December 20, 2025', text: 'Great resource for beginners. The writing is warm and accessible. I would love to see more content on community building in future editions.', verified: true },
-		{ id: 4, name: 'Ibrahim J.', rating: 5, date: 'December 8, 2025', text: 'I have been Muslim my whole life but bought this to understand what new converts experience. It gave me so much appreciation and taught me things I did not know.', verified: false }
+		{ id: 2, name: 'Omar K.', rating: 5, date: 'January 3, 2026', text: 'I bought this for my wife who recently converted, and she reads it every day. The prayer section is especially helpful — clear, step-by-step, and non-judgmental. Highly recommend.', verified: true },
+		{ id: 3, name: 'Sarah M.', rating: 4, date: 'December 20, 2025', text: 'Great resource for beginners. The writing is warm and accessible. I would love to see more content on community building in future editions, but overall this is the best introductory book I have found.', verified: true },
+		{ id: 4, name: 'Ibrahim J.', rating: 5, date: 'December 8, 2025', text: 'I have been Muslim my whole life but bought this to understand what new converts experience. It gave me so much appreciation and also taught me things I did not know. Beautiful book inside and out.', verified: false }
 	];
 
 	const averageRating = reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length;
+
+	// Related products
 	const relatedProducts = $derived(products.filter((p) => p.handle !== product.handle).slice(0, 3));
 </script>
 
@@ -150,17 +173,17 @@
 </svelte:head>
 
 <!-- ============================== -->
-<!-- DARK BREADCRUMB BAR            -->
+<!-- BREADCRUMB                     -->
 <!-- ============================== -->
-<div style="background: #2a2018; padding-top: 72px;">
-	<div class="mx-auto max-w-[1400px] px-6 lg:px-10" style="padding: 14px 0;">
-		<nav style="display: flex; align-items: center; gap: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: rgba(255,255,255,0.5);">
-			<a href="/b-staging/shop" style="display: inline-flex; align-items: center; gap: 4px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s;" class="bm-view-all">
-				<ChevronLeft style="width: 14px; height: 14px;" />
-				Shop
+<div style="background: #f4f1eb; padding: 110px 0 12px;">
+	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
+		<nav style="display: flex; align-items: center; gap: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: #8a7e70;">
+			<a href="/b-staging/shop" class="bm-view-all" style="display: inline-flex; align-items: center; gap: 4px; color: #8a7e70; text-decoration: none;">
+				<ChevronLeft style="width: 16px; height: 16px;" />
+				Back to Shop
 			</a>
 			<span>/</span>
-			<span style="color: rgba(255,255,255,0.8);">{product.title}</span>
+			<span style="color: #2a2018;">{product.title}</span>
 		</nav>
 	</div>
 </div>
@@ -168,43 +191,30 @@
 <!-- ============================== -->
 <!-- PRODUCT DETAIL                 -->
 <!-- ============================== -->
-<section style="background: #faf9f5; padding: 48px 0 64px;">
+<section style="background: #faf9f5; padding: 40px 0 64px;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 		<div class="bm-grid-product">
-			<!-- LEFT: Vertical thumbnails + main image -->
-			<div class="bm-gallery-layout">
-				<!-- Vertical thumbnail strip (desktop only) -->
-				{#if gallery.length > 1}
-					<div class="bm-gallery-thumbs-vertical">
-						{#each gallery as thumb, idx}
-							<button
-								onclick={() => (selectedImageIndex = idx)}
-								style="width: 72px; height: 72px; overflow: hidden; border-radius: 8px; border: 2px solid {selectedImageIndex === idx ? '#2a2018' : '#d8d2c8'}; background: #e2dcd2; cursor: pointer; transition: border-color 0.2s; flex-shrink: 0;"
-							>
-								<img src={thumb} alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-							</button>
-						{/each}
-					</div>
-				{/if}
-
+			<!-- LEFT: Image Gallery -->
+			<div>
 				<!-- Main Image -->
-				<div class="bm-gallery-main" style="aspect-ratio: 1; overflow: hidden; border-radius: 12px; background: #e2dcd2;">
+				<div style="aspect-ratio: 1; overflow: hidden; border-radius: 16px; background: #e2dcd2;">
 					{#if currentImage}
 						<img src={currentImage} alt={product.title} style="width: 100%; height: 100%; object-fit: cover; display: block;" />
 					{:else}
 						<div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-							<BookOpen style="width: 80px; height: 80px; color: rgba(200,184,160,0.3);" />
+							<BookOpen style="width: 96px; height: 96px; color: rgba(200,184,160,0.3);" />
+							<p style="font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; color: rgba(200,184,160,0.4); margin-top: 16px;">Product Image</p>
 						</div>
 					{/if}
 				</div>
 
-				<!-- Horizontal thumbnail strip (mobile only) -->
+				<!-- Thumbnail Strip -->
 				{#if gallery.length > 1}
-					<div class="bm-gallery-thumbs-horizontal">
+					<div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap;">
 						{#each gallery as thumb, idx}
 							<button
 								onclick={() => (selectedImageIndex = idx)}
-								style="width: 60px; height: 60px; overflow: hidden; border-radius: 8px; border: 2px solid {selectedImageIndex === idx ? '#2a2018' : '#d8d2c8'}; background: #e2dcd2; cursor: pointer; transition: border-color 0.2s; flex-shrink: 0;"
+								style="aspect-ratio: 1; width: 80px; overflow: hidden; border-radius: 10px; border: 2px solid {selectedImageIndex === idx ? '#2a2018' : '#d8d2c8'}; background: #e2dcd2; cursor: pointer; transition: border-color 0.2s;"
 							>
 								<img src={thumb} alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
 							</button>
@@ -223,88 +233,114 @@
 					<span style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: #8a7e70; background: #f4f1eb; padding: 4px 12px; border-radius: 999px;">{product.category}</span>
 				</div>
 
-				<h1 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3vw, 34px); font-weight: 400; color: #2a2018; margin: 14px 0 0; line-height: 1.15;">{product.title}</h1>
+				<!-- Title -->
+				<h1 style="font-family: 'Source Serif 4', serif; font-size: clamp(28px, 3.5vw, 38px); font-weight: 400; color: #2a2018; margin: 16px 0 0; line-height: 1.15;">{product.title}</h1>
 
 				<!-- Rating -->
-				<div style="display: flex; align-items: center; gap: 8px; margin-top: 10px;">
+				<div style="display: flex; align-items: center; gap: 10px; margin-top: 12px;">
 					<div style="display: flex; gap: 2px;">
 						{#each Array(5) as _, idx}
-							<Star style="width: 16px; height: 16px; {idx < Math.floor(product.rating) ? 'fill: #d4a843; color: #d4a843;' : 'color: #d8d2c8;'}" />
+							<Star style="width: 18px; height: 18px; {idx < Math.floor(product.rating) ? 'fill: #d4a843; color: #d4a843;' : 'color: #d8d2c8;'}" />
 						{/each}
 					</div>
-					<span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018;">{product.rating}</span>
-					<a href="#reviews" style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #8a7e70; text-decoration: none;" class="bm-view-all">({product.reviewCount} reviews)</a>
+					<span style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #2a2018;">{product.rating}</span>
+					<a href="#reviews" style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #8a7e70; text-decoration: none;" class="bm-view-all">
+						({product.reviewCount} reviews)
+					</a>
 				</div>
 
 				<!-- Price -->
-				<p style="font-family: 'DM Sans', sans-serif; font-size: 28px; font-weight: 700; color: #2a2018; margin: 14px 0 0;">
-					${product.price.toFixed(2)}
+				<div style="display: flex; align-items: baseline; gap: 12px; margin-top: 16px;">
+					<span style="font-family: 'DM Sans', sans-serif; font-size: 30px; font-weight: 700; color: #2a2018;">
+						${product.price.toFixed(2)}
+					</span>
 					{#if product.compareAtPrice}
-						<span style="font-size: 16px; color: #8a7e70; text-decoration: line-through; margin-left: 8px;">${product.compareAtPrice.toFixed(2)}</span>
+						<span style="font-family: 'DM Sans', sans-serif; font-size: 18px; color: #8a7e70; text-decoration: line-through;">
+							${product.compareAtPrice.toFixed(2)}
+						</span>
 					{/if}
-				</p>
-
-				<!-- Sponsor inline banner -->
-				<div style="background: #f4f1eb; border-radius: 10px; padding: 14px 18px; margin-top: 18px; display: flex; align-items: center; gap: 12px;">
-					<Heart style="width: 18px; height: 18px; color: #c8b8a0; flex-shrink: 0;" />
-					<p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #5a5248; margin: 0; line-height: 1.4;">
-						<strong style="color: #2a2018;">Sponsor this for a new Muslim</strong> — add ${product.price.toFixed(2)} to gift this to someone beginning their journey.
-						<a href="/b-staging/support" style="color: #2a2018; text-decoration: underline; text-underline-offset: 2px;">Learn more</a>
-					</p>
 				</div>
 
-				<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.7; color: #5a5248; margin: 20px 0 0;">{product.description}</p>
+				<!-- Description -->
+				<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.7; color: #5a5248; margin: 24px 0 0;">{product.description}</p>
 
-				<!-- Variant Options — Dropdowns -->
+				<!-- Variant Options -->
 				{#if options.length > 0}
-					<div style="margin-top: 20px; display: flex; gap: 16px; flex-wrap: wrap;">
+					<div style="margin-top: 24px; display: flex; flex-direction: column; gap: 20px;">
 						{#each options as group}
 							{#if group.options.length > 1}
-								<div style="flex: 1; min-width: 180px;">
-									<label style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #2a2018; display: block; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">{group.name}</label>
-									<select
-										onchange={(e) => { selections = { ...selections, [group.name]: (e.target as HTMLSelectElement).selectedIndex }; }}
-										style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #2a2018; width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid #d8d2c8; background: #fff; cursor: pointer; appearance: auto;"
-									>
-										{#each group.options as option}
-											<option>{option.label}</option>
+								<div>
+									<span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: #2a2018; display: block; margin-bottom: 8px;">{group.name}</span>
+									<div style="display: flex; gap: 8px; flex-wrap: wrap;">
+										{#each group.options as option, idx}
+											<button
+												onclick={() => selectOption(group.name, idx)}
+												style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 8px 18px; border-radius: 999px; cursor: pointer; transition: all 0.2s; border: 1.5px solid {getSelection(group.name) === idx ? '#2a2018' : '#d8d2c8'}; background: {getSelection(group.name) === idx ? '#2a2018' : '#fff'}; color: {getSelection(group.name) === idx ? '#fff' : '#2a2018'};"
+											>
+												{option.label}{option.price > 0 ? ` · $${option.price.toFixed(2)}` : ''}
+											</button>
 										{/each}
-									</select>
+									</div>
 								</div>
 							{/if}
 						{/each}
 					</div>
 				{/if}
 
-				<div style="height: 1px; background: #e8e3da; margin: 22px 0;"></div>
+				<div style="height: 1px; background: #e8e3da; margin: 24px 0;"></div>
 
-				<!-- Quantity + Add to Cart -->
-				<div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
-					<div style="display: flex; align-items: center; gap: 2px;">
-						<span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; margin-right: 10px;">Qty</span>
-						<button onclick={decrementQty} disabled={quantity <= 1} style="width: 36px; height: 36px; border-radius: 8px; border: 1px solid #d8d2c8; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: {quantity <= 1 ? '0.4' : '1'};">
-							<Minus style="width: 14px; height: 14px; color: #2a2018;" />
-						</button>
-						<span style="width: 40px; height: 36px; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: #2a2018;">{quantity}</span>
-						<button onclick={incrementQty} disabled={quantity >= 10} style="width: 36px; height: 36px; border-radius: 8px; border: 1px solid #d8d2c8; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: {quantity >= 10 ? '0.4' : '1'};">
-							<Plus style="width: 14px; height: 14px; color: #2a2018;" />
-						</button>
-					</div>
-					<button class="bm-btn-dark" style="padding: 12px 32px; font-size: 14px; flex: 1;" disabled={!product.inStock}>
-						<ShoppingCart style="width: 16px; height: 16px;" />
+				<!-- Quantity Selector -->
+				<div style="display: flex; align-items: center; gap: 4px;">
+					<span style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #2a2018; margin-right: 12px;">Quantity</span>
+					<button onclick={decrementQty} disabled={quantity <= 1} style="width: 40px; height: 40px; border-radius: 10px; border: 1px solid #d8d2c8; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: {quantity <= 1 ? '0.4' : '1'};">
+						<Minus style="width: 16px; height: 16px; color: #2a2018;" />
+					</button>
+					<span style="width: 48px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 10px; border: 1px solid #d8d2c8; background: #fff; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: #2a2018;">
+						{quantity}
+					</span>
+					<button onclick={incrementQty} disabled={quantity >= 10} style="width: 40px; height: 40px; border-radius: 10px; border: 1px solid #d8d2c8; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: {quantity >= 10 ? '0.4' : '1'};">
+						<Plus style="width: 16px; height: 16px; color: #2a2018;" />
+					</button>
+				</div>
+
+				<!-- Action Buttons -->
+				<div style="margin-top: 24px;">
+					<button class="bm-btn-dark" style="width: 100%; padding: 16px; font-size: 15px; justify-content: center;" disabled={!product.inStock}>
+						<ShoppingCart style="width: 18px; height: 18px;" />
 						{product.inStock ? 'Add to Cart' : 'Out of Stock'}
 					</button>
 				</div>
 
+				<!-- Sponsor Option -->
+				<button
+					onclick={() => (sponsorOption = !sponsorOption)}
+					style="margin-top: 16px; width: 100%; display: flex; align-items: center; gap: 12px; border-radius: 12px; border: 1px solid {sponsorOption ? '#c8b8a0' : '#e8e3da'}; background: {sponsorOption ? 'rgba(200,184,160,0.08)' : '#fff'}; padding: 16px; text-align: left; cursor: pointer; transition: all 0.2s;"
+				>
+					<div style="width: 40px; height: 40px; border-radius: 999px; background: {sponsorOption ? '#c8b8a0' : 'rgba(200,184,160,0.15)'}; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+						<Heart style="width: 20px; height: 20px; color: {sponsorOption ? '#2a2018' : '#c8b8a0'};" />
+					</div>
+					<div style="flex: 1;">
+						<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: #2a2018; margin: 0;">Sponsor this for a new Muslim</p>
+						<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #8a7e70; margin: 2px 0 0;">Add ${product.price.toFixed(2)} to send this to someone beginning their journey</p>
+					</div>
+					<div style="width: 20px; height: 20px; border-radius: 999px; border: 2px solid {sponsorOption ? '#c8b8a0' : '#d8d2c8'}; background: {sponsorOption ? '#c8b8a0' : 'transparent'}; display: flex; align-items: center; justify-content: center;">
+						{#if sponsorOption}
+							<Check style="width: 12px; height: 12px; color: #2a2018;" />
+						{/if}
+					</div>
+				</button>
+
+				<div style="height: 1px; background: #e8e3da; margin: 24px 0;"></div>
+
 				<!-- Trust Signals -->
-				<div style="display: flex; gap: 24px; margin-top: 20px;">
+				<div class="bm-grid-3" style="gap: 16px;">
 					{#each [
 						{ icon: Truck, label: 'Free Shipping' },
 						{ icon: Shield, label: 'Secure Checkout' },
 						{ icon: RotateCcw, label: '30-Day Returns' }
 					] as signal}
-						<div style="display: flex; align-items: center; gap: 6px;">
-							<svelte:component this={signal.icon} style="width: 15px; height: 15px; color: #c8b8a0;" />
+						<div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px;">
+							<svelte:component this={signal.icon} style="width: 18px; height: 18px; color: #c8b8a0;" />
 							<span style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #8a7e70;">{signal.label}</span>
 						</div>
 					{/each}
@@ -315,17 +351,19 @@
 </section>
 
 <!-- ============================== -->
-<!-- PRODUCT FEATURES — NUMBERED    -->
+<!-- PRODUCT FEATURES               -->
 <!-- ============================== -->
-<section style="background: #f4f1eb; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(24px, 3vw, 30px); font-weight: 400; color: #2a2018; margin: 0 0 32px;">
+		<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(24px, 3vw, 30px); font-weight: 400; color: #2a2018; margin: 0 0 28px;">
 			{product.handle === 'being-muslim-boxed-set' ? "What's Inside" : 'Product Features'}
 		</h2>
-		<div style="display: flex; flex-direction: column; gap: 0;">
-			{#each features as feature, i}
-				<div style="display: flex; align-items: start; gap: 16px; padding: 16px 0; {i > 0 ? 'border-top: 1px solid #e2dcd2;' : ''}">
-					<span style="font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 400; color: #c8b8a0; width: 28px; flex-shrink: 0; text-align: right;">{i + 1}</span>
+		<div class="bm-grid-2-gap" style="gap: 16px 40px;">
+			{#each features as feature}
+				<div style="display: flex; align-items: start; gap: 12px;">
+					<div style="width: 22px; height: 22px; border-radius: 999px; background: rgba(200,184,160,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">
+						<Check style="width: 12px; height: 12px; color: #c8b8a0;" />
+					</div>
 					<span style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: #5a5248; line-height: 1.5;">{feature}</span>
 				</div>
 			{/each}
@@ -334,54 +372,57 @@
 </section>
 
 <!-- ============================== -->
-<!-- REVIEWS — STACKED VERTICAL     -->
+<!-- REVIEWS SECTION                -->
 <!-- ============================== -->
-<section id="reviews" style="background: #faf9f5; padding: 64px 0;">
+<section id="reviews" class="bm-section-padding" style="background: #faf9f5;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
-			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(24px, 3vw, 30px); font-weight: 400; color: #2a2018; margin: 0;">Customer Reviews</h2>
-			<button class="bm-btn-outline" style="padding: 8px 20px; font-size: 13px;">Write a Review</button>
-		</div>
-		<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 32px;">
-			<div style="display: flex; gap: 2px;">
-				{#each Array(5) as _, idx}
-					<Star style="width: 16px; height: 16px; {idx < Math.floor(averageRating) ? 'fill: #d4a843; color: #d4a843;' : 'color: #d8d2c8;'}" />
-				{/each}
+		<div>
+			<div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+				<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(24px, 3vw, 30px); font-weight: 400; color: #2a2018; margin: 0;">Customer Reviews</h2>
+				<button class="bm-btn-outline" style="padding: 8px 20px; font-size: 13px;">Write a Review</button>
 			</div>
-			<span style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #8a7e70;">Based on {product.reviewCount} reviews</span>
-		</div>
+			<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 32px;">
+				<div style="display: flex; gap: 2px;">
+					{#each Array(5) as _, idx}
+						<Star style="width: 16px; height: 16px; {idx < Math.floor(averageRating) ? 'fill: #d4a843; color: #d4a843;' : 'color: #d8d2c8;'}" />
+					{/each}
+				</div>
+				<span style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #8a7e70;">
+					Based on {product.reviewCount} reviews
+				</span>
+			</div>
 
-		<div style="max-width: 800px;">
-			{#each reviews as review, i}
-				<div style="padding: 24px 0; {i > 0 ? 'border-top: 1px solid #e8e3da;' : ''}">
-					<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-						<div style="width: 36px; height: 36px; border-radius: 999px; background: {['#7a8b6e', '#a08b6e', '#6e7a8b', '#8b6e7a'][i]}; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-							<span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: #fff;">{review.name[0]}</span>
-						</div>
+			<div style="display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px;">
+			{#each reviews as review}
+				<div style="border: 1px solid #e8e3da; border-radius: 12px; background: #fff; padding: 24px; flex: 0 0 calc(50% - 8px); min-width: 320px; scroll-snap-align: start;">
+					<div style="display: flex; justify-content: space-between; align-items: start;">
 						<div>
 							<div style="display: flex; align-items: center; gap: 8px;">
 								<span style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: #2a2018;">{review.name}</span>
 								{#if review.verified}
-									<span style="font-family: 'DM Sans', sans-serif; font-size: 11px; color: #c8b8a0;">Verified</span>
+									<span style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; color: #c8b8a0; background: rgba(200,184,160,0.15); padding: 2px 8px; border-radius: 999px;">
+										<Check style="width: 10px; height: 10px; display: inline; vertical-align: -1px;" /> Verified
+									</span>
 								{/if}
 							</div>
-							<div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
-								<div style="display: flex; gap: 1px;">
+							<div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+								<div style="display: flex; gap: 2px;">
 									{#each Array(5) as _, idx}
-										<Star style="width: 12px; height: 12px; {idx < review.rating ? 'fill: #d4a843; color: #d4a843;' : 'color: #d8d2c8;'}" />
+										<Star style="width: 13px; height: 13px; {idx < review.rating ? 'fill: #d4a843; color: #d4a843;' : 'color: #d8d2c8;'}" />
 									{/each}
 								</div>
-								<span style="font-family: 'DM Sans', sans-serif; font-size: 11px; color: #a09888;">{review.date}</span>
+								<span style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #a09888;">{review.date}</span>
 							</div>
 						</div>
 					</div>
-					<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #5a5248; line-height: 1.65; margin: 0;">{review.text}</p>
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #5a5248; line-height: 1.65; margin: 12px 0 0;">{review.text}</p>
 				</div>
 			{/each}
-		</div>
+			</div>
 
-		<div style="margin-top: 16px;">
-			<button class="bm-btn-outline" style="padding: 10px 24px; font-size: 13px;">Load More Reviews</button>
+			<div style="text-align: center; margin-top: 24px;">
+				<button class="bm-btn-outline" style="padding: 10px 24px; font-size: 13px;">Load More Reviews</button>
+			</div>
 		</div>
 	</div>
 </section>
@@ -389,19 +430,15 @@
 <!-- ============================== -->
 <!-- RELATED PRODUCTS               -->
 <!-- ============================== -->
-<section style="background: #f4f1eb; padding: 64px 0;">
+<section class="bm-section-padding" style="background: #f4f1eb;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="display: flex; justify-content: space-between; align-items: end; margin-bottom: 28px;">
-			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(24px, 3vw, 30px); font-weight: 400; color: #2a2018; margin: 0;">You might also like</h2>
-			<a href="/b-staging/shop" class="bm-view-all" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
-				All products <ArrowRight style="width: 14px; height: 14px;" />
-			</a>
-		</div>
+		<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(24px, 3vw, 30px); font-weight: 400; color: #2a2018; margin: 0 0 28px;">You might also like</h2>
+
 		<div class="bm-grid-3" style="gap: 24px;">
 			{#each relatedProducts as related}
 				<a href="/b-staging/shop/{related.handle}" style="text-decoration: none; display: block;" class="bm-title-underline-parent group">
-					<div class="bm-card-hover" style="background: #fff; border-radius: 12px; overflow: hidden;">
-						<div style="aspect-ratio: 4/3; background: #e2dcd2; overflow: hidden;">
+					<div class="bm-card-hover" style="background: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
+						<div style="aspect-ratio: 4/3; background: #e2dcd2; position: relative; overflow: hidden;">
 							{#if productGalleries[related.handle]?.[0]}
 								<img src={productGalleries[related.handle][0]} alt={related.title} class="transition-transform duration-500 group-hover:scale-105" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
 							{:else}
@@ -413,13 +450,27 @@
 								<span style="position: absolute; top: 12px; left: 12px; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600; color: #2a2018; background: #fff; padding: 3px 10px; border-radius: 999px;">{related.badge}</span>
 							{/if}
 						</div>
-						<div style="padding: 20px;">
+						<div style="padding: 20px; flex: 1; display: flex; flex-direction: column;">
 							<h3 class="bm-title-underline" style="font-family: 'Source Serif 4', serif; font-size: 16px; font-weight: 400; color: #2a2018; margin: 0 0 6px; line-height: 1.3;">{related.title}</h3>
-							<span style="font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; color: #2a2018;">${related.price.toFixed(2)}</span>
+							<div style="display: flex; align-items: center; gap: 4px; margin-bottom: 8px;">
+								<div style="display: flex; gap: 1px;">
+									{#each Array(5) as _, idx}
+										<Star style="width: 12px; height: 12px; {idx < Math.floor(related.rating) ? 'fill: #d4a843; color: #d4a843;' : 'color: #d8d2c8;'}" />
+									{/each}
+								</div>
+								<span style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #8a7e70;">{related.rating}</span>
+							</div>
+							<span style="font-family: 'DM Sans', sans-serif; font-size: 18px; font-weight: 600; color: #2a2018; margin-top: auto;">${related.price.toFixed(2)}</span>
 						</div>
 					</div>
 				</a>
 			{/each}
+		</div>
+
+		<div style="text-align: center; margin-top: 32px;">
+			<a href="/b-staging/shop" class="bm-view-all" style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+				View all products <ArrowRight style="width: 16px; height: 16px;" />
+			</a>
 		</div>
 	</div>
 </section>

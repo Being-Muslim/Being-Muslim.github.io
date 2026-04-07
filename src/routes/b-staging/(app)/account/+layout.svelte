@@ -1,61 +1,98 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { page } from '$app/state';
-	import { withPrefix } from '$lib/data/utils';
+	import { withPrefix } from '$lib/data/utils.js';
 	import {
 		LayoutDashboard,
 		BookOpen,
 		ShoppingBag,
 		Heart,
-		User,
-		Settings
+		UserCircle,
+		Settings,
+		Menu,
+		X
 	} from 'lucide-svelte';
 
 	let { children }: { children: Snippet } = $props();
 
 	const p = (href: string) => withPrefix('/b-staging', href);
 
+	let mobileMenuOpen = $state(false);
+
 	const sidebarLinks = [
-		{ label: 'Dashboard', href: p('/account'), icon: LayoutDashboard },
-		{ label: 'My Learning', href: p('/account/learning'), icon: BookOpen },
-		{ label: 'Orders', href: p('/account/orders'), icon: ShoppingBag },
-		{ label: 'Donations', href: p('/account/donations'), icon: Heart },
-		{ label: 'Profile', href: p('/account/profile'), icon: User },
-		{ label: 'Settings', href: p('/account/settings'), icon: Settings }
-	];
+		{ href: p('/account'), label: 'Dashboard', icon: LayoutDashboard },
+		{ href: p('/account/learning'), label: 'My Learning', icon: BookOpen },
+		{ href: p('/account/orders'), label: 'Orders', icon: ShoppingBag },
+		{ href: p('/account/donations'), label: 'Donations', icon: Heart },
+		{ href: p('/account/profile'), label: 'Profile', icon: UserCircle },
+		{ href: p('/account/settings'), label: 'Settings', icon: Settings }
+	] as const;
 
 	function isActive(href: string): boolean {
-		return page.url.pathname === href;
+		const path = page.url.pathname;
+		if (href === p('/account')) {
+			return path === p('/account');
+		}
+		return path.startsWith(href);
 	}
 </script>
 
-<div class="mx-auto max-w-[1200px] px-6 py-16 md:py-20">
-	<div class="flex flex-col gap-0 lg:flex-row">
-		<!-- Sidebar — bordered zones, no cards -->
-		<aside class="w-full shrink-0 border-[3px] border-border lg:w-56">
-			<div class="border-b-[3px] border-border px-4 py-3">
-				<span class="mono text-text-primary">ACCOUNT</span>
-			</div>
-			<nav class="flex flex-row lg:flex-col">
-				{#each sidebarLinks as link, i}
-					<a
-						href={link.href}
-						class="flex items-center gap-3 border-b-[3px] border-border px-4 py-3 text-sm transition-colors last:border-b-0 {isActive(link.href)
-							? 'bg-accent-gold/20 font-bold text-text-primary'
-							: 'text-text-secondary hover:bg-accent-gold/10 hover:text-text-primary'}"
-					>
-						<link.icon class="h-4 w-4 shrink-0" />
-						<span>{link.label}</span>
-					</a>
-				{/each}
+<div class="mx-auto max-w-[1400px] px-4 py-8 sm:px-6 md:py-12">
+	<div class="flex gap-4">
+		<!-- Mobile Menu Toggle -->
+		<div class="lg:hidden">
+			<button
+				onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
+				class="fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-[#007AFF] text-white shadow-lg"
+				aria-label="Toggle account menu"
+			>
+				{#if mobileMenuOpen}
+					<X class="h-5 w-5" />
+				{:else}
+					<Menu class="h-5 w-5" />
+				{/if}
+			</button>
+		</div>
+
+		<!-- Sidebar -->
+		<aside
+			class="shrink-0 {mobileMenuOpen ? 'fixed inset-0 z-30 bg-black/40' : 'hidden lg:block'}"
+		>
+			{#if mobileMenuOpen}
+				<!-- svelte-ignore a11y_no_static_element_interactions -->
+				<!-- svelte-ignore a11y_click_events_have_key_events -->
+				<div class="absolute inset-0 lg:hidden" onclick={() => (mobileMenuOpen = false)}></div>
+			{/if}
+			<nav
+				class="relative h-full w-64 overflow-y-auto bg-[#F2F2F7] p-4 shadow-lg lg:h-auto lg:rounded-[20px] lg:bg-white lg:shadow-none"
+			>
+				<div class="mb-4 border-b border-[#E5E5EA] pb-4 lg:hidden">
+					<p class="font-display text-lg font-bold text-[#1C1C1E]">My Account</p>
+				</div>
+				<ul class="space-y-1">
+					{#each sidebarLinks as link}
+						{@const Icon = link.icon}
+						{@const active = isActive(link.href)}
+						<li>
+							<a
+								href={link.href}
+								onclick={() => (mobileMenuOpen = false)}
+								class="flex items-center gap-3 rounded-[14px] px-4 py-2.5 text-sm font-medium transition-colors {active
+									? 'bg-[#007AFF]/10 text-[#007AFF]'
+									: 'text-[#8E8E93] hover:bg-[#F2F2F7] hover:text-[#1C1C1E]'}"
+							>
+								<Icon class="h-4 w-4" />
+								{link.label}
+							</a>
+						</li>
+					{/each}
+				</ul>
 			</nav>
 		</aside>
 
 		<!-- Main Content -->
-		<div class="min-w-0 flex-1 border-[3px] border-l-0 border-border max-lg:border-l-[3px] max-lg:border-t-0">
-			<div class="p-6 lg:p-8">
-				{@render children()}
-			</div>
+		<div class="min-w-0 flex-1">
+			{@render children()}
 		</div>
 	</div>
 </div>

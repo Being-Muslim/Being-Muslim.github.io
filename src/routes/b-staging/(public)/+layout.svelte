@@ -13,7 +13,6 @@
 
 	afterNavigate(() => {
 		window.scrollTo(0, 0);
-		// Restore after a tick
 		requestAnimationFrame(() => {
 			document.documentElement.style.scrollBehavior = '';
 		});

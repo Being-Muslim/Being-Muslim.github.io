@@ -174,8 +174,11 @@ p, a, li, label, input, textarea, select, button {
 }
 @media (min-width: 768px) {
 	.bm-grid-explore {
-		grid-template-columns: 1fr 280px 280px;
+		grid-template-columns: repeat(3, 1fr);
 		padding: 48px !important;
+	}
+	.bm-grid-explore > :first-child {
+		grid-column: 1 / -1;
 	}
 }
 

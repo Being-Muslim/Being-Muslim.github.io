@@ -1,97 +1,256 @@
 <script lang="ts">
-	import { Menu, X } from 'lucide-svelte';
+	import { Menu, X, BookOpen, Heart, ShoppingBag, Users, ArrowRight, Compass, Sunrise, RefreshCw } from 'lucide-svelte';
 
 	let mobileOpen = $state(false);
 	let scrolled = $state(false);
+	let activeMenu = $state<string | null>(null);
+	let closeTimeout = $state<ReturnType<typeof setTimeout> | null>(null);
 
 	function handleScroll() {
 		scrolled = window.scrollY > 20;
 	}
+
+	function openMenu(label: string) {
+		if (closeTimeout) clearTimeout(closeTimeout);
+		activeMenu = label;
+	}
+
+	function scheduleClose() {
+		closeTimeout = setTimeout(() => {
+			activeMenu = null;
+		}, 150);
+	}
+
+	function cancelClose() {
+		if (closeTimeout) clearTimeout(closeTimeout);
+	}
+
+	const megaMenus: Record<string, { columns: { heading?: string; links: { label: string; href: string; desc?: string; icon?: any }[] }[]; featured?: { title: string; desc: string; href: string; img: string } }> = {
+		Learn: {
+			columns: [
+				{
+					heading: 'Resources',
+					links: [
+						{ label: 'Articles', href: '/e/learn', desc: 'In-depth guides on faith and practice' },
+						{ label: 'Courses', href: '/e/learn', desc: 'Structured learning at your own pace' },
+						{ label: 'Brief Overview of Islam', href: '/e/learn/brief-overview-of-islam', desc: 'Core beliefs, practices, and history' }
+					]
+				},
+				{
+					heading: 'Popular Topics',
+					links: [
+						{ label: "Beginner's Guide", href: '/e/learn/beginners-guide', desc: 'First steps for new Muslims' },
+						{ label: 'Islam and Other Faiths', href: '/e/learn/islam-and-other-faiths', desc: 'Common ground and key differences' },
+						{ label: 'View All Resources', href: '/e/learn' }
+					]
+				}
+			],
+			featured: {
+				title: 'Foundations of Faith',
+				desc: 'A 24-lesson course covering the essentials.',
+				href: '/e/learn',
+				img: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&q=80&auto=format&fit=crop'
+			}
+		},
+		Convert: {
+			columns: [
+				{
+					heading: 'Your Journey',
+					links: [
+						{ label: 'Ready to Convert?', href: '/e/convert', desc: 'Take the next step with guidance and support' },
+						{ label: 'What to Expect', href: '/e/convert', desc: 'Understanding the process and what comes after' },
+						{ label: 'FAQ for New Muslims', href: '/e/convert', desc: 'Answers to the most common questions' }
+					]
+				},
+				{
+					heading: 'Support',
+					links: [
+						{ label: 'Find a Community', href: '/e/convert', desc: 'Connect with Muslims near you' },
+						{ label: 'Mentorship Program', href: '/e/convert', desc: 'One-on-one guidance from experienced Muslims' },
+						{ label: 'Start Your Journey', href: '/e/convert' }
+					]
+				}
+			]
+		},
+		Products: {
+			columns: [
+				{
+					heading: 'Products',
+					links: [
+						{ label: 'Being Muslim: A Practical Guide', href: '/e/shop/book', desc: 'The bestselling book' },
+						{ label: 'The Complete Boxed Set', href: '/e/shop/boxed-set', desc: 'Book, prayer cards, and more' },
+						{ label: 'Prayer Reference Cards', href: '/e/shop/prayer-cards', desc: 'Keep by your prayer mat' },
+						{ label: 'Digital Edition (eBook)', href: '/e/shop/ebook', desc: 'Read anywhere, instantly' }
+					]
+				}
+			],
+			featured: {
+				title: 'The Complete Boxed Set',
+				desc: 'Everything you need in one beautiful package.',
+				href: '/e/shop/boxed-set',
+				img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg'
+			}
+		},
+		Support: {
+			columns: [
+				{
+					heading: 'Get Involved',
+					links: [
+						{ label: 'Donate', href: '/e/support', desc: 'Help fund resources for new Muslims' },
+						{ label: 'Sponsor a Boxed Set', href: '/e/support', desc: 'Gift a set to someone in need' },
+						{ label: 'Volunteer', href: '/e/support', desc: 'Join our team of contributors' },
+						{ label: 'Support the Mission', href: '/e/support' }
+					]
+				}
+			]
+		}
+	};
 </script>
 
 <svelte:window onscroll={handleScroll} />
 
 <header
-	class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-	style="background: {scrolled || mobileOpen ? 'rgba(12, 18, 32, 0.98)' : 'rgba(12, 18, 32, 0.8)'}; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(250, 250, 248, {scrolled ? '0.08' : '0.04'});"
+	class="fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 {activeMenu || mobileOpen
+		? 'backdrop-blur-md shadow-sm border-border'
+		: scrolled
+			? 'backdrop-blur-md shadow-sm border-border'
+			: 'border-transparent'}"
+	style="{activeMenu || mobileOpen || scrolled ? 'background: rgba(250,249,245,0.97);' : 'background: rgba(250,249,245,0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);'}"
 >
-	<nav style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; padding: 0 24px;">
+	<nav class="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between px-6 lg:px-10">
 		<!-- Logo -->
-		<a href="/e" style="text-decoration: none; display: flex; align-items: center; gap: 8px;">
-			<span style="font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 600; color: #FAFAF8;">Being Muslim</span>
+		<a href="/e" class="flex items-center gap-2.5">
+			<img
+				src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png"
+				alt="Being Muslim"
+				class="h-8 w-8 invert"
+				style="transition: filter 0.3s;"
+			/>
+			<span class="text-lg font-bold transition-colors font-display text-text-primary">
+				Being Muslim
+			</span>
 		</a>
 
 		<!-- Desktop Nav -->
-		<div class="hidden md:flex" style="align-items: center; gap: 32px;">
+		<div class="hidden items-center gap-8 md:flex">
 			{#each [
+				{ label: 'Home', href: '/e' },
 				{ label: 'Learn', href: '/e/learn' },
 				{ label: 'Convert', href: '/e/convert' },
 				{ label: 'Products', href: '/e/shop' },
 				{ label: 'Support', href: '/e/support' }
 			] as link}
-				<a
-					href={link.href}
-					style="font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 400; color: rgba(250, 250, 248, 0.6); text-decoration: none; transition: color 0.2s;"
-					onmouseenter={(e) => e.currentTarget.style.color = 'rgba(250, 250, 248, 0.95)'}
-					onmouseleave={(e) => e.currentTarget.style.color = 'rgba(250, 250, 248, 0.6)'}
+				<div
+					class="relative"
+					onmouseenter={() => megaMenus[link.label] ? openMenu(link.label) : (activeMenu = null)}
+					onmouseleave={scheduleClose}
 				>
-					{link.label}
-				</a>
+					<a
+						href={link.href}
+						class="bm-link-animated text-[14px] font-medium transition-colors py-6 inline-block text-text-primary hover:text-black"
+						style="font-family: 'DM Sans', sans-serif;"
+					>
+						{link.label}
+					</a>
+				</div>
 			{/each}
 		</div>
 
 		<!-- Desktop CTA -->
-		<a href="/e/contact" class="e-nav-pill hidden md:inline-flex">
-			Get Started
+		<a
+			href="/e/contact"
+			class="hidden md:inline-flex items-center px-6 py-2.5 rounded-full text-[14px] font-medium transition-all"
+			style="font-family: 'DM Sans', sans-serif; background: #2a2018; color: #fff;"
+		>
+			Contact
 		</a>
 
 		<!-- Mobile Menu Button -->
 		<button
-			class="md:hidden"
-			style="background: none; border: none; cursor: pointer; padding: 8px; color: rgba(250, 250, 248, 0.8);"
+			class="rounded-lg p-2 md:hidden text-text-primary"
 			onclick={() => (mobileOpen = !mobileOpen)}
 			aria-label="Toggle menu"
 		>
-			{#if mobileOpen}<X class="h-5 w-5" />{:else}<Menu class="h-5 w-5" />{/if}
+			{#if mobileOpen}<X class="h-6 w-6" />{:else}<Menu class="h-6 w-6" />{/if}
 		</button>
 	</nav>
 
-	<!-- Mobile Menu -->
+	<!-- Mega Menu Dropdown -->
+	{#if activeMenu && megaMenus[activeMenu]}
+		{@const menu = megaMenus[activeMenu]}
+		<div
+			class="hidden md:block absolute left-0 right-0 top-[72px] bg-white shadow-lg border-t border-border"
+			onmouseenter={cancelClose}
+			onmouseleave={scheduleClose}
+			style="animation: megaFadeIn 0.15s ease-out;"
+		>
+			<div class="mx-auto max-w-[1400px] px-6 lg:px-10 py-8">
+				<div style="display: flex; gap: 48px;">
+					{#each menu.columns as column}
+						<div style="flex: 1; min-width: 200px;">
+							{#if column.heading}
+								<p style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: #8a7e70; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 16px;">{column.heading}</p>
+							{/if}
+							{#each column.links as item}
+								<a href={item.href} style="display: block; text-decoration: none; padding: 8px 0; transition: opacity 0.15s;" class="mega-link">
+									<span style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #2a2018; display: block;">{item.label}</span>
+									{#if item.desc}
+										<span style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #8a7e70; display: block; margin-top: 2px;">{item.desc}</span>
+									{/if}
+								</a>
+							{/each}
+						</div>
+					{/each}
+
+					{#if menu.featured}
+						<div style="flex: 0 0 260px;">
+							<a href={menu.featured.href} style="display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: #f4f1eb;">
+								<div style="aspect-ratio: 16/10; overflow: hidden;">
+									<img src={menu.featured.img} alt={menu.featured.title} style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+								</div>
+								<div style="padding: 16px;">
+									<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: #2a2018; margin: 0 0 4px;">{menu.featured.title}</p>
+									<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #8a7e70; margin: 0;">{menu.featured.desc}</p>
+								</div>
+							</a>
+						</div>
+					{/if}
+				</div>
+			</div>
+		</div>
+	{/if}
+
 	<div class="mobile-menu md:hidden" class:open={mobileOpen}>
-		<div style="padding: 16px 24px 24px; border-top: 1px solid rgba(250, 250, 248, 0.08);">
+		<div class="border-t border-border px-6 py-4">
 			{#each [
+				{ label: 'Home', href: '/e' },
 				{ label: 'Learn', href: '/e/learn' },
 				{ label: 'Convert', href: '/e/convert' },
 				{ label: 'Products', href: '/e/shop' },
 				{ label: 'Support', href: '/e/support' }
 			] as link}
-				<a
-					href={link.href}
-					style="display: block; padding: 10px 0; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 400; color: rgba(250, 250, 248, 0.7); text-decoration: none;"
-					onclick={() => (mobileOpen = false)}
-				>
-					{link.label}
-				</a>
+				<a href={link.href} class="block py-2.5 text-text-primary font-medium" onclick={() => (mobileOpen = false)}>{link.label}</a>
 			{/each}
-			<a
-				href="/e/contact"
-				class="e-nav-pill"
-				style="display: block; text-align: center; margin-top: 12px;"
-				onclick={() => (mobileOpen = false)}
-			>
-				Get Started
-			</a>
+			<a href="/e/contact" class="block mt-3 text-center bg-text-primary text-white py-2.5 rounded-full font-medium">Contact</a>
 		</div>
 	</div>
 </header>
 
 <style>
+	@keyframes megaFadeIn {
+		from { opacity: 0; transform: translateY(-4px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+	:global(.mega-link:hover) {
+		opacity: 0.7;
+	}
 	.mobile-menu {
 		max-height: 0;
 		overflow: hidden;
+		background: rgba(250,249,245,0.97);
 		transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 	.mobile-menu.open {
-		max-height: 320px;
+		max-height: 350px;
 	}
 </style>

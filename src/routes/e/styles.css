@@ -1,0 +1,350 @@
+/* ============================================
+   Being Muslim — Concept E Design System
+   Bold Gradient Modern (Stripe / Linear)
+   ============================================ */
+
+/* ---------- Design Tokens ---------- */
+:root {
+	--e-midnight: #0C1220;
+	--e-surface: #151D2E;
+	--e-white: #FAFAF8;
+	--e-gradient: linear-gradient(135deg, #6366F1, #8B5CF6, #A78BFA);
+	--e-gradient-hover: linear-gradient(135deg, #818CF8, #A78BFA, #C4B5FD);
+	--e-text-primary: #FAFAF8;
+	--e-text-muted: rgba(250, 250, 248, 0.5);
+	--e-text-dark: #0C1220;
+	--e-text-dark-muted: rgba(12, 18, 32, 0.55);
+	--e-border-dark: rgba(250, 250, 248, 0.08);
+	--e-border-light: rgba(12, 18, 32, 0.08);
+	--e-font-heading: 'Space Grotesk', sans-serif;
+	--e-font-body: 'Inter', sans-serif;
+}
+
+/* ---------- Global ---------- */
+.e-root {
+	font-family: var(--e-font-body);
+	color: var(--e-text-dark);
+	background: var(--e-white);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+html {
+	scroll-behavior: auto !important;
+}
+
+/* ---------- Gradient Text Utility ---------- */
+.gradient-text {
+	background: linear-gradient(135deg, #6366F1, #8B5CF6, #A78BFA);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* ---------- Gradient Border Card ---------- */
+.e-gradient-border {
+	position: relative;
+	background: var(--e-surface);
+	border-radius: 12px;
+	overflow: hidden;
+}
+.e-gradient-border::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: 12px;
+	padding: 1px;
+	background: linear-gradient(135deg, #6366F1, #8B5CF6, #A78BFA);
+	-webkit-mask:
+		linear-gradient(#fff 0 0) content-box,
+		linear-gradient(#fff 0 0);
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	pointer-events: none;
+	transition: opacity 0.3s;
+	opacity: 0.5;
+}
+.e-gradient-border:hover::before {
+	opacity: 1;
+}
+
+/* ---------- Buttons ---------- */
+.e-btn-gradient,
+.e-btn-outline,
+.e-btn-outline-dark {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-family: var(--e-font-body);
+	font-size: 14px;
+	font-weight: 500;
+	border-radius: 999px;
+	padding: 12px 28px;
+	text-decoration: none;
+	border: none;
+	cursor: pointer;
+	transition: all 0.25s;
+}
+
+/* Gradient background button */
+.e-btn-gradient {
+	background: var(--e-gradient);
+	color: #fff;
+	box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+.e-btn-gradient:hover {
+	box-shadow: 0 0 32px rgba(99, 102, 241, 0.5);
+	transform: translateY(-1px);
+}
+
+/* Outline button (on dark) */
+.e-btn-outline {
+	background: transparent;
+	color: rgba(250, 250, 248, 0.8);
+	border: 1px solid rgba(250, 250, 248, 0.25);
+}
+.e-btn-outline:hover {
+	border-color: rgba(250, 250, 248, 0.5);
+	color: #fff;
+}
+
+/* Outline button (on light) */
+.e-btn-outline-dark {
+	background: transparent;
+	color: var(--e-text-dark);
+	border: 1px solid rgba(12, 18, 32, 0.2);
+}
+.e-btn-outline-dark:hover {
+	border-color: rgba(12, 18, 32, 0.4);
+	background: rgba(12, 18, 32, 0.03);
+}
+
+/* ---------- Section helpers ---------- */
+.e-section-dark {
+	background: var(--e-midnight);
+	color: var(--e-text-primary);
+}
+
+.e-section-light {
+	background: var(--e-white);
+	color: var(--e-text-dark);
+}
+
+.e-section-padding {
+	padding: 48px 0;
+}
+@media (min-width: 768px) {
+	.e-section-padding {
+		padding: 80px 0;
+	}
+}
+
+.e-container {
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 24px;
+	padding-right: 24px;
+}
+@media (min-width: 1024px) {
+	.e-container {
+		padding-left: 40px;
+		padding-right: 40px;
+	}
+}
+
+/* ---------- Explore cards grid ---------- */
+.e-grid-explore {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 20px;
+}
+@media (min-width: 768px) {
+	.e-grid-explore {
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+	}
+}
+
+/* ---------- Articles grid ---------- */
+.e-grid-articles {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 24px;
+}
+@media (min-width: 640px) {
+	.e-grid-articles {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+@media (min-width: 1024px) {
+	.e-grid-articles {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* ---------- Products horizontal scroll ---------- */
+.e-products-scroll {
+	display: flex;
+	gap: 20px;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	padding-bottom: 16px;
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: thin;
+	scrollbar-color: rgba(250, 250, 248, 0.15) transparent;
+}
+.e-products-scroll::-webkit-scrollbar {
+	height: 4px;
+}
+.e-products-scroll::-webkit-scrollbar-track {
+	background: transparent;
+}
+.e-products-scroll::-webkit-scrollbar-thumb {
+	background: rgba(250, 250, 248, 0.15);
+	border-radius: 2px;
+}
+
+/* ---------- FAQ styles ---------- */
+.e-faq-item {
+	border-top: 1px solid rgba(12, 18, 32, 0.1);
+}
+.e-faq-button {
+	width: 100%;
+	text-align: left;
+	padding: 20px 0;
+	border: none;
+	background: none;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 16px;
+}
+.e-faq-question {
+	font-family: var(--e-font-heading);
+	font-size: 15px;
+	font-weight: 500;
+	color: var(--e-text-dark);
+	line-height: 1.4;
+}
+.e-faq-answer {
+	font-family: var(--e-font-body);
+	font-size: 14px;
+	color: var(--e-text-dark-muted);
+	line-height: 1.7;
+	margin: 0 0 20px;
+	padding-right: 40px;
+}
+.e-faq-chevron {
+	flex-shrink: 0;
+	margin-top: 2px;
+	transition: transform 0.2s;
+}
+.e-faq-chevron.open {
+	transform: rotate(180deg);
+}
+
+/* ---------- Article card ---------- */
+.e-article-card {
+	background: #fff;
+	border-radius: 12px;
+	overflow: hidden;
+	text-decoration: none;
+	display: block;
+	transition: box-shadow 0.3s, transform 0.3s;
+	border: 1px solid rgba(12, 18, 32, 0.06);
+}
+.e-article-card:hover {
+	box-shadow: 0 8px 32px rgba(12, 18, 32, 0.08);
+	transform: translateY(-2px);
+}
+
+/* ---------- Badge ---------- */
+.e-badge {
+	display: inline-block;
+	font-family: var(--e-font-body);
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.03em;
+	padding: 4px 10px;
+	border-radius: 999px;
+	background: var(--e-gradient);
+	color: #fff;
+}
+
+/* ---------- Footer links ---------- */
+.e-footer-link {
+	font-family: var(--e-font-body);
+	font-size: 13px;
+	color: rgba(250, 250, 248, 0.5);
+	text-decoration: none;
+	transition: all 0.2s;
+	display: inline-block;
+}
+.e-footer-link:hover {
+	background: linear-gradient(135deg, #6366F1, #8B5CF6, #A78BFA);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* ---------- Navbar pill button ---------- */
+.e-nav-pill {
+	display: inline-flex;
+	align-items: center;
+	font-family: var(--e-font-body);
+	font-size: 13px;
+	font-weight: 500;
+	padding: 8px 20px;
+	border-radius: 999px;
+	background: var(--e-gradient);
+	color: #fff;
+	text-decoration: none;
+	transition: all 0.25s;
+}
+.e-nav-pill:hover {
+	box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+/* ---------- Product card on dark ---------- */
+.e-product-card {
+	flex: 0 0 280px;
+	scroll-snap-align: start;
+	text-decoration: none;
+	display: block;
+}
+.e-product-card:hover .e-product-img img {
+	transform: scale(1.03);
+}
+
+.e-product-img {
+	aspect-ratio: 1;
+	background: var(--e-surface);
+	overflow: hidden;
+	margin-bottom: 16px;
+	position: relative;
+}
+.e-product-img img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.5s;
+}
+
+/* ---------- Trust avatars ---------- */
+.e-trust-avatars {
+	display: flex;
+	-space-x: 2;
+}
+.e-trust-avatar {
+	width: 36px;
+	height: 36px;
+	border-radius: 999px;
+	border: 2px solid var(--e-midnight);
+	margin-left: -8px;
+}
+.e-trust-avatar:first-child {
+	margin-left: 0;
+}

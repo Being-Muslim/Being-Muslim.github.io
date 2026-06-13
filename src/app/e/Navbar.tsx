@@ -128,32 +128,32 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
-        solid ? "backdrop-blur-md shadow-sm border-border" : "bg-transparent border-transparent"
-      }`}
-      style={solid ? css("background: rgba(250,245,235,0.97)") : undefined}
+      className="fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300"
+      style={css(
+        `border-color: rgba(255,255,255,0.16); ${
+          solid ? "background: #000;" : "background: rgba(0,0,0,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);"
+        }`
+      )}
     >
-      <nav className="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between px-6 lg:px-10">
+      <nav className="mx-auto flex h-[68px] max-w-[1400px] items-center justify-between px-6 lg:px-10">
         {/* Logo */}
         <Link href="/e" className="flex items-center gap-2.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png"
             alt="Being Muslim"
-            className={`h-8 w-8 ${scrolled || activeMenu || mobileOpen ? "invert" : ""}`}
-            style={css("transition: filter 0.3s")}
+            className="h-7 w-7"
+            style={css("filter: brightness(0) invert(1)")}
           />
           <span
-            className={`text-lg font-bold transition-colors font-display ${
-              scrolled || activeMenu || mobileOpen ? "text-text-primary" : "text-white"
-            }`}
+            style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.01em; font-size: 16px; color: #fff")}
           >
             Being Muslim
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-9 md:flex">
           {navLinks.map((link) => (
             <div
               key={link.label}
@@ -163,10 +163,8 @@ export default function Navbar() {
             >
               <Link
                 href={link.href}
-                className={`text-[14px] font-medium transition-colors py-6 inline-block ${
-                  scrolled || activeMenu ? "text-text-primary hover:text-black" : "text-white/80 hover:text-white"
-                }`}
-                style={css("font-family: 'DM Sans', sans-serif")}
+                className="py-6 inline-block transition-colors"
+                style={css("font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7)")}
               >
                 {link.label}
               </Link>
@@ -177,38 +175,37 @@ export default function Navbar() {
         {/* Desktop CTA */}
         <Link
           href="/e/contact"
-          className={`hidden md:inline-flex items-center px-6 py-2.5 rounded-full text-[14px] font-medium transition-all ${
-            scrolled || activeMenu ? "" : "bg-white text-text-primary hover:bg-white/90"
-          }`}
-          style={css(`font-family: 'DM Sans', sans-serif;${scrolled || activeMenu ? " background: #2a2018; color: #fff;" : ""}`)}
+          className="hidden md:inline-flex items-center transition-all"
+          style={css("font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 22px; border: 1px solid rgba(255,255,255,0.32); color: #fff")}
         >
           Contact
         </Link>
 
         {/* Mobile Menu Button */}
         <button
-          className={`rounded-lg p-2 md:hidden ${scrolled || activeMenu || mobileOpen ? "text-text-primary" : "text-white"}`}
+          className="p-2 md:hidden"
+          style={css("color: #fff")}
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Toggle menu"
         >
-          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {mobileOpen ? <X className="h-6 w-6" strokeWidth={1.5} /> : <Menu className="h-6 w-6" strokeWidth={1.5} />}
         </button>
       </nav>
 
       {/* Mega Menu Dropdown */}
       {menu && (
         <div
-          className="hidden md:block absolute left-0 right-0 top-[72px] bg-white shadow-lg border-t border-border"
+          className="hidden md:block absolute left-0 right-0 top-[68px] border-t"
           onMouseEnter={cancelClose}
           onMouseLeave={scheduleClose}
-          style={css("animation: megaFadeIn 0.15s ease-out")}
+          style={css("animation: megaFadeIn 0.15s ease-out; background: #000; border-color: rgba(255,255,255,0.16); border-bottom: 1px solid rgba(255,255,255,0.16)")}
         >
-          <div className="mx-auto max-w-[1400px] px-6 lg:px-10 py-8">
-            <div style={css("display: flex; gap: 48px")}>
+          <div className="mx-auto max-w-[1400px] px-6 lg:px-10 py-10">
+            <div style={css("display: flex; gap: 56px")}>
               {menu.columns.map((column, ci) => (
                 <div key={ci} style={css("flex: 1; min-width: 200px")}>
                   {column.heading && (
-                    <p style={css("font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: #8a7e70; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 16px")}>
+                    <p style={css("font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 18px")}>
                       {column.heading}
                     </p>
                   )}
@@ -217,13 +214,13 @@ export default function Navbar() {
                       key={item.label}
                       href={item.href}
                       className="mega-link"
-                      style={css("display: block; text-decoration: none; padding: 8px 0; transition: opacity 0.15s")}
+                      style={css("display: block; text-decoration: none; padding: 9px 0; transition: color 0.15s")}
                     >
-                      <span style={css("font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #2a2018; display: block")}>
+                      <span style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.01em; font-size: 14px; color: #fff; display: block")}>
                         {item.label}
                       </span>
                       {item.desc && (
-                        <span style={css("font-family: 'DM Sans', sans-serif; font-size: 12px; color: #8a7e70; display: block; margin-top: 2px")}>
+                        <span style={css("font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.45); display: block; margin-top: 4px")}>
                           {item.desc}
                         </span>
                       )}
@@ -234,14 +231,14 @@ export default function Navbar() {
 
               {menu.featured && (
                 <div style={css("flex: 0 0 260px")}>
-                  <Link href={menu.featured.href} style={css("display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: #f4f1eb")}>
+                  <Link href={menu.featured.href} style={css("display: block; text-decoration: none; overflow: hidden; border: 1px solid rgba(255,255,255,0.16); background: #050505")}>
                     <div style={css("aspect-ratio: 16/10; overflow: hidden")}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={menu.featured.img} alt={menu.featured.title} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
+                      <img src={menu.featured.img} alt={menu.featured.title} style={css("width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(0.2)")} />
                     </div>
                     <div style={css("padding: 16px")}>
-                      <p style={css("font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: #2a2018; margin: 0 0 4px")}>{menu.featured.title}</p>
-                      <p style={css("font-family: 'DM Sans', sans-serif; font-size: 12px; color: #8a7e70; margin: 0")}>{menu.featured.desc}</p>
+                      <p style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.01em; font-size: 14px; color: #fff; margin: 0 0 6px")}>{menu.featured.title}</p>
+                      <p style={css("font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.45); margin: 0; line-height: 1.5")}>{menu.featured.desc}</p>
                     </div>
                   </Link>
                 </div>
@@ -253,13 +250,23 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div className={`mobile-menu md:hidden ${mobileOpen ? "open" : ""}`}>
-        <div className="border-t border-border px-6 py-4">
+        <div className="px-6 py-4" style={css("border-top: 1px solid rgba(255,255,255,0.16)")}>
           {navLinks.map((link) => (
-            <Link key={link.label} href={link.href} className="block py-2.5 text-text-primary font-medium" onClick={() => setMobileOpen(false)}>
+            <Link
+              key={link.label}
+              href={link.href}
+              className="block py-3"
+              style={css("font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #fff")}
+              onClick={() => setMobileOpen(false)}
+            >
               {link.label}
             </Link>
           ))}
-          <Link href="/e/contact" className="block mt-3 text-center bg-text-primary text-white py-2.5 rounded-full font-medium">
+          <Link
+            href="/e/contact"
+            className="block mt-3 text-center py-3"
+            style={css("font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; background: #fff; color: #000")}
+          >
             Contact
           </Link>
         </div>

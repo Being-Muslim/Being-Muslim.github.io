@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { css } from "@/lib/css";
 
@@ -17,17 +19,31 @@ const columns = [
 
 export default function Footer() {
   return (
-    <footer style={css("background: #191918; padding: 64px 0 0")}>
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+    <footer style={css("background: #16223a; padding: 56px 0 0; border-radius: 28px 28px 0 0")}>
+      <div className="mx-auto max-w-[1240px] px-6 lg:px-8">
+        {/* Newsletter signup band */}
+        <div className="bm-reveal" style={css("background: #1f8a70; border-radius: 24px; padding: 36px 32px; margin-bottom: 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px")}>
+          <div style={css("max-width: 420px")}>
+            <h3 className="bm-lower" style={css("font-family: 'Inter', sans-serif; font-size: 26px; font-weight: 800; color: #fff; margin: 0 0 6px; letter-spacing: -0.01em")}>stay in the loop</h3>
+            <p style={css("font-family: 'Inter', sans-serif; font-size: 14px; color: rgba(255,255,255,0.85); margin: 0; line-height: 1.5")}>
+              Get new resources, articles, and support delivered to your inbox.
+            </p>
+          </div>
+          <form style={css("display: flex; gap: 10px; flex: 1; min-width: 280px; max-width: 460px")} onSubmit={(e) => e.preventDefault()}>
+            <input type="email" placeholder="Your email address" aria-label="Email address" className="bm-newsletter-input" />
+            <button type="submit" className="bm-btn-gold" style={css("white-space: nowrap")}>Subscribe</button>
+          </form>
+        </div>
+
         <div className="bm-grid-footer">
           {/* Brand */}
           <div>
             <Link href="/f" style={css("display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 16px")}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png" alt="Being Muslim" style={css("height: 32px; width: 32px")} />
-              <span style={css("font-family: 'Source Serif 4', serif; font-size: 18px; color: #fff")}>Being Muslim</span>
+              <span style={css("font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 700; color: #fff")}>Being Muslim</span>
             </Link>
-            <p style={css("font-family: 'DM Sans', sans-serif; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; max-width: 260px; margin-bottom: 20px")}>
+            <p style={css("font-family: 'Inter', sans-serif; font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; max-width: 280px; margin-bottom: 20px")}>
               Empowering converts and beginners on their Islamic journey through education, community, and support.
             </p>
             <div style={css("display: flex; gap: 10px")}>
@@ -43,7 +59,7 @@ export default function Footer() {
 
           {columns.map((col) => (
             <div key={col.heading}>
-              <h4 style={css("font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px")}>
+              <h4 style={css("font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; color: #f5c518; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px")}>
                 {col.heading}
               </h4>
               {col.links.map((link, i) => (
@@ -56,8 +72,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div style={css("border-top: 1px solid rgba(255,255,255,0.08); padding: 20px 0; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px")}>
-          <p style={css("font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(255,255,255,0.3)")}>&copy; 2026 The Being Muslim Project. All rights reserved.</p>
+        <div style={css("border-top: 1px solid rgba(255,255,255,0.12); padding: 20px 0; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px")}>
+          <p style={css("font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255,255,255,0.4)")}>&copy; 2026 The Being Muslim Project. All rights reserved.</p>
           <div style={css("display: flex; gap: 24px")}>
             <Link href="/f" className="bm-footer-link" style={css("font-size: 12px; color: rgba(255,255,255,0.3)")}>Privacy</Link>
             <Link href="/f" className="bm-footer-link" style={css("font-size: 12px; color: rgba(255,255,255,0.3)")}>Terms</Link>

@@ -509,14 +509,44 @@ p, a, li, label, input, textarea, select, button {
 	display: none;
 }
 
-/* ---------- Navbar (ported from NavbarB.svelte <style>) ---------- */
-@keyframes megaFadeIn {
-	from { opacity: 0; transform: translateY(-4px); }
-	to { opacity: 1; transform: translateY(0); }
+/* ---------- Coda-style expanding mega-menu ---------- */
+/* Full-width panel that expands DOWN from the navbar: animate max-height +
+   opacity for a smooth ~200ms expand/collapse. Collapsed by default. */
+.bm-mega-wrap {
+	max-height: 0;
+	opacity: 0;
+	overflow: hidden;
+	pointer-events: none;
+	transition: max-height 0.22s ease-out, opacity 0.18s ease-out;
 }
-.mega-link:hover {
-	opacity: 0.7;
+.bm-mega-wrap.bm-mega-open {
+	max-height: 560px;
+	opacity: 1;
+	pointer-events: auto;
 }
+/* Link rows get a soft hover background (calm, Coda-like) */
+.bm-mega-link:hover {
+	background: rgba(42, 32, 24, 0.05);
+}
+/* Title arrow nudges right on hover */
+.bm-mega-title:hover .bm-mega-title-arrow {
+	transform: translateX(3px);
+}
+/* "See all →" underline on hover */
+.bm-mega-seeall:hover {
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+/* Product image cards lift slightly on hover */
+.bm-mega-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+/* Chevron rotation is driven inline via transform, this just smooths it */
+.bm-chevron {
+	will-change: transform;
+}
+
 .mobile-shell {
 	max-width: 1100px;
 	margin: 0 auto;

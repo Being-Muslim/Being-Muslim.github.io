@@ -133,11 +133,11 @@ export default function Navbar() {
       }`}
       style={
         solid
-          ? css("background: rgba(250,249,245,0.97)")
-          : css("background: rgba(250,249,245,0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px)")
+          ? css("background: rgba(249,247,242,0.97)")
+          : css("background: rgba(249,247,242,0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px)")
       }
     >
-      <nav className="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between px-6 lg:px-10">
+      <nav className="mx-auto flex h-[72px] max-w-[1240px] items-center justify-between px-6 lg:px-8">
         {/* Logo */}
         <Link href="/f" className="flex items-center gap-2.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -147,7 +147,7 @@ export default function Navbar() {
             className="h-8 w-8 invert"
             style={css("transition: filter 0.3s")}
           />
-          <span className="text-lg font-bold transition-colors font-display text-text-primary">
+          <span className="text-lg font-bold transition-colors" style={css("font-family: 'Inter', sans-serif; color: #1d2b29")}>
             Being Muslim
           </span>
         </Link>
@@ -163,8 +163,8 @@ export default function Navbar() {
             >
               <Link
                 href={link.href}
-                className="bm-link-animated text-[14px] font-medium transition-colors py-6 inline-block text-text-primary hover:text-black"
-                style={css("font-family: 'DM Sans', sans-serif")}
+                className="bm-link-animated text-[15px] font-medium transition-colors py-6 inline-block"
+                style={css("font-family: 'Inter', sans-serif; color: #1d2b29")}
               >
                 {link.label}
               </Link>
@@ -174,16 +174,17 @@ export default function Navbar() {
 
         {/* Desktop CTA */}
         <Link
-          href="/f/contact"
-          className="hidden md:inline-flex items-center px-6 py-2.5 rounded-full text-[14px] font-medium transition-all"
-          style={css("font-family: 'DM Sans', sans-serif; background: #2a2018; color: #fff")}
+          href="/f/support"
+          className="hidden md:inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full text-[15px] font-semibold transition-all bm-btn-gold"
+          style={css("font-family: 'Inter', sans-serif")}
         >
-          Contact
+          Donate
         </Link>
 
         {/* Mobile Menu Button */}
         <button
-          className="rounded-lg p-2 md:hidden text-text-primary"
+          className="rounded-lg p-2 md:hidden"
+          style={css("color: #1d2b29")}
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -194,17 +195,17 @@ export default function Navbar() {
       {/* Mega Menu Dropdown */}
       {menu && (
         <div
-          className="hidden md:block absolute left-0 right-0 top-[72px] bg-white shadow-lg border-t border-border"
+          className="hidden md:block absolute left-0 right-0 top-[72px] shadow-lg"
           onMouseEnter={cancelClose}
           onMouseLeave={scheduleClose}
-          style={css("animation: megaFadeIn 0.15s ease-out")}
+          style={css("animation: megaFadeIn 0.15s ease-out; background: #fff; border-top: 1px solid #ece7dd; border-radius: 0 0 20px 20px")}
         >
-          <div className="mx-auto max-w-[1400px] px-6 lg:px-10 py-8">
+          <div className="mx-auto max-w-[1240px] px-6 lg:px-8 py-8">
             <div style={css("display: flex; gap: 48px")}>
               {menu.columns.map((column, ci) => (
                 <div key={ci} style={css("flex: 1; min-width: 200px")}>
                   {column.heading && (
-                    <p style={css("font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: #8a7e70; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 16px")}>
+                    <p style={css("font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; color: #1f8a70; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 16px")}>
                       {column.heading}
                     </p>
                   )}
@@ -215,11 +216,11 @@ export default function Navbar() {
                       className="mega-link"
                       style={css("display: block; text-decoration: none; padding: 8px 0; transition: opacity 0.15s")}
                     >
-                      <span style={css("font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #2a2018; display: block")}>
+                      <span style={css("font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: #1d2b29; display: block")}>
                         {item.label}
                       </span>
                       {item.desc && (
-                        <span style={css("font-family: 'DM Sans', sans-serif; font-size: 12px; color: #8a7e70; display: block; margin-top: 2px")}>
+                        <span style={css("font-family: 'Inter', sans-serif; font-size: 12px; color: #666; display: block; margin-top: 2px")}>
                           {item.desc}
                         </span>
                       )}
@@ -230,14 +231,14 @@ export default function Navbar() {
 
               {menu.featured && (
                 <div style={css("flex: 0 0 260px")}>
-                  <Link href={menu.featured.href} style={css("display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: #f4f1eb")}>
+                  <Link href={menu.featured.href} style={css("display: block; text-decoration: none; border-radius: 16px; overflow: hidden; background: #f9f7f2")}>
                     <div style={css("aspect-ratio: 16/10; overflow: hidden")}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={menu.featured.img} alt={menu.featured.title} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
                     </div>
                     <div style={css("padding: 16px")}>
-                      <p style={css("font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: #2a2018; margin: 0 0 4px")}>{menu.featured.title}</p>
-                      <p style={css("font-family: 'DM Sans', sans-serif; font-size: 12px; color: #8a7e70; margin: 0")}>{menu.featured.desc}</p>
+                      <p style={css("font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #1d2b29; margin: 0 0 4px")}>{menu.featured.title}</p>
+                      <p style={css("font-family: 'Inter', sans-serif; font-size: 12px; color: #666; margin: 0")}>{menu.featured.desc}</p>
                     </div>
                   </Link>
                 </div>
@@ -249,14 +250,14 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div className={`mobile-menu md:hidden ${mobileOpen ? "open" : ""}`}>
-        <div className="border-t border-border px-6 py-4">
+        <div className="px-6 py-4" style={css("border-top: 1px solid #ece7dd")}>
           {navLinks.map((link) => (
-            <Link key={link.label} href={link.href} className="block py-2.5 text-text-primary font-medium" onClick={() => setMobileOpen(false)}>
+            <Link key={link.label} href={link.href} className="block py-2.5 font-medium" style={css("font-family: 'Inter', sans-serif; color: #1d2b29")} onClick={() => setMobileOpen(false)}>
               {link.label}
             </Link>
           ))}
-          <Link href="/f/contact" className="block mt-3 text-center bg-text-primary text-white py-2.5 rounded-full font-medium">
-            Contact
+          <Link href="/f/support" className="block mt-3 text-center py-2.5 rounded-full font-semibold bm-btn-gold" style={css("justify-content: center; font-family: 'Inter', sans-serif")} onClick={() => setMobileOpen(false)}>
+            Donate
           </Link>
         </div>
       </div>

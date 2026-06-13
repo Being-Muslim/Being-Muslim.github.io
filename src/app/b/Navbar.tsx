@@ -118,23 +118,22 @@ const navLinks = [
   { label: "Support", href: "/b/support" },
 ];
 
-// The expanding mega-menu panel reads as a clean, calm, Coda-style light
-// surface that sits cleanly under concept B's glass/dark pill navbar.
+// The expanding mega-menu panel is GLASS — a frosted dark translucent surface
+// (backdrop-filter blur) consistent with concept B's glass/dark pill navbar.
+// Text/heading/link colors are light so content stays legible on the dark
+// frosted glass. The actual glass background + blur live in concept-b.css
+// (.bm-mega-region); these are the foreground colors used inline.
 const PANEL = {
-  bg: "rgba(255,255,255,0.97)",
-  border: "rgba(0,0,0,0.06)",
-  shadow: "0 16px 40px rgba(0,0,0,0.16)",
-  blur: "blur(20px)",
-  title: "#2a2018",
-  heading: "#9a8f80",
-  itemText: "#3a2e22",
-  itemIcon: "#8a7e70",
-  divider: "rgba(0,0,0,0.07)",
-  link: "#7a6f60",
-  blurbText: "#7a6f60",
-  cardBg: "#f4f1eb",
-  cardBorder: "rgba(0,0,0,0.05)",
-  cardTitle: "#2a2018",
+  title: "#ffffff",
+  heading: "rgba(255,255,255,0.55)",
+  itemText: "rgba(255,255,255,0.88)",
+  itemIcon: "rgba(255,255,255,0.6)",
+  divider: "rgba(255,255,255,0.12)",
+  link: "rgba(255,255,255,0.72)",
+  blurbText: "rgba(255,255,255,0.7)",
+  cardBg: "rgba(255,255,255,0.08)",
+  cardBorder: "rgba(255,255,255,0.14)",
+  cardTitle: "#ffffff",
 };
 
 export default function Navbar() {
@@ -173,21 +172,16 @@ export default function Navbar() {
 
   // Concept B's glass pill becomes a readable solid dark surface once scrolled
   // past the dark hero onto the light page body. The navbar surface stays
-  // VISUALLY STABLE whether or not a menu is open — opening a menu no longer
-  // morphs the pill's color/border/radius. Instead the panel region below
-  // calmly reveals itself (see .bm-mega-region). This avoids the "violent"
-  // simultaneous shape+color+width morph; the nav row itself doesn't change.
+  // VISUALLY STABLE whether or not a menu is open — opening a menu does NOT
+  // touch the top edge at all. The nav ROW is a fixed-height pill with FIXED
+  // top corners; only the panel region BELOW it (.bm-mega-region) animates its
+  // max-height to grow strictly downward. No transform/scale, no top-radius
+  // change, no top-padding change, no shadow animation on the top edge.
   const pillBg = scrolled ? "rgba(30,28,24,0.92)" : "rgba(255,255,255,0.08)";
   const pillBorder = scrolled ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.15)";
-  const pillShadow = panelOpen
-    ? "0 16px 40px rgba(0,0,0,0.16)"
-    : scrolled
-      ? "0 4px 24px rgba(0,0,0,0.25)"
-      : "none";
-  // Soften only the BOTTOM corners when the panel is open so the revealed
-  // region tucks under the same surface; the top stays a stable pill. This is
-  // a small, gentle change — not the old full 999px→24px morph.
-  const pillRadius = panelOpen ? "24px 24px 22px 22px" : "999px";
+  // Shadow is NOT animated on open (animating box-shadow visually nudges the
+  // top edge). It only reflects scroll state and switches instantly.
+  const pillShadow = scrolled ? "0 4px 24px rgba(0,0,0,0.25)" : "none";
   // The surface is comfortably wide so the multi-column menu (incl. the 4
   // Products image cards) sits cleanly; it grows taller, not wider, on open.
   const pillMaxWidth = "1100px";
@@ -214,7 +208,13 @@ export default function Navbar() {
           scheduleClose();
         }}
         style={css(
-          `max-width: ${pillMaxWidth}; margin: 0 auto; border-radius: ${pillRadius}; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid ${pillBorder}; background: ${pillBg}; box-shadow: ${pillShadow}; overflow: hidden; transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.3s cubic-bezier(0.4, 0, 0.2, 1)`,
+          // Border-radius is CONSTANT — never animated, never changes on open —
+          // so the top corners stay perfectly still. A roomy 26px radius reads
+          // as a pill on the short nav row but tucks cleanly around the panel
+          // when expanded. Only background/border-color transition (color only,
+          // never geometry); box-shadow + radius are NOT transitioned so the top
+          // edge cannot move. The downward growth is owned by .bm-mega-region.
+          `max-width: ${pillMaxWidth}; margin: 0 auto; border-radius: 26px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid ${pillBorder}; background: ${pillBg}; box-shadow: ${pillShadow}; overflow: hidden; transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1)`,
         )}
       >
         {/* Top nav row */}

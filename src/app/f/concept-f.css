@@ -9,7 +9,8 @@
 /* ---------- Design Tokens ---------- */
 :root {
 	--bm-bg: #faf8f3;          /* cream / off-white page */
-	--bm-dark: #1a1f25;        /* brand dark hero panel */
+	--bm-dark: #1a1f25;        /* brand dark (footer, dark buttons) */
+	--bm-hero: #163a36;        /* deep teal — hero panel only */
 	--bm-navy: #1a1f25;        /* alt brand dark */
 	--bm-ink: #2d3748;         /* near-black headings */
 	--bm-muted: #666666;       /* muted gray body */
@@ -79,21 +80,10 @@ p, a, li, label, input, textarea, select, button {
 	transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.bm-btn-white:hover,
-.bm-btn-dark:hover,
-.bm-btn-outline:hover,
-.bm-btn-glass:hover,
-.bm-btn-gold:hover {
-	transform: translateY(-2px);
-}
-
 /* White pill */
 .bm-btn-white {
 	background: #fff;
 	color: var(--bm-ink);
-}
-.bm-btn-white:hover {
-	box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
 }
 
 /* Dark / deep-green pill */
@@ -101,17 +91,11 @@ p, a, li, label, input, textarea, select, button {
 	background: var(--bm-dark);
 	color: #fff;
 }
-.bm-btn-dark:hover {
-	box-shadow: 0 10px 22px rgba(26, 58, 48, 0.3);
-}
 
 /* Gold accent pill */
 .bm-btn-gold {
 	background: var(--bm-gold);
 	color: #2d3748;
-}
-.bm-btn-gold:hover {
-	box-shadow: 0 10px 22px rgba(196, 163, 90, 0.4);
 }
 
 /* Outline pill */
@@ -260,24 +244,6 @@ p, a, li, label, input, textarea, select, button {
 .bm-carousel-wrapper {
 	position: relative;
 }
-.bm-carousel-wrapper::before,
-.bm-carousel-wrapper::after {
-	content: '';
-	position: absolute;
-	top: 0;
-	bottom: 16px;
-	width: 48px;
-	z-index: 2;
-	pointer-events: none;
-}
-.bm-carousel-wrapper::before {
-	left: 0;
-	background: linear-gradient(to right, var(--bm-bg), transparent);
-}
-.bm-carousel-wrapper::after {
-	right: 0;
-	background: linear-gradient(to left, var(--bm-bg), transparent);
-}
 
 /* ---------- Product card ---------- */
 .bm-product-card {
@@ -323,7 +289,7 @@ p, a, li, label, input, textarea, select, button {
 .bm-hero-panel {
 	position: relative;
 	border-radius: 28px;
-	background: var(--bm-dark);
+	background: var(--bm-hero);
 	overflow: hidden;
 	display: grid;
 	grid-template-columns: 1fr;

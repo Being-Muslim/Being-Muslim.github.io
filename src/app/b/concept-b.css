@@ -487,20 +487,30 @@ p, a, li, label, input, textarea, select, button {
 	display: none;
 }
 
-/* ---------- Calm expand-down navbar mega-menu ---------- */
-/* The nav row stays a VISUALLY STABLE glass/dark pill. Hovering a nav item
-   calmly slides this panel region open DOWNWARD inside the same rounded
-   surface — a gentle height + opacity grow, not a dramatic pill→panel morph.
-   The region carries its own light, readable surface (PANEL colors) so the
-   dark nav row above it never has to flip its text/background colors.
-   Timing is a soft ~0.32s cubic-bezier so nothing jumps or resizes abruptly. */
+/* ---------- Calm expand-down navbar mega-menu (GLASS) ---------- */
+/* The nav ROW stays a VISUALLY STABLE glass/dark pill with FIXED top corners.
+   Hovering a nav item calmly slides ONLY this panel region open DOWNWARD —
+   a gentle max-height + opacity grow beneath the untouched nav row. The top
+   edge, nav-row height, top padding and top corners never change or animate.
+
+   The region is GLASS — a frosted dark translucent surface with its own
+   backdrop-filter blur, matching concept B's glass/dark pill theme. Content
+   uses light text (see PANEL colors in Navbar.tsx) so it stays legible on the
+   frosted glass.
+
+   Timing is a soft ~0.32s cubic-bezier so nothing jumps or resizes abruptly.
+   ONLY max-height + opacity transition — never any geometry that touches the
+   top of the navbar. */
 .bm-mega-region {
 	max-height: 0;
 	opacity: 0;
 	overflow: hidden;
 	pointer-events: none;
-	/* Light, readable surface for the revealed menu content. */
-	background: rgba(255, 255, 255, 0.97);
+	/* Frosted dark glass: translucent dark tint + blur. The dark tint keeps
+	   the light menu text high-contrast while reading as glass, not opaque. */
+	background: rgba(28, 24, 28, 0.68);
+	backdrop-filter: blur(22px) saturate(140%);
+	-webkit-backdrop-filter: blur(22px) saturate(140%);
 	transition:
 		max-height 0.32s cubic-bezier(0.4, 0, 0.2, 1),
 		opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1);
@@ -510,9 +520,9 @@ p, a, li, label, input, textarea, select, button {
 	opacity: 1;
 	pointer-events: auto;
 }
-/* Link rows get a soft hover background (calm, Coda-like) */
+/* Link rows get a soft hover background, light on the dark glass */
 .bm-mega-link:hover {
-	background: rgba(42, 32, 24, 0.05);
+	background: rgba(255, 255, 255, 0.1);
 }
 /* Title arrow nudges right on hover */
 .bm-mega-title:hover .bm-mega-title-arrow {
@@ -523,10 +533,11 @@ p, a, li, label, input, textarea, select, button {
 	text-decoration: underline;
 	text-underline-offset: 3px;
 }
-/* Product image cards lift slightly on hover */
+/* Product image cards lift slightly on hover (shadow reads on dark glass) */
 .bm-mega-card:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+	border-color: rgba(255, 255, 255, 0.28);
 }
 .bm-chevron {
 	will-change: transform;

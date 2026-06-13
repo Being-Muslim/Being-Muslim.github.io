@@ -6,9 +6,9 @@ import { ArrowRight, BookOpen, Compass, ShoppingBag, ChevronDown, Plus } from "l
 import { css } from "@/lib/css";
 
 const featureBoxes = [
-  { label: "Learn", desc: "Explore articles, guides, and resources on Islamic faith and practice", href: "/e/learn", Icon: BookOpen },
-  { label: "Convert", desc: "Take the next step on your journey with guidance and support", href: "/e/convert", Icon: Compass },
-  { label: "Buy", desc: "Books, prayer cards, and resources for your journey", href: "/e/shop", Icon: ShoppingBag },
+  { label: "Learn", desc: "Explore articles, guides, and resources on Islamic faith and practice", href: "/e/learn", Icon: BookOpen, img: "https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png" },
+  { label: "Convert", desc: "Take the next step on your journey with guidance and support", href: "/e/convert", Icon: Compass, img: "/images/hero-bg.jpg" },
+  { label: "Buy", desc: "Books, prayer cards, and resources for your journey", href: "/e/shop", Icon: ShoppingBag, img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg" },
 ];
 
 const articles = [
@@ -78,17 +78,20 @@ export default function ConceptEHome() {
           </div>
 
           <div className="bm-grid-explore">
-            {featureBoxes.map(({ label, desc, href, Icon }) => (
-              <Link key={label} href={href} className="bm-cell bm-card-hover bm-title-underline-parent" style={css("padding: 34px 30px 30px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none")}>
-                <div>
-                  <div className="bm-icon-chip" style={css("margin-bottom: 22px")}>
+            {featureBoxes.map(({ label, desc, href, Icon, img }) => (
+              <Link key={label} href={href} className="bm-overlay-card bm-card-hover bm-title-underline-parent" style={css("min-height: 320px")}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={img} alt={label} className="bm-overlay-img" />
+                <div className="bm-overlay-scrim" aria-hidden="true" />
+                <div className="bm-overlay-body">
+                  <div className="bm-icon-chip" style={css("margin-bottom: 18px; background: rgba(255,255,255,0.16); color: #fff")}>
                     <Icon className="h-6 w-6" strokeWidth={1.75} />
                   </div>
-                  <h3 className="bm-title-underline" style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 22px; color: #2d3748; margin: 0 0 10px; line-height: 1.2")}>{label}</h3>
-                  <p style={css("font-size: 16px; color: #6b7a8d; line-height: 1.55; margin: 0")}>{desc}</p>
-                </div>
-                <div style={css("margin-top: 26px; display: inline-flex; align-items: center; gap: 8px; color: #8b2e36; font-weight: 600; font-size: 15px")}>
-                  Get started <ArrowRight className="h-4 w-4 bm-arrow-slide" strokeWidth={2} />
+                  <h3 style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 24px; color: #fff; margin: 0 0 10px; line-height: 1.2")}>{label}</h3>
+                  <p style={css("font-size: 16px; color: rgba(255,255,255,0.85); line-height: 1.55; margin: 0")}>{desc}</p>
+                  <div style={css("margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; color: #fff; font-weight: 600; font-size: 15px")}>
+                    Get started <ArrowRight className="h-4 w-4 bm-arrow-slide" strokeWidth={2} />
+                  </div>
                 </div>
               </Link>
             ))}
@@ -113,17 +116,16 @@ export default function ConceptEHome() {
 
           <div className="bm-grid-3">
             {articles.map((article) => (
-              <Link key={article.title} href={article.href} style={css("text-decoration: none; display: block; padding: 16px; overflow: hidden")} className="bm-cell bm-title-underline-parent">
-                <div style={css("aspect-ratio: 4/3; background: #faf2e3; overflow: hidden; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px")}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={article.img} alt={article.title} className="bm-frame-img" style={css("width: 100%; height: 100%; object-fit: cover")} />
-                </div>
-                <div style={css("padding: 0 6px 6px")}>
-                  <div style={css("display: flex; align-items: center; gap: 12px; margin-bottom: 10px")}>
-                    <span className="bm-meta" style={css("color: #8b2e36")}>{article.category}</span>
-                    <span style={css("font-size: 13px; color: #6b7a8d")}>{article.time}</span>
+              <Link key={article.title} href={article.href} className="bm-overlay-card bm-title-underline-parent" style={css("min-height: 340px")}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={article.img} alt={article.title} className="bm-overlay-img" />
+                <div className="bm-overlay-scrim" aria-hidden="true" />
+                <div className="bm-overlay-body">
+                  <div style={css("display: flex; align-items: center; gap: 12px; margin-bottom: 12px")}>
+                    <span className="bm-meta" style={css("color: #f3d79b")}>{article.category}</span>
+                    <span style={css("font-size: 13px; color: rgba(255,255,255,0.75)")}>{article.time}</span>
                   </div>
-                  <h3 className="bm-title-underline" style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 20px; color: #2d3748; margin: 0; line-height: 1.25")}>{article.title}</h3>
+                  <h3 style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 22px; color: #fff; margin: 0; line-height: 1.25")}>{article.title}</h3>
                 </div>
               </Link>
             ))}

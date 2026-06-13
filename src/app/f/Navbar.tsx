@@ -184,11 +184,11 @@ export default function Navbar() {
 
         {/* Desktop CTA */}
         <Link
-          href="/f/support"
+          href="/f/contact"
           className="hidden md:inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full text-[15px] font-semibold transition-all bm-btn-gold"
           style={css("font-family: 'Inter', sans-serif")}
         >
-          Donate
+          Contact
         </Link>
 
         {/* Mobile Menu Button */}
@@ -210,8 +210,8 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link href="/f/support" className="block mt-3 text-center py-2.5 rounded-full font-semibold bm-btn-gold" style={css("justify-content: center; font-family: 'Inter', sans-serif")} onClick={() => setMobileOpen(false)}>
-            Donate
+          <Link href="/f/contact" className="block mt-3 text-center py-2.5 rounded-full font-semibold bm-btn-gold" style={css("justify-content: center; font-family: 'Inter', sans-serif")} onClick={() => setMobileOpen(false)}>
+            Contact
           </Link>
         </div>
       </div>

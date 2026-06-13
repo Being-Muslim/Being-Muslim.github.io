@@ -1,10 +1,62 @@
 <script lang="ts">
-	import { Menu, X, ArrowRight } from 'lucide-svelte';
+	import { Menu, X, Droplets, Square } from 'lucide-svelte';
 
 	let mobileOpen = $state(false);
 	let scrolled = $state(false);
 	let activeMenu = $state<string | null>(null);
 	let closeTimeout = $state<ReturnType<typeof setTimeout> | null>(null);
+	let navStyle = $state<'glass' | 'white'>('glass');
+
+	// Theme tokens for the two nav styles (glass pill vs solid white pill)
+	const T = $derived(
+		navStyle === 'glass'
+			? {
+					pillBg: 'rgba(255,255,255,0.08)',
+					pillBorder: 'rgba(255,255,255,0.15)',
+					pillShadow: 'none',
+					blur: 'blur(20px)',
+					logoFilter: 'none',
+					text: '#fff',
+					link: 'rgba(255,255,255,0.85)',
+					ctaBg: 'rgba(255,255,255,0.15)',
+					ctaColor: '#fff',
+					ctaBorder: 'rgba(255,255,255,0.25)',
+					menuBg: 'rgba(30,28,24,0.85)',
+					menuBorder: 'rgba(255,255,255,0.15)',
+					menuBlur: 'blur(24px)',
+					menuShadow: '0 8px 32px rgba(0,0,0,0.3)',
+					heading: 'rgba(255,255,255,0.45)',
+					itemText: '#fff',
+					itemDesc: 'rgba(255,255,255,0.45)',
+					cardBg: 'rgba(255,255,255,0.08)',
+					cardBorder: 'rgba(255,255,255,0.1)',
+					cardTitle: '#fff',
+					cardDesc: 'rgba(255,255,255,0.45)'
+				}
+			: {
+					pillBg: '#ffffff',
+					pillBorder: 'rgba(0,0,0,0.08)',
+					pillShadow: '0 4px 24px rgba(0,0,0,0.10)',
+					blur: 'none',
+					logoFilter: 'invert(1)',
+					text: '#2a2018',
+					link: 'rgba(42,32,24,0.8)',
+					ctaBg: '#2a2018',
+					ctaColor: '#fff',
+					ctaBorder: '#2a2018',
+					menuBg: '#ffffff',
+					menuBorder: 'rgba(0,0,0,0.08)',
+					menuBlur: 'none',
+					menuShadow: '0 12px 32px rgba(0,0,0,0.12)',
+					heading: '#8a7e70',
+					itemText: '#2a2018',
+					itemDesc: '#8a7e70',
+					cardBg: '#f4f1eb',
+					cardBorder: 'rgba(0,0,0,0.05)',
+					cardTitle: '#2a2018',
+					cardDesc: '#8a7e70'
+				}
+	);
 
 	function handleScroll() {
 		scrolled = window.scrollY > 20;
@@ -120,17 +172,17 @@
 			justify-content: space-between;
 			padding: 10px 12px 10px 20px;
 			border-radius: 999px;
-			backdrop-filter: blur(20px);
-			-webkit-backdrop-filter: blur(20px);
-			border: 1px solid rgba(255,255,255,0.15);
-			background: rgba(255,255,255,0.08);
-			box-shadow: none;
+			backdrop-filter: {T.blur};
+			-webkit-backdrop-filter: {T.blur};
+			border: 1px solid {T.pillBorder};
+			background: {T.pillBg};
+			box-shadow: {T.pillShadow};
 			transition: all 0.3s;
 		"
 	>
 		<a href="/b" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
-			<img src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png" alt="Being Muslim" style="height: 28px; width: 28px;" />
-			<span style="font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700; color: #fff;">Being Muslim</span>
+			<img src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png" alt="Being Muslim" style="height: 28px; width: 28px; filter: {T.logoFilter}; transition: filter 0.3s;" />
+			<span style="font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700; color: {T.text}; transition: color 0.3s;">Being Muslim</span>
 		</a>
 		<div style="display: flex; align-items: center; gap: 28px;">
 			{#each [
@@ -145,11 +197,22 @@
 					onmouseenter={() => megaMenus[link.label] ? openMenu(link.label) : (activeMenu = null)}
 					onmouseleave={scheduleClose}
 				>
-					<a href={link.href} style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; text-decoration: none; color: rgba(255,255,255,0.85); padding: 6px 14px; border-radius: 999px; display: inline-block;">{link.label}</a>
+					<a href={link.href} style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; text-decoration: none; color: {T.link}; padding: 6px 14px; border-radius: 999px; display: inline-block; transition: color 0.3s;">{link.label}</a>
 				</div>
 			{/each}
 		</div>
-		<a href="/b/contact" style="align-items: center; padding: 8px 20px; border-radius: 999px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.3s; background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.25);">Contact</a>
+		<div style="display: flex; align-items: center; gap: 8px;">
+			<!-- Nav style switcher (glass <-> white) -->
+			<button
+				onclick={() => (navStyle = navStyle === 'glass' ? 'white' : 'glass')}
+				title="Nav style: {navStyle} — click to switch"
+				aria-label="Switch navigation style"
+				style="display: inline-flex; align-items: center; justify-content: center; height: 34px; width: 34px; border-radius: 999px; cursor: pointer; background: none; border: 1px solid {T.ctaBorder}; color: {T.text}; transition: all 0.3s;"
+			>
+				{#if navStyle === 'glass'}<Droplets style="height: 15px; width: 15px;" />{:else}<Square style="height: 15px; width: 15px;" />{/if}
+			</button>
+			<a href="/b/contact" style="align-items: center; padding: 8px 20px; border-radius: 999px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.3s; background: {T.ctaBg}; color: {T.ctaColor}; border: 1px solid {T.ctaBorder};">Contact</a>
+		</div>
 	</nav>
 
 	<!-- Mega Menu Dropdown -->
@@ -159,7 +222,7 @@
 			class="hidden md:block"
 			onmouseenter={cancelClose}
 			onmouseleave={scheduleClose}
-			style="max-width: 1100px; margin: 8px auto 0; border-radius: 20px; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.15); background: rgba(30,28,24,0.85); box-shadow: 0 8px 32px rgba(0,0,0,0.3); animation: megaFadeIn 0.15s ease-out;"
+			style="max-width: 1100px; margin: 8px auto 0; border-radius: 20px; backdrop-filter: {T.menuBlur}; -webkit-backdrop-filter: {T.menuBlur}; border: 1px solid {T.menuBorder}; background: {T.menuBg}; box-shadow: {T.menuShadow}; animation: megaFadeIn 0.15s ease-out;"
 		>
 			<div style="padding: 28px 32px;">
 				<div style="display: flex; gap: 48px;">
@@ -167,13 +230,13 @@
 					{#each menu.columns as column}
 						<div style="flex: 1; min-width: 200px;">
 							{#if column.heading}
-								<p style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 16px;">{column.heading}</p>
+								<p style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: {T.heading}; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 16px;">{column.heading}</p>
 							{/if}
 							{#each column.links as item}
 								<a href={item.href} style="display: block; text-decoration: none; padding: 8px 0; transition: opacity 0.15s;" class="mega-link">
-									<span style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #fff; display: block;">{item.label}</span>
+									<span style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: {T.itemText}; display: block;">{item.label}</span>
 									{#if item.desc}
-										<span style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(255,255,255,0.45); display: block; margin-top: 2px;">{item.desc}</span>
+										<span style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: {T.itemDesc}; display: block; margin-top: 2px;">{item.desc}</span>
 									{/if}
 								</a>
 							{/each}
@@ -183,13 +246,13 @@
 					<!-- Featured card (optional) -->
 					{#if menu.featured}
 						<div style="flex: 0 0 260px;">
-							<a href={menu.featured.href} style="display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);">
+							<a href={menu.featured.href} style="display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: {T.cardBg}; border: 1px solid {T.cardBorder};">
 								<div style="aspect-ratio: 16/10; overflow: hidden;">
 									<img src={menu.featured.img} alt={menu.featured.title} style="width: 100%; height: 100%; object-fit: cover; display: block;" />
 								</div>
 								<div style="padding: 16px;">
-									<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: #fff; margin: 0 0 4px;">{menu.featured.title}</p>
-									<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(255,255,255,0.45); margin: 0;">{menu.featured.desc}</p>
+									<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: {T.cardTitle}; margin: 0 0 4px;">{menu.featured.title}</p>
+									<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: {T.cardDesc}; margin: 0;">{menu.featured.desc}</p>
 								</div>
 							</a>
 						</div>
@@ -203,20 +266,30 @@
 	<div
 		class="mobile-shell md:hidden"
 		class:open={mobileOpen}
+		style="backdrop-filter: {T.blur}; -webkit-backdrop-filter: {T.blur}; border: 1px solid {T.pillBorder}; background: {T.pillBg}; box-shadow: {T.pillShadow};"
 	>
-		<!-- Top row: logo + hamburger -->
+		<!-- Top row: logo + switcher + hamburger -->
 		<div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px 10px 20px;">
 			<a href="/b" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
-				<img src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png" alt="Being Muslim" style="height: 28px; width: 28px;" />
-				<span style="font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700; color: #fff;">Being Muslim</span>
+				<img src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png" alt="Being Muslim" style="height: 28px; width: 28px; filter: {T.logoFilter}; transition: filter 0.3s;" />
+				<span style="font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700; color: {T.text}; transition: color 0.3s;">Being Muslim</span>
 			</a>
-			<button
-				style="padding: 8px; border: none; background: none; cursor: pointer; color: #fff;"
-				onclick={() => (mobileOpen = !mobileOpen)}
-				aria-label="Toggle menu"
-			>
-				{#if mobileOpen}<X class="h-5 w-5" />{:else}<Menu class="h-5 w-5" />{/if}
-			</button>
+			<div style="display: flex; align-items: center; gap: 4px;">
+				<button
+					onclick={() => (navStyle = navStyle === 'glass' ? 'white' : 'glass')}
+					aria-label="Switch navigation style"
+					style="padding: 8px; border: none; background: none; cursor: pointer; color: {T.text};"
+				>
+					{#if navStyle === 'glass'}<Droplets class="h-5 w-5" />{:else}<Square class="h-5 w-5" />{/if}
+				</button>
+				<button
+					style="padding: 8px; border: none; background: none; cursor: pointer; color: {T.text};"
+					onclick={() => (mobileOpen = !mobileOpen)}
+					aria-label="Toggle menu"
+				>
+					{#if mobileOpen}<X class="h-5 w-5" />{:else}<Menu class="h-5 w-5" />{/if}
+				</button>
+			</div>
 		</div>
 
 		<!-- Expandable links -->
@@ -229,9 +302,9 @@
 					{ label: 'Products', href: '/b/shop' },
 					{ label: 'Support', href: '/b/support' }
 				] as link}
-					<a href={link.href} style="display: block; padding: 10px 0; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #fff; text-decoration: none;" onclick={() => (mobileOpen = false)}>{link.label}</a>
+					<a href={link.href} style="display: block; padding: 10px 0; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: {T.text}; text-decoration: none;" onclick={() => (mobileOpen = false)}>{link.label}</a>
 				{/each}
-				<a href="/b/contact" style="display: block; margin-top: 8px; text-align: center; background: rgba(255,255,255,0.15); color: #fff; padding: 10px; border-radius: 999px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.25);" onclick={() => (mobileOpen = false)}>Contact</a>
+				<a href="/b/contact" style="display: block; margin-top: 8px; text-align: center; background: {T.ctaBg}; color: {T.ctaColor}; padding: 10px; border-radius: 999px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; text-decoration: none; border: 1px solid {T.ctaBorder};" onclick={() => (mobileOpen = false)}>Contact</a>
 			</div>
 		</div>
 	</div>
@@ -249,10 +322,6 @@
 		max-width: 1100px;
 		margin: 0 auto;
 		border-radius: 24px;
-		backdrop-filter: blur(20px);
-		-webkit-backdrop-filter: blur(20px);
-		border: 1px solid rgba(255,255,255,0.15);
-		background: rgba(255,255,255,0.08);
 		overflow: hidden;
 	}
 	.mobile-links {

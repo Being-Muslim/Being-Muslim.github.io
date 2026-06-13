@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Menu, X, BookOpen, Heart, ShoppingBag, Users, ArrowRight, Compass, Sunrise, RefreshCw } from 'lucide-svelte';
+	import { Menu, X, ChevronDown } from 'lucide-svelte';
 
 	let mobileOpen = $state(false);
 	let scrolled = $state(false);
@@ -7,7 +7,7 @@
 	let closeTimeout = $state<ReturnType<typeof setTimeout> | null>(null);
 
 	function handleScroll() {
-		scrolled = window.scrollY > 20;
+		scrolled = window.scrollY > 8;
 	}
 
 	function openMenu(label: string) {
@@ -25,8 +25,11 @@
 		if (closeTimeout) clearTimeout(closeTimeout);
 	}
 
-	const megaMenus: Record<string, { columns: { heading?: string; links: { label: string; href: string; desc?: string; icon?: any }[] }[]; featured?: { title: string; desc: string; href: string; img: string } }> = {
-		Learn: {
+	// Coda-style nav: dropdown items first, then a divider, then plain links
+	const dropdownItems: { label: string; href: string; columns: { heading?: string; links: { label: string; href: string; desc?: string }[] }[] }[] = [
+		{
+			label: 'Learn',
+			href: '/c/learn',
 			columns: [
 				{
 					heading: 'Resources',
@@ -44,35 +47,33 @@
 						{ label: 'View All Resources', href: '/c/learn' }
 					]
 				}
-			],
-			featured: {
-				title: 'Foundations of Faith',
-				desc: 'A 24-lesson course covering the essentials.',
-				href: '/c/learn',
-				img: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&q=80&auto=format&fit=crop'
-			}
+			]
 		},
-		Convert: {
+		{
+			label: 'Convert',
+			href: '/c/convert',
 			columns: [
 				{
 					heading: 'Your Journey',
 					links: [
-						{ label: 'Ready to Convert?', href: '/c/convert', desc: 'Take the next step with guidance and support' },
-						{ label: 'What to Expect', href: '/c/convert', desc: 'Understanding the process and what comes after' },
-						{ label: 'FAQ for New Muslims', href: '/c/convert', desc: 'Answers to the most common questions' }
+						{ label: 'Ready to Convert?', href: '/c/convert', desc: 'Take the next step with guidance' },
+						{ label: 'What to Expect', href: '/c/convert', desc: 'The process and what comes after' },
+						{ label: 'FAQ for New Muslims', href: '/c/convert', desc: 'Answers to common questions' }
 					]
 				},
 				{
 					heading: 'Support',
 					links: [
 						{ label: 'Find a Community', href: '/c/convert', desc: 'Connect with Muslims near you' },
-						{ label: 'Mentorship Program', href: '/c/convert', desc: 'One-on-one guidance from experienced Muslims' },
+						{ label: 'Mentorship Program', href: '/c/convert', desc: 'One-on-one guidance' },
 						{ label: 'Start Your Journey', href: '/c/convert' }
 					]
 				}
 			]
 		},
-		Products: {
+		{
+			label: 'Products',
+			href: '/c/shop',
 			columns: [
 				{
 					heading: 'Products',
@@ -83,180 +84,222 @@
 						{ label: 'Digital Edition (eBook)', href: '/c/shop/ebook', desc: 'Read anywhere, instantly' }
 					]
 				}
-			],
-			featured: {
-				title: 'The Complete Boxed Set',
-				desc: 'Everything you need in one beautiful package.',
-				href: '/c/shop/boxed-set',
-				img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg'
-			}
-		},
-		Support: {
-			columns: [
-				{
-					heading: 'Get Involved',
-					links: [
-						{ label: 'Donate', href: '/c/support', desc: 'Help fund resources for new Muslims' },
-						{ label: 'Sponsor a Boxed Set', href: '/c/support', desc: 'Gift a set to someone in need' },
-						{ label: 'Volunteer', href: '/c/support', desc: 'Join our team of contributors' },
-						{ label: 'Support the Mission', href: '/c/support' }
-					]
-				}
 			]
 		}
-	};
+	];
+
+	const plainLinks = [{ label: 'Support', href: '/c/support' }];
 </script>
 
 <svelte:window onscroll={handleScroll} />
 
 <header
-	class="fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 {activeMenu || mobileOpen
-		? 'backdrop-blur-md shadow-sm border-border'
-		: scrolled
-			? 'backdrop-blur-md shadow-sm border-border'
-			: 'bg-transparent border-transparent'}"
-	style="{activeMenu || mobileOpen || scrolled ? 'background: rgba(250,245,235,0.97);' : ''}"
+	class="fixed top-0 left-0 right-0 z-50"
+	style="
+		background: #faf9f5;
+		border-bottom: 1px solid {scrolled || activeMenu ? '#e6e0d6' : 'transparent'};
+		box-shadow: {scrolled && !activeMenu ? '0 1px 12px rgba(42,32,24,0.05)' : 'none'};
+		transition: border-color 0.2s, box-shadow 0.2s;
+	"
 >
-	<nav class="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between px-6 lg:px-10">
-		<!-- Logo -->
-		<a href="/c" class="flex items-center gap-2.5">
-			<img
-				src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png"
-				alt="Being Muslim"
-				class="h-8 w-8 {scrolled || activeMenu || mobileOpen ? 'invert' : ''}"
-				style="transition: filter 0.3s;"
-			/>
-			<span class="text-lg font-bold transition-colors font-display {scrolled || activeMenu || mobileOpen ? 'text-text-primary' : 'text-white'}">
-				Being Muslim
-			</span>
-		</a>
+	<nav
+		style="
+			max-width: 1400px;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: 64px;
+			padding: 0 24px;
+		"
+	>
+		<!-- Left: logo + nav links (Coda-style left-aligned group) -->
+		<div style="display: flex; align-items: center; gap: 28px; min-width: 0;">
+			<a href="/c" style="display: flex; align-items: center; gap: 9px; text-decoration: none; flex-shrink: 0;">
+				<img
+					src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png"
+					alt="Being Muslim"
+					style="height: 26px; width: 26px; filter: invert(1);"
+				/>
+				<span style="font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700; color: #2a2018; white-space: nowrap;">
+					Being Muslim
+				</span>
+			</a>
 
-		<!-- Desktop Nav -->
-		<div class="hidden items-center gap-8 md:flex">
-			{#each [
-				{ label: 'Home', href: '/c' },
-				{ label: 'Learn', href: '/c/learn' },
-				{ label: 'Convert', href: '/c/convert' },
-				{ label: 'Products', href: '/c/shop' },
-				{ label: 'Support', href: '/c/support' }
-			] as link}
-				<div
-					class="relative"
-					onmouseenter={() => megaMenus[link.label] ? openMenu(link.label) : (activeMenu = null)}
-					onmouseleave={scheduleClose}
-				>
-					<a
-						href={link.href}
-						class="text-[14px] font-medium transition-colors py-6 inline-block {scrolled || activeMenu
-							? 'text-text-primary hover:text-black'
-							: 'text-white/80 hover:text-white'}"
-						style="font-family: 'DM Sans', sans-serif;"
+			<div class="hidden lg:flex" style="align-items: center; gap: 2px;">
+				{#each dropdownItems as item}
+					<div
+						style="position: relative;"
+						onmouseenter={() => openMenu(item.label)}
+						onmouseleave={scheduleClose}
 					>
-						{link.label}
-					</a>
-				</div>
-			{/each}
+						<a href={item.href} class="bm-nav-item" class:active={activeMenu === item.label}>
+							{item.label}
+							<ChevronDown
+								style="height: 13px; width: 13px; transition: transform 0.15s; {activeMenu === item.label ? 'transform: rotate(180deg);' : ''}"
+							/>
+						</a>
+
+						{#if activeMenu === item.label}
+							<!-- svelte-ignore a11y_no_static_element_interactions -->
+							<div
+								onmouseenter={cancelClose}
+								onmouseleave={scheduleClose}
+								style="
+									position: absolute;
+									top: calc(100% + 6px);
+									left: 0;
+									display: flex;
+									gap: 8px;
+									background: #fff;
+									border: 1px solid #ece6dc;
+									border-radius: 14px;
+									box-shadow: 0 12px 32px rgba(42,32,24,0.10);
+									padding: 8px;
+									animation: navDropIn 0.15s ease-out;
+								"
+							>
+								{#each item.columns as column}
+									<div style="min-width: 250px;">
+										{#if column.heading}
+											<p style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: #8a7e70; text-transform: uppercase; letter-spacing: 0.08em; margin: 6px 12px 4px;">{column.heading}</p>
+										{/if}
+										{#each column.links as link}
+											<a href={link.href} class="bm-dropdown-link">
+												<span style="display: block; font-size: 14px; font-weight: 500; color: #2a2018; white-space: nowrap;">{link.label}</span>
+												{#if link.desc}
+													<span style="display: block; font-size: 12px; color: #8a7e70; margin-top: 1px; white-space: nowrap;">{link.desc}</span>
+												{/if}
+											</a>
+										{/each}
+									</div>
+								{/each}
+							</div>
+						{/if}
+					</div>
+				{/each}
+
+				<!-- Divider between dropdowns and plain links -->
+				<div style="width: 1px; height: 18px; background: #d8d2c8; margin: 0 10px;"></div>
+
+				{#each plainLinks as link}
+					<a href={link.href} class="bm-nav-item">{link.label}</a>
+				{/each}
+			</div>
 		</div>
 
-		<!-- Desktop CTA -->
-		<a
-			href="/c/contact"
-			class="hidden md:inline-flex items-center px-6 py-2.5 rounded-full text-[14px] font-medium transition-all {scrolled || activeMenu
-				? ''
-				: 'bg-white text-text-primary hover:bg-white/90'}"
-			style="font-family: 'DM Sans', sans-serif; {scrolled || activeMenu ? 'background: #2a2018; color: #fff;' : ''}"
-		>
-			Contact
-		</a>
+		<!-- Right: dual CTAs (outline + solid) -->
+		<div style="display: flex; align-items: center; gap: 10px;">
+			<a href="/c/support" class="hidden md:inline-flex bm-cta-outline">Donate</a>
+			<a href="/c/contact" class="hidden md:inline-flex bm-cta-solid">Contact</a>
 
-		<!-- Mobile Menu Button -->
-		<button
-			class="rounded-lg p-2 md:hidden {scrolled || activeMenu || mobileOpen ? 'text-text-primary' : 'text-white'}"
-			onclick={() => (mobileOpen = !mobileOpen)}
-			aria-label="Toggle menu"
-		>
-			{#if mobileOpen}<X class="h-6 w-6" />{:else}<Menu class="h-6 w-6" />{/if}
-		</button>
+			<!-- Mobile Menu Button -->
+			<button
+				class="lg:hidden"
+				style="padding: 8px; border: none; background: none; cursor: pointer; color: #2a2018;"
+				onclick={() => (mobileOpen = !mobileOpen)}
+				aria-label="Toggle menu"
+			>
+				{#if mobileOpen}<X class="h-5 w-5" />{:else}<Menu class="h-5 w-5" />{/if}
+			</button>
+		</div>
 	</nav>
 
-	<!-- Mega Menu Dropdown -->
-	{#if activeMenu && megaMenus[activeMenu]}
-		{@const menu = megaMenus[activeMenu]}
+	{#if mobileOpen}
 		<div
-			class="hidden md:block absolute left-0 right-0 top-[72px] bg-white shadow-lg border-t border-border"
-			onmouseenter={cancelClose}
-			onmouseleave={scheduleClose}
-			style="animation: megaFadeIn 0.15s ease-out;"
+			class="lg:hidden"
+			style="background: #faf9f5; border-top: 1px solid #e6e0d6; padding: 12px 24px 20px;"
 		>
-			<div class="mx-auto max-w-[1400px] px-6 lg:px-10 py-8">
-				<div style="display: flex; gap: 48px;">
-					<!-- Link columns -->
-					{#each menu.columns as column}
-						<div style="flex: 1; min-width: 200px;">
-							{#if column.heading}
-								<p style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: #8a7e70; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 16px;">{column.heading}</p>
-							{/if}
-							{#each column.links as item}
-								<a href={item.href} style="display: block; text-decoration: none; padding: 8px 0; transition: opacity 0.15s;" class="mega-link">
-									<span style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #2a2018; display: block;">{item.label}</span>
-									{#if item.desc}
-										<span style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #8a7e70; display: block; margin-top: 2px;">{item.desc}</span>
-									{/if}
-								</a>
-							{/each}
-						</div>
-					{/each}
-
-					<!-- Featured card (optional) -->
-					{#if menu.featured}
-						<div style="flex: 0 0 260px;">
-							<a href={menu.featured.href} style="display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: #f4f1eb;">
-								<div style="aspect-ratio: 16/10; overflow: hidden;">
-									<img src={menu.featured.img} alt={menu.featured.title} style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-								</div>
-								<div style="padding: 16px;">
-									<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: #2a2018; margin: 0 0 4px;">{menu.featured.title}</p>
-									<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #8a7e70; margin: 0;">{menu.featured.desc}</p>
-								</div>
-							</a>
-						</div>
-					{/if}
-				</div>
+			{#each dropdownItems as item}
+				<a
+					href={item.href}
+					style="display: block; padding: 10px 0; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #2a2018; text-decoration: none;"
+					onclick={() => (mobileOpen = false)}>{item.label}</a
+				>
+			{/each}
+			<div style="height: 1px; background: #e6e0d6; margin: 8px 0;"></div>
+			{#each plainLinks as link}
+				<a
+					href={link.href}
+					style="display: block; padding: 10px 0; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #2a2018; text-decoration: none;"
+					onclick={() => (mobileOpen = false)}>{link.label}</a
+				>
+			{/each}
+			<div style="display: flex; gap: 10px; margin-top: 12px;">
+				<a href="/c/support" class="bm-cta-outline" style="flex: 1; justify-content: center;" onclick={() => (mobileOpen = false)}>Donate</a>
+				<a href="/c/contact" class="bm-cta-solid" style="flex: 1; justify-content: center;" onclick={() => (mobileOpen = false)}>Contact</a>
 			</div>
 		</div>
 	{/if}
-
-	<div class="mobile-menu md:hidden" class:open={mobileOpen}>
-		<div class="border-t border-border px-6 py-4">
-			{#each [
-				{ label: 'Home', href: '/c' },
-				{ label: 'Learn', href: '/c/learn' },
-				{ label: 'Convert', href: '/c/convert' },
-				{ label: 'Products', href: '/c/shop' },
-				{ label: 'Support', href: '/c/support' }
-			] as link}
-				<a href={link.href} class="block py-2.5 text-text-primary font-medium" onclick={() => (mobileOpen = false)}>{link.label}</a>
-			{/each}
-			<a href="/c/contact" class="block mt-3 text-center bg-text-primary text-white py-2.5 rounded-full font-medium">Contact</a>
-		</div>
-	</div>
 </header>
 
 <style>
-	@keyframes megaFadeIn {
+	@keyframes navDropIn {
 		from { opacity: 0; transform: translateY(-4px); }
 		to { opacity: 1; transform: translateY(0); }
 	}
-	:global(.mega-link:hover) {
-		opacity: 0.7;
+
+	.bm-nav-item {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		font-family: 'DM Sans', sans-serif;
+		font-size: 14px;
+		font-weight: 500;
+		color: #2a2018;
+		text-decoration: none;
+		padding: 7px 12px;
+		border-radius: 999px;
+		transition: background 0.15s;
+		white-space: nowrap;
 	}
-	.mobile-menu {
-		max-height: 0;
-		overflow: hidden;
-		background: rgba(250,245,235,0.97);
-		transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	.bm-nav-item:hover,
+	.bm-nav-item.active {
+		background: rgba(42, 32, 24, 0.06);
 	}
-	.mobile-menu.open {
-		max-height: 350px;
+
+	.bm-dropdown-link {
+		display: block;
+		text-decoration: none;
+		padding: 8px 12px;
+		border-radius: 10px;
+		transition: background 0.15s;
+	}
+	.bm-dropdown-link:hover {
+		background: #f5f1ea;
+	}
+
+	.bm-cta-outline {
+		align-items: center;
+		padding: 8px 18px;
+		border-radius: 999px;
+		font-family: 'DM Sans', sans-serif;
+		font-size: 14px;
+		font-weight: 500;
+		text-decoration: none;
+		background: #fff;
+		color: #2a2018;
+		border: 1px solid #d8d2c8;
+		transition: border-color 0.15s, background 0.15s;
+	}
+	.bm-cta-outline:hover {
+		border-color: #b5ac9e;
+	}
+
+	.bm-cta-solid {
+		align-items: center;
+		padding: 8px 18px;
+		border-radius: 999px;
+		font-family: 'DM Sans', sans-serif;
+		font-size: 14px;
+		font-weight: 500;
+		text-decoration: none;
+		background: #2a2018;
+		color: #fff;
+		border: 1px solid #2a2018;
+		transition: background 0.15s;
+	}
+	.bm-cta-solid:hover {
+		background: #1a140e;
 	}
 </style>

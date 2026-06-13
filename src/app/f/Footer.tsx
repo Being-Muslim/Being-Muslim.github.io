@@ -22,7 +22,7 @@ export default function Footer() {
     <footer style={css("background: #16223a; padding: 56px 0 0; border-radius: 28px 28px 0 0")}>
       <div className="mx-auto max-w-[1240px] px-6 lg:px-8">
         {/* Newsletter signup band */}
-        <div className="bm-reveal" style={css("background: #1f8a70; border-radius: 24px; padding: 36px 32px; margin-bottom: 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px")}>
+        <div style={css("background: #2d6a4f; border-radius: 24px; padding: 36px 32px; margin-bottom: 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px")}>
           <div style={css("max-width: 420px")}>
             <h3 className="bm-lower" style={css("font-family: 'Inter', sans-serif; font-size: 26px; font-weight: 800; color: #fff; margin: 0 0 6px; letter-spacing: -0.01em")}>stay in the loop</h3>
             <p style={css("font-family: 'Inter', sans-serif; font-size: 14px; color: rgba(255,255,255,0.85); margin: 0; line-height: 1.5")}>
@@ -59,7 +59,7 @@ export default function Footer() {
 
           {columns.map((col) => (
             <div key={col.heading}>
-              <h4 style={css("font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; color: #f5c518; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px")}>
+              <h4 style={css("font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; color: #c4a35a; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px")}>
                 {col.heading}
               </h4>
               {col.links.map((link, i) => (

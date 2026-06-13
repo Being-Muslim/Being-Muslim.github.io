@@ -28,36 +28,37 @@ type MenuRow = {
   title: string;
   desc: string;
   href: string;
-  /** Accent color for the icon + title. Defaults to teal. */
-  accent?: "teal" | "gold";
+  /** Accent color for the icon + title. Defaults to maroon. */
+  accent?: "maroon" | "gold" | "green";
 };
 
-const TEAL = "#1f8a70";
-const GOLD = "#f5c518";
-// The title color leans into a slightly deeper teal for legibility.
-const TITLE_TEAL = "#15302e";
+const MAROON = "#8b2e36";
+const GOLD = "#c4a35a";
+const GREEN = "#2d6a4f";
+// Deeper gold tone for title legibility on the gold accent rows.
+const TITLE_GOLD = "#8a6d2a";
 
 const megaMenus: Record<string, MenuRow[]> = {
   Learn: [
-    { icon: BookOpen, title: "Articles", desc: "In-depth guides on faith and practice", href: "/f/learn", accent: "teal" },
+    { icon: BookOpen, title: "Articles", desc: "In-depth guides on faith and practice", href: "/f/learn", accent: "maroon" },
     { icon: GraduationCap, title: "Get Started", desc: "First steps for new Muslims", href: "/f/learn/beginners-guide", accent: "gold" },
-    { icon: BookMarked, title: "Overview of Islam", desc: "Core beliefs, practices, and history", href: "/f/learn/brief-overview-of-islam", accent: "teal" },
+    { icon: BookMarked, title: "Overview of Islam", desc: "Core beliefs, practices, and history", href: "/f/learn/brief-overview-of-islam", accent: "green" },
   ],
   Convert: [
-    { icon: Compass, title: "Ready to Convert?", desc: "Take the next step with guidance and support", href: "/f/convert", accent: "teal" },
+    { icon: Compass, title: "Ready to Convert?", desc: "Take the next step with guidance and support", href: "/f/convert", accent: "maroon" },
     { icon: Users, title: "Find a Community", desc: "Connect with Muslims near you", href: "/f/convert", accent: "gold" },
-    { icon: HelpCircle, title: "FAQ for Reverts", desc: "Answers to the most common questions", href: "/f/convert", accent: "teal" },
+    { icon: HelpCircle, title: "FAQ for Reverts", desc: "Answers to the most common questions", href: "/f/convert", accent: "green" },
   ],
   Products: [
-    { icon: BookOpen, title: "The Book", desc: "Being Muslim: A Practical Guide", href: "/f/shop/book", accent: "teal" },
+    { icon: BookOpen, title: "The Book", desc: "Being Muslim: A Practical Guide", href: "/f/shop/book", accent: "maroon" },
     { icon: Package, title: "Boxed Set", desc: "Book, prayer cards, and more", href: "/f/shop/boxed-set", accent: "gold" },
-    { icon: Layers, title: "Prayer Cards", desc: "Keep by your prayer mat", href: "/f/shop/prayer-cards", accent: "teal" },
+    { icon: Layers, title: "Prayer Cards", desc: "Keep by your prayer mat", href: "/f/shop/prayer-cards", accent: "green" },
     { icon: Tablet, title: "Digital Edition", desc: "Read anywhere, instantly", href: "/f/shop/ebook", accent: "gold" },
   ],
   Support: [
-    { icon: Heart, title: "Donate", desc: "Help fund resources for new Muslims", href: "/f/support", accent: "teal" },
+    { icon: Heart, title: "Donate", desc: "Help fund resources for new Muslims", href: "/f/support", accent: "maroon" },
     { icon: Gift, title: "Sponsor a Set", desc: "Gift a boxed set to someone in need", href: "/f/support", accent: "gold" },
-    { icon: HandHeart, title: "Volunteer", desc: "Join our team of contributors", href: "/f/support", accent: "teal" },
+    { icon: HandHeart, title: "Volunteer", desc: "Join our team of contributors", href: "/f/support", accent: "green" },
   ],
 };
 
@@ -96,13 +97,13 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
-        solid ? "backdrop-blur-md shadow-sm border-border" : "border-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+        solid ? "backdrop-blur-md" : ""
       }`}
       style={
         solid
-          ? css("background: rgba(249,247,242,0.97)")
-          : css("background: rgba(249,247,242,0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px)")
+          ? css("background: rgba(250,248,243,0.97)")
+          : css("background: rgba(250,248,243,0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px)")
       }
     >
       <nav className="mx-auto flex h-[72px] max-w-[1240px] items-center justify-between px-6 lg:px-8">
@@ -115,7 +116,7 @@ export default function Navbar() {
             className="h-8 w-8 invert"
             style={css("transition: filter 0.3s")}
           />
-          <span className="text-lg font-bold transition-colors" style={css("font-family: 'Inter', sans-serif; color: #1d2b29")}>
+          <span className="text-lg font-bold transition-colors" style={css("font-family: 'Inter', sans-serif; color: #2d3748")}>
             Being Muslim
           </span>
         </Link>
@@ -134,8 +135,8 @@ export default function Navbar() {
               >
                 <Link
                   href={link.href}
-                  className="bm-link-animated text-[15px] font-medium transition-colors py-6 inline-block"
-                  style={css("font-family: 'Inter', sans-serif; color: #1d2b29")}
+                  className="text-[15px] font-medium transition-colors py-6 inline-block"
+                  style={css("font-family: 'Inter', sans-serif; color: #2d3748")}
                 >
                   {link.label}
                 </Link>
@@ -151,7 +152,8 @@ export default function Navbar() {
                     <div className="bm-dropdown-card">
                       {rows.map((row) => {
                         const Icon = row.icon;
-                        const accent = row.accent === "gold" ? GOLD : TEAL;
+                        const accent = row.accent === "gold" ? GOLD : row.accent === "green" ? GREEN : MAROON;
+                        const titleColor = row.accent === "gold" ? TITLE_GOLD : accent;
                         return (
                           <Link key={row.title} href={row.href} className="bm-dropdown-row">
                             <span
@@ -163,7 +165,7 @@ export default function Navbar() {
                             <span style={css("display: flex; flex-direction: column; gap: 2px")}>
                               <span
                                 className="bm-dropdown-title"
-                                style={css(`color: ${row.accent === "gold" ? "#a87d00" : TITLE_TEAL}`)}
+                                style={css(`color: ${titleColor}`)}
                               >
                                 {row.title}
                               </span>
@@ -192,7 +194,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           className="rounded-lg p-2 md:hidden"
-          style={css("color: #1d2b29")}
+          style={css("color: #2d3748")}
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -202,9 +204,9 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div className={`mobile-menu md:hidden ${mobileOpen ? "open" : ""}`}>
-        <div className="px-6 py-4" style={css("border-top: 1px solid #ece7dd")}>
+        <div className="px-6 py-4" style={css("border-top: 1px solid #e8e4de")}>
           {navLinks.map((link) => (
-            <Link key={link.label} href={link.href} className="block py-2.5 font-medium" style={css("font-family: 'Inter', sans-serif; color: #1d2b29")} onClick={() => setMobileOpen(false)}>
+            <Link key={link.label} href={link.href} className="block py-2.5 font-medium" style={css("font-family: 'Inter', sans-serif; color: #2d3748")} onClick={() => setMobileOpen(false)}>
               {link.label}
             </Link>
           ))}

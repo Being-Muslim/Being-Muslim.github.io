@@ -2,13 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, Heart, Gift, Users, Sparkles } from "lucide-react";
 import { css } from "@/lib/css";
 
 type MegaLink = { label: string; href: string; desc?: string };
+type ProductCard = { title: string; href: string; desc: string; img: string };
+type SupportItem = { title: string; href: string; desc: string; Icon: typeof Heart };
 type MegaMenu = {
-  columns: { heading?: string; links: MegaLink[] }[];
+  columns?: { heading?: string; links: MegaLink[] }[];
   featured?: { title: string; desc: string; href: string; img: string };
+  productCards?: ProductCard[];
+  supportGrid?: SupportItem[];
 };
 
 const megaMenus: Record<string, MegaMenu> = {
@@ -59,35 +63,19 @@ const megaMenus: Record<string, MegaMenu> = {
     ],
   },
   Products: {
-    columns: [
-      {
-        heading: "Products",
-        links: [
-          { label: "Being Muslim: A Practical Guide", href: "/e/shop/book", desc: "The bestselling book" },
-          { label: "The Complete Boxed Set", href: "/e/shop/boxed-set", desc: "Book, prayer cards, and more" },
-          { label: "Prayer Reference Cards", href: "/e/shop/prayer-cards", desc: "Keep by your prayer mat" },
-          { label: "Digital Edition (eBook)", href: "/e/shop/ebook", desc: "Read anywhere, instantly" },
-        ],
-      },
+    productCards: [
+      { title: "Being Muslim: A Practical Guide", href: "/e/shop/book", desc: "The bestselling book", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg" },
+      { title: "The Complete Boxed Set", href: "/e/shop/boxed-set", desc: "Book, prayer cards, and more", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg" },
+      { title: "Prayer Reference Cards", href: "/e/shop/prayer-cards", desc: "Keep by your prayer mat", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-prayer-card-900x610.jpeg" },
+      { title: "Digital Edition (eBook)", href: "/e/shop/ebook", desc: "Read anywhere, instantly", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/BM-E-Book-900x1200.png" },
     ],
-    featured: {
-      title: "The Complete Boxed Set",
-      desc: "Everything you need in one beautiful package.",
-      href: "/e/shop/boxed-set",
-      img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg",
-    },
   },
   Support: {
-    columns: [
-      {
-        heading: "Get Involved",
-        links: [
-          { label: "Donate", href: "/e/support", desc: "Help fund resources for new Muslims" },
-          { label: "Sponsor a Boxed Set", href: "/e/support", desc: "Gift a set to someone in need" },
-          { label: "Volunteer", href: "/e/support", desc: "Join our team of contributors" },
-          { label: "Support the Mission", href: "/e/support" },
-        ],
-      },
+    supportGrid: [
+      { title: "Donate", href: "/e/support", desc: "Help fund resources for new Muslims", Icon: Heart },
+      { title: "Sponsor a Boxed Set", href: "/e/support", desc: "Gift a set to someone in need", Icon: Gift },
+      { title: "Volunteer", href: "/e/support", desc: "Join our team of contributors", Icon: Users },
+      { title: "Support the Mission", href: "/e/support", desc: "Back the work for years to come", Icon: Sparkles },
     ],
   },
 };
@@ -132,7 +120,7 @@ export default function Navbar() {
         <nav
           className="flex items-center justify-between gap-4"
           style={css(
-            "background: #ffffff; border-radius: 999px; padding: 10px 12px 10px 22px; box-shadow: 0 12px 36px rgba(43,34,86,0.12); border: 1px solid rgba(108,92,231,0.08)"
+            "background: #ffffff; border-radius: 999px; padding: 10px 12px 10px 22px; box-shadow: 0 12px 36px rgba(45,55,72,0.12); border: 1px solid #e8e4de"
           )}
         >
           {/* Logo */}
@@ -143,7 +131,7 @@ export default function Navbar() {
               alt="Being Muslim"
               className="h-7 w-7"
             />
-            <span style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 17px; color: #2b2256")}>
+            <span style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 17px; color: #2d3748")}>
               Being Muslim
             </span>
           </Link>
@@ -160,7 +148,7 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   className="bm-nav-link py-2 inline-block"
-                  style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 15px; font-weight: 500; color: #5b5470")}
+                  style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 15px; font-weight: 500; color: #6b7a8d")}
                 >
                   {link.label}
                 </Link>
@@ -180,7 +168,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             className="p-2 md:hidden"
-            style={css("color: #2b2256")}
+            style={css("color: #2d3748")}
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -194,52 +182,103 @@ export default function Navbar() {
             className="hidden md:block absolute left-1/2 top-[72px] -translate-x-1/2"
             onMouseEnter={cancelClose}
             onMouseLeave={scheduleClose}
-            style={css("animation: megaFadeIn 0.15s ease-out; background: #ffffff; border-radius: 24px; box-shadow: 0 24px 60px rgba(43,34,86,0.18); border: 1px solid rgba(108,92,231,0.1); width: min(880px, 92vw)")}
+            style={css("animation: megaFadeIn 0.15s ease-out; background: #ffffff; border-radius: 24px; box-shadow: 0 24px 60px rgba(45,55,72,0.18); border: 1px solid #e8e4de; width: min(880px, 92vw)")}
           >
             <div className="px-8 py-8">
-              <div style={css("display: flex; gap: 48px")}>
-                {menu.columns.map((column, ci) => (
-                  <div key={ci} style={css("flex: 1; min-width: 190px")}>
-                    {column.heading && (
-                      <p style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 12px; font-weight: 600; color: #6c5ce7; text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 14px")}>
-                        {column.heading}
-                      </p>
-                    )}
-                    {column.links.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        className="mega-link"
-                        style={css("display: block; text-decoration: none; padding: 10px 12px; transition: background 0.15s")}
-                      >
-                        <span style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 15px; color: #2b2256; display: block")}>
-                          {item.label}
-                        </span>
-                        {item.desc && (
-                          <span style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; color: #5b5470; display: block; margin-top: 3px; line-height: 1.4")}>
-                            {item.desc}
-                          </span>
-                        )}
-                      </Link>
-                    ))}
-                  </div>
-                ))}
-
-                {menu.featured && (
-                  <div style={css("flex: 0 0 240px")}>
-                    <Link href={menu.featured.href} style={css("display: block; text-decoration: none; overflow: hidden; border-radius: 18px; background: #efecff")}>
-                      <div style={css("aspect-ratio: 16/10; overflow: hidden")}>
+              {/* Products — row of image cards */}
+              {menu.productCards && (
+                <div className="bm-mega-products">
+                  {menu.productCards.map((product) => (
+                    <Link key={product.title} href={product.href} className="bm-mega-product-card">
+                      <div className="bm-mega-product-img">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={menu.featured.img} alt={menu.featured.title} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
+                        <img src={product.img} alt={product.title} />
                       </div>
-                      <div style={css("padding: 16px")}>
-                        <p style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 15px; color: #2b2256; margin: 0 0 5px")}>{menu.featured.title}</p>
-                        <p style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; color: #5b5470; margin: 0; line-height: 1.5")}>{menu.featured.desc}</p>
+                      <div style={css("padding: 13px 14px 15px")}>
+                        <span style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 14px; color: #2d3748; display: block; line-height: 1.25")}>
+                          {product.title}
+                        </span>
+                        <span style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 12.5px; color: #6b7a8d; display: block; margin-top: 4px; line-height: 1.4")}>
+                          {product.desc}
+                        </span>
                       </div>
                     </Link>
-                  </div>
-                )}
-              </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Support — 2×2 grid */}
+              {menu.supportGrid && (
+                <div className="bm-mega-support">
+                  {menu.supportGrid.map(({ title, href, desc, Icon }) => (
+                    <Link
+                      key={title}
+                      href={href}
+                      className="mega-link"
+                      style={css("display: flex; gap: 14px; align-items: flex-start; text-decoration: none; padding: 14px 14px; transition: background 0.15s")}
+                    >
+                      <span style={css("flex: 0 0 40px; width: 40px; height: 40px; border-radius: 12px; background: #faf2e3; color: #8b2e36; display: flex; align-items: center; justify-content: center")}>
+                        <Icon className="h-5 w-5" strokeWidth={1.75} />
+                      </span>
+                      <span style={css("display: block")}>
+                        <span style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 15px; color: #2d3748; display: block")}>
+                          {title}
+                        </span>
+                        <span style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; color: #6b7a8d; display: block; margin-top: 3px; line-height: 1.4")}>
+                          {desc}
+                        </span>
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+
+              {/* Default — text columns + optional featured (Learn / Convert) */}
+              {menu.columns && (
+                <div style={css("display: flex; gap: 48px")}>
+                  {menu.columns.map((column, ci) => (
+                    <div key={ci} style={css("flex: 1; min-width: 190px")}>
+                      {column.heading && (
+                        <p style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 12px; font-weight: 600; color: #8b2e36; text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 14px")}>
+                          {column.heading}
+                        </p>
+                      )}
+                      {column.links.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          className="mega-link"
+                          style={css("display: block; text-decoration: none; padding: 10px 12px; transition: background 0.15s")}
+                        >
+                          <span style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 15px; color: #2d3748; display: block")}>
+                            {item.label}
+                          </span>
+                          {item.desc && (
+                            <span style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; color: #6b7a8d; display: block; margin-top: 3px; line-height: 1.4")}>
+                              {item.desc}
+                            </span>
+                          )}
+                        </Link>
+                      ))}
+                    </div>
+                  ))}
+
+                  {menu.featured && (
+                    <div style={css("flex: 0 0 240px")}>
+                      <Link href={menu.featured.href} style={css("display: block; text-decoration: none; overflow: hidden; border-radius: 18px; background: #faf2e3")}>
+                        <div style={css("aspect-ratio: 16/10; overflow: hidden")}>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={menu.featured.img} alt={menu.featured.title} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
+                        </div>
+                        <div style={css("padding: 16px")}>
+                          <p style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 15px; color: #2d3748; margin: 0 0 5px")}>{menu.featured.title}</p>
+                          <p style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; color: #6b7a8d; margin: 0; line-height: 1.5")}>{menu.featured.desc}</p>
+                        </div>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -248,14 +287,14 @@ export default function Navbar() {
         <div className={`mobile-menu md:hidden ${mobileOpen ? "open" : ""}`}>
           <div
             className="mt-3 px-4 py-3"
-            style={css("background: #ffffff; border-radius: 24px; box-shadow: 0 16px 40px rgba(43,34,86,0.14); border: 1px solid rgba(108,92,231,0.1)")}
+            style={css("background: #ffffff; border-radius: 24px; box-shadow: 0 16px 40px rgba(45,55,72,0.14); border: 1px solid #e8e4de")}
           >
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
                 className="block py-3 px-3"
-                style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 16px; font-weight: 500; color: #2b2256")}
+                style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 16px; font-weight: 500; color: #2d3748")}
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}

@@ -1,16 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Compass, ShoppingBag, ChevronDown } from "lucide-react";
 import { css } from "@/lib/css";
 
-const heroWords = ["Navigating", "the", "Path", "to", "Islam"];
-
 const featureBoxes = [
-  { label: "Learn", desc: "Explore articles, guides, and resources on Islamic faith and practice", href: "/f/learn", Icon: BookOpen, color: "teal" as const },
-  { label: "Convert", desc: "Take the next step on your journey with guidance and support", href: "/f/convert", Icon: Compass, color: "coral" as const },
-  { label: "Buy", desc: "Books, prayer cards, and resources for your journey", href: "/f/shop", Icon: ShoppingBag, color: "blue" as const },
+  { label: "Learn", desc: "Explore articles, guides, and resources on Islamic faith and practice", href: "/f/learn", Icon: BookOpen, color: "maroon" as const },
+  { label: "Convert", desc: "Take the next step on your journey with guidance and support", href: "/f/convert", Icon: Compass, color: "green" as const },
+  { label: "Buy", desc: "Books, prayer cards, and resources for your journey", href: "/f/shop", Icon: ShoppingBag, color: "deep" as const },
 ];
 
 const articles = [
@@ -19,7 +17,7 @@ const articles = [
   { title: "Islam and Other Faiths", category: "Belief", time: "8 min read", href: "/f/learn/islam-and-other-faiths", img: "https://www.beingmuslim.org/wp-content/uploads/2022/03/oneGodmanynames.jpeg" },
 ];
 
-const articleColors = ["gold", "teal", "coral"] as const;
+const articleColors = ["gold", "maroon", "green"] as const;
 
 const products = [
   { title: "Being Muslim: A Practical Guide", price: "$14.95", badge: "Bestseller", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg", href: "/f/shop/book" },
@@ -40,38 +38,8 @@ const faqs = [
 ];
 
 export default function ConceptFHome() {
-  const [visibleWords, setVisibleWords] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const toggleFaq = (i: number) => setOpenFaq((cur) => (cur === i ? null : i));
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setVisibleWords((n) => {
-        const next = n + 1;
-        if (next >= heroWords.length) clearInterval(interval);
-        return next;
-      });
-    }, 150);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
-    );
-
-    document.querySelectorAll(".bm-reveal").forEach((el) => observer.observe(el));
-
-    return () => {
-      clearInterval(interval);
-      observer.disconnect();
-    };
-  }, []);
 
   return (
     <>
@@ -80,26 +48,16 @@ export default function ConceptFHome() {
         <div className="bm-container">
           <div className="bm-hero-panel">
             {/* Organic blob accents */}
-            <div className="bm-blob" style={css("width: 280px; height: 280px; background: rgba(31,138,112,0.35); top: -90px; right: -60px")} />
-            <div className="bm-blob" style={css("width: 220px; height: 220px; background: rgba(239,90,76,0.25); bottom: -90px; left: 40%")} />
-            {/* Yellow dotted-circle motifs */}
-            <div className="bm-dots bm-spin" style={css("top: 24px; right: 30px")} />
+            <div className="bm-blob" style={css("width: 280px; height: 280px; background: rgba(139,46,54,0.35); top: -90px; right: -60px")} />
+            <div className="bm-blob" style={css("width: 220px; height: 220px; background: rgba(45,106,79,0.30); bottom: -90px; left: 40%")} />
+            {/* Gold dotted-circle motifs */}
+            <div className="bm-dots" style={css("top: 24px; right: 30px")} />
             <div className="bm-dots-arc" style={css("bottom: 16px; left: 16px; opacity: 0.8")} />
 
             {/* Left: text */}
             <div style={css("position: relative; z-index: 1")}>
               <h1 className="bm-lower" style={css("font-family: 'Inter', sans-serif; font-size: clamp(38px, 5.5vw, 66px); font-weight: 800; line-height: 1.04; letter-spacing: -0.02em; color: #ffffff; margin: 0 0 22px")}>
-                {heroWords.map((word, i) => (
-                  <span key={i}>
-                    <span
-                      className="bm-hero-word"
-                      style={css(`opacity: ${visibleWords > i ? 1 : 0}; transform: translateY(${visibleWords > i ? "0" : "10px"}); ${word === "Path" ? "color: #f5c518" : "color: #ffffff"}`)}
-                    >
-                      {word}
-                    </span>
-                    {" "}
-                  </span>
-                ))}
+                Navigating the <span style={css("color: #c4a35a")}>Path</span> to Islam
               </h1>
 
               <p style={css("font-family: 'Inter', sans-serif; font-size: 17px; line-height: 1.65; color: rgba(255,255,255,0.82); max-width: 480px; margin: 0 0 32px")}>
@@ -119,7 +77,7 @@ export default function ConceptFHome() {
 
             {/* Right: photo */}
             <div style={css("position: relative; z-index: 1")}>
-              <div className="bm-hero-photo bm-float">
+              <div className="bm-hero-photo">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/hero-bg.jpg" alt="Islamic journey" style={css("width: 100%; height: auto; display: block; aspect-ratio: 4/3; object-fit: cover")} />
               </div>
@@ -131,16 +89,16 @@ export default function ConceptFHome() {
       {/* ============ 2. EXPLORE YOUR PATH — color-block cards ============ */}
       <section className="bm-section-padding">
         <div className="bm-container">
-          <div className="bm-reveal" style={css("max-width: 640px; margin: 0 0 36px")}>
-            <h2 className="bm-lower" style={css("font-family: 'Inter', sans-serif; font-size: clamp(30px, 4vw, 44px); font-weight: 800; color: #1d2b29; margin: 0 0 14px; line-height: 1.1; letter-spacing: -0.02em")}>explore your path</h2>
+          <div style={css("max-width: 640px; margin: 0 0 36px")}>
+            <h2 className="bm-lower" style={css("font-family: 'Inter', sans-serif; font-size: clamp(30px, 4vw, 44px); font-weight: 800; color: #2d3748; margin: 0 0 14px; line-height: 1.1; letter-spacing: -0.02em")}>explore your path</h2>
             <p style={css("font-family: 'Inter', sans-serif; font-size: 16px; color: #666; line-height: 1.6; margin: 0")}>
               Discover Islam through courses, articles, and guides. Whether you&apos;re curious, converting, or deepening your practice — find resources made for you.
             </p>
           </div>
 
           <div className="bm-grid-3">
-            {featureBoxes.map(({ label, desc, href, Icon, color }, i) => (
-              <Link key={label} href={href} className={`bm-block-card bm-block-${color} bm-reveal bm-stagger-${i + 1}`}>
+            {featureBoxes.map(({ label, desc, href, Icon, color }) => (
+              <Link key={label} href={href} className={`bm-block-card bm-block-${color}`}>
                 <div style={css("position: relative; z-index: 1")}>
                   <Icon className="h-8 w-8" style={css("margin-bottom: 18px")} />
                   <p className="bm-lower" style={css("font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 800; margin: 0 0 10px; line-height: 1.1; letter-spacing: -0.01em")}>{label}</p>
@@ -153,7 +111,7 @@ export default function ConceptFHome() {
             ))}
           </div>
 
-          <div className="bm-reveal" style={css("margin-top: 28px")}>
+          <div style={css("margin-top: 28px")}>
             <Link href="/f/learn" className="bm-btn-outline">See all resources <ArrowRight className="h-4 w-4" /></Link>
           </div>
         </div>
@@ -162,16 +120,16 @@ export default function ConceptFHome() {
       {/* ============ 3. FEATURED ARTICLES — color-block cards ============ */}
       <section className="bm-section-padding">
         <div className="bm-container">
-          <div className="bm-reveal" style={css("display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 16px; margin-bottom: 32px")}>
-            <h2 className="bm-lower" style={css("font-family: 'Inter', sans-serif; font-size: clamp(28px, 3.8vw, 40px); line-height: 1.1; color: #1d2b29; font-weight: 800; margin: 0; letter-spacing: -0.02em")}>latest resources</h2>
-            <Link href="/f/learn" className="bm-view-all bm-link-animated" style={css("font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: #1d2b29; text-decoration: none; display: inline-flex; align-items: center; gap: 4px")}>
+          <div style={css("display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 16px; margin-bottom: 32px")}>
+            <h2 className="bm-lower" style={css("font-family: 'Inter', sans-serif; font-size: clamp(28px, 3.8vw, 40px); line-height: 1.1; color: #2d3748; font-weight: 800; margin: 0; letter-spacing: -0.02em")}>latest resources</h2>
+            <Link href="/f/learn" className="bm-view-all" style={css("font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: #2d3748; text-decoration: none; display: inline-flex; align-items: center; gap: 4px")}>
               View all <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
           <div className="bm-grid-3">
             {articles.map((article, i) => (
-              <Link key={article.title} href={article.href} className={`bm-block-card bm-block-${articleColors[i]} bm-title-underline-parent bm-reveal bm-stagger-${i + 1}`} style={css("min-height: 320px; padding: 0; justify-content: flex-end")}>
+              <Link key={article.title} href={article.href} className={`bm-block-card bm-block-${articleColors[i]} bm-title-underline-parent`} style={css("min-height: 320px; padding: 0; justify-content: flex-end")}>
                 <div style={css("position: absolute; inset: 0; z-index: 0")}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={article.img} alt={article.title} style={css("width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.4")} />
@@ -190,7 +148,7 @@ export default function ConceptFHome() {
             ))}
           </div>
 
-          <div className="bm-reveal" style={css("text-align: center; margin-top: 32px")}>
+          <div style={css("text-align: center; margin-top: 32px")}>
             <Link href="/f/learn" className="bm-btn-outline">
               Additional Resources <ArrowRight className="h-4 w-4" />
             </Link>
@@ -201,14 +159,14 @@ export default function ConceptFHome() {
       {/* ============ 4. PRODUCTS — warm rounded carousel ============ */}
       <section className="bm-section-padding">
         <div className="bm-container">
-          <h2 className="bm-reveal bm-lower" style={css("font-family: 'Inter', sans-serif; font-size: clamp(28px, 3.8vw, 40px); line-height: 1.1; color: #1d2b29; font-weight: 800; margin: 0 0 32px; text-align: center; letter-spacing: -0.02em")}>
+          <h2 className="bm-lower" style={css("font-family: 'Inter', sans-serif; font-size: clamp(28px, 3.8vw, 40px); line-height: 1.1; color: #2d3748; font-weight: 800; margin: 0 0 32px; text-align: center; letter-spacing: -0.02em")}>
             everything you need to begin
           </h2>
 
           <div className="bm-carousel-wrapper">
             <div style={css("display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 16px; -webkit-overflow-scrolling: touch")}>
-              {products.map((product, i) => (
-                <Link key={product.title} href={product.href} className={`bm-product-card bm-title-underline-parent bm-reveal bm-stagger-${i + 1}`} style={css("flex: 0 0 280px; scroll-snap-align: start; text-decoration: none; display: block")}>
+              {products.map((product) => (
+                <Link key={product.title} href={product.href} className="bm-product-card bm-title-underline-parent" style={css("flex: 0 0 280px; scroll-snap-align: start; text-decoration: none; display: block")}>
                   <div style={css("aspect-ratio: 1; background: #fff; border-radius: 20px; overflow: hidden; margin-bottom: 16px; position: relative; box-shadow: 0 6px 20px rgba(29,43,41,0.08)")}>
                     {product.img ? (
                       // eslint-disable-next-line @next/next/no-img-element
@@ -219,17 +177,17 @@ export default function ConceptFHome() {
                       </div>
                     )}
                     {product.badge && (
-                      <span style={css("position: absolute; top: 12px; left: 12px; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; color: #1d2b29; background: #f5c518; padding: 4px 12px; border-radius: 999px; z-index: 2")}>{product.badge}</span>
+                      <span style={css("position: absolute; top: 12px; left: 12px; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; color: #2d3748; background: #c4a35a; padding: 4px 12px; border-radius: 999px; z-index: 2")}>{product.badge}</span>
                     )}
                   </div>
-                  <h3 className="bm-title-underline" style={css("font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600; color: #1d2b29; margin: 0 0 6px; line-height: 1.3")}>{product.title}</h3>
-                  <span style={css("font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; color: #1f8a70")}>{product.price}</span>
+                  <h3 className="bm-title-underline" style={css("font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600; color: #2d3748; margin: 0 0 6px; line-height: 1.3")}>{product.title}</h3>
+                  <span style={css("font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; color: #8b2e36")}>{product.price}</span>
                 </Link>
               ))}
             </div>
           </div>
 
-          <div className="bm-reveal" style={css("text-align: center; margin-top: 32px")}>
+          <div style={css("text-align: center; margin-top: 32px")}>
             <Link href="/f/shop" className="bm-btn-outline">
               See All Store Items <ArrowRight className="h-4 w-4" />
             </Link>
@@ -241,18 +199,18 @@ export default function ConceptFHome() {
       <section className="bm-section-padding">
         <div className="bm-container">
           <div style={css("max-width: 820px; margin: 0 auto")}>
-            <h2 className="bm-reveal bm-lower" style={css("font-family: 'Inter', sans-serif; font-size: clamp(28px, 3.8vw, 40px); line-height: 1.1; color: #1d2b29; font-weight: 800; margin: 0 0 32px; text-align: center; letter-spacing: -0.02em")}>
+            <h2 className="bm-lower" style={css("font-family: 'Inter', sans-serif; font-size: clamp(28px, 3.8vw, 40px); line-height: 1.1; color: #2d3748; font-weight: 800; margin: 0 0 32px; text-align: center; letter-spacing: -0.02em")}>
               frequently asked questions
             </h2>
 
             {faqs.map((faq, i) => (
-              <div key={i} className="bm-faq-item bm-reveal">
+              <div key={i} className="bm-faq-item">
                 <button
                   onClick={() => toggleFaq(i)}
                   style={css("width: 100%; text-align: left; padding: 20px 24px; border: none; background: none; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px")}
                 >
-                  <span style={css("font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600; color: #1d2b29; line-height: 1.4")}>{faq.q}</span>
-                  <ChevronDown className={`h-5 w-5 flex-shrink-0 mt-0.5 bm-faq-chevron ${openFaq === i ? "open" : ""}`} style={css("color: #1f8a70")} />
+                  <span style={css("font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600; color: #2d3748; line-height: 1.4")}>{faq.q}</span>
+                  <ChevronDown className={`h-5 w-5 flex-shrink-0 mt-0.5 bm-faq-chevron ${openFaq === i ? "open" : ""}`} style={css("color: #8b2e36")} />
                 </button>
                 <div className={`bm-faq-answer ${openFaq === i ? "open" : ""}`}>
                   <p style={css("font-family: 'Inter', sans-serif; font-size: 15px; color: #666; line-height: 1.65; margin: 0; padding: 0 24px 22px")}>{faq.a}</p>
@@ -260,7 +218,7 @@ export default function ConceptFHome() {
               </div>
             ))}
 
-            <div className="bm-reveal" style={css("margin-top: 28px; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px")}>
+            <div style={css("margin-top: 28px; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px")}>
               <Link href="/f/learn/ask-a-question" className="bm-btn-outline">Ask a Question</Link>
               <Link href="/f/convert" className="bm-btn-dark">Ready to Convert <ArrowRight className="h-4 w-4" /></Link>
             </div>

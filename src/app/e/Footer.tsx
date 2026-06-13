@@ -19,7 +19,7 @@ export default function Footer() {
   return (
     <footer style={css("padding: 0 16px 16px")}>
       <div
-        style={css("background: #2b2256; border-radius: 32px; padding: 64px 0 0; overflow: hidden")}
+        style={css("background: #2d3748; border-radius: 32px; padding: 64px 0 0; overflow: hidden")}
       >
         <div className="mx-auto max-w-[1280px] px-8 lg:px-12">
           <div className="bm-grid-footer">
@@ -46,7 +46,7 @@ export default function Footer() {
 
             {columns.map((col) => (
               <div key={col.heading}>
-                <h4 style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: #ab9ff2; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 18px")}>
+                <h4 style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: #c4a35a; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 18px")}>
                   {col.heading}
                 </h4>
                 {col.links.map((link, i) => (

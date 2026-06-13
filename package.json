@@ -1,50 +1,27 @@
 {
-	"name": "being-muslim",
-	"private": true,
-	"version": "0.0.1",
-	"type": "module",
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
-	},
-	"devDependencies": {
-		"@sveltejs/adapter-auto": "^7.0.0",
-		"@sveltejs/adapter-static": "^3.0.10",
-		"@sveltejs/kit": "^2.50.2",
-		"@sveltejs/vite-plugin-svelte": "^6.2.4",
-		"@tailwindcss/typography": "^0.5.19",
-		"@tailwindcss/vite": "^4.1.18",
-		"svelte": "^5.49.2",
-		"svelte-check": "^4.3.6",
-		"tailwindcss": "^4.1.18",
-		"typescript": "^5.9.3",
-		"vite": "^7.3.1"
-	},
-	"dependencies": {
-		"@fontsource-variable/albert-sans": "^5.2.8",
-		"@fontsource-variable/cormorant-garamond": "^5.2.6",
-		"@fontsource-variable/dm-sans": "^5.2.8",
-		"@fontsource-variable/fraunces": "^5.2.9",
-		"@fontsource-variable/inter": "^5.2.8",
-		"@fontsource-variable/jetbrains-mono": "^5.2.8",
-		"@fontsource-variable/lora": "^5.2.8",
-		"@fontsource-variable/manrope": "^5.2.8",
-		"@fontsource-variable/newsreader": "^5.2.10",
-		"@fontsource-variable/outfit": "^5.2.8",
-		"@fontsource-variable/rubik": "^5.2.8",
-		"@fontsource-variable/source-serif-4": "^5.2.9",
-		"@fontsource-variable/space-grotesk": "^5.2.10",
-		"@fontsource-variable/work-sans": "^5.2.8",
-		"@fontsource/libre-baskerville": "^5.2.10",
-		"@internationalized/date": "^3.11.0",
-		"bits-ui": "^2.15.6",
-		"clsx": "^2.1.1",
-		"lucide-svelte": "^0.574.0",
-		"tailwind-merge": "^3.4.1",
-		"tailwind-variants": "^3.2.2"
-	}
+  "name": "being-muslim-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "lucide-react": "^1.18.0",
+    "next": "16.2.9",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.9",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
 }

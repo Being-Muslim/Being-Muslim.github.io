@@ -32,7 +32,7 @@ export default function ConceptAStagingShopBook() {
             className="inline-flex items-center gap-2 text-sm transition-colors hover:text-[#2a2018]"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to Shop
+            Back to Products
           </Link>
         </div>
       </section>

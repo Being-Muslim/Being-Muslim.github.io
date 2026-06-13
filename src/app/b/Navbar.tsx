@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Menu, X, Droplets, Square } from "lucide-react";
 import { css } from "@/lib/css";
 
-type MegaLink = { label: string; href: string; desc?: string };
+type MegaLink = { label: string; href: string; desc?: string; img?: string };
 type MegaMenu = {
   columns: { heading?: string; links: MegaLink[] }[];
   featured?: { title: string; desc: string; href: string; img: string };
@@ -63,19 +63,13 @@ const megaMenus: Record<string, MegaMenu> = {
       {
         heading: "Products",
         links: [
-          { label: "Being Muslim: A Practical Guide", href: "/b/shop/book", desc: "The bestselling book" },
-          { label: "The Complete Boxed Set", href: "/b/shop/boxed-set", desc: "Book, prayer cards, and more" },
-          { label: "Prayer Reference Cards", href: "/b/shop/prayer-cards", desc: "Keep by your prayer mat" },
-          { label: "Digital Edition (eBook)", href: "/b/shop/ebook", desc: "Read anywhere, instantly" },
+          { label: "Being Muslim: A Practical Guide", href: "/b/shop/book", desc: "The bestselling book", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg" },
+          { label: "The Complete Boxed Set", href: "/b/shop/boxed-set", desc: "Book, prayer cards, and more", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg" },
+          { label: "Prayer Reference Cards", href: "/b/shop/prayer-cards", desc: "Keep by your prayer mat", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-prayer-card-900x610.jpeg" },
+          { label: "Digital Edition (eBook)", href: "/b/shop/ebook", desc: "Read anywhere, instantly", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/BM-E-Book-900x1200.png" },
         ],
       },
     ],
-    featured: {
-      title: "The Complete Boxed Set",
-      desc: "Everything you need in one beautiful package.",
-      href: "/b/shop/boxed-set",
-      img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg",
-    },
   },
   Support: {
     columns: [
@@ -124,6 +118,7 @@ type Theme = {
   cardBorder: string;
   cardTitle: string;
   cardDesc: string;
+  hoverBg: string;
 };
 
 const themes: Record<NavStyle, Theme> = {
@@ -149,6 +144,7 @@ const themes: Record<NavStyle, Theme> = {
     cardBorder: "rgba(255,255,255,0.1)",
     cardTitle: "#fff",
     cardDesc: "rgba(255,255,255,0.45)",
+    hoverBg: "rgba(255,255,255,0.12)",
   },
   white: {
     pillBg: "#ffffff",
@@ -172,6 +168,7 @@ const themes: Record<NavStyle, Theme> = {
     cardBorder: "rgba(0,0,0,0.05)",
     cardTitle: "#2a2018",
     cardDesc: "#8a7e70",
+    hoverBg: "rgba(42,32,24,0.06)",
   },
 };
 
@@ -179,12 +176,15 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [navStyle, setNavStyle] = useState<NavStyle>("glass");
+  const [hovered, setHovered] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const closeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Keep window scroll listener parity with concept A (no visual binding here,
-  // but preserved so the navbar mounts/unmounts the same effect lifecycle).
+  // Track scroll so the glass pill can become a readable solid surface once
+  // the user scrolls past the dark hero onto the light page body.
   useEffect(() => {
-    const handleScroll = () => {};
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -206,13 +206,21 @@ export default function Navbar() {
   const T = themes[navStyle];
   const menu = activeMenu ? megaMenus[activeMenu] : null;
 
+  // When in glass mode and scrolled past the dark hero, swap the translucent
+  // pill for a solid dark surface so the white text stays legible over light
+  // page content. White theme already reads fine, so leave it untouched.
+  const glassScrolled = navStyle === "glass" && scrolled;
+  const pillBg = glassScrolled ? "rgba(30,28,24,0.92)" : T.pillBg;
+  const pillBorder = glassScrolled ? "rgba(255,255,255,0.12)" : T.pillBorder;
+  const pillShadow = glassScrolled ? "0 4px 24px rgba(0,0,0,0.25)" : T.pillShadow;
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50" style={css("padding: 16px 24px")}>
       {/* Desktop: pill navbar (always visible on md+) */}
       <nav
         className="bm-navbar-pill hidden md:flex"
         style={css(
-          `max-width: 1100px; margin: 0 auto; align-items: center; justify-content: space-between; padding: 10px 12px 10px 20px; border-radius: 999px; backdrop-filter: ${T.blur}; -webkit-backdrop-filter: ${T.blur}; border: 1px solid ${T.pillBorder}; background: ${T.pillBg}; box-shadow: ${T.pillShadow}; transition: all 0.3s`
+          `max-width: 1100px; margin: 0 auto; align-items: center; justify-content: space-between; padding: 10px 12px 10px 20px; border-radius: 999px; backdrop-filter: ${T.blur}; -webkit-backdrop-filter: ${T.blur}; border: 1px solid ${pillBorder}; background: ${pillBg}; box-shadow: ${pillShadow}; transition: all 0.3s`
         )}
       >
         <Link href="/b" style={css("display: flex; align-items: center; gap: 10px; text-decoration: none")}>
@@ -232,12 +240,19 @@ export default function Navbar() {
             <div
               key={link.label}
               className="relative"
-              onMouseEnter={() => (megaMenus[link.label] ? openMenu(link.label) : setActiveMenu(null))}
-              onMouseLeave={scheduleClose}
+              onMouseEnter={() => {
+                setHovered(link.label);
+                if (megaMenus[link.label]) openMenu(link.label);
+                else setActiveMenu(null);
+              }}
+              onMouseLeave={() => {
+                setHovered(null);
+                scheduleClose();
+              }}
             >
               <Link
                 href={link.href}
-                style={css(`font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; text-decoration: none; color: ${T.link}; padding: 6px 14px; border-radius: 999px; display: inline-block; transition: color 0.3s`)}
+                style={css(`font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; text-decoration: none; color: ${T.link}; padding: 6px 14px; border-radius: 999px; display: inline-block; background: ${hovered === link.label || activeMenu === link.label ? T.hoverBg : "transparent"}; transition: color 0.3s, background 0.15s`)}
               >
                 {link.label}
               </Link>
@@ -277,6 +292,31 @@ export default function Navbar() {
           style={css(`max-width: 1100px; margin: 8px auto 0; border-radius: 20px; backdrop-filter: ${T.menuBlur}; -webkit-backdrop-filter: ${T.menuBlur}; border: 1px solid ${T.menuBorder}; background: ${T.menuBg}; box-shadow: ${T.menuShadow}; animation: megaFadeIn 0.15s ease-out`)}
         >
           <div style={css("padding: 28px 32px")}>
+            {menu.columns.some((c) => c.links.some((l) => l.img)) ? (
+              /* Image-card grid (e.g. Products): each product as a card */
+              <div style={css("display: flex; flex-wrap: wrap; gap: 16px")}>
+                {menu.columns.flatMap((c) => c.links).map((item) => (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    style={css(`flex: 0 0 220px; display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: ${T.cardBg}; border: 1px solid ${T.cardBorder}`)}
+                  >
+                    {item.img && (
+                      <div style={css("aspect-ratio: 16/10; overflow: hidden")}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={item.img} alt={item.label} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
+                      </div>
+                    )}
+                    <div style={css("padding: 16px")}>
+                      <p style={css(`font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: ${T.cardTitle}; margin: 0 0 4px`)}>{item.label}</p>
+                      {item.desc && (
+                        <p style={css(`font-family: 'DM Sans', sans-serif; font-size: 12px; color: ${T.cardDesc}; margin: 0`)}>{item.desc}</p>
+                      )}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            ) : (
             <div style={css("display: flex; gap: 48px")}>
               {/* Link columns */}
               {menu.columns.map((column, ci) => (
@@ -317,6 +357,7 @@ export default function Navbar() {
                 </div>
               )}
             </div>
+            )}
           </div>
         </div>
       )}
@@ -324,7 +365,7 @@ export default function Navbar() {
       {/* Mobile: single glass container that expands */}
       <div
         className={`mobile-shell md:hidden ${mobileOpen ? "open" : ""}`}
-        style={css(`backdrop-filter: ${T.blur}; -webkit-backdrop-filter: ${T.blur}; border: 1px solid ${T.pillBorder}; background: ${T.pillBg}; box-shadow: ${T.pillShadow}`)}
+        style={css(`backdrop-filter: ${T.blur}; -webkit-backdrop-filter: ${T.blur}; border: 1px solid ${pillBorder}; background: ${pillBg}; box-shadow: ${pillShadow}`)}
       >
         {/* Top row: logo + switcher + hamburger */}
         <div style={css("display: flex; align-items: center; justify-content: space-between; padding: 10px 12px 10px 20px")}>

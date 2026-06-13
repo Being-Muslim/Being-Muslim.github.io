@@ -48,7 +48,7 @@ export default function ConceptBStagingShop() {
             Free shipping on orders over $50
           </span>
           <h1 style={css("font-family: 'Source Serif 4', serif; font-size: clamp(32px, 5vw, 48px); font-weight: 400; color: #fff; margin: 20px 0 16px; line-height: 1.1")}>
-            Shop
+            Products
           </h1>
           <p style={css("font-family: 'DM Sans', sans-serif; font-size: 16px; color: rgba(255,255,255,0.65); max-width: 520px; margin: 0 auto; line-height: 1.6")}>
             Beautifully crafted resources to support your journey — from bestselling books to prayer essentials.

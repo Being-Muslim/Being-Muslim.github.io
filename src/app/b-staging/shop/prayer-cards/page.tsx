@@ -24,7 +24,7 @@ export default function ConceptBStagingShopPrayerCards() {
           <nav style={css("display: flex; align-items: center; gap: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px")}>
             <Link href="/b-staging/shop" style={css("color: #8a7e70; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s")} className="bm-view-all">
               <ArrowLeft style={css("width: 16px; height: 16px")} />
-              Back to Shop
+              Back to Products
             </Link>
           </nav>
         </div>

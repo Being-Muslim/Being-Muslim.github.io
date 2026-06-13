@@ -9,7 +9,7 @@ const navLinks = [
   { label: "Home", href: "/b-staging" },
   { label: "Learn", href: "/b-staging/learn" },
   { label: "Convert", href: "/b-staging/convert" },
-  { label: "Shop", href: "/b-staging/shop" },
+  { label: "Products", href: "/b-staging/shop" },
   { label: "Support", href: "/b-staging/support" },
 ];
 

@@ -3,7 +3,7 @@ import { ArrowRight, BookOpen, Globe } from "lucide-react";
 import { css } from "@/lib/css";
 
 export const metadata = {
-  title: "Shop — Being Muslim",
+  title: "Products — Being Muslim",
   description:
     "Browse books, boxed sets, prayer cards, and digital resources to support your journey.",
 };
@@ -64,7 +64,7 @@ export default function ConceptAStagingShop() {
               style={css("font-family: 'Source Serif 4', serif; color: #f0ebe3")}
               className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.1]"
             >
-              Shop
+              Products
             </h1>
             <p
               style={css("color: #f0ebe3; font-family: 'DM Sans', sans-serif")}

@@ -10,7 +10,7 @@ const socials = [
 
 const columns = [
   { heading: "Learn", links: [{ label: "Articles", href: "/a-staging/learn" }, { label: "Resources", href: "/a-staging/learn/recommended-resources" }] },
-  { heading: "Shop", links: [{ label: "The Book", href: "/a-staging/shop" }, { label: "Boxed Set", href: "/a-staging/shop" }, { label: "Prayer Cards", href: "/a-staging/shop" }, { label: "eBook", href: "/a-staging/shop" }] },
+  { heading: "Products", links: [{ label: "The Book", href: "/a-staging/shop" }, { label: "Boxed Set", href: "/a-staging/shop" }, { label: "Prayer Cards", href: "/a-staging/shop" }, { label: "eBook", href: "/a-staging/shop" }] },
   { heading: "Support", links: [{ label: "Donate", href: "/a-staging/support" }, { label: "Request Donation", href: "/a-staging/support" }, { label: "Volunteer", href: "/a-staging/support" }] },
   { heading: "Company", links: [{ label: "About Us", href: "/a-staging/contact" }, { label: "Contact", href: "/a-staging/contact" }, { label: "Convert", href: "/a-staging/convert" }, { label: "Privacy Policy", href: "/a-staging" }] },
 ];

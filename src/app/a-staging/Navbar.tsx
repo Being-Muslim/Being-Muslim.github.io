@@ -58,7 +58,7 @@ const megaMenus: Record<string, MegaMenu> = {
       },
     ],
   },
-  Shop: {
+  Products: {
     columns: [
       {
         heading: "Products",
@@ -96,7 +96,7 @@ const navLinks = [
   { label: "Home", href: "/a-staging" },
   { label: "Learn", href: "/a-staging/learn" },
   { label: "Convert", href: "/a-staging/convert" },
-  { label: "Shop", href: "/a-staging/shop" },
+  { label: "Products", href: "/a-staging/shop" },
   { label: "Support", href: "/a-staging/support" },
 ];
 

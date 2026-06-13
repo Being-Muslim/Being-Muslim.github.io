@@ -1,14 +1,10 @@
 <script lang="ts">
-	import { Menu, X, BookOpen, Heart, ShoppingBag, Users, ArrowRight, Compass, Sunrise, RefreshCw, Droplets, Square } from 'lucide-svelte';
+	import { Menu, X, BookOpen, Heart, ShoppingBag, Users, ArrowRight, Compass, Sunrise, RefreshCw } from 'lucide-svelte';
 
 	let mobileOpen = $state(false);
 	let scrolled = $state(false);
 	let activeMenu = $state<string | null>(null);
 	let closeTimeout = $state<ReturnType<typeof setTimeout> | null>(null);
-	let navStyle = $state<'glass' | 'white'>('glass');
-
-	// In white mode the bar is always solid; in glass mode it surfaces on scroll / open menu.
-	const surfaceActive = $derived(navStyle === 'white' || scrolled || activeMenu !== null);
 
 	function handleScroll() {
 		scrolled = window.scrollY > 20;
@@ -114,11 +110,11 @@
 <svelte:window onscroll={handleScroll} />
 
 <header
-	class="fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 {surfaceActive
-		? navStyle === 'glass'
-			? 'bg-white/70 backdrop-blur-lg shadow-sm border-border'
-			: 'bg-white shadow-sm border-border'
-		: 'bg-transparent border-transparent'}"
+	class="fixed top-0 left-0 right-0 z-50 border-b {activeMenu
+		? 'bg-white/95 backdrop-blur-md shadow-sm border-border'
+		: scrolled
+			? 'bg-white/95 backdrop-blur-md shadow-sm border-border transition-all duration-300'
+			: 'bg-transparent border-transparent transition-all duration-300'}"
 >
 	<nav class="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between px-6 lg:px-10">
 		<!-- Logo -->
@@ -126,10 +122,10 @@
 			<img
 				src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png"
 				alt="Being Muslim"
-				class="h-8 w-8 {surfaceActive ? 'invert' : ''}"
+				class="h-8 w-8 {scrolled || activeMenu ? 'invert' : ''}"
 				style="transition: filter 0.3s;"
 			/>
-			<span class="text-lg font-bold transition-colors font-display {surfaceActive ? 'text-text-primary' : 'text-white'}">
+			<span class="text-lg font-bold transition-colors font-display {scrolled || activeMenu ? 'text-text-primary' : 'text-white'}">
 				Being Muslim
 			</span>
 		</a>
@@ -150,7 +146,7 @@
 				>
 					<a
 						href={link.href}
-						class="text-[14px] font-medium transition-colors py-6 inline-block {surfaceActive
+						class="text-[14px] font-medium transition-colors py-6 inline-block {scrolled || activeMenu
 							? 'text-text-primary hover:text-black'
 							: 'text-white/80 hover:text-white'}"
 						style="font-family: 'DM Sans', sans-serif;"
@@ -161,40 +157,25 @@
 			{/each}
 		</div>
 
-		<!-- Right cluster: style switcher + CTA + mobile button -->
-		<div class="flex items-center gap-3">
-			<!-- Nav style switcher (glass <-> white) -->
-			<button
-				class="inline-flex h-9 w-9 items-center justify-center rounded-full border transition-all {surfaceActive
-					? 'border-border text-text-primary hover:bg-black/5'
-					: 'border-white/30 text-white hover:bg-white/10'}"
-				onclick={() => (navStyle = navStyle === 'glass' ? 'white' : 'glass')}
-				title="Nav style: {navStyle === 'glass' ? 'glass' : 'white'} — click to switch"
-				aria-label="Switch navigation style"
-			>
-				{#if navStyle === 'glass'}<Droplets class="h-4 w-4" />{:else}<Square class="h-4 w-4" />{/if}
-			</button>
+		<!-- Desktop CTA -->
+		<a
+			href="/b/contact"
+			class="hidden md:inline-flex items-center px-6 py-2.5 rounded-full text-[14px] font-medium transition-all {scrolled || activeMenu
+				? ''
+				: 'bg-white text-text-primary hover:bg-white/90'}"
+			style="font-family: 'DM Sans', sans-serif; {scrolled || activeMenu ? 'background: #2a2018; color: #fff;' : ''}"
+		>
+			Contact
+		</a>
 
-			<!-- Desktop CTA -->
-			<a
-				href="/b/contact"
-				class="hidden md:inline-flex items-center px-6 py-2.5 rounded-full text-[14px] font-medium transition-all {surfaceActive
-					? ''
-					: 'bg-white text-text-primary hover:bg-white/90'}"
-				style="font-family: 'DM Sans', sans-serif; {surfaceActive ? 'background: #2a2018; color: #fff;' : ''}"
-			>
-				Contact
-			</a>
-
-			<!-- Mobile Menu Button -->
-			<button
-				class="rounded-lg p-2 md:hidden {surfaceActive ? 'text-text-primary' : 'text-white'}"
-				onclick={() => (mobileOpen = !mobileOpen)}
-				aria-label="Toggle menu"
-			>
-				{#if mobileOpen}<X class="h-6 w-6" />{:else}<Menu class="h-6 w-6" />{/if}
-			</button>
-		</div>
+		<!-- Mobile Menu Button -->
+		<button
+			class="rounded-lg p-2 md:hidden {scrolled || activeMenu ? 'text-text-primary' : 'text-white'}"
+			onclick={() => (mobileOpen = !mobileOpen)}
+			aria-label="Toggle menu"
+		>
+			{#if mobileOpen}<X class="h-6 w-6" />{:else}<Menu class="h-6 w-6" />{/if}
+		</button>
 	</nav>
 
 	<!-- Mega Menu Dropdown -->

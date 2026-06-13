@@ -1,6 +1,6 @@
 <footer style="background: #191918; padding: 64px 0 0;">
 	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
-		<div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 48px;">
+		<div class="bm-grid-footer">
 			<!-- Brand -->
 			<div>
 				<a href="/c" style="display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 16px;">
@@ -41,7 +41,7 @@
 
 			<!-- Shop -->
 			<div>
-				<h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Shop</h4>
+				<h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Products</h4>
 				{#each [
 					{ label: 'The Book', href: '/c/shop' },
 					{ label: 'Boxed Set', href: '/c/shop' },
@@ -68,7 +68,7 @@
 			<div>
 				<h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;">Company</h4>
 				{#each [
-					{ label: 'About Us', href: '/c/about' },
+					{ label: 'About Us', href: '/c/contact' },
 					{ label: 'Contact', href: '/c/contact' },
 					{ label: 'Convert', href: '/c/convert' },
 					{ label: 'Privacy Policy', href: '/c' }
@@ -79,7 +79,7 @@
 		</div>
 
 		<!-- Bottom bar -->
-		<div style="border-top: 1px solid rgba(255,255,255,0.08); padding: 20px 0; display: flex; justify-content: space-between; align-items: center;">
+		<div style="border-top: 1px solid rgba(255,255,255,0.08); padding: 20px 0; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;">
 			<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(255,255,255,0.3);">&copy; 2026 The Being Muslim Project. All rights reserved.</p>
 			<div style="display: flex; gap: 24px;">
 				<a href="/c" class="bm-footer-link" style="font-size: 12px; color: rgba(255,255,255,0.3);">Privacy</a>

@@ -4,6 +4,7 @@
 	import '../styles.css';
 	import NavbarC from '../NavbarC.svelte';
 	import FooterC from '../FooterC.svelte';
+	import FontSelector from '$lib/components/common/FontSelector.svelte';
 	let { children }: { children: Snippet } = $props();
 
 	beforeNavigate(() => {
@@ -13,6 +14,7 @@
 
 	afterNavigate(() => {
 		window.scrollTo(0, 0);
+		// Restore after a tick
 		requestAnimationFrame(() => {
 			document.documentElement.style.scrollBehavior = '';
 		});
@@ -29,4 +31,5 @@
 	<NavbarC />
 	<main>{@render children()}</main>
 	<FooterC />
+	<FontSelector />
 </div>

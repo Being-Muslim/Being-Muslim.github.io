@@ -4,27 +4,19 @@
 	const concepts = [
 		{
 			id: 'A',
-			subtitle: 'Original Design',
+			subtitle: 'Warm & Editorial',
 			href: '/a',
-			primary: '#8b2e36',
-			fonts: 'Brill + Inter',
-			description: 'The original design — warm, scholarly, and rooted in tradition. Dark hero sections with geometric patterns, burgundy accent, and classic typography.'
+			primary: '#2a2018',
+			fonts: 'Source Serif 4 + DM Sans',
+			description: 'Clean, warm, and editorial. Dark hero with mega-menu navigation, Source Serif 4 headings, DM Sans body text, warm earth tones, and a classic grid-based layout.'
 		},
 		{
 			id: 'B',
-			subtitle: 'Warm & Editorial',
+			subtitle: 'Glass & Bento',
 			href: '/b',
 			primary: '#2a2018',
 			fonts: 'Source Serif 4 + DM Sans',
-			description: 'Clean, warm, and editorial. Dark hero with mega-menu navigation, Source Serif 4 headings, DM Sans body text, warm earth tones (#2a2018, #c8b8a0), and a classic grid-based layout throughout.'
-		},
-		{
-			id: 'C',
-			subtitle: 'Glass & Bento',
-			href: '/c',
-			primary: '#2a2018',
-			fonts: 'Source Serif 4 + DM Sans',
-			description: 'Modern, airy, and explorable. Floating glass-effect pill navbar, bento grid layouts, horizontal scroll course carousels, alternating warm backgrounds, and generous whitespace with the same warm earth palette.'
+			description: 'Modern, airy, and explorable. Floating glass-effect pill navbar, bento grid layouts, horizontal scroll carousels, and generous whitespace with the same warm earth palette.'
 		}
 	];
 </script>
@@ -38,11 +30,11 @@
 		<div class="text-center">
 			<h1 class="font-display text-4xl font-bold sm:text-5xl">Design Concepts</h1>
 			<p class="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
-				Three design approaches for BeingMuslim.org. A is the base design — B and C explore different visual identities and layout patterns.
+				Two design approaches for BeingMuslim.org. Use the font selector on each page to preview different typography pairings.
 			</p>
 		</div>
 
-		<div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+		<div class="mt-16 grid gap-6 sm:grid-cols-2 max-w-[800px] mx-auto">
 			{#each concepts as concept}
 				<a href={concept.href} class="group">
 					<div class="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface transition-all duration-200 hover:shadow-lg">

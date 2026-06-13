@@ -27,7 +27,12 @@
 		Heart,
 		ChevronLeft,
 		ChevronRight,
-		Mail
+		Mail,
+		Fingerprint,
+		Wrench,
+		ShieldCheck,
+		Diamond,
+		ChevronDown
 	} from 'lucide-svelte';
 
 	const featuredArticles = articles.filter((a) => a.featured).slice(0, 3);
@@ -35,6 +40,11 @@
 	const featuredCourses = courses.slice(0, 3);
 
 	let testimonialIndex = $state(0);
+	let openFaq = $state<number | null>(null);
+
+	function toggleFaq(index: number) {
+		openFaq = openFaq === index ? null : index;
+	}
 
 	function nextTestimonial() {
 		testimonialIndex = (testimonialIndex + 1) % testimonials.length;
@@ -59,521 +69,252 @@
 <!-- ============================== -->
 <!-- 1. HERO SECTION                -->
 <!-- ============================== -->
-<section class="relative flex min-h-[90vh] items-center overflow-hidden bg-bg-dark">
-	<!-- Background Pattern -->
-	<div class="absolute inset-0 opacity-[0.03]">
-		<svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg">
-			<defs>
-				<pattern id="geo" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-					<path d="M30 0L60 30L30 60L0 30Z" fill="none" stroke="currentColor" stroke-width="0.5" class="text-text-cream" />
-				</pattern>
-			</defs>
-			<rect width="100%" height="100%" fill="url(#geo)" />
-		</svg>
+<section class="relative flex min-h-[83vh] flex-col justify-end overflow-hidden">
+	<!-- Background Image -->
+	<div class="absolute inset-0">
+		<img
+			src="/images/hero-bg.jpg"
+			alt=""
+			class="h-full w-full object-cover"
+		/>
+		<!-- Warm gradient overlay -->
+		<div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(40,35,28,0.3) 0%, rgba(40,35,28,0.1) 40%, rgba(40,35,28,0.55) 100%);"></div>
 	</div>
 
-	<div class="relative mx-auto max-w-[1280px] px-4 py-32 sm:px-6 lg:px-8">
-		<div class="max-w-3xl">
-			<div class="mb-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm text-text-cream/80">
-				<Heart class="h-4 w-4 text-accent-gold" />
-				<span>10,000+ books distributed worldwide</span>
-			</div>
-
-			<h1 class="font-display text-4xl font-bold leading-tight text-text-cream sm:text-5xl lg:text-6xl">
-				Your guide to a meaningful
-				<span class="text-accent-gold">Islamic journey</span>
+	<div class="relative z-10 mx-auto w-full max-w-[1400px] px-6 pt-32 pb-12 lg:px-10">
+		<div class="max-w-[680px]">
+			<h1 class="font-display text-[44px] font-bold leading-[1.05] tracking-[-0.02em] text-white sm:text-[56px] lg:text-[68px]">
+				Navigating the
+				<span class="italic font-normal text-amber-200/90">Path</span>
+				to Islam
 			</h1>
 
-			<p class="mt-6 max-w-xl text-lg leading-relaxed text-text-cream/80 sm:text-xl">
-				Whether you're exploring Islam, newly converted, or reconnecting with your faith —
-				find the knowledge, community, and support you need to thrive.
+			<p class="mt-6 max-w-[480px] text-[16px] leading-[1.65] text-white/80">
+				Empowering new and beginner Muslims with comprehensive education and support to navigate your journey and deepen your understanding and connection with faith.
 			</p>
 
-			<div class="mt-10 flex flex-wrap gap-4">
-				<Button size="lg" class="bg-accent-primary text-text-cream hover:bg-accent-hover">
-					{#snippet children()}
-						Start Learning
-						<ArrowRight class="ml-1 h-5 w-5" />
-					{/snippet}
-				</Button>
-				<Button variant="outline" size="lg" class="border-text-cream/30 text-text-cream hover:bg-white/10 hover:text-text-cream">
-					{#snippet children()}
-						Explore Resources
-					{/snippet}
-				</Button>
+			<div class="mt-8 flex flex-wrap items-center gap-4">
+				<!-- White button -->
+				<a
+					href="/a/learn"
+					class="bm-btn-white"
+				style="padding: 14px 28px; font-weight: 600;"
+				>
+					Start Learning
+					<ArrowRight class="h-4 w-4" />
+				</a>
+				<!-- Glass button -->
+				<a
+					href="/a/learn"
+					class="bm-btn-glass"
+				style="padding: 14px 28px; font-weight: 600;"
+				>
+					Explore Resources
+				</a>
 			</div>
 		</div>
-	</div>
 
-	<!-- Gradient fade at bottom -->
-	<div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-bg-primary to-transparent"></div>
-</section>
-
-<!-- ============================== -->
-<!-- 2. SOCIAL PROOF BAR            -->
-<!-- ============================== -->
-<section class="-mt-12 relative z-10">
-	<div class="mx-auto max-w-[1080px] px-4 sm:px-6">
-		<div class="grid grid-cols-2 gap-4 rounded-2xl bg-surface p-6 shadow-lg sm:grid-cols-4 sm:p-8">
-			{#each stats as stat}
-				<div class="text-center">
-					<p class="font-display text-2xl font-bold text-accent-primary sm:text-3xl">{stat.value}</p>
-					<p class="mt-1 text-sm text-text-secondary">{stat.label}</p>
-				</div>
-			{/each}
-		</div>
-	</div>
-</section>
-
-<!-- ============================== -->
-<!-- 3. WHO IS THIS FOR?            -->
-<!-- ============================== -->
-<Section>
-	<div class="text-center">
-		<h2 class="font-display text-3xl font-bold sm:text-4xl">Where are you on your journey?</h2>
-		<p class="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
-			Everyone's path is unique. Find the right starting point for you.
-		</p>
-	</div>
-
-	<div class="mt-12 grid gap-6 sm:grid-cols-3">
-		{#each audiencePaths as path}
-			{@const Icon = audienceIcons[path.icon as keyof typeof audienceIcons]}
-			<a href={path.href} class="group">
-				<div class="flex h-full flex-col rounded-xl border border-border bg-surface p-8 transition-all duration-200 hover:border-accent-primary/30 hover:shadow-lg">
-					<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-primary/10 text-accent-primary transition-colors group-hover:bg-accent-primary group-hover:text-text-cream">
-						<Icon class="h-6 w-6" />
-					</div>
-					<h3 class="font-display text-xl font-semibold">{path.title}</h3>
-					<p class="mt-2 flex-1 text-sm leading-relaxed text-text-secondary">{path.description}</p>
-					<div class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent-primary">
-						{path.cta}
-						<ArrowRight class="h-4 w-4 transition-transform group-hover:translate-x-1" />
-					</div>
-				</div>
-			</a>
-		{/each}
-	</div>
-</Section>
-
-<!-- ============================== -->
-<!-- 4. FEATURED CONTENT            -->
-<!-- ============================== -->
-<Section class="bg-secondary/50">
-	<div class="flex items-end justify-between">
-		<div>
-			<h2 class="font-display text-3xl font-bold sm:text-4xl">Latest Resources</h2>
-			<p class="mt-2 text-text-secondary">Fresh insights to guide your journey</p>
-		</div>
-		<a href="/articles" class="hidden items-center gap-1 text-sm font-medium text-accent-primary hover:underline sm:inline-flex">
-			View all resources
-			<ArrowRight class="h-4 w-4" />
-		</a>
-	</div>
-
-	<div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-		{#each featuredArticles as article}
-			<a href="/articles/{article.slug}" class="group">
-				<div class="overflow-hidden rounded-xl border border-border bg-surface transition-all hover:shadow-lg">
-					<div class="aspect-[16/10] bg-gradient-to-br from-accent-primary/20 to-accent-gold/20">
-						<!-- Placeholder for article image -->
-						<div class="flex h-full items-center justify-center">
-							<BookOpen class="h-12 w-12 text-accent-primary/40" />
-						</div>
-					</div>
-					<div class="p-5">
-						<div class="flex items-center gap-2">
-							<Badge variant="secondary">
-								{#snippet children()}{article.category}{/snippet}
-							</Badge>
-							<span class="text-xs text-text-secondary">{article.readingTime}</span>
-						</div>
-						<h3 class="mt-3 font-display text-lg font-semibold leading-snug group-hover:text-accent-primary">
-							{article.title}
-						</h3>
-						<p class="mt-2 line-clamp-2 text-sm text-text-secondary">{article.excerpt}</p>
-					</div>
-				</div>
-			</a>
-		{/each}
-	</div>
-
-	<div class="mt-6 text-center sm:hidden">
-		<a href="/articles" class="inline-flex items-center gap-1 text-sm font-medium text-accent-primary">
-			View all resources
-			<ArrowRight class="h-4 w-4" />
-		</a>
-	</div>
-</Section>
-
-<!-- ============================== -->
-<!-- 5. PRODUCTS SPOTLIGHT          -->
-<!-- ============================== -->
-<Section>
-	<div class="grid items-center gap-12 lg:grid-cols-2">
-		<div>
-			<Badge variant="gold">
-				{#snippet children()}Bestselling Resources{/snippet}
-			</Badge>
-			<h2 class="mt-4 font-display text-3xl font-bold sm:text-4xl">
-				Everything you need to begin
-			</h2>
-			<p class="mt-4 text-lg leading-relaxed text-text-secondary">
-				Dr. Asad Tarsin's comprehensive guide has helped thousands navigate their first steps in Islam.
-				Now available as a complete boxed set with prayer cards and quick-reference guides.
-			</p>
-
-			<div class="mt-8 space-y-4">
-				{#each featuredProducts as product}
-					<a href="/shop/{product.handle}" class="group flex gap-4 rounded-xl border border-border bg-surface p-4 transition-all hover:border-accent-primary/30 hover:shadow-md">
-						<div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-accent-primary/10 to-accent-gold/10">
-							<BookOpen class="h-8 w-8 text-accent-primary/60" />
-						</div>
-						<div class="flex flex-1 flex-col justify-center">
-							<div class="flex items-center gap-2">
-								<h3 class="font-display text-base font-semibold">{product.title}</h3>
-								{#if product.badge}
-									<Badge variant="gold">
-										{#snippet children()}{product.badge}{/snippet}
-									</Badge>
-								{/if}
-							</div>
-							<div class="mt-1 flex items-center gap-3">
-								<span class="font-semibold text-accent-primary">${product.price}</span>
-								<span class="flex items-center gap-0.5 text-xs text-accent-gold">
-									<Star class="h-3 w-3 fill-current" />
-									{product.rating} ({product.reviewCount})
-								</span>
-							</div>
-						</div>
-						<div class="flex items-center">
-							<ArrowRight class="h-5 w-5 text-text-secondary transition-transform group-hover:translate-x-1 group-hover:text-accent-primary" />
-						</div>
-					</a>
-				{/each}
-			</div>
-
-			<Button variant="outline" class="mt-6">
-				{#snippet children()}
-					Browse All Products
-					<ArrowRight class="ml-1 h-4 w-4" />
-				{/snippet}
-			</Button>
-		</div>
-
-		<!-- Product Image Area -->
-		<div class="flex items-center justify-center">
-			<div class="relative aspect-square w-full max-w-md rounded-2xl bg-gradient-to-br from-bg-dark to-accent-primary/80 p-12">
-				<div class="flex h-full flex-col items-center justify-center text-center text-text-cream">
-					<BookOpen class="mb-4 h-20 w-20 opacity-60" />
-					<p class="font-display text-2xl font-bold">Being Muslim</p>
-					<p class="mt-2 text-sm text-text-cream/70">A Practical Guide</p>
-					<p class="mt-1 text-xs text-text-cream/50">by Dr. Asad Tarsin</p>
-				</div>
-				<!-- Decorative circle -->
-				<div class="absolute -right-4 -bottom-4 h-32 w-32 rounded-full bg-accent-gold/20 blur-xl"></div>
-				<div class="absolute -top-4 -left-4 h-24 w-24 rounded-full bg-accent-primary/20 blur-xl"></div>
-			</div>
-		</div>
-	</div>
-</Section>
-
-<!-- ============================== -->
-<!-- 6. COURSE PREVIEW              -->
-<!-- ============================== -->
-<Section class="bg-secondary/50">
-	<div class="text-center">
-		<h2 class="font-display text-3xl font-bold sm:text-4xl">Learn at your own pace</h2>
-		<p class="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
-			Structured courses designed by scholars and educators to guide you step by step.
-		</p>
-	</div>
-
-	<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-		{#each featuredCourses as course}
-			<a href="/courses/{course.slug}" class="group">
-				<div class="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface transition-all hover:shadow-lg">
-					<div class="aspect-[16/9] bg-gradient-to-br from-accent-green/20 to-accent-primary/20">
-						<div class="flex h-full items-center justify-center">
-							<Play class="h-12 w-12 text-accent-green/40" />
-						</div>
-					</div>
-					<div class="flex flex-1 flex-col p-5">
-						<div class="flex items-center gap-2">
-							<Badge variant={course.difficulty === 'Beginner' ? 'green' : 'secondary'}>
-								{#snippet children()}{course.difficulty}{/snippet}
-							</Badge>
-							<span class="text-xs text-text-secondary">{course.lessonCount} lessons</span>
-						</div>
-						<h3 class="mt-3 font-display text-lg font-semibold group-hover:text-accent-primary">
-							{course.title}
-						</h3>
-						<p class="mt-2 flex-1 text-sm text-text-secondary line-clamp-2">{course.description}</p>
-						<div class="mt-4 flex items-center justify-between text-xs text-text-secondary">
-							<span>{course.instructor}</span>
-							<span>{course.duration}</span>
-						</div>
-						{#if course.enrolled}
-							<div class="mt-3">
-								<div class="flex items-center justify-between text-xs text-text-secondary">
-									<span>{course.enrolled?.toLocaleString()} enrolled</span>
-								</div>
-								<Progress value={65} class="mt-1.5 h-1.5" />
-							</div>
-						{/if}
-					</div>
-				</div>
-			</a>
-		{/each}
-	</div>
-
-	<div class="mt-10 text-center">
-		<Button variant="outline">
-			{#snippet children()}
-				Explore All Courses
-				<ArrowRight class="ml-1 h-4 w-4" />
-			{/snippet}
-		</Button>
-	</div>
-</Section>
-
-<!-- ============================== -->
-<!-- 7. COMMUNITY TEASER            -->
-<!-- ============================== -->
-<Section>
-	<div class="overflow-hidden rounded-2xl bg-gradient-to-br from-bg-dark to-accent-primary/20">
-		<div class="grid items-center gap-8 p-8 sm:p-12 lg:grid-cols-2 lg:p-16">
-			<div>
-				<h2 class="font-display text-3xl font-bold text-text-cream sm:text-4xl">
-					You're not on this journey alone
-				</h2>
-				<p class="mt-4 text-lg leading-relaxed text-text-cream/80">
-					Join a supportive community of fellow seekers, converts, and lifelong Muslims. Ask questions, share experiences, and grow together.
-				</p>
-				<div class="mt-8 flex flex-wrap gap-6">
-					<div class="flex items-center gap-2">
-						<Users class="h-5 w-5 text-accent-gold" />
-						<span class="text-text-cream"><strong class="text-accent-gold">2,500+</strong> members</span>
-					</div>
-					<div class="flex items-center gap-2">
-						<MessageCircle class="h-5 w-5 text-accent-gold" />
-						<span class="text-text-cream"><strong class="text-accent-gold">1,200+</strong> discussions</span>
-					</div>
-				</div>
-				<Button size="lg" class="mt-8 bg-accent-primary text-text-cream hover:bg-accent-hover">
-					{#snippet children()}
-						Join the Community
-						<ArrowRight class="ml-1 h-5 w-5" />
-					{/snippet}
-				</Button>
-			</div>
-
-			<!-- Chat Preview -->
-			<div class="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-				<div class="space-y-4">
-					{#each [
-						{ name: 'Aminah', msg: 'Salaam everyone! Just took my shahada yesterday 🤲', time: '2m ago' },
-						{ name: 'Omar', msg: 'MashaAllah! Welcome to the family, sister! 💚', time: '1m ago' },
-						{ name: 'Fatima', msg: 'So happy for you! Feel free to ask anything here.', time: 'just now' }
-					] as message}
-						<div class="flex gap-3">
-							<div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-primary/30 text-xs font-bold text-text-cream">
-								{message.name[0]}
-							</div>
-							<div>
-								<div class="flex items-center gap-2">
-									<span class="text-sm font-medium text-text-cream">{message.name}</span>
-									<span class="text-xs text-text-cream/40">{message.time}</span>
-								</div>
-								<p class="mt-0.5 text-sm text-text-cream/70">{message.msg}</p>
-							</div>
-						</div>
+		<!-- Trust bar -->
+		<div class="mt-8 flex items-center">
+			<div class="flex items-center gap-3">
+				<div class="flex -space-x-2">
+					{#each ['#7a8b6e', '#a08b6e', '#6e7a8b', '#8b6e7a'] as color}
+						<div class="h-9 w-9 rounded-full border-2 border-white/80" style="background: {color};"></div>
 					{/each}
 				</div>
+				<div class="text-[13px] text-white">
+					<span class="font-semibold">Trusted by</span>
+					<span class="text-white/80">10,000+ learners</span>
+				</div>
 			</div>
 		</div>
 	</div>
-</Section>
+
+</section>
 
 <!-- ============================== -->
-<!-- 8. DONATION / SPONSORSHIP      -->
+<!-- LEARN / CONVERT / SHOP         -->
 <!-- ============================== -->
-<Section class="bg-secondary/50">
-	<div class="text-center">
-		<Badge variant="gold">
-			{#snippet children()}Make an Impact{/snippet}
-		</Badge>
-		<h2 class="mt-4 font-display text-3xl font-bold sm:text-4xl">
-			Sponsor a boxed set for a new Muslim
-		</h2>
-		<p class="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
-			Many new Muslims can't afford the resources they need. Your sponsorship puts a complete
-			Being Muslim boxed set in their hands — a gift that transforms lives.
-		</p>
-	</div>
-
-	<!-- Impact Stats -->
-	<div class="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-6 sm:grid-cols-4">
-		<div class="text-center">
-			<p class="font-display text-2xl font-bold text-accent-primary">
-				{donationStats.totalSponsored.toLocaleString()}
-			</p>
-			<p class="mt-1 text-xs text-text-secondary">Sets Sponsored</p>
-		</div>
-		<div class="text-center">
-			<p class="font-display text-2xl font-bold text-accent-primary">
-				{donationStats.communitiesReached}
-			</p>
-			<p class="mt-1 text-xs text-text-secondary">Communities</p>
-		</div>
-		<div class="text-center">
-			<p class="font-display text-2xl font-bold text-accent-primary">
-				{donationStats.countriesReached}
-			</p>
-			<p class="mt-1 text-xs text-text-secondary">Countries</p>
-		</div>
-		<div class="text-center">
-			<p class="font-display text-2xl font-bold text-accent-primary">
-				{donationStats.monthlyDonors}
-			</p>
-			<p class="mt-1 text-xs text-text-secondary">Monthly Donors</p>
-		</div>
-	</div>
-
-	<!-- Sponsorship Tiers -->
-	<div class="mt-12 grid gap-6 sm:grid-cols-3">
-		{#each sponsorshipTiers as tier}
-			<div
-				class="relative flex flex-col rounded-xl border bg-surface p-6 transition-all hover:shadow-lg {tier.popular
-					? 'border-accent-primary shadow-md'
-					: 'border-border'}"
-			>
-				{#if tier.popular}
-					<div class="absolute -top-3 left-1/2 -translate-x-1/2">
-						<Badge variant="default">
-							{#snippet children()}Most Popular{/snippet}
-						</Badge>
-					</div>
-				{/if}
-				<h3 class="font-display text-lg font-semibold">{tier.name}</h3>
-				<p class="mt-2 flex-1 text-sm text-text-secondary">{tier.description}</p>
-				<p class="mt-4 font-display text-3xl font-bold text-accent-primary">
-					${tier.price}
-				</p>
-				<p class="mt-1 text-xs text-text-secondary">{tier.impact}</p>
-				<Button variant={tier.popular ? 'default' : 'outline'} class="mt-6 w-full">
-					{#snippet children()}
-						Sponsor Now
-						<Heart class="ml-1 h-4 w-4" />
-					{/snippet}
-				</Button>
+<section style="background: #faf9f5; padding: 24px 0;">
+	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
+		<div class="bm-grid-explore" style="background: #e3dacc; border-radius: 16px; padding: 28px 20px;">
+			<!-- Left: title + description + CTA -->
+			<div style="display: flex; flex-direction: column; justify-content: space-between; padding-right: 24px;">
+				<div>
+					<h2 style="font-family: 'Source Serif 4', serif; font-size: 36px; font-weight: 400; color: #2a2018; margin: 0 0 16px; line-height: 1.15;">Explore your path</h2>
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 15px; color: #5a5248; line-height: 1.6; margin: 0;">
+						Discover Islam through courses, articles, and guides. Whether you're curious, converting, or deepening your practice — find resources made for you.
+					</p>
+				</div>
+				<div style="margin-top: 24px;">
+					<a href="/a/learn" class="bm-btn-outline" style="padding: 10px 24px;">
+						See all resources
+					</a>
+				</div>
 			</div>
-		{/each}
-	</div>
 
-	<div class="mt-8 text-center">
-		<a href="/give" class="inline-flex items-center gap-1 text-sm font-medium text-accent-primary hover:underline">
-			Learn more about giving
-			<ArrowRight class="h-4 w-4" />
-		</a>
-	</div>
-</Section>
+			<!-- Card: Learn -->
+			<a href="/a/learn" class="bm-card-hover" style="background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
+				<div>
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #6a6258; margin: 0 0 8px; letter-spacing: 0.02em;">Learn</p>
+					<p style="font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0; line-height: 1.2;">Explore articles, guides, and resources on Islamic faith and practice</p>
+				</div>
+				<div style="margin-top: 24px; text-align: right;">
+					<ArrowRight class="h-5 w-5" style="color: #2a2018;" />
+				</div>
+			</a>
 
-<!-- ============================== -->
-<!-- 9. TESTIMONIALS                -->
-<!-- ============================== -->
-<Section>
-	<div class="text-center">
-		<h2 class="font-display text-3xl font-bold sm:text-4xl">What people are saying</h2>
-	</div>
+			<!-- Card: Convert -->
+			<a href="/a/convert" class="bm-card-hover" style="background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
+				<div>
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #6a6258; margin: 0 0 8px; letter-spacing: 0.02em;">Convert</p>
+					<p style="font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0; line-height: 1.2;">Take the next step on your journey with guidance and support</p>
+				</div>
+				<div style="margin-top: 24px; text-align: right;">
+					<ArrowRight class="h-5 w-5" style="color: #2a2018;" />
+				</div>
+			</a>
 
-	<div class="relative mx-auto mt-12 max-w-3xl">
-		<!-- Testimonial Card -->
-		<div class="rounded-2xl border border-border bg-surface p-8 text-center sm:p-12">
-			<div class="flex justify-center gap-1">
-				{#each Array(5) as _}
-					<Star class="h-5 w-5 fill-accent-gold text-accent-gold" />
-				{/each}
-			</div>
-			<blockquote class="mt-6 font-display text-xl leading-relaxed sm:text-2xl">
-				"{testimonials[testimonialIndex].quote}"
-			</blockquote>
-			<div class="mt-6">
-				<p class="font-semibold">{testimonials[testimonialIndex].name}</p>
-				<p class="text-sm text-text-secondary">{testimonials[testimonialIndex].role}</p>
-			</div>
-		</div>
-
-		<!-- Navigation -->
-		<div class="mt-6 flex items-center justify-center gap-4">
-			<button
-				onclick={prevTestimonial}
-				class="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface transition-colors hover:bg-secondary"
-				aria-label="Previous testimonial"
-			>
-				<ChevronLeft class="h-5 w-5" />
-			</button>
-			<div class="flex gap-2">
-				{#each testimonials as _, i}
-					<button
-						class="h-2 w-2 rounded-full transition-colors {i === testimonialIndex
-							? 'bg-accent-primary'
-							: 'bg-border'}"
-						onclick={() => (testimonialIndex = i)}
-						aria-label="Go to testimonial {i + 1}"
-					></button>
-				{/each}
-			</div>
-			<button
-				onclick={nextTestimonial}
-				class="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface transition-colors hover:bg-secondary"
-				aria-label="Next testimonial"
-			>
-				<ChevronRight class="h-5 w-5" />
-			</button>
-		</div>
-	</div>
-</Section>
-
-<!-- ============================== -->
-<!-- 10. NEWSLETTER SIGNUP          -->
-<!-- ============================== -->
-<section class="bg-bg-dark py-16 sm:py-24">
-	<div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-		<div class="mx-auto max-w-xl text-center">
-			<Mail class="mx-auto h-10 w-10 text-accent-gold" />
-			<h2 class="mt-4 font-display text-3xl font-bold text-text-cream sm:text-4xl">
-				Stay on the path
-			</h2>
-			<p class="mt-4 text-text-cream/70">
-				Weekly insights, resources, and encouragement delivered to your inbox. No spam — just guidance for your journey.
-			</p>
-
-			<form
-				class="mt-8 flex flex-col gap-3 sm:flex-row"
-				onsubmit={(e) => {
-					e.preventDefault();
-					// TODO: Newsletter signup integration
-				}}
-			>
-				<input
-					type="email"
-					bind:value={email}
-					placeholder="Enter your email"
-					required
-					class="flex-1 rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-text-cream placeholder:text-text-cream/40 focus:border-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary/50"
-				/>
-				<Button size="lg" class="bg-accent-primary text-text-cream hover:bg-accent-hover">
-					{#snippet children()}
-						Subscribe
-						<ArrowRight class="ml-1 h-4 w-4" />
-					{/snippet}
-				</Button>
-			</form>
-
-			<p class="mt-3 text-xs text-text-cream/40">
-				Join 5,000+ subscribers. Unsubscribe anytime.
-			</p>
+			<!-- Card: Buy -->
+			<a href="/a/shop" class="bm-card-hover" style="background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
+				<div>
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #6a6258; margin: 0 0 8px; letter-spacing: 0.02em;">Buy</p>
+					<p style="font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0; line-height: 1.2;">Books, prayer cards, and resources for your journey</p>
+				</div>
+				<div style="margin-top: 24px; text-align: right;">
+					<ArrowRight class="h-5 w-5" style="color: #2a2018;" />
+				</div>
+			</a>
 		</div>
 	</div>
 </section>
+
+<!-- ============================== -->
+<!-- 4. FEATURED ARTICLES           -->
+<!-- ============================== -->
+<section class="bm-section-padding" style="background: #f4f1eb;">
+	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
+		<div style="display: flex; justify-content: space-between; align-items: end; margin-bottom: 32px;">
+			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0;">
+				Latest Resources
+			</h2>
+			<a href="/a/learn" class="bm-view-all" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+				View all <ArrowRight class="h-3.5 w-3.5" />
+			</a>
+		</div>
+
+		<div class="bm-grid-3">
+			{#each [
+				{ title: 'Brief Overview of Islam', category: 'Foundations', time: '10 min read', href: '/a/learn/brief-overview-of-islam', img: 'https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png' },
+				{ title: "A Beginner's Guide to Being a Muslim", category: 'New Muslims', time: '12 min read', href: '/a/learn/beginners-guide', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg' },
+				{ title: 'Islam and Other Faiths', category: 'Belief', time: '8 min read', href: '/a/learn/islam-and-other-faiths', img: 'https://www.beingmuslim.org/wp-content/uploads/2022/03/oneGodmanynames.jpeg' }
+			] as article}
+				<a href={article.href} style="text-decoration: none; display: block;" class="bm-title-underline-parent">
+					<div style="aspect-ratio: 4/3; background: #e2dcd2; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+						<img src={article.img} alt={article.title} style="width: 100%; height: 100%; object-fit: cover;" />
+					</div>
+					<h3 class="bm-title-underline" style="font-family: 'Source Serif 4', serif; font-size: 18px; font-weight: 400; color: #2a2018; margin: 0 0 8px; line-height: 1.3;">{article.title}</h3>
+					<div style="display: flex; align-items: center; gap: 12px;">
+						<span style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #2a2018;">{article.category}</span>
+						<span style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #a09888;">{article.time}</span>
+					</div>
+				</a>
+			{/each}
+		</div>
+
+		<div style="text-align: center; margin-top: 32px;">
+			<a href="/a/learn" class="bm-btn-outline" style="padding: 10px 24px;">
+				Additional Resources <ArrowRight class="h-3.5 w-3.5" />
+			</a>
+		</div>
+	</div>
+</section>
+
+<!-- ============================== -->
+<!-- 5. PRODUCTS                    -->
+<!-- ============================== -->
+<section class="bm-section-padding" style="background: #faf9f5;">
+	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
+		<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px; text-align: center;">
+			Everything you need to begin
+		</h2>
+
+		<div style="display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 16px; -webkit-overflow-scrolling: touch;">
+			{#each [
+				{ title: 'Being Muslim: A Practical Guide', price: '$14.95', badge: 'Bestseller', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg', href: '/a/shop/book' },
+				{ title: 'The Complete Boxed Set', price: '$85.00', badge: 'Most Popular', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg', href: '/a/shop/boxed-set' },
+				{ title: 'Prayer Reference Cards', price: '$37.50', badge: '', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/the-prayer-card-900x610.jpeg', href: '/a/shop/prayer-cards' },
+				{ title: 'Digital Edition (eBook)', price: '$9.00', badge: '', img: 'https://www.beingmuslim.org/wp-content/uploads/2021/08/BM-E-Book-900x1200.png', href: '/a/shop/ebook' }
+			] as product}
+				<a href={product.href} style="flex: 0 0 280px; scroll-snap-align: start; text-decoration: none; display: block;" class="bm-title-underline-parent group">
+					<div style="aspect-ratio: 1; background: #e2dcd2; border-radius: 12px; overflow: hidden; margin-bottom: 16px; position: relative;">
+						{#if product.img}
+							<img src={product.img} alt={product.title} class="transition-transform duration-500 group-hover:scale-105" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+						{:else}
+							<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+								<BookOpen class="h-10 w-10" style="color: #c8c0b4;" />
+							</div>
+						{/if}
+						{#if product.badge}
+							<span style="position: absolute; top: 12px; left: 12px; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600; color: #2a2018; background: #fff; padding: 3px 10px; border-radius: 999px; z-index: 2;">{product.badge}</span>
+						{/if}
+					</div>
+					<h3 class="bm-title-underline" style="font-family: 'Source Serif 4', serif; font-size: 16px; font-weight: 400; color: #2a2018; margin: 0 0 6px; line-height: 1.3;">{product.title}</h3>
+					<span style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #2a2018;">{product.price}</span>
+				</a>
+			{/each}
+		</div>
+
+		<div style="text-align: center; margin-top: 32px;">
+			<a href="/a/shop" class="bm-btn-outline" style="padding: 10px 24px;">
+				See All Store Items <ArrowRight class="h-3.5 w-3.5" />
+			</a>
+		</div>
+	</div>
+</section>
+
+<!-- ============================== -->
+<!-- 10. FAQ                        -->
+<!-- ============================== -->
+<section class="bm-section-padding" style="background: #f4f1eb;">
+	<div class="mx-auto max-w-[1400px] px-6 lg:px-10">
+		<div style="max-width: 800px;">
+			<h2 style="font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px;">
+				Frequently Asked Questions
+			</h2>
+
+			{#each [
+				{ q: 'My family is not supportive of my conversion. What do you advise?', a: 'This is a common challenge many new Muslims face. We recommend patience, maintaining loving relationships, and leading by positive example. Our community forum has many discussions from people who have navigated this successfully.' },
+				{ q: 'Can you help me find a mosque or community of Muslims near me?', a: 'We can help connect you with local communities. Reach out through our Contact page and we will do our best to help you find a welcoming community in your area.' },
+				{ q: 'My previous faith was very dear to me. If I am now a Muslim, do I have to reject it entirely?', a: 'Islam acknowledges and respects the earlier prophets and scriptures. Many of the values you cherished in your previous faith are shared in Islam. Your journey enriches rather than erases your spiritual history.' },
+				{ q: 'My spouse or significant other is not a Muslim. How does becoming Muslim impact my marriage?', a: 'This is a nuanced topic that depends on your specific situation. We recommend speaking with a knowledgeable scholar who can provide guidance tailored to your circumstances. Reach out through our Contact page.' },
+				{ q: 'I just converted, what do I do next?', a: 'Congratulations and may God bless your path ahead! We have written an article that offers some advice and important first steps: "A Beginner\'s Guide to Being a Muslim." You can find it on our Learn page.' },
+				{ q: 'I believe Islam to be true and revealed by God, but I can\'t live up to its teachings. What should I do?', a: 'This feeling is more common than you might think. Islam teaches that God is the Most Merciful and that no one is expected to be perfect. Begin with what you can, be sincere in your intention, and trust that growth comes with time. The door to God is always open.' },
+				{ q: 'I want to convert, but I am finding it difficult to change my lifestyle including the way that I dress, what I eat/drink, relationships. Can I still become Muslim?', a: 'Absolutely. Islam teaches that faith is a journey, not a destination. You do not need to be perfect to begin. Start with the essentials and grow at your own pace — God is patient and merciful.' },
+				{ q: 'Do I need to change my name now that I have become Muslim?', a: 'No, changing your name is not required in Islam. Many Muslims keep their birth names. Some choose to adopt a new name as a personal expression of their new identity, but this is entirely optional.' }
+			] as faq, i}
+				<button
+					onclick={() => toggleFaq(i)}
+					style="width: 100%; text-align: left; padding: 20px 0; border: none; border-top: 1px solid #e8e3da; background: none; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;"
+				>
+					<span style="font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: #2a2018; line-height: 1.4;">{faq.q}</span>
+					<ChevronDown class="h-4 w-4 flex-shrink-0 mt-1 transition-transform duration-200 {openFaq === i ? 'rotate-180' : ''}" style="color: #8a7e70;" />
+				</button>
+				{#if openFaq === i}
+					<p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #8a7e70; line-height: 1.6; margin: 0 0 20px; padding-right: 40px;">{faq.a}</p>
+				{/if}
+			{/each}
+
+			<div style="margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px;">
+				<a href="/a/convert" class="bm-btn-dark" style="padding: 10px 24px;">
+					Ready to Convert
+				</a>
+				<a href="/a/contact" class="bm-btn-outline" style="padding: 10px 24px;">
+					Ask a Question
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Styles now in /src/routes/b/styles.css -->

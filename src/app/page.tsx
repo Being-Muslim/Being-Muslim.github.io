@@ -1,10 +1,10 @@
 const concepts = [
-  { slug: "a", name: "Concept A" },
-  { slug: "b", name: "Concept B" },
-  { slug: "c", name: "Concept C" },
-  { slug: "d", name: "Concept D" },
-  { slug: "e", name: "Concept E" },
-  { slug: "f", name: "Concept F" },
+  { slug: "a", name: "Concept A", isNew: false },
+  { slug: "b", name: "Concept B", isNew: false },
+  { slug: "c", name: "Concept C", isNew: false },
+  { slug: "d", name: "Concept D", isNew: true },
+  { slug: "e", name: "Concept E", isNew: true },
+  { slug: "f", name: "Concept F", isNew: true },
 ];
 
 export default function ConceptIndex() {
@@ -25,6 +25,7 @@ export default function ConceptIndex() {
             target="_blank"
             rel="noopener noreferrer"
             style={{
+              position: "relative",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -38,6 +39,25 @@ export default function ConceptIndex() {
             }}
           >
             {c.name}
+            {c.isNew && (
+              <span
+                style={{
+                  position: "absolute",
+                  top: 12,
+                  right: 12,
+                  background: "#8b2e36",
+                  color: "#fff",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: "0.04em",
+                  textTransform: "uppercase",
+                  padding: "3px 8px",
+                  borderRadius: 999,
+                }}
+              >
+                New
+              </span>
+            )}
           </a>
         ))}
       </div>

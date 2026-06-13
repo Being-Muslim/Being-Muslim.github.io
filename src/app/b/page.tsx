@@ -56,6 +56,9 @@ export default function ConceptBStagingHome() {
 
         {/* ============ 2. LEARN / CONVERT / BUY (glass nav cards) ============ */}
         <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-10 mt-10 pb-8">
+          <h2 style={css("font-family: 'Source Serif 4', serif; font-size: clamp(22px, 3vw, 30px); font-weight: 400; color: #fff; margin: 0 0 20px; line-height: 1.2")}>
+            Explore your path
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 rounded-2xl border border-white/15 bg-white/10 backdrop-blur-xl overflow-hidden">
             {featureBoxes.map(({ label, desc, href, Icon }, i) => (
               <Link

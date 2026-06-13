@@ -68,9 +68,9 @@ export default function ConceptEHome() {
         <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
           <div className="bm-panel bm-panel-soft">
           <div style={css("text-align: center; max-width: 680px; margin: 0 auto 48px")}>
-            <p className="bm-eyebrow">Explore your path</p>
+            <p className="bm-eyebrow">Get started</p>
             <h2 style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 400; letter-spacing: -0.02em; font-size: clamp(30px, 4.5vw, 48px); color: #2d3748; margin: 14px 0 16px; line-height: 1.05")}>
-              Three ways to begin
+              Explore your path
             </h2>
             <p style={css("font-size: 17px; color: #6b7a8d; line-height: 1.6; margin: 0")}>
               Discover Islam through courses, articles, and guides. Whether you&apos;re curious, converting, or deepening your practice — find resources made for you.
@@ -153,17 +153,16 @@ export default function ConceptEHome() {
 
           <div style={css("display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 6px 2px 12px")}>
             {products.map((product) => (
-              <Link key={product.title} href={product.href} style={css("flex: 0 0 270px; scroll-snap-align: start; text-decoration: none; display: block; padding: 16px")} className="bm-cell bm-title-underline-parent group">
-                <div style={css("aspect-ratio: 1; background: #faf2e3; overflow: hidden; border-radius: 16px; margin-bottom: 16px; position: relative")}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={product.img} alt={product.title} className="bm-frame-img" style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
-                  {product.badge && (
-                    <span style={css("position: absolute; top: 12px; left: 12px; font-size: 12px; font-weight: 600; color: #fff; background: #8b2e36; padding: 5px 12px; border-radius: 999px; z-index: 2")}>{product.badge}</span>
-                  )}
-                </div>
-                <div style={css("padding: 0 6px 6px")}>
-                  <h3 className="bm-title-underline" style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 17px; color: #2d3748; margin: 0 0 8px; line-height: 1.3")}>{product.title}</h3>
-                  <span style={css("font-size: 16px; font-weight: 600; color: #8b2e36")}>{product.price}</span>
+              <Link key={product.title} href={product.href} className="bm-overlay-card bm-title-underline-parent" style={css("flex: 0 0 270px; scroll-snap-align: start; min-height: 340px")}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={product.img} alt={product.title} className="bm-overlay-img" />
+                <div className="bm-overlay-scrim" aria-hidden="true" />
+                {product.badge && (
+                  <span style={css("position: absolute; top: 16px; left: 16px; font-size: 12px; font-weight: 600; color: #fff; background: #8b2e36; padding: 5px 12px; border-radius: 999px; z-index: 3")}>{product.badge}</span>
+                )}
+                <div className="bm-overlay-body">
+                  <h3 className="bm-title-underline" style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 18px; color: #fff; margin: 0 0 6px; line-height: 1.3")}>{product.title}</h3>
+                  <span style={css("font-size: 16px; font-weight: 600; color: #f3d79b")}>{product.price}</span>
                 </div>
               </Link>
             ))}

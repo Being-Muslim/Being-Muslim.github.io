@@ -517,29 +517,9 @@ p, a, li, label, input, textarea, select, button {
    CONCEPT D — HOVER & INTERACTION EFFECTS
    ============================================ */
 
-/* ---------- Enhanced card hovers ---------- */
-.card-lift {
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.card-lift:hover {
-	transform: translateY(-6px);
-	box-shadow: 0 12px 32px rgba(42, 32, 24, 0.12);
-}
-
-/* Product card: image zooms, card lifts 4px */
-.product-card-hover {
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.product-card-hover:hover {
-	transform: translateY(-4px);
-	box-shadow: 0 8px 24px rgba(42, 32, 24, 0.1);
-}
-.product-card-hover img {
-	transition: transform 0.5s ease;
-}
-.product-card-hover:hover img {
-	transform: scale(1.05);
-}
+/* ---------- Card hovers: static (no lift / no image zoom) ---------- */
+/* .card-lift (Latest Resources) and .product-card-hover (Everything you need)
+   intentionally have NO hover transform/lift/zoom — cards stay still on hover. */
 
 /* Explore path cards: background brightens, border color change, arrow slides right */
 .explore-card-hover {

@@ -172,90 +172,122 @@ export default function Navbar() {
   const panelOpen = !!activeMenu;
 
   // Concept B's glass pill becomes a readable solid dark surface once scrolled
-  // past the dark hero onto the light page body.
-  const pillBg = scrolled ? "rgba(30,28,24,0.92)" : "rgba(255,255,255,0.08)";
-  const pillBorder = scrolled ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.15)";
-  const pillShadow = scrolled ? "0 4px 24px rgba(0,0,0,0.25)" : "none";
+  // past the dark hero onto the light page body. When the mega-menu is OPEN the
+  // SAME surface morphs into a light expanded panel (Coda-style), so the nav row
+  // and the menu content read as one continuous surface.
+  const pillBg = panelOpen
+    ? PANEL.bg
+    : scrolled
+      ? "rgba(30,28,24,0.92)"
+      : "rgba(255,255,255,0.08)";
+  const pillBorder = panelOpen
+    ? PANEL.border
+    : scrolled
+      ? "rgba(255,255,255,0.12)"
+      : "rgba(255,255,255,0.15)";
+  const pillShadow = panelOpen
+    ? PANEL.shadow
+    : scrolled
+      ? "0 4px 24px rgba(0,0,0,0.25)"
+      : "none";
+  // Border radius morphs from a full pill to a rounded panel as it expands.
+  const pillRadius = panelOpen ? "24px" : "999px";
+  // The surface is comfortably wide so the multi-column menu (incl. the 4
+  // Products image cards) sits cleanly; it grows taller, not wider, on open.
+  const pillMaxWidth = "1100px";
+
+  // Nav row foreground colors flip from light-on-glass to dark-on-light as the
+  // surface morphs to the expanded light panel.
+  const navText = panelOpen ? PANEL.itemText : "rgba(255,255,255,0.85)";
+  const logoText = panelOpen ? PANEL.title : "#fff";
+  const navItemHoverBg = panelOpen ? "rgba(42,32,24,0.06)" : "rgba(255,255,255,0.12)";
+  const contactBg = panelOpen ? "rgba(42,32,24,0.06)" : "rgba(255,255,255,0.15)";
+  const contactBorder = panelOpen ? PANEL.border : "rgba(255,255,255,0.25)";
+  const contactText = panelOpen ? PANEL.itemText : "#fff";
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50" style={css("padding: 16px 24px")}>
-      {/* Desktop: pill navbar (always visible on md+) */}
-      <nav
-        className="bm-navbar-pill hidden md:flex"
+      {/* Desktop: ONE surface that morphs from a pill into an expanded panel.
+          The nav row and the mega-menu content live INSIDE this single
+          container, so opening a menu reads as the navbar itself expanding —
+          no detached panel, no gap. */}
+      <div
+        className={`bm-navbar-surface hidden md:block ${panelOpen ? "bm-navbar-surface-open" : ""}`}
+        onMouseLeave={() => {
+          setHovered(null);
+          scheduleClose();
+        }}
         style={css(
-          `max-width: 1100px; margin: 0 auto; align-items: center; justify-content: space-between; padding: 10px 12px 10px 20px; border-radius: 999px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid ${pillBorder}; background: ${pillBg}; box-shadow: ${pillShadow}; transition: all 0.3s`,
+          `max-width: ${pillMaxWidth}; margin: 0 auto; border-radius: ${pillRadius}; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid ${pillBorder}; background: ${pillBg}; box-shadow: ${pillShadow}; overflow: hidden; transition: background 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, border-radius 0.22s ease`,
         )}
       >
-        <Link href="/b" style={css("display: flex; align-items: center; gap: 10px; text-decoration: none")}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png" alt="Being Muslim" style={css("height: 28px; width: 28px")} />
-          <span style={css("font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700; color: #fff")}>Being Muslim</span>
-        </Link>
-
-        <div style={css("display: flex; align-items: center; gap: 28px")}>
-          {navLinks.map((link) => {
-            const hasMenu = !!megaMenus[link.label];
-            const isActive = activeMenu === link.label;
-            return (
-              <div
-                key={link.label}
-                className="relative"
-                onMouseEnter={() => {
-                  setHovered(link.label);
-                  if (hasMenu) openMenu(link.label);
-                  else setActiveMenu(null);
-                }}
-                onMouseLeave={() => {
-                  setHovered(null);
-                  scheduleClose();
-                }}
-              >
-                <Link
-                  href={link.href}
-                  style={css(`font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; text-decoration: none; color: rgba(255,255,255,0.85); padding: 6px 14px; border-radius: 999px; display: inline-flex; align-items: center; gap: 4px; background: ${hovered === link.label || isActive ? "rgba(255,255,255,0.12)" : "transparent"}; transition: background 0.15s`)}
-                >
-                  {link.label}
-                  {hasMenu && (
-                    <ChevronDown
-                      className="bm-chevron"
-                      style={css(`height: 13px; width: 13px; transition: transform 0.2s ease; transform: rotate(${isActive ? "180deg" : "0deg"})`)}
-                    />
-                  )}
-                </Link>
-              </div>
-            );
-          })}
-        </div>
-
-        <Link
-          href="/b/contact"
-          style={css("align-items: center; padding: 8px 20px; border-radius: 999px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.3s; background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.25)")}
+        {/* Top nav row */}
+        <nav
+          className="bm-navbar-pill"
+          style={css(
+            "display: flex; align-items: center; justify-content: space-between; padding: 10px 12px 10px 20px",
+          )}
         >
-          Contact
-        </Link>
-      </nav>
+          <Link href="/b" style={css("display: flex; align-items: center; gap: 10px; text-decoration: none")}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png" alt="Being Muslim" style={css("height: 28px; width: 28px")} />
+            <span style={css(`font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700; transition: color 0.22s ease; color: ${logoText}`)}>Being Muslim</span>
+          </Link>
 
-      {/* Coda-style full-width expanding mega-menu panel. Always mounted so the
-          max-height + opacity transition can play in BOTH directions; the
-          `bm-mega-open` class drives the expand-down. */}
-      <div
-        className={`bm-mega-wrap hidden md:block ${panelOpen ? "bm-mega-open" : ""}`}
-        onMouseEnter={cancelClose}
-        onMouseLeave={scheduleClose}
-        style={css("max-width: 1100px; margin: 8px auto 0")}
-        aria-hidden={!panelOpen}
-      >
+          <div style={css("display: flex; align-items: center; gap: 28px")}>
+            {navLinks.map((link) => {
+              const hasMenu = !!megaMenus[link.label];
+              const isActive = activeMenu === link.label;
+              return (
+                <div
+                  key={link.label}
+                  className="relative"
+                  onMouseEnter={() => {
+                    setHovered(link.label);
+                    if (hasMenu) openMenu(link.label);
+                    else setActiveMenu(null);
+                  }}
+                >
+                  <Link
+                    href={link.href}
+                    style={css(`font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; text-decoration: none; color: ${navText}; padding: 6px 14px; border-radius: 999px; display: inline-flex; align-items: center; gap: 4px; background: ${hovered === link.label || isActive ? navItemHoverBg : "transparent"}; transition: background 0.15s, color 0.22s ease`)}
+                  >
+                    {link.label}
+                    {hasMenu && (
+                      <ChevronDown
+                        className="bm-chevron"
+                        style={css(`height: 13px; width: 13px; transition: transform 0.2s ease; transform: rotate(${isActive ? "180deg" : "0deg"})`)}
+                      />
+                    )}
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+
+          <Link
+            href="/b/contact"
+            style={css(`align-items: center; padding: 8px 20px; border-radius: 999px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; text-decoration: none; transition: background 0.22s ease, border-color 0.22s ease, color 0.22s ease; background: ${contactBg}; color: ${contactText}; border: 1px solid ${contactBorder}`)}
+          >
+            Contact
+          </Link>
+        </nav>
+
+        {/* Coda-style expanding region INSIDE the same surface. Always mounted so
+            the max-height + opacity transition plays in BOTH directions; the
+            `bm-mega-open` class drives the expand-down. */}
         <div
-          className="bm-mega-inner"
-          style={css(`border-radius: 20px; backdrop-filter: ${PANEL.blur}; -webkit-backdrop-filter: ${PANEL.blur}; border: 1px solid ${PANEL.border}; border-top: 2px solid ${PANEL.border}; background: ${PANEL.bg}; box-shadow: ${PANEL.shadow}; overflow: hidden`)}
+          className={`bm-mega-region ${panelOpen ? "bm-mega-open" : ""}`}
+          onMouseEnter={cancelClose}
+          aria-hidden={!panelOpen}
         >
           {menu && (
-            <div style={css("padding: 30px 32px")}>
+            <div style={css(`padding: 18px 32px 30px; border-top: 1px solid ${PANEL.divider}`)}>
               {/* Section title with trailing arrow, e.g. "Learn →" */}
               <Link
                 href={menu.titleHref}
                 className="bm-mega-title"
-                style={css(`display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-family: 'DM Sans', sans-serif; font-size: 18px; font-weight: 700; color: ${PANEL.title}; margin: 0 0 22px`)}
+                style={css(`display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-family: 'DM Sans', sans-serif; font-size: 18px; font-weight: 700; color: ${PANEL.title}; margin: 4px 0 22px`)}
               >
                 {menu.title}
                 <ArrowRight className="bm-mega-title-arrow" style={css("height: 16px; width: 16px; transition: transform 0.2s ease")} />

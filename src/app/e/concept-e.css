@@ -1,36 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap');
 
 /* ============================================
    Being Muslim — Concept E Design System
-   "Frame Style" dark editorial (inspired by phantom.land)
-   Black bg, white Helvetica display, IBM Plex Mono labels,
-   thin-bordered framed grid cells.
+   "Phantom" style — inspired by phantom.com
+   Light lavender page, floating white pill nav,
+   large rounded hero frame with flowing purple
+   artwork, light Hanken Grotesk headlines, soft
+   rounded purple cards & pills.
    ============================================ */
 
 /* ---------- Design Tokens ---------- */
 :root {
-	--bm-bg: #000000;
-	--bm-bg-alt: #0a0a0a;
-	--bm-ink: #ffffff;
-	--bm-muted: rgba(255, 255, 255, 0.55);
-	--bm-faint: rgba(255, 255, 255, 0.32);
-	--bm-frame: rgba(255, 255, 255, 0.16);
-	--bm-frame-strong: rgba(255, 255, 255, 0.32);
-	--bm-cell: #050505;
-	--bm-cell-hover: #0e0e0e;
-	--bm-font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	--bm-font-mono: 'IBM Plex Mono', monospace;
-	--bm-margin: 18px;
+	--bm-page: #f4f3ff;            /* light lavender page */
+	--bm-purple-light: #ab9ff2;
+	--bm-purple: #6c5ce7;          /* primary purple */
+	--bm-purple-deep: #534bb3;     /* deep indigo */
+	--bm-heading: #2b2256;         /* dark indigo headings */
+	--bm-heading-soft: #3d3580;
+	--bm-body: #5b5470;            /* muted body text */
+	--bm-card: #ffffff;
+	--bm-card-alt: #efecff;        /* pale purple card */
+	--bm-frame-ink: #1a1530;       /* near-black hero base */
+	--bm-font: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* ---------- Root ---------- */
 .bm-root {
-	font-family: var(--bm-font-display);
-	color: var(--bm-ink);
-	background: var(--bm-bg);
+	font-family: var(--bm-font);
+	color: var(--bm-body);
+	background: var(--bm-page);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	position: relative;
+	overflow-x: hidden;
 }
 
 html {
@@ -43,121 +45,134 @@ html {
 .bm-root h4,
 .bm-root h5,
 .bm-root h6 {
-	font-family: var(--bm-font-display);
-	font-weight: 700;
+	font-family: var(--bm-font);
+	font-weight: 400;
 	letter-spacing: -0.02em;
-	color: var(--bm-ink);
+	color: var(--bm-heading);
 }
 
 .bm-root p,
 .bm-root a,
 .bm-root li,
 .bm-root label,
-.bm-root button {
-	font-family: var(--bm-font-display);
+.bm-root button,
+.bm-root span {
+	font-family: var(--bm-font);
 }
 
-/* ---------- Fixed inset viewport frame ---------- */
-.bm-viewport-frame {
-	position: fixed;
-	inset: var(--bm-margin);
-	border: 1px solid var(--bm-frame);
-	pointer-events: none;
-	z-index: 60;
-}
-
-/* ---------- Eyebrow / mono labels ---------- */
+/* ---------- Eyebrow labels ---------- */
 .bm-eyebrow {
-	font-family: var(--bm-font-mono);
-	font-size: 11px;
-	font-weight: 500;
-	letter-spacing: 0.12em;
+	font-family: var(--bm-font);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 0.04em;
 	text-transform: uppercase;
-	color: var(--bm-muted);
+	color: var(--bm-purple);
 	margin: 0;
 }
 
-.bm-meta {
-	font-family: var(--bm-font-mono);
-	font-size: 11px;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-	color: var(--bm-faint);
+.bm-eyebrow-light {
+	color: var(--bm-purple-light);
 }
 
-/* ---------- Buttons ---------- */
+.bm-meta {
+	font-family: var(--bm-font);
+	font-size: 13px;
+	font-weight: 500;
+	letter-spacing: 0.01em;
+	color: var(--bm-purple);
+}
+
+/* ---------- Pill buttons ---------- */
 .bm-btn-white,
 .bm-btn-dark,
 .bm-btn-outline,
 .bm-btn-glass {
 	display: inline-flex;
 	align-items: center;
-	gap: 8px;
-	font-family: var(--bm-font-mono);
-	font-size: 12px;
-	font-weight: 500;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-	border-radius: 0;
-	padding: 14px 26px;
+	gap: 9px;
+	font-family: var(--bm-font);
+	font-size: 16px;
+	font-weight: 600;
+	letter-spacing: 0;
+	border-radius: 999px;
+	padding: 14px 30px;
 	text-decoration: none;
 	cursor: pointer;
-	transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+	transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
 }
 
-/* Solid white pill -> sharp white block */
-.bm-btn-white {
-	background: var(--bm-ink);
-	color: #000;
-	border: 1px solid var(--bm-ink);
-}
-.bm-btn-white:hover {
-	background: transparent;
-	color: var(--bm-ink);
-}
-
-/* Dark / primary -> inverse of white */
+/* Primary purple pill */
 .bm-btn-dark {
-	background: var(--bm-ink);
-	color: #000;
-	border: 1px solid var(--bm-ink);
+	background: var(--bm-purple);
+	color: #fff;
+	border: 1px solid var(--bm-purple);
+	box-shadow: 0 8px 22px rgba(108, 92, 231, 0.28);
 }
 .bm-btn-dark:hover {
-	background: transparent;
-	color: var(--bm-ink);
+	background: var(--bm-purple-deep);
+	border-color: var(--bm-purple-deep);
+	transform: translateY(-2px);
+	box-shadow: 0 12px 28px rgba(108, 92, 231, 0.36);
 }
 
-/* Outline / framed */
+/* Light / white pill (used on dark hero) */
+.bm-btn-white {
+	background: #fff;
+	color: var(--bm-heading);
+	border: 1px solid #fff;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+.bm-btn-white:hover {
+	background: var(--bm-purple-light);
+	border-color: var(--bm-purple-light);
+	color: var(--bm-heading);
+	transform: translateY(-2px);
+}
+
+/* Soft purple-outline pill */
 .bm-btn-outline {
-	background: transparent;
-	color: var(--bm-ink);
-	border: 1px solid var(--bm-frame-strong);
+	background: #fff;
+	color: var(--bm-purple);
+	border: 1px solid rgba(108, 92, 231, 0.3);
+	box-shadow: 0 4px 14px rgba(108, 92, 231, 0.08);
 }
 .bm-btn-outline:hover {
-	border-color: var(--bm-ink);
-	background: rgba(255, 255, 255, 0.04);
+	border-color: var(--bm-purple);
+	background: var(--bm-card-alt);
+	transform: translateY(-2px);
 }
 
-/* Glass -> framed transparent (used on hero) */
+/* Glass pill (translucent on hero) */
 .bm-btn-glass {
-	background: transparent;
-	color: var(--bm-ink);
-	border: 1px solid var(--bm-frame-strong);
+	background: rgba(255, 255, 255, 0.12);
+	color: #fff;
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
 }
 .bm-btn-glass:hover {
-	border-color: var(--bm-ink);
-	background: rgba(255, 255, 255, 0.04);
+	background: rgba(255, 255, 255, 0.2);
+	border-color: rgba(255, 255, 255, 0.6);
+	transform: translateY(-2px);
 }
 
-/* ---------- Framed cell ---------- */
+/* ---------- Soft rounded card ---------- */
 .bm-cell {
-	background: var(--bm-cell);
-	border: 1px solid var(--bm-frame);
-	transition: background 0.3s ease, border-color 0.3s ease;
+	background: var(--bm-card);
+	border: 1px solid rgba(108, 92, 231, 0.1);
+	border-radius: 22px;
+	box-shadow: 0 8px 28px rgba(83, 75, 179, 0.06);
+	transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .bm-cell:hover {
-	background: var(--bm-cell-hover);
-	border-color: var(--bm-frame-strong);
+	transform: translateY(-4px);
+	box-shadow: 0 18px 44px rgba(83, 75, 179, 0.14);
+	border-color: rgba(108, 92, 231, 0.28);
+}
+
+.bm-cell-alt {
+	background: var(--bm-card-alt);
 }
 
 /* ---------- Title underline (subtle) ---------- */
@@ -166,12 +181,15 @@ html {
 	transition: color 0.2s ease;
 }
 .bm-title-underline-parent:hover .bm-title-underline {
-	color: var(--bm-muted);
+	color: var(--bm-purple);
 }
 
 /* ---------- View all / arrow ---------- */
+.bm-view-all {
+	transition: color 0.2s ease;
+}
 .bm-view-all:hover {
-	color: var(--bm-muted) !important;
+	color: var(--bm-purple-deep) !important;
 }
 .bm-arrow-slide {
 	transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -182,80 +200,79 @@ html {
 	transform: translateX(4px);
 }
 
-/* ---------- Image inside frame ---------- */
+/* ---------- Image inside card ---------- */
 .bm-frame-img {
-	transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-	filter: grayscale(0.15);
+	transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .bm-title-underline-parent:hover .bm-frame-img,
 .bm-cell:hover .bm-frame-img {
-	transform: scale(1.04);
-	filter: grayscale(0);
+	transform: scale(1.05);
+}
+
+/* ---------- Feature icon chip ---------- */
+.bm-icon-chip {
+	width: 56px;
+	height: 56px;
+	border-radius: 18px;
+	background: var(--bm-card-alt);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--bm-purple);
 }
 
 /* ---------- Footer links ---------- */
 .bm-footer-link {
-	font-family: var(--bm-font-mono);
-	font-size: 12px;
-	letter-spacing: 0.06em;
-	color: var(--bm-muted);
+	font-family: var(--bm-font);
+	font-size: 15px;
+	font-weight: 400;
+	color: rgba(255, 255, 255, 0.7);
 	text-decoration: none;
 	display: block;
-	padding: 5px 0;
+	padding: 6px 0;
 	transition: color 0.2s ease;
 }
 .bm-footer-link:hover {
-	color: var(--bm-ink) !important;
+	color: #fff !important;
 }
 
 /* ---------- Social icons ---------- */
 .bm-social-icon {
-	width: 38px;
-	height: 38px;
-	border: 1px solid var(--bm-frame);
+	width: 40px;
+	height: 40px;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.1);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transition: border-color 0.2s ease, background 0.2s ease;
+	transition: background 0.2s ease, transform 0.2s ease;
 }
 .bm-social-icon:hover {
-	border-color: var(--bm-ink);
-	background: rgba(255, 255, 255, 0.04);
+	background: var(--bm-purple);
+	transform: translateY(-2px);
 }
 
 /* ============================================
-   Framed grids
+   Grids
    ============================================ */
 
-/* Explore (Learn / Convert / Buy) — framed grid, shared 1px gutters */
+/* Explore (Learn / Convert / Buy) */
 .bm-grid-explore {
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 1px;
-	background: var(--bm-frame);
-	border: 1px solid var(--bm-frame);
+	gap: 22px;
 }
 @media (min-width: 768px) {
 	.bm-grid-explore {
-		grid-template-columns: 1.2fr 1fr 1fr 1fr;
-	}
-}
-@media (min-width: 768px) and (max-width: 1023px) {
-	.bm-grid-explore {
-		grid-template-columns: 1fr 1fr;
-	}
-	.bm-grid-explore > :first-child {
-		grid-column: 1 / -1;
+		grid-template-columns: repeat(3, 1fr);
 	}
 }
 
-/* Articles 3-up framed grid */
+/* Articles 3-up */
 .bm-grid-3 {
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 1px;
-	background: var(--bm-frame);
-	border: 1px solid var(--bm-frame);
+	gap: 22px;
 }
 @media (min-width: 640px) {
 	.bm-grid-3 {
@@ -272,7 +289,7 @@ html {
 .bm-grid-footer {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	gap: 32px 24px;
+	gap: 36px 24px;
 	padding-bottom: 48px;
 }
 .bm-grid-footer > :first-child {
@@ -290,16 +307,16 @@ html {
 
 /* ---------- Section spacing ---------- */
 .bm-section-padding {
-	padding: 56px 0;
+	padding: 64px 0;
 }
 @media (min-width: 768px) {
 	.bm-section-padding {
-		padding: 88px 0;
+		padding: 96px 0;
 	}
 }
 
 .bm-container {
-	max-width: 1400px;
+	max-width: 1280px;
 	margin-left: auto;
 	margin-right: auto;
 	padding-left: 24px;
@@ -313,47 +330,79 @@ html {
 }
 
 /* ============================================
-   Hero (framed editorial)
+   Hero — large rounded frame with flowing artwork
    ============================================ */
 .bm-hero {
+	padding: 16px;
+}
+@media (min-width: 768px) {
+	.bm-hero {
+		padding: 22px;
+	}
+}
+.bm-hero-frame {
 	position: relative;
-	min-height: 92vh;
+	border-radius: 32px;
+	overflow: hidden;
+	min-height: 88vh;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-end;
-	border-bottom: 1px solid var(--bm-frame);
-	overflow: hidden;
-	background: #000;
+	justify-content: center;
+	align-items: center;
+	background: var(--bm-frame-ink);
+	box-shadow: 0 30px 80px rgba(43, 34, 86, 0.25);
 }
-.bm-hero-bg {
+.bm-hero-art {
 	position: absolute;
 	inset: 0;
 	z-index: 0;
+	background:
+		radial-gradient(120% 90% at 12% 18%, rgba(171, 159, 242, 0.55) 0%, rgba(171, 159, 242, 0) 48%),
+		radial-gradient(110% 80% at 88% 12%, rgba(108, 92, 231, 0.65) 0%, rgba(108, 92, 231, 0) 52%),
+		radial-gradient(140% 120% at 78% 92%, rgba(83, 75, 179, 0.7) 0%, rgba(83, 75, 179, 0) 55%),
+		conic-gradient(from 200deg at 35% 70%, rgba(126, 105, 232, 0.5), rgba(60, 52, 130, 0.35), rgba(154, 148, 96, 0.22), rgba(126, 105, 232, 0.5)),
+		linear-gradient(160deg, #221a44 0%, #1a1530 55%, #120e26 100%);
+	filter: saturate(1.05);
+	animation: bm-flow 22s ease-in-out infinite alternate;
 }
-.bm-hero-bg img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	opacity: 0.34;
-	filter: grayscale(0.4) contrast(1.05);
+.bm-hero-art::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background:
+		radial-gradient(60% 70% at 50% 40%, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 60%),
+		conic-gradient(from 40deg at 65% 35%, rgba(171, 159, 242, 0.18), rgba(26, 21, 48, 0) 30%, rgba(108, 92, 231, 0.2) 60%, rgba(26, 21, 48, 0) 85%);
+	mix-blend-mode: screen;
+	animation: bm-flow-2 18s ease-in-out infinite alternate;
+}
+@keyframes bm-flow {
+	0%   { transform: scale(1.05) translate3d(0, 0, 0); }
+	100% { transform: scale(1.12) translate3d(-2%, -2%, 0); }
+}
+@keyframes bm-flow-2 {
+	0%   { transform: rotate(0deg) scale(1.1); opacity: 0.8; }
+	100% { transform: rotate(8deg) scale(1.2); opacity: 1; }
 }
 .bm-hero-content {
 	position: relative;
 	z-index: 2;
+	text-align: center;
+	padding: 48px 24px;
+	max-width: 880px;
 }
 
 /* ============================================
-   Reveal animations (subtle fades only)
+   Reveal animations (soft fades)
    ============================================ */
 .bm-reveal {
 	opacity: 0;
-	transform: translateY(16px);
+	transform: translateY(18px);
 	transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .bm-reveal-up,
 .bm-reveal-left,
 .bm-reveal-right {
-	transform: translateY(16px);
+	transform: translateY(18px);
 }
 .bm-reveal-visible {
 	opacity: 1;
@@ -365,6 +414,18 @@ html {
 .bm-stagger-4 { transition-delay: 0.24s; }
 
 /* ---------- FAQ accordion ---------- */
+.bm-faq-item {
+	background: var(--bm-card);
+	border: 1px solid rgba(108, 92, 231, 0.12);
+	border-radius: 18px;
+	margin-bottom: 14px;
+	box-shadow: 0 6px 18px rgba(83, 75, 179, 0.05);
+	transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.bm-faq-item:hover {
+	border-color: rgba(108, 92, 231, 0.28);
+	box-shadow: 0 10px 26px rgba(83, 75, 179, 0.1);
+}
 .bm-faq-answer {
 	max-height: 0;
 	overflow: hidden;
@@ -372,19 +433,8 @@ html {
 	opacity: 0;
 }
 .bm-faq-answer.bm-faq-open {
-	max-height: 360px;
+	max-height: 400px;
 	opacity: 1;
-}
-.bm-faq-item {
-	border: 1px solid var(--bm-frame);
-	border-top: none;
-	transition: background 0.25s ease;
-}
-.bm-faq-item:first-of-type {
-	border-top: 1px solid var(--bm-frame);
-}
-.bm-faq-item:hover {
-	background: var(--bm-cell-hover);
 }
 
 /* ---------- Section flow ---------- */
@@ -394,18 +444,26 @@ html {
 
 /* ---------- Navbar ---------- */
 @keyframes megaFadeIn {
-	from { opacity: 0; transform: translateY(-4px); }
+	from { opacity: 0; transform: translateY(-6px); }
 	to { opacity: 1; transform: translateY(0); }
 }
+.bm-nav-link {
+	transition: color 0.18s ease;
+}
+.bm-nav-link:hover {
+	color: var(--bm-purple) !important;
+}
+.mega-link {
+	border-radius: 12px;
+}
 .mega-link:hover {
-	color: var(--bm-muted);
+	background: var(--bm-card-alt);
 }
 .mobile-menu {
 	max-height: 0;
 	overflow: hidden;
-	background: #000;
 	transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .mobile-menu.open {
-	max-height: 400px;
+	max-height: 460px;
 }

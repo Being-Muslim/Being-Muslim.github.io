@@ -473,13 +473,88 @@ p, a, li, label, input, textarea, select, button {
 }
 
 /* ---------- Navbar ---------- */
-@keyframes megaFadeIn {
-	from { opacity: 0; transform: translateY(-4px); }
-	to { opacity: 1; transform: translateY(0); }
+/* ---------- Beginnings-style dropdown card ---------- */
+@keyframes bmDropdownIn {
+	from { opacity: 0; transform: translateX(-50%) translateY(-6px); }
+	to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
-.mega-link:hover {
-	opacity: 0.65;
+
+/* Wrapper anchors the card under the nav item and centers it.
+   A small invisible top pad keeps hover continuous from item to card. */
+.bm-dropdown {
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	padding-top: 12px;
+	z-index: 60;
+	animation: bmDropdownIn 0.16s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* Caret / triangle pointer connecting the card to the nav item */
+.bm-dropdown-caret {
+	position: absolute;
+	top: 4px;
+	left: 50%;
+	transform: translateX(-50%) rotate(45deg);
+	width: 16px;
+	height: 16px;
+	background: #fff;
+	border-top-left-radius: 4px;
+	box-shadow: -3px -3px 8px rgba(0, 0, 0, 0.04);
+	z-index: 1;
+}
+
+/* White rounded card */
+.bm-dropdown-card {
+	position: relative;
+	background: #fff;
+	border-radius: 18px;
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.10);
+	padding: 10px;
+	min-width: 320px;
+	z-index: 2;
+}
+
+/* Each row: colored icon + uppercase title + gray desc */
+.bm-dropdown-row {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding: 14px;
+	border-radius: 12px;
+	text-decoration: none;
+	transition: background 0.18s ease;
+}
+.bm-dropdown-row:hover {
+	background: rgba(31, 138, 112, 0.07);
+}
+
+.bm-dropdown-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	width: 28px;
+	height: 28px;
+}
+
+.bm-dropdown-title {
+	font-family: var(--bm-font);
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	line-height: 1.2;
+}
+
+.bm-dropdown-desc {
+	font-family: var(--bm-font);
+	font-size: 13px;
+	color: #666;
+	line-height: 1.35;
+}
+
 .mobile-menu {
 	max-height: 0;
 	overflow: hidden;

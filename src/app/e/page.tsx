@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Compass, ShoppingBag, ChevronDown } from "lucide-react";
+import { ArrowRight, BookOpen, Compass, ShoppingBag, ChevronDown, Plus } from "lucide-react";
 import { css } from "@/lib/css";
 
 const featureBoxes = [
-  { label: "01 / Learn", desc: "Explore articles, guides, and resources on Islamic faith and practice", href: "/e/learn", Icon: BookOpen, reveal: "bm-reveal-up", stagger: "bm-stagger-2" },
-  { label: "02 / Convert", desc: "Take the next step on your journey with guidance and support", href: "/e/convert", Icon: Compass, reveal: "bm-reveal-up", stagger: "bm-stagger-3" },
-  { label: "03 / Buy", desc: "Books, prayer cards, and resources for your journey", href: "/e/shop", Icon: ShoppingBag, reveal: "bm-reveal-up", stagger: "bm-stagger-4" },
+  { label: "Learn", desc: "Explore articles, guides, and resources on Islamic faith and practice", href: "/e/learn", Icon: BookOpen, reveal: "bm-reveal-up", stagger: "bm-stagger-2" },
+  { label: "Convert", desc: "Take the next step on your journey with guidance and support", href: "/e/convert", Icon: Compass, reveal: "bm-reveal-up", stagger: "bm-stagger-3" },
+  { label: "Buy", desc: "Books, prayer cards, and resources for your journey", href: "/e/shop", Icon: ShoppingBag, reveal: "bm-reveal-up", stagger: "bm-stagger-4" },
 ];
 
 const articles = [
@@ -57,23 +57,20 @@ export default function ConceptEHome() {
     <>
       {/* ============ 1. HERO ============ */}
       <section className="bm-hero">
-        <div className="bm-hero-bg">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/hero-bg.jpg" alt="" />
-        </div>
+        <div className="bm-hero-frame">
+          <div className="bm-hero-art" aria-hidden="true" />
 
-        <div className="bm-hero-content mx-auto w-full max-w-[1400px] px-6 pt-40 pb-16 lg:px-10">
-          <p className="bm-eyebrow">Being Muslim — A Guide for New Muslims</p>
-          <div className="mt-6 max-w-[820px]">
-            <h1 style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.03em; line-height: 0.98; color: #fff; margin: 0; font-size: clamp(46px, 8vw, 92px)")}>
+          <div className="bm-hero-content">
+            <p className="bm-eyebrow bm-eyebrow-light">Being Muslim — A Guide for New Muslims</p>
+            <h1 style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 400; letter-spacing: -0.02em; line-height: 1.02; color: #fff; margin: 18px 0 0; font-size: clamp(40px, 7vw, 80px)")}>
               Navigating the Path to Islam
             </h1>
-            <p style={css("margin: 28px 0 0; max-width: 520px; font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.7)")}>
+            <p style={css("margin: 24px auto 0; max-width: 560px; font-size: 18px; line-height: 1.6; color: rgba(255,255,255,0.78)")}>
               Empowering new and beginner Muslims with comprehensive education and support to navigate your journey and deepen your understanding and connection with faith.
             </p>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
               <Link href="/e/learn" className="bm-btn-white">
-                Start Learning <ArrowRight className="h-3.5 w-3.5 bm-arrow-slide" strokeWidth={1.5} />
+                Start Learning <ArrowRight className="h-4 w-4 bm-arrow-slide" strokeWidth={2} />
               </Link>
               <Link href="/e/learn" className="bm-btn-glass">
                 Explore Resources
@@ -84,31 +81,30 @@ export default function ConceptEHome() {
       </section>
 
       {/* ============ 2. LEARN / CONVERT / BUY ============ */}
-      <section className="bm-section-padding bm-section-flow" style={css("background: #000")}>
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <div className="bm-grid-explore">
-            <div className="bm-reveal bm-reveal-up bm-stagger-1" style={css("background: #050505; display: flex; flex-direction: column; justify-content: space-between; padding: 36px 30px")}>
-              <div>
-                <p className="bm-eyebrow">Index</p>
-                <h2 style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.02em; font-size: 34px; color: #fff; margin: 18px 0 16px; line-height: 1.05")}>Explore your path</h2>
-                <p style={css("font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.6; margin: 0")}>
-                  Discover Islam through courses, articles, and guides. Whether you&apos;re curious, converting, or deepening your practice — find resources made for you.
-                </p>
-              </div>
-              <div style={css("margin-top: 32px")}>
-                <Link href="/e/learn" className="bm-btn-outline">See all resources</Link>
-              </div>
-            </div>
+      <section className="bm-section-padding bm-section-flow">
+        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div className="bm-reveal bm-reveal-up" style={css("text-align: center; max-width: 680px; margin: 0 auto 48px")}>
+            <p className="bm-eyebrow">Explore your path</p>
+            <h2 style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 400; letter-spacing: -0.02em; font-size: clamp(30px, 4.5vw, 48px); color: #2b2256; margin: 14px 0 16px; line-height: 1.05")}>
+              Three ways to begin
+            </h2>
+            <p style={css("font-size: 17px; color: #5b5470; line-height: 1.6; margin: 0")}>
+              Discover Islam through courses, articles, and guides. Whether you&apos;re curious, converting, or deepening your practice — find resources made for you.
+            </p>
+          </div>
 
+          <div className="bm-grid-explore">
             {featureBoxes.map(({ label, desc, href, Icon, reveal, stagger }) => (
-              <Link key={label} href={href} className={`bm-cell bm-card-hover bm-reveal ${reveal} ${stagger}`} style={css("padding: 36px 30px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none")}>
+              <Link key={label} href={href} className={`bm-cell bm-card-hover bm-title-underline-parent bm-reveal ${reveal} ${stagger}`} style={css("padding: 34px 30px 30px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none")}>
                 <div>
-                  <Icon className="h-6 w-6" strokeWidth={1.25} style={css("color: #fff; margin-bottom: 22px")} />
-                  <p className="bm-eyebrow" style={css("margin-bottom: 12px")}>{label}</p>
-                  <p style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.01em; font-size: 21px; color: #fff; margin: 0; line-height: 1.2")}>{desc}</p>
+                  <div className="bm-icon-chip" style={css("margin-bottom: 22px")}>
+                    <Icon className="h-6 w-6" strokeWidth={1.75} />
+                  </div>
+                  <h3 className="bm-title-underline" style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 22px; color: #2b2256; margin: 0 0 10px; line-height: 1.2")}>{label}</h3>
+                  <p style={css("font-size: 16px; color: #5b5470; line-height: 1.55; margin: 0")}>{desc}</p>
                 </div>
-                <div style={css("margin-top: 32px; text-align: right")}>
-                  <ArrowRight className="h-5 w-5 bm-arrow-slide" strokeWidth={1.25} style={css("color: #fff")} />
+                <div style={css("margin-top: 26px; display: inline-flex; align-items: center; gap: 8px; color: #6c5ce7; font-weight: 600; font-size: 15px")}>
+                  Get started <ArrowRight className="h-4 w-4 bm-arrow-slide" strokeWidth={2} />
                 </div>
               </Link>
             ))}
@@ -117,83 +113,87 @@ export default function ConceptEHome() {
       </section>
 
       {/* ============ 3. FEATURED ARTICLES ============ */}
-      <section className="bm-section-padding bm-section-flow" style={css("background: #000")}>
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <div style={css("display: flex; justify-content: space-between; align-items: end; margin-bottom: 36px")}>
+      <section className="bm-section-padding bm-section-flow">
+        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div style={css("display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 16px; margin-bottom: 40px")}>
             <div className="bm-reveal bm-reveal-up">
               <p className="bm-eyebrow">Reading</p>
-              <h2 style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.02em; font-size: clamp(28px, 4vw, 44px); line-height: 1.02; color: #fff; margin: 14px 0 0")}>Latest Resources</h2>
+              <h2 style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 400; letter-spacing: -0.02em; font-size: clamp(30px, 4.5vw, 48px); line-height: 1.02; color: #2b2256; margin: 14px 0 0")}>Latest Resources</h2>
             </div>
-            <Link href="/e/learn" className="bm-view-all bm-meta" style={css("text-decoration: none; display: inline-flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.55)")}>
-              View all <ArrowRight className="h-3.5 w-3.5 bm-arrow-slide" strokeWidth={1.5} />
+            <Link href="/e/learn" className="bm-view-all bm-meta" style={css("text-decoration: none; display: inline-flex; align-items: center; gap: 8px; color: #6c5ce7")}>
+              View all <ArrowRight className="h-4 w-4 bm-arrow-slide" strokeWidth={2} />
             </Link>
           </div>
 
           <div className="bm-grid-3">
             {articles.map((article) => (
-              <Link key={article.title} href={article.href} style={css("text-decoration: none; display: block; padding: 18px")} className={`bm-cell bm-title-underline-parent bm-reveal ${article.reveal}`}>
-                <div style={css("aspect-ratio: 4/3; background: #0a0a0a; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 18px")}>
+              <Link key={article.title} href={article.href} style={css("text-decoration: none; display: block; padding: 16px; overflow: hidden")} className={`bm-cell bm-title-underline-parent bm-reveal ${article.reveal}`}>
+                <div style={css("aspect-ratio: 4/3; background: #efecff; overflow: hidden; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px")}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={article.img} alt={article.title} className="bm-frame-img" style={css("width: 100%; height: 100%; object-fit: cover")} />
                 </div>
-                <h3 className="bm-title-underline" style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.01em; font-size: 19px; color: #fff; margin: 0 0 12px; line-height: 1.25")}>{article.title}</h3>
-                <div style={css("display: flex; align-items: center; gap: 14px")}>
-                  <span className="bm-meta" style={css("color: rgba(255,255,255,0.55)")}>{article.category}</span>
-                  <span className="bm-meta">{article.time}</span>
+                <div style={css("padding: 0 6px 6px")}>
+                  <div style={css("display: flex; align-items: center; gap: 12px; margin-bottom: 10px")}>
+                    <span className="bm-meta" style={css("color: #6c5ce7")}>{article.category}</span>
+                    <span style={css("font-size: 13px; color: #9a93b3")}>{article.time}</span>
+                  </div>
+                  <h3 className="bm-title-underline" style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 20px; color: #2b2256; margin: 0; line-height: 1.25")}>{article.title}</h3>
                 </div>
               </Link>
             ))}
           </div>
 
-          <div style={css("text-align: center; margin-top: 36px")}>
+          <div style={css("text-align: center; margin-top: 40px")}>
             <Link href="/e/learn" className="bm-btn-outline">
-              Additional Resources <ArrowRight className="h-3.5 w-3.5 bm-arrow-slide" strokeWidth={1.5} />
+              Additional Resources <ArrowRight className="h-4 w-4 bm-arrow-slide" strokeWidth={2} />
             </Link>
           </div>
         </div>
       </section>
 
       {/* ============ 4. PRODUCTS (carousel) ============ */}
-      <section className="bm-section-padding bm-section-flow" style={css("background: #000")}>
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <div className="bm-reveal bm-reveal-up" style={css("text-align: center; margin-bottom: 36px")}>
+      <section className="bm-section-padding bm-section-flow">
+        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div className="bm-reveal bm-reveal-up" style={css("text-align: center; margin-bottom: 40px")}>
             <p className="bm-eyebrow">The Store</p>
-            <h2 style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.02em; font-size: clamp(28px, 4vw, 44px); line-height: 1.02; color: #fff; margin: 14px 0 0")}>
+            <h2 style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 400; letter-spacing: -0.02em; font-size: clamp(30px, 4.5vw, 48px); line-height: 1.02; color: #2b2256; margin: 14px 0 0")}>
               Everything you need to begin
             </h2>
           </div>
 
-          <div className="bm-reveal bm-reveal-right" style={css("display: flex; gap: 1px; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.16); overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch")}>
+          <div className="bm-reveal bm-reveal-right" style={css("display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 6px 2px 12px")}>
             {products.map((product) => (
-              <Link key={product.title} href={product.href} style={css("flex: 0 0 280px; scroll-snap-align: start; text-decoration: none; display: block; background: #050505; padding: 18px")} className="bm-cell bm-title-underline-parent group">
-                <div style={css("aspect-ratio: 1; background: #0a0a0a; overflow: hidden; margin-bottom: 18px; position: relative")}>
+              <Link key={product.title} href={product.href} style={css("flex: 0 0 270px; scroll-snap-align: start; text-decoration: none; display: block; padding: 16px")} className="bm-cell bm-title-underline-parent group">
+                <div style={css("aspect-ratio: 1; background: #efecff; overflow: hidden; border-radius: 16px; margin-bottom: 16px; position: relative")}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={product.img} alt={product.title} className="bm-frame-img" style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
                   {product.badge && (
-                    <span className="bm-meta" style={css("position: absolute; top: 12px; left: 12px; color: #000; background: #fff; padding: 4px 10px; z-index: 2")}>{product.badge}</span>
+                    <span style={css("position: absolute; top: 12px; left: 12px; font-size: 12px; font-weight: 600; color: #fff; background: #6c5ce7; padding: 5px 12px; border-radius: 999px; z-index: 2")}>{product.badge}</span>
                   )}
                 </div>
-                <h3 className="bm-title-underline" style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.01em; font-size: 16px; color: #fff; margin: 0 0 8px; line-height: 1.25")}>{product.title}</h3>
-                <span className="bm-meta" style={css("color: rgba(255,255,255,0.7)")}>{product.price}</span>
+                <div style={css("padding: 0 6px 6px")}>
+                  <h3 className="bm-title-underline" style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 17px; color: #2b2256; margin: 0 0 8px; line-height: 1.3")}>{product.title}</h3>
+                  <span style={css("font-size: 16px; font-weight: 600; color: #6c5ce7")}>{product.price}</span>
+                </div>
               </Link>
             ))}
           </div>
 
-          <div style={css("text-align: center; margin-top: 36px")}>
+          <div style={css("text-align: center; margin-top: 40px")}>
             <Link href="/e/shop" className="bm-btn-outline">
-              See All Store Items <ArrowRight className="h-3.5 w-3.5 bm-arrow-slide" strokeWidth={1.5} />
+              See All Store Items <ArrowRight className="h-4 w-4 bm-arrow-slide" strokeWidth={2} />
             </Link>
           </div>
         </div>
       </section>
 
       {/* ============ 5. FAQ ============ */}
-      <section className="bm-section-padding bm-section-flow" style={css("background: #000")}>
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <div style={css("max-width: 820px")}>
-            <div className="bm-reveal bm-reveal-left" style={css("margin-bottom: 36px")}>
+      <section className="bm-section-padding bm-section-flow">
+        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div style={css("max-width: 860px; margin: 0 auto")}>
+            <div className="bm-reveal bm-reveal-left" style={css("text-align: center; margin-bottom: 40px")}>
               <p className="bm-eyebrow">Questions</p>
-              <h2 style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.02em; font-size: clamp(28px, 4vw, 44px); line-height: 1.02; color: #fff; margin: 14px 0 0")}>
+              <h2 style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 400; letter-spacing: -0.02em; font-size: clamp(30px, 4.5vw, 48px); line-height: 1.02; color: #2b2256; margin: 14px 0 0")}>
                 Frequently Asked Questions
               </h2>
             </div>
@@ -202,18 +202,22 @@ export default function ConceptEHome() {
               <div key={i} className="bm-faq-item bm-reveal bm-reveal-up" style={css(`transition-delay: ${Math.min(i * 0.04, 0.24)}s`)}>
                 <button
                   onClick={() => toggleFaq(i)}
-                  style={css("width: 100%; text-align: left; padding: 22px 24px; border: none; background: none; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 18px")}
+                  style={css("width: 100%; text-align: left; padding: 22px 26px; border: none; background: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 18px")}
                 >
-                  <span style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.01em; font-size: 15px; color: #fff; line-height: 1.4")}>{faq.q}</span>
-                  <ChevronDown className={`h-4 w-4 flex-shrink-0 mt-1 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} strokeWidth={1.5} style={css("color: rgba(255,255,255,0.5)")} />
+                  <span style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 17px; color: #2b2256; line-height: 1.4")}>{faq.q}</span>
+                  {openFaq === i ? (
+                    <ChevronDown className="h-5 w-5 flex-shrink-0 transition-transform duration-200 rotate-180" strokeWidth={2} style={css("color: #6c5ce7")} />
+                  ) : (
+                    <Plus className="h-5 w-5 flex-shrink-0" strokeWidth={2} style={css("color: #6c5ce7")} />
+                  )}
                 </button>
                 <div className={`bm-faq-answer ${openFaq === i ? "bm-faq-open" : ""}`}>
-                  <p style={css("font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.65; margin: 0; padding: 0 24px 24px")}>{faq.a}</p>
+                  <p style={css("font-size: 16px; color: #5b5470; line-height: 1.65; margin: 0; padding: 0 26px 24px")}>{faq.a}</p>
                 </div>
               </div>
             ))}
 
-            <div style={css("margin-top: 32px; display: flex; flex-wrap: wrap; gap: 14px")}>
+            <div style={css("margin-top: 34px; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px")}>
               <Link href="/e/learn/ask-a-question" className="bm-btn-outline">Ask a Question</Link>
               <Link href="/e/convert" className="bm-btn-dark">Ready to Convert</Link>
             </div>

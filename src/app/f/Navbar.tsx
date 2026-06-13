@@ -1,98 +1,67 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { ComponentType } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import {
+  Menu,
+  X,
+  BookOpen,
+  GraduationCap,
+  BookMarked,
+  Compass,
+  Users,
+  HelpCircle,
+  ShoppingBag,
+  Package,
+  Layers,
+  Tablet,
+  Heart,
+  Gift,
+  HandHeart,
+} from "lucide-react";
 import { css } from "@/lib/css";
 
-type MegaLink = { label: string; href: string; desc?: string };
-type MegaMenu = {
-  columns: { heading?: string; links: MegaLink[] }[];
-  featured?: { title: string; desc: string; href: string; img: string };
+type LucideIcon = ComponentType<{ size?: number; strokeWidth?: number; color?: string }>;
+type MenuRow = {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+  href: string;
+  /** Accent color for the icon + title. Defaults to teal. */
+  accent?: "teal" | "gold";
 };
 
-const megaMenus: Record<string, MegaMenu> = {
-  Learn: {
-    columns: [
-      {
-        heading: "Resources",
-        links: [
-          { label: "Articles", href: "/f/learn", desc: "In-depth guides on faith and practice" },
-          { label: "Courses", href: "/f/learn", desc: "Structured learning at your own pace" },
-          { label: "Brief Overview of Islam", href: "/f/learn/brief-overview-of-islam", desc: "Core beliefs, practices, and history" },
-        ],
-      },
-      {
-        heading: "Popular Topics",
-        links: [
-          { label: "Beginner's Guide", href: "/f/learn/beginners-guide", desc: "First steps for new Muslims" },
-          { label: "Islam and Other Faiths", href: "/f/learn/islam-and-other-faiths", desc: "Common ground and key differences" },
-          { label: "View All Resources", href: "/f/learn" },
-        ],
-      },
-    ],
-    featured: {
-      title: "Foundations of Faith",
-      desc: "A 24-lesson course covering the essentials.",
-      href: "/f/learn",
-      img: "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&q=80&auto=format&fit=crop",
-    },
-  },
-  Convert: {
-    columns: [
-      {
-        heading: "Your Journey",
-        links: [
-          { label: "Ready to Convert?", href: "/f/convert", desc: "Take the next step with guidance and support" },
-          { label: "What to Expect", href: "/f/convert", desc: "Understanding the process and what comes after" },
-          { label: "FAQ for New Muslims", href: "/f/convert", desc: "Answers to the most common questions" },
-        ],
-      },
-      {
-        heading: "Support",
-        links: [
-          { label: "Find a Community", href: "/f/convert", desc: "Connect with Muslims near you" },
-          { label: "Mentorship Program", href: "/f/convert", desc: "One-on-one guidance from experienced Muslims" },
-          { label: "Start Your Journey", href: "/f/convert" },
-        ],
-      },
-    ],
-  },
-  Products: {
-    columns: [
-      {
-        heading: "Products",
-        links: [
-          { label: "Being Muslim: A Practical Guide", href: "/f/shop/book", desc: "The bestselling book" },
-          { label: "The Complete Boxed Set", href: "/f/shop/boxed-set", desc: "Book, prayer cards, and more" },
-          { label: "Prayer Reference Cards", href: "/f/shop/prayer-cards", desc: "Keep by your prayer mat" },
-          { label: "Digital Edition (eBook)", href: "/f/shop/ebook", desc: "Read anywhere, instantly" },
-        ],
-      },
-    ],
-    featured: {
-      title: "The Complete Boxed Set",
-      desc: "Everything you need in one beautiful package.",
-      href: "/f/shop/boxed-set",
-      img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg",
-    },
-  },
-  Support: {
-    columns: [
-      {
-        heading: "Get Involved",
-        links: [
-          { label: "Donate", href: "/f/support", desc: "Help fund resources for new Muslims" },
-          { label: "Sponsor a Boxed Set", href: "/f/support", desc: "Gift a set to someone in need" },
-          { label: "Volunteer", href: "/f/support", desc: "Join our team of contributors" },
-          { label: "Support the Mission", href: "/f/support" },
-        ],
-      },
-    ],
-  },
+const TEAL = "#1f8a70";
+const GOLD = "#f5c518";
+// The title color leans into a slightly deeper teal for legibility.
+const TITLE_TEAL = "#15302e";
+
+const megaMenus: Record<string, MenuRow[]> = {
+  Learn: [
+    { icon: BookOpen, title: "Articles", desc: "In-depth guides on faith and practice", href: "/f/learn", accent: "teal" },
+    { icon: GraduationCap, title: "Get Started", desc: "First steps for new Muslims", href: "/f/learn/beginners-guide", accent: "gold" },
+    { icon: BookMarked, title: "Overview of Islam", desc: "Core beliefs, practices, and history", href: "/f/learn/brief-overview-of-islam", accent: "teal" },
+  ],
+  Convert: [
+    { icon: Compass, title: "Ready to Convert?", desc: "Take the next step with guidance and support", href: "/f/convert", accent: "teal" },
+    { icon: Users, title: "Find a Community", desc: "Connect with Muslims near you", href: "/f/convert", accent: "gold" },
+    { icon: HelpCircle, title: "FAQ for Reverts", desc: "Answers to the most common questions", href: "/f/convert", accent: "teal" },
+  ],
+  Products: [
+    { icon: BookOpen, title: "The Book", desc: "Being Muslim: A Practical Guide", href: "/f/shop/book", accent: "teal" },
+    { icon: Package, title: "Boxed Set", desc: "Book, prayer cards, and more", href: "/f/shop/boxed-set", accent: "gold" },
+    { icon: Layers, title: "Prayer Cards", desc: "Keep by your prayer mat", href: "/f/shop/prayer-cards", accent: "teal" },
+    { icon: Tablet, title: "Digital Edition", desc: "Read anywhere, instantly", href: "/f/shop/ebook", accent: "gold" },
+  ],
+  Support: [
+    { icon: Heart, title: "Donate", desc: "Help fund resources for new Muslims", href: "/f/support", accent: "teal" },
+    { icon: Gift, title: "Sponsor a Set", desc: "Gift a boxed set to someone in need", href: "/f/support", accent: "gold" },
+    { icon: HandHeart, title: "Volunteer", desc: "Join our team of contributors", href: "/f/support", accent: "teal" },
+  ],
 };
 
-const navLinks = [
+const navLinks: { label: string; href: string }[] = [
   { label: "Home", href: "/f" },
   { label: "Learn", href: "/f/learn" },
   { label: "Convert", href: "/f/convert" },
@@ -124,7 +93,6 @@ export default function Navbar() {
   }
 
   const solid = scrolled || !!activeMenu || mobileOpen;
-  const menu = activeMenu ? megaMenus[activeMenu] : null;
 
   return (
     <header
@@ -154,22 +122,62 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         <div className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <div
-              key={link.label}
-              className="relative"
-              onMouseEnter={() => (megaMenus[link.label] ? openMenu(link.label) : setActiveMenu(null))}
-              onMouseLeave={scheduleClose}
-            >
-              <Link
-                href={link.href}
-                className="bm-link-animated text-[15px] font-medium transition-colors py-6 inline-block"
-                style={css("font-family: 'Inter', sans-serif; color: #1d2b29")}
+          {navLinks.map((link) => {
+            const rows = megaMenus[link.label];
+            const open = activeMenu === link.label;
+            return (
+              <div
+                key={link.label}
+                className="relative"
+                onMouseEnter={() => (rows ? openMenu(link.label) : setActiveMenu(null))}
+                onMouseLeave={scheduleClose}
               >
-                {link.label}
-              </Link>
-            </div>
-          ))}
+                <Link
+                  href={link.href}
+                  className="bm-link-animated text-[15px] font-medium transition-colors py-6 inline-block"
+                  style={css("font-family: 'Inter', sans-serif; color: #1d2b29")}
+                >
+                  {link.label}
+                </Link>
+
+                {/* Beginnings-style dropdown card */}
+                {rows && open && (
+                  <div
+                    className="bm-dropdown"
+                    onMouseEnter={cancelClose}
+                    onMouseLeave={scheduleClose}
+                  >
+                    <div className="bm-dropdown-caret" />
+                    <div className="bm-dropdown-card">
+                      {rows.map((row) => {
+                        const Icon = row.icon;
+                        const accent = row.accent === "gold" ? GOLD : TEAL;
+                        return (
+                          <Link key={row.title} href={row.href} className="bm-dropdown-row">
+                            <span
+                              className="bm-dropdown-icon"
+                              style={css(`color: ${accent}`)}
+                            >
+                              <Icon size={26} strokeWidth={1.75} />
+                            </span>
+                            <span style={css("display: flex; flex-direction: column; gap: 2px")}>
+                              <span
+                                className="bm-dropdown-title"
+                                style={css(`color: ${row.accent === "gold" ? "#a87d00" : TITLE_TEAL}`)}
+                              >
+                                {row.title}
+                              </span>
+                              <span className="bm-dropdown-desc">{row.desc}</span>
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         {/* Desktop CTA */}
@@ -191,62 +199,6 @@ export default function Navbar() {
           {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </nav>
-
-      {/* Mega Menu Dropdown */}
-      {menu && (
-        <div
-          className="hidden md:block absolute left-0 right-0 top-[72px] shadow-lg"
-          onMouseEnter={cancelClose}
-          onMouseLeave={scheduleClose}
-          style={css("animation: megaFadeIn 0.15s ease-out; background: #fff; border-top: 1px solid #ece7dd; border-radius: 0 0 20px 20px")}
-        >
-          <div className="mx-auto max-w-[1240px] px-6 lg:px-8 py-8">
-            <div style={css("display: flex; gap: 48px")}>
-              {menu.columns.map((column, ci) => (
-                <div key={ci} style={css("flex: 1; min-width: 200px")}>
-                  {column.heading && (
-                    <p style={css("font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; color: #1f8a70; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 16px")}>
-                      {column.heading}
-                    </p>
-                  )}
-                  {column.links.map((item) => (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      className="mega-link"
-                      style={css("display: block; text-decoration: none; padding: 8px 0; transition: opacity 0.15s")}
-                    >
-                      <span style={css("font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: #1d2b29; display: block")}>
-                        {item.label}
-                      </span>
-                      {item.desc && (
-                        <span style={css("font-family: 'Inter', sans-serif; font-size: 12px; color: #666; display: block; margin-top: 2px")}>
-                          {item.desc}
-                        </span>
-                      )}
-                    </Link>
-                  ))}
-                </div>
-              ))}
-
-              {menu.featured && (
-                <div style={css("flex: 0 0 260px")}>
-                  <Link href={menu.featured.href} style={css("display: block; text-decoration: none; border-radius: 16px; overflow: hidden; background: #f9f7f2")}>
-                    <div style={css("aspect-ratio: 16/10; overflow: hidden")}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={menu.featured.img} alt={menu.featured.title} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
-                    </div>
-                    <div style={css("padding: 16px")}>
-                      <p style={css("font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #1d2b29; margin: 0 0 4px")}>{menu.featured.title}</p>
-                      <p style={css("font-family: 'Inter', sans-serif; font-size: 12px; color: #666; margin: 0")}>{menu.featured.desc}</p>
-                    </div>
-                  </Link>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Mobile menu */}
       <div className={`mobile-menu md:hidden ${mobileOpen ? "open" : ""}`}>

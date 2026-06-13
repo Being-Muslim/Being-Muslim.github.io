@@ -487,17 +487,20 @@ p, a, li, label, input, textarea, select, button {
 	display: none;
 }
 
-/* ---------- Coda-style expanding mega-menu ---------- */
-/* Full-width panel that expands DOWN from the navbar: animate max-height +
-   opacity for a smooth ~200ms expand/collapse. Collapsed by default. */
-.bm-mega-wrap {
+/* ---------- Coda-style expanding navbar surface ---------- */
+/* The nav row and the mega-menu content share ONE rounded surface
+   (.bm-navbar-surface). Opening a menu morphs the pill into a taller rounded
+   panel — there is no detached dropdown and no gap. The morph (background,
+   border, radius) is handled by inline transitions; this region drives the
+   height/opacity reveal of the menu content INSIDE the same surface. */
+.bm-mega-region {
 	max-height: 0;
 	opacity: 0;
 	overflow: hidden;
 	pointer-events: none;
 	transition: max-height 0.22s ease-out, opacity 0.18s ease-out;
 }
-.bm-mega-wrap.bm-mega-open {
+.bm-mega-region.bm-mega-open {
 	max-height: 560px;
 	opacity: 1;
 	pointer-events: auto;

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { css } from "@/lib/css";
 
 type MegaLink = { label: string; href: string; desc?: string };
@@ -102,14 +102,14 @@ const navLinks = [
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const closeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    // no-op effect retained for parity with scroll-aware variants; keeps menu clean on unmount
+    return () => {
+      if (closeTimeout.current) clearTimeout(closeTimeout.current);
+    };
   }, []);
 
   function openMenu(label: string) {
@@ -123,152 +123,153 @@ export default function Navbar() {
     if (closeTimeout.current) clearTimeout(closeTimeout.current);
   }
 
-  const solid = scrolled || !!activeMenu || mobileOpen;
   const menu = activeMenu ? megaMenus[activeMenu] : null;
 
   return (
-    <header
-      className="fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300"
-      style={css(
-        `border-color: rgba(255,255,255,0.16); ${
-          solid ? "background: #000;" : "background: rgba(0,0,0,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);"
-        }`
-      )}
-    >
-      <nav className="mx-auto flex h-[68px] max-w-[1400px] items-center justify-between px-6 lg:px-10">
-        {/* Logo */}
-        <Link href="/e" className="flex items-center gap-2.5">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png"
-            alt="Being Muslim"
-            className="h-7 w-7"
-            style={css("filter: brightness(0) invert(1)")}
-          />
-          <span
-            style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.01em; font-size: 16px; color: #fff")}
-          >
-            Being Muslim
-          </span>
-        </Link>
+    <header className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 lg:px-6">
+      <div className="relative mx-auto w-full max-w-[1180px]">
+        {/* Floating white pill bar */}
+        <nav
+          className="flex items-center justify-between gap-4"
+          style={css(
+            "background: #ffffff; border-radius: 999px; padding: 10px 12px 10px 22px; box-shadow: 0 12px 36px rgba(43,34,86,0.12); border: 1px solid rgba(108,92,231,0.08)"
+          )}
+        >
+          {/* Logo */}
+          <Link href="/e" className="flex items-center gap-2.5">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png"
+              alt="Being Muslim"
+              className="h-7 w-7"
+            />
+            <span style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 17px; color: #2b2256")}>
+              Being Muslim
+            </span>
+          </Link>
 
-        {/* Desktop Nav */}
-        <div className="hidden items-center gap-9 md:flex">
-          {navLinks.map((link) => (
-            <div
-              key={link.label}
-              className="relative"
-              onMouseEnter={() => (megaMenus[link.label] ? openMenu(link.label) : setActiveMenu(null))}
-              onMouseLeave={scheduleClose}
-            >
+          {/* Desktop Nav (centered) */}
+          <div className="hidden items-center gap-8 md:flex">
+            {navLinks.map((link) => (
+              <div
+                key={link.label}
+                className="relative"
+                onMouseEnter={() => (megaMenus[link.label] ? openMenu(link.label) : setActiveMenu(null))}
+                onMouseLeave={scheduleClose}
+              >
+                <Link
+                  href={link.href}
+                  className="bm-nav-link py-2 inline-block"
+                  style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 15px; font-weight: 500; color: #5b5470")}
+                >
+                  {link.label}
+                </Link>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop CTA — purple pill */}
+          <Link
+            href="/e/contact"
+            className="bm-btn-dark hidden md:inline-flex"
+            style={css("padding: 11px 24px; font-size: 15px")}
+          >
+            Get the Guide <ArrowRight className="h-4 w-4 bm-arrow-slide" strokeWidth={2} />
+          </Link>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="p-2 md:hidden"
+            style={css("color: #2b2256")}
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X className="h-6 w-6" strokeWidth={2} /> : <Menu className="h-6 w-6" strokeWidth={2} />}
+          </button>
+        </nav>
+
+        {/* Mega Menu Dropdown */}
+        {menu && (
+          <div
+            className="hidden md:block absolute left-1/2 top-[72px] -translate-x-1/2"
+            onMouseEnter={cancelClose}
+            onMouseLeave={scheduleClose}
+            style={css("animation: megaFadeIn 0.15s ease-out; background: #ffffff; border-radius: 24px; box-shadow: 0 24px 60px rgba(43,34,86,0.18); border: 1px solid rgba(108,92,231,0.1); width: min(880px, 92vw)")}
+          >
+            <div className="px-8 py-8">
+              <div style={css("display: flex; gap: 48px")}>
+                {menu.columns.map((column, ci) => (
+                  <div key={ci} style={css("flex: 1; min-width: 190px")}>
+                    {column.heading && (
+                      <p style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 12px; font-weight: 600; color: #6c5ce7; text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 14px")}>
+                        {column.heading}
+                      </p>
+                    )}
+                    {column.links.map((item) => (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        className="mega-link"
+                        style={css("display: block; text-decoration: none; padding: 10px 12px; transition: background 0.15s")}
+                      >
+                        <span style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 15px; color: #2b2256; display: block")}>
+                          {item.label}
+                        </span>
+                        {item.desc && (
+                          <span style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; color: #5b5470; display: block; margin-top: 3px; line-height: 1.4")}>
+                            {item.desc}
+                          </span>
+                        )}
+                      </Link>
+                    ))}
+                  </div>
+                ))}
+
+                {menu.featured && (
+                  <div style={css("flex: 0 0 240px")}>
+                    <Link href={menu.featured.href} style={css("display: block; text-decoration: none; overflow: hidden; border-radius: 18px; background: #efecff")}>
+                      <div style={css("aspect-ratio: 16/10; overflow: hidden")}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={menu.featured.img} alt={menu.featured.title} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
+                      </div>
+                      <div style={css("padding: 16px")}>
+                        <p style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 15px; color: #2b2256; margin: 0 0 5px")}>{menu.featured.title}</p>
+                        <p style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; color: #5b5470; margin: 0; line-height: 1.5")}>{menu.featured.desc}</p>
+                      </div>
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Mobile menu */}
+        <div className={`mobile-menu md:hidden ${mobileOpen ? "open" : ""}`}>
+          <div
+            className="mt-3 px-4 py-3"
+            style={css("background: #ffffff; border-radius: 24px; box-shadow: 0 16px 40px rgba(43,34,86,0.14); border: 1px solid rgba(108,92,231,0.1)")}
+          >
+            {navLinks.map((link) => (
               <Link
+                key={link.label}
                 href={link.href}
-                className="py-6 inline-block transition-colors"
-                style={css("font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7)")}
+                className="block py-3 px-3"
+                style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 16px; font-weight: 500; color: #2b2256")}
+                onClick={() => setMobileOpen(false)}
               >
                 {link.label}
               </Link>
-            </div>
-          ))}
-        </div>
-
-        {/* Desktop CTA */}
-        <Link
-          href="/e/contact"
-          className="hidden md:inline-flex items-center transition-all"
-          style={css("font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 22px; border: 1px solid rgba(255,255,255,0.32); color: #fff")}
-        >
-          Contact
-        </Link>
-
-        {/* Mobile Menu Button */}
-        <button
-          className="p-2 md:hidden"
-          style={css("color: #fff")}
-          onClick={() => setMobileOpen((v) => !v)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X className="h-6 w-6" strokeWidth={1.5} /> : <Menu className="h-6 w-6" strokeWidth={1.5} />}
-        </button>
-      </nav>
-
-      {/* Mega Menu Dropdown */}
-      {menu && (
-        <div
-          className="hidden md:block absolute left-0 right-0 top-[68px] border-t"
-          onMouseEnter={cancelClose}
-          onMouseLeave={scheduleClose}
-          style={css("animation: megaFadeIn 0.15s ease-out; background: #000; border-color: rgba(255,255,255,0.16); border-bottom: 1px solid rgba(255,255,255,0.16)")}
-        >
-          <div className="mx-auto max-w-[1400px] px-6 lg:px-10 py-10">
-            <div style={css("display: flex; gap: 56px")}>
-              {menu.columns.map((column, ci) => (
-                <div key={ci} style={css("flex: 1; min-width: 200px")}>
-                  {column.heading && (
-                    <p style={css("font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 18px")}>
-                      {column.heading}
-                    </p>
-                  )}
-                  {column.links.map((item) => (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      className="mega-link"
-                      style={css("display: block; text-decoration: none; padding: 9px 0; transition: color 0.15s")}
-                    >
-                      <span style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.01em; font-size: 14px; color: #fff; display: block")}>
-                        {item.label}
-                      </span>
-                      {item.desc && (
-                        <span style={css("font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.45); display: block; margin-top: 4px")}>
-                          {item.desc}
-                        </span>
-                      )}
-                    </Link>
-                  ))}
-                </div>
-              ))}
-
-              {menu.featured && (
-                <div style={css("flex: 0 0 260px")}>
-                  <Link href={menu.featured.href} style={css("display: block; text-decoration: none; overflow: hidden; border: 1px solid rgba(255,255,255,0.16); background: #050505")}>
-                    <div style={css("aspect-ratio: 16/10; overflow: hidden")}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={menu.featured.img} alt={menu.featured.title} style={css("width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(0.2)")} />
-                    </div>
-                    <div style={css("padding: 16px")}>
-                      <p style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.01em; font-size: 14px; color: #fff; margin: 0 0 6px")}>{menu.featured.title}</p>
-                      <p style={css("font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.45); margin: 0; line-height: 1.5")}>{menu.featured.desc}</p>
-                    </div>
-                  </Link>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Mobile menu */}
-      <div className={`mobile-menu md:hidden ${mobileOpen ? "open" : ""}`}>
-        <div className="px-6 py-4" style={css("border-top: 1px solid rgba(255,255,255,0.16)")}>
-          {navLinks.map((link) => (
+            ))}
             <Link
-              key={link.label}
-              href={link.href}
-              className="block py-3"
-              style={css("font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #fff")}
+              href="/e/contact"
+              className="bm-btn-dark mt-3 w-full justify-center"
+              style={css("display: flex")}
               onClick={() => setMobileOpen(false)}
             >
-              {link.label}
+              Get the Guide
             </Link>
-          ))}
-          <Link
-            href="/e/contact"
-            className="block mt-3 text-center py-3"
-            style={css("font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; background: #fff; color: #000")}
-          >
-            Contact
-          </Link>
+          </div>
         </div>
       </div>
     </header>

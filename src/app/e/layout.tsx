@@ -9,7 +9,6 @@ export default function ConceptDLayout({
 }) {
   return (
     <div className="bm-root">
-      <div className="bm-viewport-frame" aria-hidden="true" />
       <Navbar />
       <main>{children}</main>
       <Footer />

@@ -17,51 +17,55 @@ const columns = [
 
 export default function Footer() {
   return (
-    <footer style={css("background: #000; border-top: 1px solid rgba(255,255,255,0.16); padding: 72px 0 0")}>
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-        <div className="bm-grid-footer">
-          {/* Brand */}
-          <div>
-            <Link href="/e" style={css("display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 18px")}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png" alt="Being Muslim" style={css("height: 30px; width: 30px; filter: brightness(0) invert(1)")} />
-              <span style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.01em; font-size: 17px; color: #fff")}>Being Muslim</span>
-            </Link>
-            <p style={css("font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; max-width: 260px; margin-bottom: 22px")}>
-              Empowering converts and beginners on their Islamic journey through education, community, and support.
-            </p>
-            <div style={css("display: flex; gap: 10px")}>
-              {socials.map((social) => (
-                <a key={social.label} href="#" aria-label={social.label} className="bm-social-icon">
-                  <svg viewBox="0 0 24 24" style={css("width: 14px; height: 14px; fill: rgba(255,255,255,0.6)")}>
-                    <path d={social.icon} />
-                  </svg>
-                </a>
-              ))}
+    <footer style={css("padding: 0 16px 16px")}>
+      <div
+        style={css("background: #2b2256; border-radius: 32px; padding: 64px 0 0; overflow: hidden")}
+      >
+        <div className="mx-auto max-w-[1280px] px-8 lg:px-12">
+          <div className="bm-grid-footer">
+            {/* Brand */}
+            <div>
+              <Link href="/e" style={css("display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 18px")}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png" alt="Being Muslim" style={css("height: 30px; width: 30px; filter: brightness(0) invert(1)")} />
+                <span style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; font-size: 18px; color: #fff")}>Being Muslim</span>
+              </Link>
+              <p style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.6; max-width: 280px; margin-bottom: 24px")}>
+                Empowering converts and beginners on their Islamic journey through education, community, and support.
+              </p>
+              <div style={css("display: flex; gap: 10px")}>
+                {socials.map((social) => (
+                  <a key={social.label} href="#" aria-label={social.label} className="bm-social-icon">
+                    <svg viewBox="0 0 24 24" style={css("width: 15px; height: 15px; fill: rgba(255,255,255,0.85)")}>
+                      <path d={social.icon} />
+                    </svg>
+                  </a>
+                ))}
+              </div>
             </div>
+
+            {columns.map((col) => (
+              <div key={col.heading}>
+                <h4 style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: #ab9ff2; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 18px")}>
+                  {col.heading}
+                </h4>
+                {col.links.map((link, i) => (
+                  <Link key={i} href={link.href} className="bm-footer-link">
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            ))}
           </div>
 
-          {columns.map((col) => (
-            <div key={col.heading}>
-              <h4 style={css("font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 18px")}>
-                {col.heading}
-              </h4>
-              {col.links.map((link, i) => (
-                <Link key={i} href={link.href} className="bm-footer-link">
-                  {link.label}
-                </Link>
-              ))}
+          {/* Bottom bar */}
+          <div style={css("border-top: 1px solid rgba(255,255,255,0.14); padding: 26px 0 30px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px")}>
+            <p style={css("font-family: 'Hanken Grotesk', sans-serif; font-size: 14px; color: rgba(255,255,255,0.5)")}>&copy; 2026 The Being Muslim Project. All rights reserved.</p>
+            <div style={css("display: flex; gap: 24px")}>
+              <Link href="/e" className="bm-footer-link" style={css("font-size: 14px; padding: 0")}>Privacy</Link>
+              <Link href="/e" className="bm-footer-link" style={css("font-size: 14px; padding: 0")}>Terms</Link>
+              <Link href="/e/contact" className="bm-footer-link" style={css("font-size: 14px; padding: 0")}>Contact</Link>
             </div>
-          ))}
-        </div>
-
-        {/* Bottom bar */}
-        <div style={css("border-top: 1px solid rgba(255,255,255,0.16); padding: 22px 0; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px")}>
-          <p style={css("font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: rgba(255,255,255,0.3)")}>&copy; 2026 The Being Muslim Project. All rights reserved.</p>
-          <div style={css("display: flex; gap: 24px")}>
-            <Link href="/e" className="bm-footer-link" style={css("font-size: 12px; color: rgba(255,255,255,0.3)")}>Privacy</Link>
-            <Link href="/e" className="bm-footer-link" style={css("font-size: 12px; color: rgba(255,255,255,0.3)")}>Terms</Link>
-            <Link href="/e/contact" className="bm-footer-link" style={css("font-size: 12px; color: rgba(255,255,255,0.3)")}>Contact</Link>
           </div>
         </div>
       </div>

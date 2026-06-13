@@ -1,6 +1,6 @@
 /* ============================================
    Being Muslim — Concept D Design System
-   Parallax + Animated Counters + Section Transitions
+   Warm editorial (A) + scroll animations
    ============================================ */
 
 /* ---------- Design Tokens ---------- */
@@ -26,6 +26,7 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+/* Disable smooth scrolling so page navigations start at top instantly */
 html {
 	scroll-behavior: auto !important;
 }
@@ -33,6 +34,7 @@ html {
 h1, h2, h3, h4, h5, h6 {
 	font-family: var(--bm-font-serif);
 }
+/* Don't override Tailwind's font-display class (used in hero) */
 .font-display {
 	font-family: var(--font-display) !important;
 }
@@ -57,19 +59,7 @@ p, a, li, label, input, textarea, select, button {
 	text-decoration: none;
 	border: none;
 	cursor: pointer;
-	transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.bm-btn-white:hover,
-.bm-btn-dark:hover,
-.bm-btn-outline:hover,
-.bm-btn-glass:hover {
-	transform: scale(1.02);
-}
-.bm-btn-white:active,
-.bm-btn-dark:active,
-.bm-btn-outline:active,
-.bm-btn-glass:active {
-	transform: scale(0.98);
+	transition: all 0.2s;
 }
 
 /* White pill */
@@ -80,6 +70,10 @@ p, a, li, label, input, textarea, select, button {
 .bm-btn-white:hover {
 	background: rgba(255, 255, 255, 0.88) !important;
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+	transform: scale(1.02);
+}
+.bm-btn-white:active {
+	transform: scale(0.98);
 }
 
 /* Dark pill */
@@ -89,6 +83,10 @@ p, a, li, label, input, textarea, select, button {
 }
 .bm-btn-dark:hover {
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	transform: scale(1.02);
+}
+.bm-btn-dark:active {
+	transform: scale(0.98);
 }
 
 /* Outline pill */
@@ -99,6 +97,10 @@ p, a, li, label, input, textarea, select, button {
 }
 .bm-btn-outline:hover {
 	background: rgba(0, 0, 0, 0.05);
+	transform: scale(1.02);
+}
+.bm-btn-outline:active {
+	transform: scale(0.98);
 }
 
 /* Glass pill */
@@ -112,6 +114,10 @@ p, a, li, label, input, textarea, select, button {
 .bm-btn-glass:hover {
 	background: rgba(255, 255, 255, 0.2);
 	border-color: rgba(255, 255, 255, 0.5);
+	transform: scale(1.02);
+}
+.bm-btn-glass:active {
+	transform: scale(0.98);
 }
 
 /* ---------- Typography ---------- */
@@ -136,12 +142,10 @@ p, a, li, label, input, textarea, select, button {
 
 /* ---------- Card hover effects ---------- */
 .bm-card-hover {
-	transition: background 0.2s, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+	transition: background 0.2s;
 }
 .bm-card-hover:hover {
 	background: #e6e3da !important;
-	transform: translateY(-6px);
-	box-shadow: 0 12px 32px rgba(42, 32, 24, 0.1);
 }
 
 .bm-img-zoom img,
@@ -167,15 +171,6 @@ p, a, li, label, input, textarea, select, button {
 .bm-view-all:hover {
 	text-decoration: underline !important;
 	text-underline-offset: 3px;
-}
-
-/* Arrow slide on hover */
-.bm-arrow-slide {
-	transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.bm-card-hover:hover .bm-arrow-slide,
-.bm-title-underline-parent:hover .bm-arrow-slide {
-	transform: translateX(4px);
 }
 
 /* ---------- Footer links ---------- */
@@ -219,6 +214,8 @@ p, a, li, label, input, textarea, select, button {
 }
 
 /* ---------- Responsive grids ---------- */
+
+/* Explore path: stacked -> description + 3 cards in one row */
 .bm-grid-explore {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -240,6 +237,7 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* 3-column grid: 1-col -> 3-col */
 .bm-grid-3 {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -256,6 +254,7 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* 4-column grid: 1-col -> 2-col -> 4-col */
 .bm-grid-4 {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -267,6 +266,7 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* 2-column grid: stacked -> 2-col */
 .bm-grid-2 {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -279,6 +279,7 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* 2-column with gap for support/newsletter */
 .bm-grid-2-gap {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -292,6 +293,7 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* Newsletter 2-col */
 .bm-grid-newsletter {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -305,6 +307,7 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* Courses header: stacked -> side-by-side */
 .bm-grid-courses-header {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -318,12 +321,14 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* 2x2 stats grid */
 .bm-grid-stats {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 16px;
 }
 
+/* Community inner padding - reduced on mobile */
 .bm-community-panel {
 	padding: 28px 20px;
 }
@@ -333,6 +338,7 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* Community chat panel: border-top on mobile, border-left on desktop */
 .bm-community-chat {
 	border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -343,6 +349,7 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* Section padding - reduced on mobile */
 .bm-section-padding {
 	padding: 40px 0;
 }
@@ -352,6 +359,7 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* Product/content detail: stacked -> side-by-side */
 .bm-grid-detail {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -365,6 +373,7 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* Sidebar layout: stacked -> content + sidebar */
 .bm-grid-sidebar {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -378,6 +387,7 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* Product page layout: stacked -> image + info */
 .bm-grid-product {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -390,6 +400,7 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* Gallery layout: stacked on mobile, side-by-side on desktop */
 .bm-gallery-layout {
 	display: flex;
 	flex-direction: column;
@@ -423,6 +434,7 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* Timeline item: stacked -> date + content */
 .bm-grid-timeline {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -436,6 +448,7 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* Course detail: stacked -> 2fr 3fr */
 .bm-grid-course-detail {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -446,6 +459,7 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* Footer grid: brand full-width + 2x2 links -> 5-col on desktop */
 .bm-grid-footer {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -465,6 +479,7 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
+/* Article list item: stacked -> side-by-side */
 .bm-grid-article-list {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -492,135 +507,249 @@ p, a, li, label, input, textarea, select, button {
 }
 @media (min-width: 1024px) {
 	.bm-container {
-		max-width: 1400px;
 		padding-left: 40px;
 		padding-right: 40px;
 	}
 }
 
+
 /* ============================================
-   CONCEPT D — Parallax + Transitions + Counters
+   CONCEPT C — SCROLL REVEAL ANIMATIONS
    ============================================ */
 
-/* ---------- Parallax Hero ---------- */
-.bm-parallax-hero {
-	position: relative;
-	min-height: 90vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
-	overflow: hidden;
-}
-
-.bm-parallax-bg {
-	position: absolute;
-	inset: -20% 0;
-	will-change: transform;
-}
-
-.bm-parallax-bg img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-.bm-parallax-content {
-	position: relative;
-	z-index: 10;
-	will-change: transform;
-}
-
-/* ---------- Floating animation ---------- */
-@keyframes bm-float {
-	0%, 100% { transform: translateY(0); }
-	50% { transform: translateY(-8px); }
-}
-
-.bm-float {
-	animation: bm-float 3s ease-in-out infinite;
-}
-
-.bm-float-delay-1 {
-	animation-delay: 0.5s;
-}
-.bm-float-delay-2 {
-	animation-delay: 1s;
-}
-.bm-float-delay-3 {
-	animation-delay: 1.5s;
-}
-
-/* ---------- Section Reveal Animations ---------- */
-.bm-reveal {
+/* ---------- Reveal animations ---------- */
+.reveal {
 	opacity: 0;
-	transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+	transform: translateY(30px);
+	transition: opacity 0.7s ease, transform 0.7s ease;
 }
-
-.bm-reveal-up {
-	transform: translateY(40px);
-}
-
-.bm-reveal-left {
-	transform: translateX(-60px);
-}
-
-.bm-reveal-right {
-	transform: translateX(60px);
-}
-
-.bm-reveal-visible {
+.reveal.visible {
 	opacity: 1;
-	transform: translateY(0) translateX(0);
+	transform: translateY(0);
 }
 
-/* Stagger delays for cards */
-.bm-stagger-1 { transition-delay: 0s; }
-.bm-stagger-2 { transition-delay: 0.15s; }
-.bm-stagger-3 { transition-delay: 0.3s; }
-.bm-stagger-4 { transition-delay: 0.45s; }
+.reveal-left {
+	opacity: 0;
+	transform: translateX(-30px);
+	transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal-left.visible {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.reveal-right {
+	opacity: 0;
+	transform: translateX(30px);
+	transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal-right.visible {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.reveal-scale {
+	opacity: 0;
+	transform: scale(0.97);
+	transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal-scale.visible {
+	opacity: 1;
+	transform: scale(1);
+}
+
+/* ---------- Stagger delays ---------- */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+.stagger-6 { transition-delay: 0.6s; }
+.stagger-7 { transition-delay: 0.7s; }
+.stagger-8 { transition-delay: 0.8s; }
+
+/* ---------- Hero load animations ---------- */
+.hero-title {
+	opacity: 0;
+	transform: scale(0.97);
+	animation: heroReveal 0.6s ease forwards;
+}
+.hero-subtitle {
+	opacity: 0;
+	animation: fadeIn 0.5s ease 0.3s forwards;
+}
+.hero-cta {
+	opacity: 0;
+	animation: fadeIn 0.5s ease 0.5s forwards;
+}
+
+@keyframes heroReveal {
+	to { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeIn {
+	to { opacity: 1; }
+}
+
+/* ---------- Enhanced card hovers ---------- */
+.card-lift {
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-lift:hover {
+	transform: translateY(-6px);
+	box-shadow: 0 12px 32px rgba(42, 32, 24, 0.12);
+}
+
+/* Product card: image zooms, card lifts 4px */
+.product-card-hover {
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card-hover:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 8px 24px rgba(42, 32, 24, 0.1);
+}
+.product-card-hover img {
+	transition: transform 0.5s ease;
+}
+.product-card-hover:hover img {
+	transform: scale(1.05);
+}
+
+/* Explore path cards: background brightens, border color change, arrow slides right */
+.explore-card-hover {
+	transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+	border: 1px solid transparent;
+}
+.explore-card-hover:hover {
+	background: #f5f3ed !important;
+	border-color: #d8d2c8;
+}
+.explore-card-hover .explore-arrow {
+	transition: transform 0.3s ease;
+}
+.explore-card-hover:hover .explore-arrow {
+	transform: translateX(4px);
+}
+
+/* FAQ question hover: slight indent */
+.faq-question-hover {
+	transition: padding-left 0.3s ease;
+}
+.faq-question-hover:hover {
+	padding-left: 4px;
+}
 
 /* ---------- FAQ smooth accordion ---------- */
-.bm-faq-answer {
+.faq-answer {
 	max-height: 0;
 	overflow: hidden;
-	transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+	transition: max-height 0.4s ease, opacity 0.3s ease;
 	opacity: 0;
 }
-
-.bm-faq-answer.bm-faq-open {
-	max-height: 300px;
+.faq-answer.open {
 	opacity: 1;
 }
 
-/* ---------- Smooth section flow ---------- */
-.bm-section-flow {
-	position: relative;
-	overflow: hidden;
+/* ---------- Chevron rotation ---------- */
+.faq-chevron {
+	transition: transform 0.3s ease;
+}
+.faq-chevron.rotated {
+	transform: rotate(180deg);
 }
 
-/* Product card hover */
-.bm-product-card {
-	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
-}
-.bm-product-card:hover {
-	transform: translateY(-6px);
-	box-shadow: 0 12px 32px rgba(42, 32, 24, 0.1);
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+	.reveal,
+	.reveal-left,
+	.reveal-right,
+	.reveal-scale {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+	.hero-title,
+	.hero-subtitle,
+	.hero-cta {
+		opacity: 1;
+		transform: none;
+		animation: none;
+	}
+	.card-lift:hover,
+	.product-card-hover:hover,
+	.explore-card-hover:hover {
+		transform: none;
+	}
+	.faq-answer {
+		transition: none;
+	}
 }
 
-/* ---------- Navbar (ported from NavbarD.svelte <style>) ---------- */
-@keyframes megaFadeIn {
+/* ---------- Navbar (ported from NavbarC.svelte <style>) ---------- */
+@keyframes navDropIn {
 	from { opacity: 0; transform: translateY(-4px); }
 	to { opacity: 1; transform: translateY(0); }
 }
-.mega-link:hover {
-	opacity: 0.7;
+
+.bm-nav-item {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	font-family: 'DM Sans', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	color: #2a2018;
+	text-decoration: none;
+	padding: 7px 12px;
+	border-radius: 999px;
+	transition: background 0.15s;
+	white-space: nowrap;
 }
-.mobile-menu {
-	max-height: 0;
-	overflow: hidden;
-	background: rgba(250, 245, 235, 0.97);
-	transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.bm-nav-item:hover,
+.bm-nav-item.active {
+	background: rgba(42, 32, 24, 0.06);
 }
-.mobile-menu.open {
-	max-height: 350px;
+
+.bm-dropdown-link {
+	display: block;
+	text-decoration: none;
+	padding: 8px 12px;
+	border-radius: 10px;
+	transition: background 0.15s;
+}
+.bm-dropdown-link:hover {
+	background: #f5f1ea;
+}
+
+.bm-cta-outline {
+	align-items: center;
+	padding: 8px 18px;
+	border-radius: 999px;
+	font-family: 'DM Sans', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	text-decoration: none;
+	background: #fff;
+	color: #2a2018;
+	border: 1px solid #d8d2c8;
+	transition: border-color 0.15s, background 0.15s;
+}
+.bm-cta-outline:hover {
+	border-color: #b5ac9e;
+}
+
+.bm-cta-solid {
+	align-items: center;
+	padding: 8px 18px;
+	border-radius: 999px;
+	font-family: 'DM Sans', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	text-decoration: none;
+	background: #2a2018;
+	color: #fff;
+	border: 1px solid #2a2018;
+	transition: background 0.15s;
+}
+.bm-cta-solid:hover {
+	background: #1a140e;
 }

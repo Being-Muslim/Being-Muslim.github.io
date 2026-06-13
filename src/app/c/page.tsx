@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, ChevronDown, BookOpen, Compass, ShoppingBag } from "lucide-react";
+import { ArrowRight, BookOpen, Compass, ShoppingBag, ChevronDown } from "lucide-react";
 import { css } from "@/lib/css";
 
 const featureBoxes = [
@@ -35,31 +35,14 @@ const faqs = [
   { q: "Do I need to change my name now that I have become Muslim?", a: "No, changing your name is not required in Islam. Many Muslims keep their birth names. Some choose to adopt a new name as a personal expression of their new identity, but this is entirely optional." },
 ];
 
-export default function ConceptCHome() {
+export default function ConceptBHome() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const toggleFaq = (i: number) => setOpenFaq((cur) => (cur === i ? null : i));
 
-  // --- Intersection Observer for scroll reveal ---
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -50px 0px" }
-    );
-    const els = document.querySelectorAll(".reveal, .reveal-left, .reveal-right, .reveal-scale");
-    els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <>
-      {/* ============ 1. HERO ============ */}
-      <section className="relative flex min-h-[83vh] flex-col justify-end overflow-hidden">
+      {/* ============ 1. HERO (with glass explore grid) ============ */}
+      <section className="relative flex min-h-screen flex-col justify-end overflow-hidden">
         <div className="absolute inset-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/hero-bg.jpg" alt="" className="h-full w-full object-cover" />
@@ -68,51 +51,39 @@ export default function ConceptCHome() {
 
         <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 pt-32 pb-12 lg:px-10">
           <div className="max-w-[680px]">
-            <h1 className="hero-title font-display text-[44px] font-bold leading-[1.05] tracking-[-0.02em] text-white sm:text-[56px] lg:text-[68px]">
+            <h1 className="font-display text-[44px] font-bold leading-[1.05] tracking-[-0.02em] text-white sm:text-[56px] lg:text-[68px]">
               Navigating the <span className="italic font-normal text-amber-200/90">Path</span> to Islam
             </h1>
-            <p className="hero-subtitle mt-6 max-w-[480px] text-[16px] leading-[1.65] text-white/80">
+            <p className="mt-6 max-w-[520px] text-[16px] leading-[1.65] text-white/80">
               Empowering new and beginner Muslims with comprehensive education and support to navigate your journey and deepen your understanding and connection with faith.
             </p>
-            <div className="hero-cta mt-8 flex flex-wrap items-center gap-4">
-              <Link href="/c/learn" className="bm-btn-white" style={css("padding: 14px 28px; font-weight: 600")}>
-                Start Learning <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link href="/c/learn" className="bm-btn-glass" style={css("padding: 14px 28px; font-weight: 600")}>
-                Explore Resources
-              </Link>
-            </div>
           </div>
         </div>
-      </section>
 
-      {/* ============ 2. LEARN / CONVERT / BUY ============ */}
-      <section style={css("background: #faf9f5; padding: 24px 0")}>
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <div className="reveal-scale bm-grid-explore" style={css("background: #e3dacc; border-radius: 16px; padding: 28px 20px")}>
+        {/* Explore your path — glassmorphism panel inside hero */}
+        <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-10 pb-10">
+          <div className="bm-grid-explore" style={css("background: rgba(227,218,204,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 16px; padding: 28px 20px")}>
             <div style={css("display: flex; flex-direction: column; justify-content: space-between; padding-right: 24px")}>
               <div>
-                <h2 className="reveal" style={css("font-family: 'Source Serif 4', serif; font-size: 36px; font-weight: 400; color: #2a2018; margin: 0 0 16px; line-height: 1.15")}>Explore your path</h2>
-                <p className="reveal stagger-1" style={css("font-family: 'DM Sans', sans-serif; font-size: 15px; color: #5a5248; line-height: 1.6; margin: 0")}>
+                <h2 style={css("font-family: 'Source Serif 4', serif; font-size: 36px; font-weight: 400; color: #2a2018; margin: 0 0 16px; line-height: 1.15")}>Explore your path</h2>
+                <p style={css("font-family: 'DM Sans', sans-serif; font-size: 15px; color: #5a5248; line-height: 1.6; margin: 0")}>
                   Discover Islam through courses, articles, and guides. Whether you&apos;re curious, converting, or deepening your practice — find resources made for you.
                 </p>
               </div>
-              <div className="reveal stagger-2" style={css("margin-top: 24px")}>
+              <div style={css("margin-top: 24px")}>
                 <Link href="/c/learn" className="bm-btn-outline" style={css("padding: 10px 24px")}>See all resources</Link>
               </div>
             </div>
 
-            {featureBoxes.map(({ label, desc, href, Icon }, i) => (
-              <Link key={label} href={href} className={`explore-card-hover reveal stagger-${i + 1}`} style={css("background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none")}>
+            {featureBoxes.map(({ label, desc, href, Icon }) => (
+              <Link key={label} href={href} className="bm-card-hover" style={css("background: rgba(240,238,230,0.9); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none")}>
                 <div>
-                  <Icon className="h-6 w-6" style={css("color: #8b2e36; margin-bottom: 12px")} strokeWidth={1.5} />
+                  <Icon className="h-6 w-6" style={css("color: #2a2018; margin-bottom: 14px")} />
                   <p style={css("font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #6a6258; margin: 0 0 8px; letter-spacing: 0.02em")}>{label}</p>
                   <p style={css("font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0; line-height: 1.2")}>{desc}</p>
                 </div>
                 <div style={css("margin-top: 24px; text-align: right")}>
-                  <span className="explore-arrow" style={css("display: inline-block")}>
-                    <ArrowRight className="h-5 w-5" style={css("color: #2a2018")} />
-                  </span>
+                  <ArrowRight className="h-5 w-5" style={css("color: #2a2018")} />
                 </div>
               </Link>
             ))}
@@ -120,33 +91,71 @@ export default function ConceptCHome() {
         </div>
       </section>
 
-      {/* ============ 3. FEATURED ARTICLES ============ */}
+      {/* ============ 2. FEATURED ARTICLES (bento grid) ============ */}
       <section className="bm-section-padding" style={css("background: #f4f1eb")}>
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <div className="reveal" style={css("display: flex; justify-content: space-between; align-items: end; margin-bottom: 32px")}>
-            <h2 style={css("font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0")}>Latest Resources</h2>
+          <div style={css("display: flex; justify-content: space-between; align-items: end; margin-bottom: 32px")}>
+            <h2 style={css("font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0")}>
+              Latest Resources
+            </h2>
             <Link href="/c/learn" className="bm-view-all" style={css("font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px")}>
               View all <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
 
-          <div className="bm-grid-3">
-            {articles.map((article, i) => (
-              <Link key={article.title} href={article.href} style={css("text-decoration: none; display: block")} className={`bm-title-underline-parent card-lift reveal stagger-${i + 1}`}>
-                <div style={css("aspect-ratio: 4/3; background: #e2dcd2; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 16px")}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={article.img} alt={article.title} style={css("width: 100%; height: 100%; object-fit: cover")} />
+          {/* Bento grid: featured image spans rows 1-2, two side cards, then text */}
+          <div className="bm-grid-bento">
+            {/* Left: featured image (article 1) spanning rows 1-2 */}
+            <Link href={articles[0].href} style={css("display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: #e2dcd2")} className="bm-title-underline-parent">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={articles[0].img} alt={articles[0].title} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
+            </Link>
+
+            {/* Right top card (article 2) */}
+            <Link href={articles[1].href} className="bm-grid-article-card bm-title-underline-parent" style={css("text-decoration: none")}>
+              <div style={css("background: #e2dcd2; border-radius: 10px; overflow: hidden; height: 100%")}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={articles[1].img} alt={articles[1].title} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
+              </div>
+              <div>
+                <h3 className="bm-title-underline" style={css("font-size: 22px; color: #2a2018; margin: 0 0 14px; line-height: 1.3")}>{articles[1].title}</h3>
+                <p style={css("font-size: 15px; color: #8a7e70; line-height: 1.45; margin: 0 0 16px")}>Practical advice and important first steps for those who have recently embraced Islam.</p>
+                <div style={css("display: flex; align-items: center; gap: 8px")}>
+                  <span style={css("font-size: 15px; font-weight: 500; color: #2a2018")}>{articles[1].category}</span>
+                  <span style={css("font-size: 15px; color: #a09888")}>{articles[1].time}</span>
                 </div>
-                <h3 className="bm-title-underline" style={css("font-family: 'Source Serif 4', serif; font-size: 18px; font-weight: 400; color: #2a2018; margin: 0 0 8px; line-height: 1.3")}>{article.title}</h3>
-                <div style={css("display: flex; align-items: center; gap: 12px")}>
-                  <span style={css("font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #2a2018")}>{article.category}</span>
-                  <span style={css("font-family: 'DM Sans', sans-serif; font-size: 12px; color: #a09888")}>{article.time}</span>
+              </div>
+            </Link>
+
+            {/* Right bottom card (article 3) */}
+            <Link href={articles[2].href} className="bm-grid-article-card bm-title-underline-parent" style={css("text-decoration: none")}>
+              <div style={css("background: #e2dcd2; border-radius: 10px; overflow: hidden; height: 100%")}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={articles[2].img} alt={articles[2].title} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
+              </div>
+              <div>
+                <h3 className="bm-title-underline" style={css("font-size: 22px; color: #2a2018; margin: 0 0 14px; line-height: 1.3")}>{articles[2].title}</h3>
+                <p style={css("font-size: 15px; color: #8a7e70; line-height: 1.45; margin: 0 0 16px")}>Understanding common ground and key differences with Christianity, Judaism, and other faiths.</p>
+                <div style={css("display: flex; align-items: center; gap: 8px")}>
+                  <span style={css("font-size: 15px; font-weight: 500; color: #2a2018")}>{articles[2].category}</span>
+                  <span style={css("font-size: 15px; color: #a09888")}>{articles[2].time}</span>
                 </div>
-              </Link>
-            ))}
+              </div>
+            </Link>
+
+            {/* Left: text below image (article 1 detail, row 3) */}
+            <Link href={articles[0].href} style={css("text-decoration: none; display: block")} className="bm-title-underline-parent">
+              <h3 className="bm-title-underline" style={css("font-size: 24px; color: #2a2018; margin: 0 0 6px; line-height: 1.3")}>{articles[0].title}</h3>
+              <p style={css("font-size: 15px; color: #8a7e70; line-height: 1.5; margin: 0 0 8px")}>A clear and accessible introduction to the core beliefs, practices, and history of Islam for those just beginning to learn.</p>
+              <div style={css("display: flex; align-items: center; gap: 10px")}>
+                <span style={css("font-size: 15px; font-weight: 500; color: #2a2018")}>{articles[0].category}</span>
+                <span style={css("font-size: 15px; color: #a09888")}>{articles[0].time}</span>
+              </div>
+            </Link>
           </div>
 
-          <div className="reveal" style={css("text-align: center; margin-top: 32px")}>
+          {/* Additional Resources button */}
+          <div style={css("text-align: center; margin-top: 32px")}>
             <Link href="/c/learn" className="bm-btn-outline" style={css("padding: 10px 24px")}>
               Additional Resources <ArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -154,19 +163,19 @@ export default function ConceptCHome() {
         </div>
       </section>
 
-      {/* ============ 4. PRODUCTS (carousel) ============ */}
+      {/* ============ 3. PRODUCTS (carousel) ============ */}
       <section className="bm-section-padding" style={css("background: #faf9f5")}>
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <h2 className="reveal" style={css("font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px; text-align: center")}>
+          <h2 style={css("font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px; text-align: center")}>
             Everything you need to begin
           </h2>
 
           <div style={css("display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 16px; -webkit-overflow-scrolling: touch")}>
-            {products.map((product, i) => (
-              <Link key={product.title} href={product.href} style={css("flex: 0 0 280px; scroll-snap-align: start; text-decoration: none; display: block")} className={`bm-title-underline-parent product-card-hover reveal-right stagger-${i + 1}`}>
+            {products.map((product) => (
+              <Link key={product.title} href={product.href} style={css("text-decoration: none; display: block; flex: 0 0 280px; scroll-snap-align: start")} className="bm-title-underline-parent group">
                 <div style={css("aspect-ratio: 1; background: #e2dcd2; border-radius: 12px; overflow: hidden; margin-bottom: 16px; position: relative")}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={product.img} alt={product.title} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
+                  <img src={product.img} alt={product.title} className="transition-transform duration-500 group-hover:scale-105" style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
                   {product.badge && (
                     <span style={css("position: absolute; top: 12px; left: 12px; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600; color: #2a2018; background: #fff; padding: 3px 10px; border-radius: 999px; z-index: 2")}>{product.badge}</span>
                   )}
@@ -177,7 +186,7 @@ export default function ConceptCHome() {
             ))}
           </div>
 
-          <div className="reveal" style={css("text-align: center; margin-top: 32px")}>
+          <div style={css("text-align: center; margin-top: 32px")}>
             <Link href="/c/shop" className="bm-btn-outline" style={css("padding: 10px 24px")}>
               See All Store Items <ArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -185,31 +194,30 @@ export default function ConceptCHome() {
         </div>
       </section>
 
-      {/* ============ 5. FAQ ============ */}
+      {/* ============ 4. FAQ ============ */}
       <section className="bm-section-padding" style={css("background: #f4f1eb")}>
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <div style={css("max-width: 800px")}>
-            <h2 className="reveal" style={css("font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px")}>
+          <div style={css("max-width: 800px; margin: 0 auto")}>
+            <h2 style={css("font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px; text-align: center")}>
               Frequently Asked Questions
             </h2>
 
             {faqs.map((faq, i) => (
-              <div key={i} className={`reveal-left stagger-${Math.min(i + 1, 4)}`}>
+              <div key={i}>
                 <button
                   onClick={() => toggleFaq(i)}
-                  className="faq-question-hover"
                   style={css("width: 100%; text-align: left; padding: 20px 0; border: none; border-top: 1px solid #e8e3da; background: none; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px")}
                 >
                   <span style={css("font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: #2a2018; line-height: 1.4")}>{faq.q}</span>
-                  <ChevronDown className={`h-4 w-4 flex-shrink-0 mt-1 faq-chevron ${openFaq === i ? "rotated" : ""}`} style={css("color: #8a7e70")} />
+                  <ChevronDown className={`h-4 w-4 flex-shrink-0 mt-1 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} style={css("color: #8a7e70")} />
                 </button>
-                <div className={`faq-answer ${openFaq === i ? "open" : ""}`} style={css(`max-height: ${openFaq === i ? "300px" : "0"}`)}>
+                {openFaq === i && (
                   <p style={css("font-family: 'DM Sans', sans-serif; font-size: 14px; color: #8a7e70; line-height: 1.6; margin: 0 0 20px; padding-right: 40px")}>{faq.a}</p>
-                </div>
+                )}
               </div>
             ))}
 
-            <div className="reveal" style={css("margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px")}>
+            <div style={css("margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center")}>
               <Link href="/c/learn/ask-a-question" className="bm-btn-outline" style={css("padding: 10px 24px")}>Ask a Question</Link>
               <Link href="/c/convert" className="bm-btn-dark" style={css("padding: 10px 24px")}>Ready to Convert</Link>
             </div>

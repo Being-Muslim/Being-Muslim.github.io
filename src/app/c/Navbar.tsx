@@ -2,18 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, Droplets, Square } from "lucide-react";
 import { css } from "@/lib/css";
 
-type DropdownLink = { label: string; href: string; desc?: string };
-type DropdownColumn = { heading?: string; links: DropdownLink[] };
-type DropdownItem = { label: string; href: string; columns: DropdownColumn[] };
+type MegaLink = { label: string; href: string; desc?: string; img?: string };
+type MegaMenu = {
+  columns: { heading?: string; links: MegaLink[] }[];
+  featured?: { title: string; desc: string; href: string; img: string };
+};
 
-// Coda-style nav: dropdown items first, then a divider, then plain links
-const dropdownItems: DropdownItem[] = [
-  {
-    label: "Learn",
-    href: "/c/learn",
+const megaMenus: Record<string, MegaMenu> = {
+  Learn: {
     columns: [
       {
         heading: "Resources",
@@ -32,56 +31,160 @@ const dropdownItems: DropdownItem[] = [
         ],
       },
     ],
+    featured: {
+      title: "Foundations of Faith",
+      desc: "A 24-lesson course covering the essentials.",
+      href: "/c/learn",
+      img: "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&q=80&auto=format&fit=crop",
+    },
   },
-  {
-    label: "Convert",
-    href: "/c/convert",
+  Convert: {
     columns: [
       {
         heading: "Your Journey",
         links: [
-          { label: "Ready to Convert?", href: "/c/convert", desc: "Take the next step with guidance" },
-          { label: "What to Expect", href: "/c/convert", desc: "The process and what comes after" },
-          { label: "FAQ for New Muslims", href: "/c/convert", desc: "Answers to common questions" },
+          { label: "Ready to Convert?", href: "/c/convert", desc: "Take the next step with guidance and support" },
+          { label: "What to Expect", href: "/c/convert", desc: "Understanding the process and what comes after" },
+          { label: "FAQ for New Muslims", href: "/c/convert", desc: "Answers to the most common questions" },
         ],
       },
       {
         heading: "Support",
         links: [
           { label: "Find a Community", href: "/c/convert", desc: "Connect with Muslims near you" },
-          { label: "Mentorship Program", href: "/c/convert", desc: "One-on-one guidance" },
+          { label: "Mentorship Program", href: "/c/convert", desc: "One-on-one guidance from experienced Muslims" },
           { label: "Start Your Journey", href: "/c/convert" },
         ],
       },
     ],
   },
-  {
-    label: "Products",
-    href: "/c/shop",
+  Products: {
     columns: [
       {
         heading: "Products",
         links: [
-          { label: "Being Muslim: A Practical Guide", href: "/c/shop/book", desc: "The bestselling book" },
-          { label: "The Complete Boxed Set", href: "/c/shop/boxed-set", desc: "Book, prayer cards, and more" },
-          { label: "Prayer Reference Cards", href: "/c/shop/prayer-cards", desc: "Keep by your prayer mat" },
-          { label: "Digital Edition (eBook)", href: "/c/shop/ebook", desc: "Read anywhere, instantly" },
+          { label: "Being Muslim: A Practical Guide", href: "/c/shop/book", desc: "The bestselling book", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg" },
+          { label: "The Complete Boxed Set", href: "/c/shop/boxed-set", desc: "Book, prayer cards, and more", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg" },
+          { label: "Prayer Reference Cards", href: "/c/shop/prayer-cards", desc: "Keep by your prayer mat", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-prayer-card-900x610.jpeg" },
+          { label: "Digital Edition (eBook)", href: "/c/shop/ebook", desc: "Read anywhere, instantly", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/BM-E-Book-900x1200.png" },
         ],
       },
     ],
   },
+  Support: {
+    columns: [
+      {
+        heading: "Get Involved",
+        links: [
+          { label: "Donate", href: "/c/support", desc: "Help fund resources for new Muslims" },
+          { label: "Sponsor a Boxed Set", href: "/c/support", desc: "Gift a set to someone in need" },
+          { label: "Volunteer", href: "/c/support", desc: "Join our team of contributors" },
+          { label: "Support the Mission", href: "/c/support" },
+        ],
+      },
+    ],
+  },
+};
+
+const navLinks = [
+  { label: "Home", href: "/c" },
+  { label: "Learn", href: "/c/learn" },
+  { label: "Convert", href: "/c/convert" },
+  { label: "Products", href: "/c/shop" },
+  { label: "Support", href: "/c/support" },
 ];
 
-const plainLinks = [{ label: "Support", href: "/c/support" }];
+type NavStyle = "glass" | "white";
+
+type Theme = {
+  pillBg: string;
+  pillBorder: string;
+  pillShadow: string;
+  blur: string;
+  logoFilter: string;
+  text: string;
+  link: string;
+  ctaBg: string;
+  ctaColor: string;
+  ctaBorder: string;
+  menuBg: string;
+  menuBorder: string;
+  menuBlur: string;
+  menuShadow: string;
+  heading: string;
+  itemText: string;
+  itemDesc: string;
+  cardBg: string;
+  cardBorder: string;
+  cardTitle: string;
+  cardDesc: string;
+  hoverBg: string;
+};
+
+const themes: Record<NavStyle, Theme> = {
+  glass: {
+    pillBg: "rgba(255,255,255,0.08)",
+    pillBorder: "rgba(255,255,255,0.15)",
+    pillShadow: "none",
+    blur: "blur(20px)",
+    logoFilter: "none",
+    text: "#fff",
+    link: "rgba(255,255,255,0.85)",
+    ctaBg: "rgba(255,255,255,0.15)",
+    ctaColor: "#fff",
+    ctaBorder: "rgba(255,255,255,0.25)",
+    menuBg: "rgba(30,28,24,0.85)",
+    menuBorder: "rgba(255,255,255,0.15)",
+    menuBlur: "blur(24px)",
+    menuShadow: "0 8px 32px rgba(0,0,0,0.3)",
+    heading: "rgba(255,255,255,0.45)",
+    itemText: "#fff",
+    itemDesc: "rgba(255,255,255,0.45)",
+    cardBg: "rgba(255,255,255,0.08)",
+    cardBorder: "rgba(255,255,255,0.1)",
+    cardTitle: "#fff",
+    cardDesc: "rgba(255,255,255,0.45)",
+    hoverBg: "rgba(255,255,255,0.12)",
+  },
+  white: {
+    pillBg: "#ffffff",
+    pillBorder: "rgba(0,0,0,0.08)",
+    pillShadow: "0 4px 24px rgba(0,0,0,0.10)",
+    blur: "none",
+    logoFilter: "invert(1)",
+    text: "#2a2018",
+    link: "rgba(42,32,24,0.8)",
+    ctaBg: "#2a2018",
+    ctaColor: "#fff",
+    ctaBorder: "#2a2018",
+    menuBg: "#ffffff",
+    menuBorder: "rgba(0,0,0,0.08)",
+    menuBlur: "none",
+    menuShadow: "0 12px 32px rgba(0,0,0,0.12)",
+    heading: "#8a7e70",
+    itemText: "#2a2018",
+    itemDesc: "#8a7e70",
+    cardBg: "#f4f1eb",
+    cardBorder: "rgba(0,0,0,0.05)",
+    cardTitle: "#2a2018",
+    cardDesc: "#8a7e70",
+    hoverBg: "rgba(42,32,24,0.06)",
+  },
+};
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [navStyle, setNavStyle] = useState<NavStyle>("glass");
+  const [hovered, setHovered] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const closeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Track scroll so the glass pill can become a readable solid surface once
+  // the user scrolls past the dark hero onto the light page body.
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 8);
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -96,129 +199,228 @@ export default function Navbar() {
   function cancelClose() {
     if (closeTimeout.current) clearTimeout(closeTimeout.current);
   }
+  function toggleNavStyle() {
+    setNavStyle((s) => (s === "glass" ? "white" : "glass"));
+  }
+
+  const T = themes[navStyle];
+  const menu = activeMenu ? megaMenus[activeMenu] : null;
+
+  // When in glass mode and scrolled past the dark hero, swap the translucent
+  // pill for a solid dark surface so the white text stays legible over light
+  // page content. White theme already reads fine, so leave it untouched.
+  const glassScrolled = navStyle === "glass" && scrolled;
+  const pillBg = glassScrolled ? "rgba(30,28,24,0.92)" : T.pillBg;
+  const pillBorder = glassScrolled ? "rgba(255,255,255,0.12)" : T.pillBorder;
+  const pillShadow = glassScrolled ? "0 4px 24px rgba(0,0,0,0.25)" : T.pillShadow;
 
   return (
-    <header
-      className="fixed top-0 left-0 right-0 z-50"
-      style={css(
-        `background: #faf9f5; border-bottom: 1px solid ${scrolled || activeMenu ? "#e6e0d6" : "transparent"}; box-shadow: ${scrolled && !activeMenu ? "0 1px 12px rgba(42,32,24,0.05)" : "none"}; transition: border-color 0.2s, box-shadow 0.2s`
+    <header className="fixed top-0 left-0 right-0 z-50" style={css("padding: 16px 24px")}>
+      {/* Desktop: pill navbar (always visible on md+) */}
+      <nav
+        className="bm-navbar-pill hidden md:flex"
+        style={css(
+          `max-width: 1100px; margin: 0 auto; align-items: center; justify-content: space-between; padding: 10px 12px 10px 20px; border-radius: 999px; backdrop-filter: ${T.blur}; -webkit-backdrop-filter: ${T.blur}; border: 1px solid ${pillBorder}; background: ${pillBg}; box-shadow: ${pillShadow}; transition: all 0.3s`
+        )}
+      >
+        <Link href="/c" style={css("display: flex; align-items: center; gap: 10px; text-decoration: none")}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png"
+            alt="Being Muslim"
+            style={css(`height: 28px; width: 28px; filter: ${T.logoFilter}; transition: filter 0.3s`)}
+          />
+          <span style={css(`font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700; color: ${T.text}; transition: color 0.3s`)}>
+            Being Muslim
+          </span>
+        </Link>
+
+        <div style={css("display: flex; align-items: center; gap: 28px")}>
+          {navLinks.map((link) => (
+            <div
+              key={link.label}
+              className="relative"
+              onMouseEnter={() => {
+                setHovered(link.label);
+                if (megaMenus[link.label]) openMenu(link.label);
+                else setActiveMenu(null);
+              }}
+              onMouseLeave={() => {
+                setHovered(null);
+                scheduleClose();
+              }}
+            >
+              <Link
+                href={link.href}
+                style={css(`font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; text-decoration: none; color: ${T.link}; padding: 6px 14px; border-radius: 999px; display: inline-block; background: ${hovered === link.label || activeMenu === link.label ? T.hoverBg : "transparent"}; transition: color 0.3s, background 0.15s`)}
+              >
+                {link.label}
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        <div style={css("display: flex; align-items: center; gap: 8px")}>
+          {/* Nav style switcher (glass <-> white) */}
+          <button
+            onClick={toggleNavStyle}
+            title={`Nav style: ${navStyle} — click to switch`}
+            aria-label="Switch navigation style"
+            style={css(`display: inline-flex; align-items: center; justify-content: center; height: 34px; width: 34px; border-radius: 999px; cursor: pointer; background: none; border: 1px solid ${T.ctaBorder}; color: ${T.text}; transition: all 0.3s`)}
+          >
+            {navStyle === "glass" ? (
+              <Droplets style={css("height: 15px; width: 15px")} />
+            ) : (
+              <Square style={css("height: 15px; width: 15px")} />
+            )}
+          </button>
+          <Link
+            href="/c/contact"
+            style={css(`align-items: center; padding: 8px 20px; border-radius: 999px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.3s; background: ${T.ctaBg}; color: ${T.ctaColor}; border: 1px solid ${T.ctaBorder}`)}
+          >
+            Contact
+          </Link>
+        </div>
+      </nav>
+
+      {/* Mega Menu Dropdown */}
+      {menu && (
+        <div
+          className="hidden md:block"
+          onMouseEnter={cancelClose}
+          onMouseLeave={scheduleClose}
+          style={css(`max-width: 1100px; margin: 8px auto 0; border-radius: 20px; backdrop-filter: ${T.menuBlur}; -webkit-backdrop-filter: ${T.menuBlur}; border: 1px solid ${T.menuBorder}; background: ${T.menuBg}; box-shadow: ${T.menuShadow}; animation: megaFadeIn 0.15s ease-out`)}
+        >
+          <div style={css("padding: 28px 32px")}>
+            {menu.columns.some((c) => c.links.some((l) => l.img)) ? (
+              /* Image-card grid (e.g. Products): each product as a card */
+              <div style={css("display: flex; flex-wrap: wrap; gap: 16px")}>
+                {menu.columns.flatMap((c) => c.links).map((item) => (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    style={css(`flex: 0 0 220px; display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: ${T.cardBg}; border: 1px solid ${T.cardBorder}`)}
+                  >
+                    {item.img && (
+                      <div style={css("aspect-ratio: 16/10; overflow: hidden")}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={item.img} alt={item.label} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
+                      </div>
+                    )}
+                    <div style={css("padding: 16px")}>
+                      <p style={css(`font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: ${T.cardTitle}; margin: 0 0 4px`)}>{item.label}</p>
+                      {item.desc && (
+                        <p style={css(`font-family: 'DM Sans', sans-serif; font-size: 12px; color: ${T.cardDesc}; margin: 0`)}>{item.desc}</p>
+                      )}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+            <div style={css("display: flex; gap: 48px")}>
+              {/* Link columns */}
+              {menu.columns.map((column, ci) => (
+                <div key={ci} style={css("flex: 1; min-width: 200px")}>
+                  {column.heading && (
+                    <p style={css(`font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: ${T.heading}; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 16px`)}>
+                      {column.heading}
+                    </p>
+                  )}
+                  {column.links.map((item) => (
+                    <Link key={item.label} href={item.href} className="mega-link" style={css("display: block; text-decoration: none; padding: 8px 0; transition: opacity 0.15s")}>
+                      <span style={css(`font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: ${T.itemText}; display: block`)}>
+                        {item.label}
+                      </span>
+                      {item.desc && (
+                        <span style={css(`font-family: 'DM Sans', sans-serif; font-size: 12px; color: ${T.itemDesc}; display: block; margin-top: 2px`)}>
+                          {item.desc}
+                        </span>
+                      )}
+                    </Link>
+                  ))}
+                </div>
+              ))}
+
+              {/* Featured card (optional) */}
+              {menu.featured && (
+                <div style={css("flex: 0 0 260px")}>
+                  <Link href={menu.featured.href} style={css(`display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: ${T.cardBg}; border: 1px solid ${T.cardBorder}`)}>
+                    <div style={css("aspect-ratio: 16/10; overflow: hidden")}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={menu.featured.img} alt={menu.featured.title} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
+                    </div>
+                    <div style={css("padding: 16px")}>
+                      <p style={css(`font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: ${T.cardTitle}; margin: 0 0 4px`)}>{menu.featured.title}</p>
+                      <p style={css(`font-family: 'DM Sans', sans-serif; font-size: 12px; color: ${T.cardDesc}; margin: 0`)}>{menu.featured.desc}</p>
+                    </div>
+                  </Link>
+                </div>
+              )}
+            </div>
+            )}
+          </div>
+        </div>
       )}
-    >
-      <nav style={css("max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 24px")}>
-        {/* Left: logo + nav links (Coda-style left-aligned group) */}
-        <div style={css("display: flex; align-items: center; gap: 28px; min-width: 0")}>
-          <Link href="/c" style={css("display: flex; align-items: center; gap: 9px; text-decoration: none; flex-shrink: 0")}>
+
+      {/* Mobile: single glass container that expands */}
+      <div
+        className={`mobile-shell md:hidden ${mobileOpen ? "open" : ""}`}
+        style={css(`backdrop-filter: ${T.blur}; -webkit-backdrop-filter: ${T.blur}; border: 1px solid ${pillBorder}; background: ${pillBg}; box-shadow: ${pillShadow}`)}
+      >
+        {/* Top row: logo + switcher + hamburger */}
+        <div style={css("display: flex; align-items: center; justify-content: space-between; padding: 10px 12px 10px 20px")}>
+          <Link href="/c" style={css("display: flex; align-items: center; gap: 10px; text-decoration: none")}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png"
               alt="Being Muslim"
-              style={css("height: 26px; width: 26px; filter: invert(1)")}
+              style={css(`height: 28px; width: 28px; filter: ${T.logoFilter}; transition: filter 0.3s`)}
             />
-            <span style={css("font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700; color: #2a2018; white-space: nowrap")}>
+            <span style={css(`font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700; color: ${T.text}; transition: color 0.3s`)}>
               Being Muslim
             </span>
           </Link>
+          <div style={css("display: flex; align-items: center; gap: 4px")}>
+            <button
+              onClick={toggleNavStyle}
+              aria-label="Switch navigation style"
+              style={css(`padding: 8px; border: none; background: none; cursor: pointer; color: ${T.text}`)}
+            >
+              {navStyle === "glass" ? <Droplets className="h-5 w-5" /> : <Square className="h-5 w-5" />}
+            </button>
+            <button
+              style={css(`padding: 8px; border: none; background: none; cursor: pointer; color: ${T.text}`)}
+              onClick={() => setMobileOpen((v) => !v)}
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+        </div>
 
-          <div className="hidden lg:flex" style={css("align-items: center; gap: 2px")}>
-            {dropdownItems.map((item) => (
-              <div
-                key={item.label}
-                style={css("position: relative")}
-                onMouseEnter={() => openMenu(item.label)}
-                onMouseLeave={scheduleClose}
+        {/* Expandable links */}
+        <div className="mobile-links">
+          <div style={css("padding: 4px 20px 16px")}>
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                style={css(`display: block; padding: 10px 0; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: ${T.text}; text-decoration: none`)}
+                onClick={() => setMobileOpen(false)}
               >
-                <Link href={item.href} className={`bm-nav-item ${activeMenu === item.label ? "active" : ""}`}>
-                  {item.label}
-                  <ChevronDown
-                    style={css(`height: 13px; width: 13px; transition: transform 0.15s;${activeMenu === item.label ? " transform: rotate(180deg);" : ""}`)}
-                  />
-                </Link>
-
-                {activeMenu === item.label && (
-                  <div
-                    onMouseEnter={cancelClose}
-                    onMouseLeave={scheduleClose}
-                    style={css("position: absolute; top: calc(100% + 6px); left: 0; display: flex; gap: 8px; background: #fff; border: 1px solid #ece6dc; border-radius: 14px; box-shadow: 0 12px 32px rgba(42,32,24,0.10); padding: 8px; animation: navDropIn 0.15s ease-out")}
-                  >
-                    {item.columns.map((column, ci) => (
-                      <div key={ci} style={css("min-width: 250px")}>
-                        {column.heading && (
-                          <p style={css("font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: #8a7e70; text-transform: uppercase; letter-spacing: 0.08em; margin: 6px 12px 4px")}>
-                            {column.heading}
-                          </p>
-                        )}
-                        {column.links.map((link) => (
-                          <Link key={link.label} href={link.href} className="bm-dropdown-link">
-                            <span style={css("display: block; font-size: 14px; font-weight: 500; color: #2a2018; white-space: nowrap")}>{link.label}</span>
-                            {link.desc && (
-                              <span style={css("display: block; font-size: 12px; color: #8a7e70; margin-top: 1px; white-space: nowrap")}>{link.desc}</span>
-                            )}
-                          </Link>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-
-            {/* Divider between dropdowns and plain links */}
-            <div style={css("width: 1px; height: 18px; background: #d8d2c8; margin: 0 10px")} />
-
-            {plainLinks.map((link) => (
-              <Link key={link.label} href={link.href} className="bm-nav-item">
                 {link.label}
               </Link>
             ))}
-          </div>
-        </div>
-
-        {/* Right: dual CTAs (outline + solid) */}
-        <div style={css("display: flex; align-items: center; gap: 10px")}>
-          <Link href="/c/support" className="hidden md:inline-flex bm-cta-outline">Donate</Link>
-          <Link href="/c/contact" className="hidden md:inline-flex bm-cta-solid">Contact</Link>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden"
-            style={css("padding: 8px; border: none; background: none; cursor: pointer; color: #2a2018")}
-            onClick={() => setMobileOpen((v) => !v)}
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
-      </nav>
-
-      {mobileOpen && (
-        <div className="lg:hidden" style={css("background: #faf9f5; border-top: 1px solid #e6e0d6; padding: 12px 24px 20px")}>
-          {dropdownItems.map((item) => (
             <Link
-              key={item.label}
-              href={item.href}
-              style={css("display: block; padding: 10px 0; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #2a2018; text-decoration: none")}
+              href="/c/contact"
+              style={css(`display: block; margin-top: 8px; text-align: center; background: ${T.ctaBg}; color: ${T.ctaColor}; padding: 10px; border-radius: 999px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; text-decoration: none; border: 1px solid ${T.ctaBorder}`)}
               onClick={() => setMobileOpen(false)}
             >
-              {item.label}
+              Contact
             </Link>
-          ))}
-          <div style={css("height: 1px; background: #e6e0d6; margin: 8px 0")} />
-          {plainLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              style={css("display: block; padding: 10px 0; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #2a2018; text-decoration: none")}
-              onClick={() => setMobileOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <div style={css("display: flex; gap: 10px; margin-top: 12px")}>
-            <Link href="/c/support" className="bm-cta-outline" style={css("flex: 1; justify-content: center")} onClick={() => setMobileOpen(false)}>Donate</Link>
-            <Link href="/c/contact" className="bm-cta-solid" style={css("flex: 1; justify-content: center")} onClick={() => setMobileOpen(false)}>Contact</Link>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

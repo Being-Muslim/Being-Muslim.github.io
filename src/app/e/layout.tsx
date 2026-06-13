@@ -2,7 +2,7 @@ import "./concept-e.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-export default function ConceptELayout({
+export default function ConceptDLayout({
   children,
 }: {
   children: React.ReactNode;

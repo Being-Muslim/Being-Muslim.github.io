@@ -2,19 +2,19 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Compass, ShoppingBag, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, BookOpen, Compass, ShoppingBag } from "lucide-react";
 import { css } from "@/lib/css";
 
 const featureBoxes = [
-  { label: "Learn", desc: "Explore articles, guides, and resources on Islamic faith and practice", href: "/d/learn", Icon: BookOpen, reveal: "bm-reveal-up", stagger: "bm-stagger-2" },
-  { label: "Convert", desc: "Take the next step on your journey with guidance and support", href: "/d/convert", Icon: Compass, reveal: "bm-reveal-up", stagger: "bm-stagger-3" },
-  { label: "Buy", desc: "Books, prayer cards, and resources for your journey", href: "/d/shop", Icon: ShoppingBag, reveal: "bm-reveal-up", stagger: "bm-stagger-4" },
+  { label: "Learn", desc: "Explore articles, guides, and resources on Islamic faith and practice", href: "/d/learn", Icon: BookOpen },
+  { label: "Convert", desc: "Take the next step on your journey with guidance and support", href: "/d/convert", Icon: Compass },
+  { label: "Buy", desc: "Books, prayer cards, and resources for your journey", href: "/d/shop", Icon: ShoppingBag },
 ];
 
 const articles = [
-  { title: "Brief Overview of Islam", category: "Foundations", time: "10 min read", href: "/d/learn/brief-overview-of-islam", img: "https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png", reveal: "bm-reveal-left" },
-  { title: "A Beginner's Guide to Being a Muslim", category: "New Muslims", time: "12 min read", href: "/d/learn/beginners-guide", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg", reveal: "bm-reveal-up" },
-  { title: "Islam and Other Faiths", category: "Belief", time: "8 min read", href: "/d/learn/islam-and-other-faiths", img: "https://www.beingmuslim.org/wp-content/uploads/2022/03/oneGodmanynames.jpeg", reveal: "bm-reveal-right" },
+  { title: "Brief Overview of Islam", category: "Foundations", time: "10 min read", href: "/d/learn/brief-overview-of-islam", img: "https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png" },
+  { title: "A Beginner's Guide to Being a Muslim", category: "New Muslims", time: "12 min read", href: "/d/learn/beginners-guide", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg" },
+  { title: "Islam and Other Faiths", category: "Belief", time: "8 min read", href: "/d/learn/islam-and-other-faiths", img: "https://www.beingmuslim.org/wp-content/uploads/2022/03/oneGodmanynames.jpeg" },
 ];
 
 const products = [
@@ -35,52 +35,46 @@ const faqs = [
   { q: "Do I need to change my name now that I have become Muslim?", a: "No, changing your name is not required in Islam. Many Muslims keep their birth names. Some choose to adopt a new name as a personal expression of their new identity, but this is entirely optional." },
 ];
 
-export default function ConceptDHome() {
-  const [scrollY, setScrollY] = useState(0);
+export default function ConceptCHome() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const toggleFaq = (i: number) => setOpenFaq((cur) => (cur === i ? null : i));
 
-  // Parallax: track scroll position to drive hero background/foreground transforms.
+  // --- Intersection Observer for scroll reveal ---
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Section reveal: add the visible class once each .bm-reveal scrolls into view.
-  useEffect(() => {
-    const revealObserver = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add("bm-reveal-visible");
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.15, rootMargin: "0px 0px -50px 0px" }
     );
-    document.querySelectorAll(".bm-reveal").forEach((el) => revealObserver.observe(el));
-    return () => revealObserver.disconnect();
+    const els = document.querySelectorAll(".reveal, .reveal-left, .reveal-right, .reveal-scale");
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   return (
     <>
-      {/* ============ 1. PARALLAX HERO ============ */}
-      <section className="bm-parallax-hero">
-        <div className="bm-parallax-bg" style={css(`transform: translateY(${scrollY * 0.4}px)`)}>
+      {/* ============ 1. HERO ============ */}
+      <section className="relative flex min-h-[83vh] flex-col justify-end overflow-hidden">
+        <div className="absolute inset-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/hero-bg.jpg" alt="" />
+          <img src="/images/hero-bg.jpg" alt="" className="h-full w-full object-cover" />
           <div className="absolute inset-0" style={css("background: linear-gradient(180deg, rgba(40,35,28,0.3) 0%, rgba(40,35,28,0.1) 40%, rgba(40,35,28,0.55) 100%)")} />
         </div>
 
-        <div className="bm-parallax-content mx-auto w-full max-w-[1400px] px-6 pt-32 pb-12 lg:px-10" style={css(`transform: translateY(${scrollY * 0.15}px)`)}>
+        <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 pt-32 pb-12 lg:px-10">
           <div className="max-w-[680px]">
-            <h1 className="font-display text-[44px] font-bold leading-[1.05] tracking-[-0.02em] text-white sm:text-[56px] lg:text-[68px]">
+            <h1 className="hero-title font-display text-[44px] font-bold leading-[1.05] tracking-[-0.02em] text-white sm:text-[56px] lg:text-[68px]">
               Navigating the <span className="italic font-normal text-amber-200/90">Path</span> to Islam
             </h1>
-            <p className="mt-6 max-w-[480px] text-[16px] leading-[1.65] text-white/80">
+            <p className="hero-subtitle mt-6 max-w-[480px] text-[16px] leading-[1.65] text-white/80">
               Empowering new and beginner Muslims with comprehensive education and support to navigate your journey and deepen your understanding and connection with faith.
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="hero-cta mt-8 flex flex-wrap items-center gap-4">
               <Link href="/d/learn" className="bm-btn-white" style={css("padding: 14px 28px; font-weight: 600")}>
                 Start Learning <ArrowRight className="h-4 w-4" />
               </Link>
@@ -93,30 +87,32 @@ export default function ConceptDHome() {
       </section>
 
       {/* ============ 2. LEARN / CONVERT / BUY ============ */}
-      <section className="bm-section-flow" style={css("background: #faf9f5; padding: 24px 0")}>
+      <section style={css("background: #faf9f5; padding: 24px 0")}>
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <div className="bm-grid-explore" style={css("background: #e3dacc; border-radius: 16px; padding: 28px 20px")}>
-            <div className="bm-reveal bm-reveal-up bm-stagger-1" style={css("display: flex; flex-direction: column; justify-content: space-between; padding-right: 24px")}>
+          <div className="reveal-scale bm-grid-explore" style={css("background: #e3dacc; border-radius: 16px; padding: 28px 20px")}>
+            <div style={css("display: flex; flex-direction: column; justify-content: space-between; padding-right: 24px")}>
               <div>
-                <h2 style={css("font-family: 'Source Serif 4', serif; font-size: 36px; font-weight: 400; color: #2a2018; margin: 0 0 16px; line-height: 1.15")}>Explore your path</h2>
-                <p style={css("font-family: 'DM Sans', sans-serif; font-size: 15px; color: #5a5248; line-height: 1.6; margin: 0")}>
+                <h2 className="reveal" style={css("font-family: 'Source Serif 4', serif; font-size: 36px; font-weight: 400; color: #2a2018; margin: 0 0 16px; line-height: 1.15")}>Explore your path</h2>
+                <p className="reveal stagger-1" style={css("font-family: 'DM Sans', sans-serif; font-size: 15px; color: #5a5248; line-height: 1.6; margin: 0")}>
                   Discover Islam through courses, articles, and guides. Whether you&apos;re curious, converting, or deepening your practice — find resources made for you.
                 </p>
               </div>
-              <div style={css("margin-top: 24px")}>
+              <div className="reveal stagger-2" style={css("margin-top: 24px")}>
                 <Link href="/d/learn" className="bm-btn-outline" style={css("padding: 10px 24px")}>See all resources</Link>
               </div>
             </div>
 
-            {featureBoxes.map(({ label, desc, href, Icon, reveal, stagger }) => (
-              <Link key={label} href={href} className={`bm-card-hover bm-reveal ${reveal} ${stagger}`} style={css("background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none")}>
+            {featureBoxes.map(({ label, desc, href, Icon }, i) => (
+              <Link key={label} href={href} className={`explore-card-hover reveal stagger-${i + 1}`} style={css("background: #f0eee6; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none")}>
                 <div>
-                  <Icon className="h-6 w-6" style={css("color: #2a2018; margin-bottom: 14px")} />
+                  <Icon className="h-6 w-6" style={css("color: #8b2e36; margin-bottom: 12px")} strokeWidth={1.5} />
                   <p style={css("font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #6a6258; margin: 0 0 8px; letter-spacing: 0.02em")}>{label}</p>
                   <p style={css("font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0; line-height: 1.2")}>{desc}</p>
                 </div>
                 <div style={css("margin-top: 24px; text-align: right")}>
-                  <ArrowRight className="h-5 w-5 bm-arrow-slide" style={css("color: #2a2018")} />
+                  <span className="explore-arrow" style={css("display: inline-block")}>
+                    <ArrowRight className="h-5 w-5" style={css("color: #2a2018")} />
+                  </span>
                 </div>
               </Link>
             ))}
@@ -125,18 +121,18 @@ export default function ConceptDHome() {
       </section>
 
       {/* ============ 3. FEATURED ARTICLES ============ */}
-      <section className="bm-section-padding bm-section-flow" style={css("background: #f4f1eb")}>
+      <section className="bm-section-padding" style={css("background: #f4f1eb")}>
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <div style={css("display: flex; justify-content: space-between; align-items: end; margin-bottom: 32px")}>
-            <h2 className="bm-reveal bm-reveal-up" style={css("font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0")}>Latest Resources</h2>
+          <div className="reveal" style={css("display: flex; justify-content: space-between; align-items: end; margin-bottom: 32px")}>
+            <h2 style={css("font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0")}>Latest Resources</h2>
             <Link href="/d/learn" className="bm-view-all" style={css("font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2a2018; text-decoration: none; display: inline-flex; align-items: center; gap: 4px")}>
-              View all <ArrowRight className="h-3.5 w-3.5 bm-arrow-slide" />
+              View all <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
 
           <div className="bm-grid-3">
-            {articles.map((article) => (
-              <Link key={article.title} href={article.href} style={css("text-decoration: none; display: block")} className={`bm-title-underline-parent bm-reveal ${article.reveal}`}>
+            {articles.map((article, i) => (
+              <Link key={article.title} href={article.href} style={css("text-decoration: none; display: block")} className={`bm-title-underline-parent card-lift reveal stagger-${i + 1}`}>
                 <div style={css("aspect-ratio: 4/3; background: #e2dcd2; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 16px")}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={article.img} alt={article.title} style={css("width: 100%; height: 100%; object-fit: cover")} />
@@ -150,7 +146,7 @@ export default function ConceptDHome() {
             ))}
           </div>
 
-          <div style={css("text-align: center; margin-top: 32px")}>
+          <div className="reveal" style={css("text-align: center; margin-top: 32px")}>
             <Link href="/d/learn" className="bm-btn-outline" style={css("padding: 10px 24px")}>
               Additional Resources <ArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -159,18 +155,18 @@ export default function ConceptDHome() {
       </section>
 
       {/* ============ 4. PRODUCTS (carousel) ============ */}
-      <section className="bm-section-padding bm-section-flow" style={css("background: #faf9f5")}>
+      <section className="bm-section-padding" style={css("background: #faf9f5")}>
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <h2 className="bm-reveal bm-reveal-up" style={css("font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px; text-align: center")}>
+          <h2 className="reveal" style={css("font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px; text-align: center")}>
             Everything you need to begin
           </h2>
 
-          <div className="bm-reveal bm-reveal-right" style={css("display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 16px; -webkit-overflow-scrolling: touch")}>
-            {products.map((product) => (
-              <Link key={product.title} href={product.href} style={css("flex: 0 0 280px; scroll-snap-align: start; text-decoration: none; display: block")} className="bm-title-underline-parent bm-product-card group">
+          <div style={css("display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 16px; -webkit-overflow-scrolling: touch")}>
+            {products.map((product, i) => (
+              <Link key={product.title} href={product.href} style={css("flex: 0 0 280px; scroll-snap-align: start; text-decoration: none; display: block")} className={`bm-title-underline-parent product-card-hover reveal-right stagger-${i + 1}`}>
                 <div style={css("aspect-ratio: 1; background: #e2dcd2; border-radius: 12px; overflow: hidden; margin-bottom: 16px; position: relative")}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={product.img} alt={product.title} className="transition-transform duration-500 group-hover:scale-105" style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
+                  <img src={product.img} alt={product.title} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
                   {product.badge && (
                     <span style={css("position: absolute; top: 12px; left: 12px; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600; color: #2a2018; background: #fff; padding: 3px 10px; border-radius: 999px; z-index: 2")}>{product.badge}</span>
                   )}
@@ -181,7 +177,7 @@ export default function ConceptDHome() {
             ))}
           </div>
 
-          <div style={css("text-align: center; margin-top: 32px")}>
+          <div className="reveal" style={css("text-align: center; margin-top: 32px")}>
             <Link href="/d/shop" className="bm-btn-outline" style={css("padding: 10px 24px")}>
               See All Store Items <ArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -190,29 +186,30 @@ export default function ConceptDHome() {
       </section>
 
       {/* ============ 5. FAQ ============ */}
-      <section className="bm-section-padding bm-section-flow" style={css("background: #f4f1eb")}>
+      <section className="bm-section-padding" style={css("background: #f4f1eb")}>
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <div style={css("max-width: 800px")}>
-            <h2 className="bm-reveal bm-reveal-left" style={css("font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px")}>
+            <h2 className="reveal" style={css("font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px")}>
               Frequently Asked Questions
             </h2>
 
             {faqs.map((faq, i) => (
-              <div key={i} className="bm-reveal bm-reveal-up" style={css(`transition-delay: ${Math.min(i * 0.05, 0.3)}s`)}>
+              <div key={i} className={`reveal-left stagger-${Math.min(i + 1, 4)}`}>
                 <button
                   onClick={() => toggleFaq(i)}
+                  className="faq-question-hover"
                   style={css("width: 100%; text-align: left; padding: 20px 0; border: none; border-top: 1px solid #e8e3da; background: none; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px")}
                 >
                   <span style={css("font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: #2a2018; line-height: 1.4")}>{faq.q}</span>
-                  <ChevronDown className={`h-4 w-4 flex-shrink-0 mt-1 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} style={css("color: #8a7e70")} />
+                  <ChevronDown className={`h-4 w-4 flex-shrink-0 mt-1 faq-chevron ${openFaq === i ? "rotated" : ""}`} style={css("color: #8a7e70")} />
                 </button>
-                <div className={`bm-faq-answer ${openFaq === i ? "bm-faq-open" : ""}`}>
+                <div className={`faq-answer ${openFaq === i ? "open" : ""}`} style={css(`max-height: ${openFaq === i ? "300px" : "0"}`)}>
                   <p style={css("font-family: 'DM Sans', sans-serif; font-size: 14px; color: #8a7e70; line-height: 1.6; margin: 0 0 20px; padding-right: 40px")}>{faq.a}</p>
                 </div>
               </div>
             ))}
 
-            <div style={css("margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px")}>
+            <div className="reveal" style={css("margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px")}>
               <Link href="/d/learn/ask-a-question" className="bm-btn-outline" style={css("padding: 10px 24px")}>Ask a Question</Link>
               <Link href="/d/convert" className="bm-btn-dark" style={css("padding: 10px 24px")}>Ready to Convert</Link>
             </div>

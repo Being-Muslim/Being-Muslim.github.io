@@ -1,6 +1,6 @@
 /* ============================================
    Being Muslim — Concept E Design System
-   Framer-style layout transitions & animations
+   Parallax + Animated Counters + Section Transitions
    ============================================ */
 
 /* ---------- Design Tokens ---------- */
@@ -33,7 +33,6 @@ html {
 h1, h2, h3, h4, h5, h6 {
 	font-family: var(--bm-font-serif);
 }
-
 .font-display {
 	font-family: var(--font-display) !important;
 }
@@ -60,13 +59,17 @@ p, a, li, label, input, textarea, select, button {
 	cursor: pointer;
 	transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-/* Button micro-interactions: scale + shadow on hover */
 .bm-btn-white:hover,
 .bm-btn-dark:hover,
 .bm-btn-outline:hover,
 .bm-btn-glass:hover {
 	transform: scale(1.02);
+}
+.bm-btn-white:active,
+.bm-btn-dark:active,
+.bm-btn-outline:active,
+.bm-btn-glass:active {
+	transform: scale(0.98);
 }
 
 /* White pill */
@@ -85,7 +88,7 @@ p, a, li, label, input, textarea, select, button {
 	color: #fff;
 }
 .bm-btn-dark:hover {
-	box-shadow: 0 6px 16px rgba(42, 32, 24, 0.25);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Outline pill */
@@ -96,7 +99,6 @@ p, a, li, label, input, textarea, select, button {
 }
 .bm-btn-outline:hover {
 	background: rgba(0, 0, 0, 0.05);
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* Glass pill */
@@ -132,34 +134,14 @@ p, a, li, label, input, textarea, select, button {
 	color: var(--bm-dark);
 }
 
-/* ---------- Link underline slide-in (::after pseudo) ---------- */
-.bm-link-animated {
-	position: relative;
-	text-decoration: none;
-	display: inline-block;
-}
-.bm-link-animated::after {
-	content: '';
-	position: absolute;
-	bottom: -2px;
-	left: 0;
-	width: 0;
-	height: 1px;
-	background: var(--bm-dark);
-	transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.bm-link-animated:hover::after {
-	width: 100%;
-}
-
 /* ---------- Card hover effects ---------- */
 .bm-card-hover {
-	transition: background 0.2s, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: background 0.2s, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
 }
 .bm-card-hover:hover {
 	background: #e6e3da !important;
-	transform: translateY(-4px);
-	box-shadow: 0 8px 24px rgba(42, 32, 24, 0.08);
+	transform: translateY(-6px);
+	box-shadow: 0 12px 32px rgba(42, 32, 24, 0.1);
 }
 
 .bm-img-zoom img,
@@ -185,6 +167,15 @@ p, a, li, label, input, textarea, select, button {
 .bm-view-all:hover {
 	text-decoration: underline !important;
 	text-underline-offset: 3px;
+}
+
+/* Arrow slide on hover */
+.bm-arrow-slide {
+	transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.bm-card-hover:hover .bm-arrow-slide,
+.bm-title-underline-parent:hover .bm-arrow-slide {
+	transform: translateX(4px);
 }
 
 /* ---------- Footer links ---------- */
@@ -221,159 +212,13 @@ p, a, li, label, input, textarea, select, button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transition: background 0.2s, transform 0.2s;
+	transition: background 0.2s;
 }
 .bm-social-icon:hover {
 	background: rgba(255, 255, 255, 0.15);
-	transform: scale(1.1);
 }
 
-
-/* ========================================
-   CONCEPT E — FRAMER-STYLE ANIMATIONS
-   ======================================== */
-
-/* ---------- Floating animation (hero image) ---------- */
-@keyframes float {
-	0%, 100% { transform: translateY(0); }
-	50% { transform: translateY(-12px); }
-}
-
-.bm-float {
-	animation: float 4s infinite ease-in-out;
-}
-
-/* ---------- Hero word reveal ---------- */
-.bm-hero-word {
-	display: inline-block;
-	transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* ---------- Scroll reveal ---------- */
-.bm-reveal {
-	opacity: 0;
-	transform: translateY(24px);
-	transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.bm-reveal.visible {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-/* Stagger delays */
-.bm-stagger-1 { transition-delay: 0.05s; }
-.bm-stagger-2 { transition-delay: 0.1s; }
-.bm-stagger-3 { transition-delay: 0.15s; }
-.bm-stagger-4 { transition-delay: 0.2s; }
-
-/* ---------- Explore card border transition ---------- */
-.bm-explore-card {
-	border: 2px solid transparent;
-	transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.2s, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
-}
-.bm-explore-card:hover {
-	border-color: #2a2018;
-	transform: translateY(-4px);
-	box-shadow: 0 8px 24px rgba(42, 32, 24, 0.08);
-}
-.bm-explore-card:hover .bm-arrow-icon {
-	transform: translateX(6px);
-}
-.bm-arrow-icon {
-	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* ---------- Article card overlay ---------- */
-.bm-article-card {
-	position: relative;
-	overflow: hidden;
-	border-radius: 12px;
-}
-.bm-article-card .bm-article-overlay {
-	position: absolute;
-	inset: 0;
-	background: linear-gradient(to top, rgba(42, 32, 24, 0.7) 0%, rgba(42, 32, 24, 0) 60%);
-	display: flex;
-	align-items: flex-end;
-	justify-content: center;
-	padding-bottom: 20px;
-	opacity: 0;
-	transform: translateY(8px);
-	transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.bm-article-card:hover .bm-article-overlay {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-/* ---------- Product carousel gradient fades ---------- */
-.bm-carousel-wrapper {
-	position: relative;
-}
-.bm-carousel-wrapper::before,
-.bm-carousel-wrapper::after {
-	content: '';
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	width: 60px;
-	z-index: 2;
-	pointer-events: none;
-}
-.bm-carousel-wrapper::before {
-	left: 0;
-	background: linear-gradient(to right, #faf9f5, transparent);
-}
-.bm-carousel-wrapper::after {
-	right: 0;
-	background: linear-gradient(to left, #faf9f5, transparent);
-}
-
-/* ---------- Product card hover ---------- */
-.bm-product-card {
-	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
-}
-.bm-product-card:hover {
-	transform: translateY(-4px);
-	box-shadow: 0 8px 24px rgba(42, 32, 24, 0.08);
-}
-
-/* ---------- FAQ Accordion ---------- */
-.bm-faq-answer {
-	max-height: 0;
-	overflow: hidden;
-	transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.bm-faq-answer.open {
-	max-height: 300px;
-}
-
-.bm-faq-chevron {
-	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.bm-faq-chevron.open {
-	transform: rotate(180deg);
-}
-
-/* ---------- SVG Wave divider ---------- */
-.bm-wave-divider {
-	display: block;
-	width: 100%;
-	margin-top: -1px;
-	line-height: 0;
-}
-.bm-wave-divider svg {
-	display: block;
-	width: 100%;
-	height: auto;
-}
-
-
-/* ========================================
-   RESPONSIVE GRIDS (from Concept A)
-   ======================================== */
-
-/* Explore path: stacked -> description + 3 cards */
+/* ---------- Responsive grids ---------- */
 .bm-grid-explore {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -395,7 +240,6 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
-/* 3-column grid */
 .bm-grid-3 {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -412,7 +256,6 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
-/* 4-column grid */
 .bm-grid-4 {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -424,7 +267,6 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
-/* 2-column grid */
 .bm-grid-2 {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -437,7 +279,70 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
-/* Section padding */
+.bm-grid-2-gap {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 32px;
+}
+@media (min-width: 768px) {
+	.bm-grid-2-gap {
+		grid-template-columns: 1fr 1fr;
+		gap: 48px;
+		align-items: center;
+	}
+}
+
+.bm-grid-newsletter {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 24px;
+}
+@media (min-width: 768px) {
+	.bm-grid-newsletter {
+		grid-template-columns: 1fr 1fr;
+		gap: 64px;
+		align-items: center;
+	}
+}
+
+.bm-grid-courses-header {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 12px;
+	margin-bottom: 32px;
+}
+@media (min-width: 768px) {
+	.bm-grid-courses-header {
+		grid-template-columns: 1fr 300px;
+		gap: 24px;
+	}
+}
+
+.bm-grid-stats {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+}
+
+.bm-community-panel {
+	padding: 28px 20px;
+}
+@media (min-width: 768px) {
+	.bm-community-panel {
+		padding: 48px;
+	}
+}
+
+.bm-community-chat {
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+@media (min-width: 768px) {
+	.bm-community-chat {
+		border-top: none;
+		border-left: 1px solid rgba(255, 255, 255, 0.08);
+	}
+}
+
 .bm-section-padding {
 	padding: 40px 0;
 }
@@ -447,103 +352,6 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
-.bm-section {
-	padding: 64px 0;
-}
-
-/* Container */
-.bm-container {
-	max-width: 1400px;
-	margin-left: auto;
-	margin-right: auto;
-	padding-left: 24px;
-	padding-right: 24px;
-}
-@media (min-width: 1024px) {
-	.bm-container {
-		padding-left: 40px;
-		padding-right: 40px;
-	}
-}
-
-/* ---------- Split hero layout ---------- */
-.bm-hero-split {
-	display: flex;
-	flex-direction: column;
-	min-height: 90vh;
-	padding-top: 72px;
-}
-@media (min-width: 768px) {
-	.bm-hero-split {
-		flex-direction: row;
-		align-items: center;
-	}
-}
-.bm-hero-left {
-	flex: 1 1 55%;
-	padding: 48px 24px 32px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-@media (min-width: 768px) {
-	.bm-hero-left {
-		padding: 80px 40px 80px 40px;
-	}
-}
-@media (min-width: 1024px) {
-	.bm-hero-left {
-		padding: 80px 60px 80px 60px;
-	}
-}
-.bm-hero-right {
-	flex: 1 1 45%;
-	padding: 24px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-@media (min-width: 768px) {
-	.bm-hero-right {
-		padding: 40px;
-	}
-}
-
-/* ---------- Footer grid ---------- */
-.bm-grid-footer {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 24px 20px;
-	padding-bottom: 48px;
-}
-.bm-grid-footer > :first-child {
-	grid-column: 1 / -1;
-}
-@media (min-width: 1024px) {
-	.bm-grid-footer {
-		grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
-		gap: 40px;
-	}
-	.bm-grid-footer > :first-child {
-		grid-column: auto;
-	}
-}
-
-/* ---------- Article list item ---------- */
-.bm-grid-article-list {
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: 20px;
-	align-items: center;
-}
-@media (min-width: 640px) {
-	.bm-grid-article-list {
-		grid-template-columns: 1fr 1fr;
-		gap: 40px;
-	}
-}
-
-/* ---------- Detail / sidebar / product grids ---------- */
 .bm-grid-detail {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -638,71 +446,168 @@ p, a, li, label, input, textarea, select, button {
 	}
 }
 
-.bm-grid-2-gap {
+.bm-grid-footer {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 24px 20px;
+	padding-bottom: 48px;
+}
+.bm-grid-footer > :first-child {
+	grid-column: 1 / -1;
+}
+@media (min-width: 1024px) {
+	.bm-grid-footer {
+		grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+		gap: 40px;
+	}
+	.bm-grid-footer > :first-child {
+		grid-column: auto;
+	}
+}
+
+.bm-grid-article-list {
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 32px;
+	gap: 20px;
+	align-items: center;
 }
-@media (min-width: 768px) {
-	.bm-grid-2-gap {
+@media (min-width: 640px) {
+	.bm-grid-article-list {
 		grid-template-columns: 1fr 1fr;
-		gap: 48px;
-		align-items: center;
+		gap: 40px;
 	}
 }
 
-.bm-grid-newsletter {
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: 24px;
+/* ---------- Section spacing ---------- */
+.bm-section {
+	padding: 64px 0;
 }
-@media (min-width: 768px) {
-	.bm-grid-newsletter {
-		grid-template-columns: 1fr 1fr;
-		gap: 64px;
-		align-items: center;
+
+.bm-container {
+	max-width: 1400px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 24px;
+	padding-right: 24px;
+}
+@media (min-width: 1024px) {
+	.bm-container {
+		max-width: 1400px;
+		padding-left: 40px;
+		padding-right: 40px;
 	}
 }
 
-.bm-grid-courses-header {
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: 12px;
-	margin-bottom: 32px;
-}
-@media (min-width: 768px) {
-	.bm-grid-courses-header {
-		grid-template-columns: 1fr 300px;
-		gap: 24px;
-	}
+/* ============================================
+   CONCEPT D — Parallax + Transitions + Counters
+   ============================================ */
+
+/* ---------- Parallax Hero ---------- */
+.bm-parallax-hero {
+	position: relative;
+	min-height: 90vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	overflow: hidden;
 }
 
-.bm-grid-stats {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 16px;
+.bm-parallax-bg {
+	position: absolute;
+	inset: -20% 0;
+	will-change: transform;
 }
 
-.bm-community-panel {
-	padding: 28px 20px;
-}
-@media (min-width: 768px) {
-	.bm-community-panel {
-		padding: 48px;
-	}
+.bm-parallax-bg img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
-.bm-community-chat {
-	border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-@media (min-width: 768px) {
-	.bm-community-chat {
-		border-top: none;
-		border-left: 1px solid rgba(255, 255, 255, 0.08);
-	}
+.bm-parallax-content {
+	position: relative;
+	z-index: 10;
+	will-change: transform;
 }
 
-/* ---------- Navbar (ported from NavbarE.svelte <style>) ---------- */
+/* ---------- Floating animation ---------- */
+@keyframes bm-float {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-8px); }
+}
+
+.bm-float {
+	animation: bm-float 3s ease-in-out infinite;
+}
+
+.bm-float-delay-1 {
+	animation-delay: 0.5s;
+}
+.bm-float-delay-2 {
+	animation-delay: 1s;
+}
+.bm-float-delay-3 {
+	animation-delay: 1.5s;
+}
+
+/* ---------- Section Reveal Animations ---------- */
+.bm-reveal {
+	opacity: 0;
+	transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bm-reveal-up {
+	transform: translateY(40px);
+}
+
+.bm-reveal-left {
+	transform: translateX(-60px);
+}
+
+.bm-reveal-right {
+	transform: translateX(60px);
+}
+
+.bm-reveal-visible {
+	opacity: 1;
+	transform: translateY(0) translateX(0);
+}
+
+/* Stagger delays for cards */
+.bm-stagger-1 { transition-delay: 0s; }
+.bm-stagger-2 { transition-delay: 0.15s; }
+.bm-stagger-3 { transition-delay: 0.3s; }
+.bm-stagger-4 { transition-delay: 0.45s; }
+
+/* ---------- FAQ smooth accordion ---------- */
+.bm-faq-answer {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+	opacity: 0;
+}
+
+.bm-faq-answer.bm-faq-open {
+	max-height: 300px;
+	opacity: 1;
+}
+
+/* ---------- Smooth section flow ---------- */
+.bm-section-flow {
+	position: relative;
+	overflow: hidden;
+}
+
+/* Product card hover */
+.bm-product-card {
+	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+}
+.bm-product-card:hover {
+	transform: translateY(-6px);
+	box-shadow: 0 12px 32px rgba(42, 32, 24, 0.1);
+}
+
+/* ---------- Navbar (ported from NavbarD.svelte <style>) ---------- */
 @keyframes megaFadeIn {
 	from { opacity: 0; transform: translateY(-4px); }
 	to { opacity: 1; transform: translateY(0); }
@@ -713,14 +618,9 @@ p, a, li, label, input, textarea, select, button {
 .mobile-menu {
 	max-height: 0;
 	overflow: hidden;
-	background: rgba(250, 249, 245, 0.97);
+	background: rgba(250, 245, 235, 0.97);
 	transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .mobile-menu.open {
 	max-height: 350px;
-}
-
-/* ---------- Product image zoom (ported from +page.svelte <style>) ---------- */
-.bm-product-card:hover .product-img {
-	transform: scale(1.05);
 }

@@ -2,7 +2,7 @@ import "./concept-b.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-export default function ConceptBLayout({
+export default function ConceptBStagingLayout({
   children,
 }: {
   children: React.ReactNode;

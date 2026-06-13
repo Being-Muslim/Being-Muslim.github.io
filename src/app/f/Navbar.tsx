@@ -17,24 +17,24 @@ const megaMenus: Record<string, MegaMenu> = {
       {
         heading: "Resources",
         links: [
-          { label: "Articles", href: "/e/learn", desc: "In-depth guides on faith and practice" },
-          { label: "Courses", href: "/e/learn", desc: "Structured learning at your own pace" },
-          { label: "Brief Overview of Islam", href: "/e/learn/brief-overview-of-islam", desc: "Core beliefs, practices, and history" },
+          { label: "Articles", href: "/f/learn", desc: "In-depth guides on faith and practice" },
+          { label: "Courses", href: "/f/learn", desc: "Structured learning at your own pace" },
+          { label: "Brief Overview of Islam", href: "/f/learn/brief-overview-of-islam", desc: "Core beliefs, practices, and history" },
         ],
       },
       {
         heading: "Popular Topics",
         links: [
-          { label: "Beginner's Guide", href: "/e/learn/beginners-guide", desc: "First steps for new Muslims" },
-          { label: "Islam and Other Faiths", href: "/e/learn/islam-and-other-faiths", desc: "Common ground and key differences" },
-          { label: "View All Resources", href: "/e/learn" },
+          { label: "Beginner's Guide", href: "/f/learn/beginners-guide", desc: "First steps for new Muslims" },
+          { label: "Islam and Other Faiths", href: "/f/learn/islam-and-other-faiths", desc: "Common ground and key differences" },
+          { label: "View All Resources", href: "/f/learn" },
         ],
       },
     ],
     featured: {
       title: "Foundations of Faith",
       desc: "A 24-lesson course covering the essentials.",
-      href: "/e/learn",
+      href: "/f/learn",
       img: "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&q=80&auto=format&fit=crop",
     },
   },
@@ -43,17 +43,17 @@ const megaMenus: Record<string, MegaMenu> = {
       {
         heading: "Your Journey",
         links: [
-          { label: "Ready to Convert?", href: "/e/convert", desc: "Take the next step with guidance and support" },
-          { label: "What to Expect", href: "/e/convert", desc: "Understanding the process and what comes after" },
-          { label: "FAQ for New Muslims", href: "/e/convert", desc: "Answers to the most common questions" },
+          { label: "Ready to Convert?", href: "/f/convert", desc: "Take the next step with guidance and support" },
+          { label: "What to Expect", href: "/f/convert", desc: "Understanding the process and what comes after" },
+          { label: "FAQ for New Muslims", href: "/f/convert", desc: "Answers to the most common questions" },
         ],
       },
       {
         heading: "Support",
         links: [
-          { label: "Find a Community", href: "/e/convert", desc: "Connect with Muslims near you" },
-          { label: "Mentorship Program", href: "/e/convert", desc: "One-on-one guidance from experienced Muslims" },
-          { label: "Start Your Journey", href: "/e/convert" },
+          { label: "Find a Community", href: "/f/convert", desc: "Connect with Muslims near you" },
+          { label: "Mentorship Program", href: "/f/convert", desc: "One-on-one guidance from experienced Muslims" },
+          { label: "Start Your Journey", href: "/f/convert" },
         ],
       },
     ],
@@ -63,17 +63,17 @@ const megaMenus: Record<string, MegaMenu> = {
       {
         heading: "Products",
         links: [
-          { label: "Being Muslim: A Practical Guide", href: "/e/shop/book", desc: "The bestselling book" },
-          { label: "The Complete Boxed Set", href: "/e/shop/boxed-set", desc: "Book, prayer cards, and more" },
-          { label: "Prayer Reference Cards", href: "/e/shop/prayer-cards", desc: "Keep by your prayer mat" },
-          { label: "Digital Edition (eBook)", href: "/e/shop/ebook", desc: "Read anywhere, instantly" },
+          { label: "Being Muslim: A Practical Guide", href: "/f/shop/book", desc: "The bestselling book" },
+          { label: "The Complete Boxed Set", href: "/f/shop/boxed-set", desc: "Book, prayer cards, and more" },
+          { label: "Prayer Reference Cards", href: "/f/shop/prayer-cards", desc: "Keep by your prayer mat" },
+          { label: "Digital Edition (eBook)", href: "/f/shop/ebook", desc: "Read anywhere, instantly" },
         ],
       },
     ],
     featured: {
       title: "The Complete Boxed Set",
       desc: "Everything you need in one beautiful package.",
-      href: "/e/shop/boxed-set",
+      href: "/f/shop/boxed-set",
       img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg",
     },
   },
@@ -82,10 +82,10 @@ const megaMenus: Record<string, MegaMenu> = {
       {
         heading: "Get Involved",
         links: [
-          { label: "Donate", href: "/e/support", desc: "Help fund resources for new Muslims" },
-          { label: "Sponsor a Boxed Set", href: "/e/support", desc: "Gift a set to someone in need" },
-          { label: "Volunteer", href: "/e/support", desc: "Join our team of contributors" },
-          { label: "Support the Mission", href: "/e/support" },
+          { label: "Donate", href: "/f/support", desc: "Help fund resources for new Muslims" },
+          { label: "Sponsor a Boxed Set", href: "/f/support", desc: "Gift a set to someone in need" },
+          { label: "Volunteer", href: "/f/support", desc: "Join our team of contributors" },
+          { label: "Support the Mission", href: "/f/support" },
         ],
       },
     ],
@@ -93,11 +93,11 @@ const megaMenus: Record<string, MegaMenu> = {
 };
 
 const navLinks = [
-  { label: "Home", href: "/e" },
-  { label: "Learn", href: "/e/learn" },
-  { label: "Convert", href: "/e/convert" },
-  { label: "Products", href: "/e/shop" },
-  { label: "Support", href: "/e/support" },
+  { label: "Home", href: "/f" },
+  { label: "Learn", href: "/f/learn" },
+  { label: "Convert", href: "/f/convert" },
+  { label: "Products", href: "/f/shop" },
+  { label: "Support", href: "/f/support" },
 ];
 
 export default function Navbar() {
@@ -129,25 +129,25 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
-        solid ? "backdrop-blur-md shadow-sm border-border" : "bg-transparent border-transparent"
+        solid ? "backdrop-blur-md shadow-sm border-border" : "border-transparent"
       }`}
-      style={solid ? css("background: rgba(250,245,235,0.97)") : undefined}
+      style={
+        solid
+          ? css("background: rgba(250,249,245,0.97)")
+          : css("background: rgba(250,249,245,0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px)")
+      }
     >
       <nav className="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between px-6 lg:px-10">
         {/* Logo */}
-        <Link href="/e" className="flex items-center gap-2.5">
+        <Link href="/f" className="flex items-center gap-2.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png"
             alt="Being Muslim"
-            className={`h-8 w-8 ${scrolled || activeMenu || mobileOpen ? "invert" : ""}`}
+            className="h-8 w-8 invert"
             style={css("transition: filter 0.3s")}
           />
-          <span
-            className={`text-lg font-bold transition-colors font-display ${
-              scrolled || activeMenu || mobileOpen ? "text-text-primary" : "text-white"
-            }`}
-          >
+          <span className="text-lg font-bold transition-colors font-display text-text-primary">
             Being Muslim
           </span>
         </Link>
@@ -163,9 +163,7 @@ export default function Navbar() {
             >
               <Link
                 href={link.href}
-                className={`text-[14px] font-medium transition-colors py-6 inline-block ${
-                  scrolled || activeMenu ? "text-text-primary hover:text-black" : "text-white/80 hover:text-white"
-                }`}
+                className="bm-link-animated text-[14px] font-medium transition-colors py-6 inline-block text-text-primary hover:text-black"
                 style={css("font-family: 'DM Sans', sans-serif")}
               >
                 {link.label}
@@ -176,18 +174,16 @@ export default function Navbar() {
 
         {/* Desktop CTA */}
         <Link
-          href="/e/contact"
-          className={`hidden md:inline-flex items-center px-6 py-2.5 rounded-full text-[14px] font-medium transition-all ${
-            scrolled || activeMenu ? "" : "bg-white text-text-primary hover:bg-white/90"
-          }`}
-          style={css(`font-family: 'DM Sans', sans-serif;${scrolled || activeMenu ? " background: #2a2018; color: #fff;" : ""}`)}
+          href="/f/contact"
+          className="hidden md:inline-flex items-center px-6 py-2.5 rounded-full text-[14px] font-medium transition-all"
+          style={css("font-family: 'DM Sans', sans-serif; background: #2a2018; color: #fff")}
         >
           Contact
         </Link>
 
         {/* Mobile Menu Button */}
         <button
-          className={`rounded-lg p-2 md:hidden ${scrolled || activeMenu || mobileOpen ? "text-text-primary" : "text-white"}`}
+          className="rounded-lg p-2 md:hidden text-text-primary"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -259,7 +255,7 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link href="/e/contact" className="block mt-3 text-center bg-text-primary text-white py-2.5 rounded-full font-medium">
+          <Link href="/f/contact" className="block mt-3 text-center bg-text-primary text-white py-2.5 rounded-full font-medium">
             Contact
           </Link>
         </div>

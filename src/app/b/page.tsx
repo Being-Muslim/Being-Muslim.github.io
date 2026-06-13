@@ -11,12 +11,6 @@ const featureBoxes = [
   { label: "Buy", desc: "Books, prayer cards, and resources for your journey", href: "/b/shop", Icon: ShoppingBag },
 ];
 
-const articles = [
-  { title: "Brief Overview of Islam", category: "Foundations", time: "10 min read", href: "/b/learn/brief-overview-of-islam", img: "https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png" },
-  { title: "A Beginner's Guide to Being a Muslim", category: "New Muslims", time: "12 min read", href: "/b/learn/beginners-guide", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg" },
-  { title: "Islam and Other Faiths", category: "Belief", time: "8 min read", href: "/b/learn/islam-and-other-faiths", img: "https://www.beingmuslim.org/wp-content/uploads/2022/03/oneGodmanynames.jpeg" },
-];
-
 const products = [
   { title: "Being Muslim: A Practical Guide", price: "$14.95", badge: "Bestseller", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg", href: "/b/shop/book" },
   { title: "The Complete Boxed Set", price: "$85.00", badge: "Most Popular", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg", href: "/b/shop/boxed-set" },
@@ -35,13 +29,13 @@ const faqs = [
   { q: "Do I need to change my name now that I have become Muslim?", a: "No, changing your name is not required in Islam. Many Muslims keep their birth names. Some choose to adopt a new name as a personal expression of their new identity, but this is entirely optional." },
 ];
 
-export default function ConceptBHome() {
+export default function ConceptBStagingHome() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const toggleFaq = (i: number) => setOpenFaq((cur) => (cur === i ? null : i));
 
   return (
     <>
-      {/* ============ 1. HERO (with glass explore grid) ============ */}
+      {/* ============ 1. HERO ============ */}
       <section className="relative flex min-h-screen flex-col justify-end overflow-hidden">
         <div className="absolute inset-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -49,41 +43,35 @@ export default function ConceptBHome() {
           <div className="absolute inset-0" style={css("background: linear-gradient(180deg, rgba(40,35,28,0.3) 0%, rgba(40,35,28,0.1) 40%, rgba(40,35,28,0.55) 100%)")} />
         </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 pt-32 pb-12 lg:px-10">
+        <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 pt-32 lg:px-10">
           <div className="max-w-[680px]">
             <h1 className="font-display text-[44px] font-bold leading-[1.05] tracking-[-0.02em] text-white sm:text-[56px] lg:text-[68px]">
               Navigating the <span className="italic font-normal text-amber-200/90">Path</span> to Islam
             </h1>
-            <p className="mt-6 max-w-[520px] text-[16px] leading-[1.65] text-white/80">
+            <p className="mt-6 max-w-[480px] text-[16px] leading-[1.65] text-white/80">
               Empowering new and beginner Muslims with comprehensive education and support to navigate your journey and deepen your understanding and connection with faith.
             </p>
           </div>
         </div>
 
-        {/* Explore your path — glassmorphism panel inside hero */}
-        <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-10 pb-10">
-          <div className="bm-grid-explore" style={css("background: rgba(227,218,204,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 16px; padding: 28px 20px")}>
-            <div style={css("display: flex; flex-direction: column; justify-content: space-between; padding-right: 24px")}>
-              <div>
-                <h2 style={css("font-family: 'Source Serif 4', serif; font-size: 36px; font-weight: 400; color: #2a2018; margin: 0 0 16px; line-height: 1.15")}>Explore your path</h2>
-                <p style={css("font-family: 'DM Sans', sans-serif; font-size: 15px; color: #5a5248; line-height: 1.6; margin: 0")}>
-                  Discover Islam through courses, articles, and guides. Whether you&apos;re curious, converting, or deepening your practice — find resources made for you.
-                </p>
-              </div>
-              <div style={css("margin-top: 24px")}>
-                <Link href="/b/learn" className="bm-btn-outline" style={css("padding: 10px 24px")}>See all resources</Link>
-              </div>
-            </div>
-
-            {featureBoxes.map(({ label, desc, href, Icon }) => (
-              <Link key={label} href={href} className="bm-card-hover" style={css("background: rgba(240,238,230,0.9); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none")}>
+        {/* ============ 2. LEARN / CONVERT / BUY (glass nav cards) ============ */}
+        <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-10 mt-10 pb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 rounded-2xl border border-white/15 bg-white/10 backdrop-blur-xl overflow-hidden">
+            {featureBoxes.map(({ label, desc, href, Icon }, i) => (
+              <Link
+                key={label}
+                href={href}
+                className={`group flex items-start justify-between gap-4 p-6 sm:p-8 hover:bg-white/5 transition-colors ${
+                  i < featureBoxes.length - 1 ? "border-b sm:border-b-0 sm:border-r border-white/10" : ""
+                }`}
+              >
                 <div>
-                  <Icon className="h-6 w-6" style={css("color: #2a2018; margin-bottom: 14px")} />
-                  <p style={css("font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #6a6258; margin: 0 0 8px; letter-spacing: 0.02em")}>{label}</p>
-                  <p style={css("font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: #2a2018; margin: 0; line-height: 1.2")}>{desc}</p>
+                  <Icon className="h-5 w-5 text-white/70 mb-3" />
+                  <h3 className="font-display text-xl font-bold text-white mb-2">{label}</h3>
+                  <p className="text-[13px] text-white/60 leading-relaxed max-w-[260px]">{desc}</p>
                 </div>
-                <div style={css("margin-top: 24px; text-align: right")}>
-                  <ArrowRight className="h-5 w-5" style={css("color: #2a2018")} />
+                <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-white/25 text-white/70 group-hover:bg-white/10 group-hover:text-white transition-all">
+                  <ArrowRight className="h-4 w-4 -rotate-45" />
                 </div>
               </Link>
             ))}
@@ -91,7 +79,7 @@ export default function ConceptBHome() {
         </div>
       </section>
 
-      {/* ============ 2. FEATURED ARTICLES (bento grid) ============ */}
+      {/* ============ 3. FEATURED ARTICLES (bento) ============ */}
       <section className="bm-section-padding" style={css("background: #f4f1eb")}>
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <div style={css("display: flex; justify-content: space-between; align-items: end; margin-bottom: 32px")}>
@@ -103,67 +91,66 @@ export default function ConceptBHome() {
             </Link>
           </div>
 
-          {/* Bento grid: featured image spans rows 1-2, two side cards, then text */}
+          {/* Bento grid: left image spans 2 rows, right cards share those rows, left text in row 3 */}
           <div className="bm-grid-bento">
-            {/* Left: featured image (article 1) spanning rows 1-2 */}
-            <Link href={articles[0].href} style={css("display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: #e2dcd2")} className="bm-title-underline-parent">
+            {/* Left: featured image spanning rows 1–2 */}
+            <Link href="/b/learn/brief-overview-of-islam" style={css("display: block; text-decoration: none; border-radius: 12px; overflow: hidden; background: #e2dcd2")} className="bm-title-underline-parent">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={articles[0].img} alt={articles[0].title} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
+              <img src="https://www.beingmuslim.org/wp-content/uploads/2022/03/livingislamwithpurpose.png" alt="Brief Overview of Islam" style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
             </Link>
 
-            {/* Right top card (article 2) */}
-            <Link href={articles[1].href} className="bm-grid-article-card bm-title-underline-parent" style={css("text-decoration: none")}>
+            {/* Right top card (row 1) */}
+            <Link href="/b/learn/beginners-guide" className="bm-grid-article-card bm-title-underline-parent" style={css("text-decoration: none")}>
               <div style={css("background: #e2dcd2; border-radius: 10px; overflow: hidden; height: 100%")}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={articles[1].img} alt={articles[1].title} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
+                <img src="https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg" alt="A Beginner's Guide to Being a Muslim" style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
               </div>
               <div>
-                <h3 className="bm-title-underline" style={css("font-size: 22px; color: #2a2018; margin: 0 0 14px; line-height: 1.3")}>{articles[1].title}</h3>
+                <h3 className="bm-title-underline" style={css("font-size: 22px; color: #2a2018; margin: 0 0 14px; line-height: 1.3")}>A Beginner&apos;s Guide to Being a Muslim</h3>
                 <p style={css("font-size: 15px; color: #8a7e70; line-height: 1.45; margin: 0 0 16px")}>Practical advice and important first steps for those who have recently embraced Islam.</p>
                 <div style={css("display: flex; align-items: center; gap: 8px")}>
-                  <span style={css("font-size: 15px; font-weight: 500; color: #2a2018")}>{articles[1].category}</span>
-                  <span style={css("font-size: 15px; color: #a09888")}>{articles[1].time}</span>
+                  <span style={css("font-size: 15px; font-weight: 500; color: #2a2018")}>New Muslims</span>
+                  <span style={css("font-size: 15px; color: #a09888")}>12 min read</span>
                 </div>
               </div>
             </Link>
 
-            {/* Right bottom card (article 3) */}
-            <Link href={articles[2].href} className="bm-grid-article-card bm-title-underline-parent" style={css("text-decoration: none")}>
+            {/* Right bottom card (row 2) */}
+            <Link href="/b/learn/islam-and-other-faiths" className="bm-grid-article-card bm-title-underline-parent" style={css("text-decoration: none")}>
               <div style={css("background: #e2dcd2; border-radius: 10px; overflow: hidden; height: 100%")}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={articles[2].img} alt={articles[2].title} style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
+                <img src="https://www.beingmuslim.org/wp-content/uploads/2022/02/foundationsofIsam_YT.jpeg" alt="Islam and Other Faiths" style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
               </div>
               <div>
-                <h3 className="bm-title-underline" style={css("font-size: 22px; color: #2a2018; margin: 0 0 14px; line-height: 1.3")}>{articles[2].title}</h3>
+                <h3 className="bm-title-underline" style={css("font-size: 22px; color: #2a2018; margin: 0 0 14px; line-height: 1.3")}>Islam and Other Faiths</h3>
                 <p style={css("font-size: 15px; color: #8a7e70; line-height: 1.45; margin: 0 0 16px")}>Understanding common ground and key differences with Christianity, Judaism, and other faiths.</p>
                 <div style={css("display: flex; align-items: center; gap: 8px")}>
-                  <span style={css("font-size: 15px; font-weight: 500; color: #2a2018")}>{articles[2].category}</span>
-                  <span style={css("font-size: 15px; color: #a09888")}>{articles[2].time}</span>
+                  <span style={css("font-size: 15px; font-weight: 500; color: #2a2018")}>Belief</span>
+                  <span style={css("font-size: 15px; color: #a09888")}>8 min read</span>
                 </div>
               </div>
             </Link>
 
-            {/* Left: text below image (article 1 detail, row 3) */}
-            <Link href={articles[0].href} style={css("text-decoration: none; display: block")} className="bm-title-underline-parent">
-              <h3 className="bm-title-underline" style={css("font-size: 24px; color: #2a2018; margin: 0 0 6px; line-height: 1.3")}>{articles[0].title}</h3>
+            {/* Left: text below image (row 3) */}
+            <Link href="/b/learn/brief-overview-of-islam" style={css("display: block; text-decoration: none")} className="bm-title-underline-parent">
+              <h3 className="bm-title-underline" style={css("font-size: 24px; color: #2a2018; margin: 0 0 6px; line-height: 1.3")}>Brief Overview of Islam</h3>
               <p style={css("font-size: 15px; color: #8a7e70; line-height: 1.5; margin: 0 0 8px")}>A clear and accessible introduction to the core beliefs, practices, and history of Islam for those just beginning to learn.</p>
               <div style={css("display: flex; align-items: center; gap: 10px")}>
-                <span style={css("font-size: 15px; font-weight: 500; color: #2a2018")}>{articles[0].category}</span>
-                <span style={css("font-size: 15px; color: #a09888")}>{articles[0].time}</span>
+                <span style={css("font-size: 15px; font-weight: 500; color: #2a2018")}>Foundations</span>
+                <span style={css("font-size: 15px; color: #a09888")}>10 min read</span>
               </div>
             </Link>
           </div>
 
-          {/* Additional Resources button */}
           <div style={css("text-align: center; margin-top: 32px")}>
-            <Link href="/b/learn" className="bm-btn-outline" style={css("padding: 10px 24px")}>
+            <Link href="/b/learn/recommended-resources" className="bm-btn-outline" style={css("padding: 10px 24px")}>
               Additional Resources <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ============ 3. PRODUCTS (carousel) ============ */}
+      {/* ============ 4. PRODUCTS (carousel) ============ */}
       <section className="bm-section-padding" style={css("background: #faf9f5")}>
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <h2 style={css("font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3.8vw, 38px); line-height: 1.15; color: #2a2018; font-weight: 400; margin: 0 0 32px; text-align: center")}>
@@ -172,7 +159,7 @@ export default function ConceptBHome() {
 
           <div style={css("display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 16px; -webkit-overflow-scrolling: touch")}>
             {products.map((product) => (
-              <Link key={product.title} href={product.href} style={css("text-decoration: none; display: block; flex: 0 0 280px; scroll-snap-align: start")} className="bm-title-underline-parent group">
+              <Link key={product.title} href={product.href} style={css("flex: 0 0 280px; scroll-snap-align: start; text-decoration: none; display: block")} className="bm-title-underline-parent group">
                 <div style={css("aspect-ratio: 1; background: #e2dcd2; border-radius: 12px; overflow: hidden; margin-bottom: 16px; position: relative")}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={product.img} alt={product.title} className="transition-transform duration-500 group-hover:scale-105" style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
@@ -194,7 +181,7 @@ export default function ConceptBHome() {
         </div>
       </section>
 
-      {/* ============ 4. FAQ ============ */}
+      {/* ============ 5. FAQ ============ */}
       <section className="bm-section-padding" style={css("background: #f4f1eb")}>
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <div style={css("max-width: 800px; margin: 0 auto")}>

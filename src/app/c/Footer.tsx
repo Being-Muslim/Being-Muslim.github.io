@@ -12,7 +12,7 @@ const columns = [
   { heading: "Learn", links: [{ label: "Articles", href: "/c/learn" }, { label: "Courses", href: "/c/learn" }, { label: "Resources", href: "/c/learn" }] },
   { heading: "Products", links: [{ label: "The Book", href: "/c/shop" }, { label: "Boxed Set", href: "/c/shop" }, { label: "Prayer Cards", href: "/c/shop" }, { label: "eBook", href: "/c/shop" }] },
   { heading: "Support", links: [{ label: "Donate", href: "/c/support" }, { label: "Request Donation", href: "/c/support" }, { label: "Volunteer", href: "/c/support" }] },
-  { heading: "Company", links: [{ label: "About Us", href: "/c/contact" }, { label: "Contact", href: "/c/contact" }, { label: "Convert", href: "/c/convert" }, { label: "Privacy Policy", href: "/c" }] },
+  { heading: "Company", links: [{ label: "About Us", href: "/c/about" }, { label: "Contact", href: "/c/contact" }, { label: "Convert", href: "/c/convert" }, { label: "Privacy Policy", href: "/c" }] },
 ];
 
 export default function Footer() {

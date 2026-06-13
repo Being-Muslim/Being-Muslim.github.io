@@ -2,12 +2,11 @@ import Link from "next/link";
 
 const concepts = [
   { slug: "a", name: "Concept A", note: "Cards · classic stacked layout" },
-  { slug: "b", name: "Concept B", note: "Glassmorphism · bento articles" },
-  { slug: "c", name: "Concept C", note: "Scroll-reveal animations" },
-  { slug: "d", name: "Concept D", note: "Parallax hero" },
-  { slug: "e", name: "Concept E", note: "Split hero · wave dividers" },
-  { slug: "a-staging", name: "A — Staging", note: "Full-site build" },
-  { slug: "b-staging", name: "B — Staging", note: "Full-site build" },
+  { slug: "b", name: "Concept B", note: "Full-site build" },
+  { slug: "c", name: "Concept C", note: "Glassmorphism · bento articles" },
+  { slug: "d", name: "Concept D", note: "Scroll-reveal animations" },
+  { slug: "e", name: "Concept E", note: "Parallax hero" },
+  { slug: "f", name: "Concept F", note: "Split hero · wave dividers" },
 ];
 
 export default function ConceptIndex() {

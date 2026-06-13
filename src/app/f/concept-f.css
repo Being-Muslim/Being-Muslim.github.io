@@ -9,19 +9,19 @@
 /* ---------- Design Tokens ---------- */
 :root {
 	--bm-bg: #faf8f3;          /* cream / off-white page */
-	--bm-dark: #1a3a30;        /* deep green hero panel */
-	--bm-navy: #16223a;        /* alt navy */
+	--bm-dark: #1a1f25;        /* brand dark hero panel */
+	--bm-navy: #1a1f25;        /* alt brand dark */
 	--bm-ink: #2d3748;         /* near-black headings */
 	--bm-muted: #666666;       /* muted gray body */
 	--bm-border: #e8e4de;      /* hairline border */
 	--bm-font: 'Inter', system-ui, -apple-system, sans-serif;
 
-	/* Brand palette (color-block cards) */
+	/* Brand palette (color-block cards) — maroon-led */
 	--bm-gold: #c4a35a;
 	--bm-maroon: #8b2e36;
 	--bm-maroon-hover: #722630;
 	--bm-green: #2d6a4f;
-	--bm-deep: #1f4d3a;
+	--bm-deep: #722630;        /* deep maroon */
 }
 
 /* ---------- Global Typography ---------- */
@@ -150,17 +150,6 @@ p, a, li, label, input, textarea, select, button {
 	color: #fff;
 	overflow: hidden;
 	min-height: 220px;
-	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
-}
-.bm-block-card:hover {
-	transform: translateY(-6px);
-	box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
-}
-.bm-block-card .bm-arrow-icon {
-	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.bm-block-card:hover .bm-arrow-icon {
-	transform: translateX(6px);
 }
 
 .bm-block-gold   { background: var(--bm-gold);   color: #2d3748; }
@@ -292,13 +281,7 @@ p, a, li, label, input, textarea, select, button {
 
 /* ---------- Product card ---------- */
 .bm-product-card {
-	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
-}
-.bm-product-card:hover {
-	transform: translateY(-6px);
-}
-.bm-product-card:hover .product-img {
-	transform: scale(1.05);
+	cursor: pointer;
 }
 
 /* ---------- FAQ Accordion ---------- */

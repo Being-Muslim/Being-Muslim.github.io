@@ -162,7 +162,7 @@ export default function Navbar() {
             className="bm-btn-dark hidden md:inline-flex"
             style={css("padding: 11px 24px; font-size: 15px")}
           >
-            Get the Guide <ArrowRight className="h-4 w-4 bm-arrow-slide" strokeWidth={2} />
+            Contact <ArrowRight className="h-4 w-4 bm-arrow-slide" strokeWidth={2} />
           </Link>
 
           {/* Mobile Menu Button */}
@@ -179,7 +179,7 @@ export default function Navbar() {
         {/* Mega Menu Dropdown */}
         {menu && (
           <div
-            className="hidden md:block absolute left-1/2 top-[72px] -translate-x-1/2"
+            className="hidden md:block absolute left-1/2 top-[92px] -translate-x-1/2"
             onMouseEnter={cancelClose}
             onMouseLeave={scheduleClose}
             style={css("animation: megaFadeIn 0.15s ease-out; background: #ffffff; border-radius: 24px; box-shadow: 0 24px 60px rgba(45,55,72,0.18); border: 1px solid #e8e4de; width: min(880px, 92vw)")}
@@ -306,7 +306,7 @@ export default function Navbar() {
               style={css("display: flex")}
               onClick={() => setMobileOpen(false)}
             >
-              Get the Guide
+              Contact
             </Link>
           </div>
         </div>

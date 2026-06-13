@@ -58,9 +58,6 @@ export default function ConceptEHome() {
               <Link href="/e/learn" className="bm-btn-white">
                 Start Learning <ArrowRight className="h-4 w-4 bm-arrow-slide" strokeWidth={2} />
               </Link>
-              <Link href="/e/learn" className="bm-btn-glass">
-                Explore Resources
-              </Link>
             </div>
           </div>
         </div>
@@ -69,6 +66,7 @@ export default function ConceptEHome() {
       {/* ============ 2. LEARN / CONVERT / BUY ============ */}
       <section className="bm-section-padding bm-section-flow">
         <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div className="bm-panel bm-panel-soft">
           <div style={css("text-align: center; max-width: 680px; margin: 0 auto 48px")}>
             <p className="bm-eyebrow">Explore your path</p>
             <h2 style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 400; letter-spacing: -0.02em; font-size: clamp(30px, 4.5vw, 48px); color: #2d3748; margin: 14px 0 16px; line-height: 1.05")}>
@@ -95,12 +93,14 @@ export default function ConceptEHome() {
               </Link>
             ))}
           </div>
+          </div>
         </div>
       </section>
 
       {/* ============ 3. FEATURED ARTICLES ============ */}
       <section className="bm-section-padding bm-section-flow">
         <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div className="bm-panel bm-panel-soft">
           <div style={css("display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 16px; margin-bottom: 40px")}>
             <div>
               <p className="bm-eyebrow">Reading</p>
@@ -134,12 +134,14 @@ export default function ConceptEHome() {
               Additional Resources <ArrowRight className="h-4 w-4 bm-arrow-slide" strokeWidth={2} />
             </Link>
           </div>
+          </div>
         </div>
       </section>
 
       {/* ============ 4. PRODUCTS (carousel) ============ */}
       <section className="bm-section-padding bm-section-flow">
         <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div className="bm-panel bm-panel-soft">
           <div style={css("text-align: center; margin-bottom: 40px")}>
             <p className="bm-eyebrow">The Store</p>
             <h2 style={css("font-family: 'Hanken Grotesk', sans-serif; font-weight: 400; letter-spacing: -0.02em; font-size: clamp(30px, 4.5vw, 48px); line-height: 1.02; color: #2d3748; margin: 14px 0 0")}>
@@ -170,12 +172,14 @@ export default function ConceptEHome() {
               See All Store Items <ArrowRight className="h-4 w-4 bm-arrow-slide" strokeWidth={2} />
             </Link>
           </div>
+          </div>
         </div>
       </section>
 
       {/* ============ 5. FAQ ============ */}
       <section className="bm-section-padding bm-section-flow">
         <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div className="bm-panel bm-panel-soft">
           <div style={css("max-width: 860px; margin: 0 auto")}>
             <div style={css("text-align: center; margin-bottom: 40px")}>
               <p className="bm-eyebrow">Questions</p>
@@ -207,6 +211,7 @@ export default function ConceptEHome() {
               <Link href="/e/learn/ask-a-question" className="bm-btn-outline">Ask a Question</Link>
               <Link href="/e/convert" className="bm-btn-dark">Ready to Convert</Link>
             </div>
+          </div>
           </div>
         </div>
       </section>

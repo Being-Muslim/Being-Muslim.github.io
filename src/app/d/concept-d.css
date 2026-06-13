@@ -1,6 +1,6 @@
 /* ============================================
    Being Muslim — Concept D Design System
-   Warm editorial (A) + scroll animations
+   Warm editorial (A), static render (no scroll animations)
    ============================================ */
 
 /* ---------- Design Tokens ---------- */
@@ -514,81 +514,8 @@ p, a, li, label, input, textarea, select, button {
 
 
 /* ============================================
-   CONCEPT C — SCROLL REVEAL ANIMATIONS
+   CONCEPT D — HOVER & INTERACTION EFFECTS
    ============================================ */
-
-/* ---------- Reveal animations ---------- */
-.reveal {
-	opacity: 0;
-	transform: translateY(30px);
-	transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.visible {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-.reveal-left {
-	opacity: 0;
-	transform: translateX(-30px);
-	transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal-left.visible {
-	opacity: 1;
-	transform: translateX(0);
-}
-
-.reveal-right {
-	opacity: 0;
-	transform: translateX(30px);
-	transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal-right.visible {
-	opacity: 1;
-	transform: translateX(0);
-}
-
-.reveal-scale {
-	opacity: 0;
-	transform: scale(0.97);
-	transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.reveal-scale.visible {
-	opacity: 1;
-	transform: scale(1);
-}
-
-/* ---------- Stagger delays ---------- */
-.stagger-1 { transition-delay: 0.1s; }
-.stagger-2 { transition-delay: 0.2s; }
-.stagger-3 { transition-delay: 0.3s; }
-.stagger-4 { transition-delay: 0.4s; }
-.stagger-5 { transition-delay: 0.5s; }
-.stagger-6 { transition-delay: 0.6s; }
-.stagger-7 { transition-delay: 0.7s; }
-.stagger-8 { transition-delay: 0.8s; }
-
-/* ---------- Hero load animations ---------- */
-.hero-title {
-	opacity: 0;
-	transform: scale(0.97);
-	animation: heroReveal 0.6s ease forwards;
-}
-.hero-subtitle {
-	opacity: 0;
-	animation: fadeIn 0.5s ease 0.3s forwards;
-}
-.hero-cta {
-	opacity: 0;
-	animation: fadeIn 0.5s ease 0.5s forwards;
-}
-
-@keyframes heroReveal {
-	to { opacity: 1; transform: scale(1); }
-}
-@keyframes fadeIn {
-	to { opacity: 1; }
-}
 
 /* ---------- Enhanced card hovers ---------- */
 .card-lift {
@@ -659,21 +586,6 @@ p, a, li, label, input, textarea, select, button {
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
-	.reveal,
-	.reveal-left,
-	.reveal-right,
-	.reveal-scale {
-		opacity: 1;
-		transform: none;
-		transition: none;
-	}
-	.hero-title,
-	.hero-subtitle,
-	.hero-cta {
-		opacity: 1;
-		transform: none;
-		animation: none;
-	}
 	.card-lift:hover,
 	.product-card-hover:hover,
 	.explore-card-hover:hover {

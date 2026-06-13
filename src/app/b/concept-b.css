@@ -487,18 +487,23 @@ p, a, li, label, input, textarea, select, button {
 	display: none;
 }
 
-/* ---------- Coda-style expanding navbar surface ---------- */
-/* The nav row and the mega-menu content share ONE rounded surface
-   (.bm-navbar-surface). Opening a menu morphs the pill into a taller rounded
-   panel — there is no detached dropdown and no gap. The morph (background,
-   border, radius) is handled by inline transitions; this region drives the
-   height/opacity reveal of the menu content INSIDE the same surface. */
+/* ---------- Calm expand-down navbar mega-menu ---------- */
+/* The nav row stays a VISUALLY STABLE glass/dark pill. Hovering a nav item
+   calmly slides this panel region open DOWNWARD inside the same rounded
+   surface — a gentle height + opacity grow, not a dramatic pill→panel morph.
+   The region carries its own light, readable surface (PANEL colors) so the
+   dark nav row above it never has to flip its text/background colors.
+   Timing is a soft ~0.32s cubic-bezier so nothing jumps or resizes abruptly. */
 .bm-mega-region {
 	max-height: 0;
 	opacity: 0;
 	overflow: hidden;
 	pointer-events: none;
-	transition: max-height 0.22s ease-out, opacity 0.18s ease-out;
+	/* Light, readable surface for the revealed menu content. */
+	background: rgba(255, 255, 255, 0.97);
+	transition:
+		max-height 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+		opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .bm-mega-region.bm-mega-open {
 	max-height: 560px;

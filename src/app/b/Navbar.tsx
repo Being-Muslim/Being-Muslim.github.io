@@ -172,38 +172,34 @@ export default function Navbar() {
   const panelOpen = !!activeMenu;
 
   // Concept B's glass pill becomes a readable solid dark surface once scrolled
-  // past the dark hero onto the light page body. When the mega-menu is OPEN the
-  // SAME surface morphs into a light expanded panel (Coda-style), so the nav row
-  // and the menu content read as one continuous surface.
-  const pillBg = panelOpen
-    ? PANEL.bg
-    : scrolled
-      ? "rgba(30,28,24,0.92)"
-      : "rgba(255,255,255,0.08)";
-  const pillBorder = panelOpen
-    ? PANEL.border
-    : scrolled
-      ? "rgba(255,255,255,0.12)"
-      : "rgba(255,255,255,0.15)";
+  // past the dark hero onto the light page body. The navbar surface stays
+  // VISUALLY STABLE whether or not a menu is open — opening a menu no longer
+  // morphs the pill's color/border/radius. Instead the panel region below
+  // calmly reveals itself (see .bm-mega-region). This avoids the "violent"
+  // simultaneous shape+color+width morph; the nav row itself doesn't change.
+  const pillBg = scrolled ? "rgba(30,28,24,0.92)" : "rgba(255,255,255,0.08)";
+  const pillBorder = scrolled ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.15)";
   const pillShadow = panelOpen
-    ? PANEL.shadow
+    ? "0 16px 40px rgba(0,0,0,0.16)"
     : scrolled
       ? "0 4px 24px rgba(0,0,0,0.25)"
       : "none";
-  // Border radius morphs from a full pill to a rounded panel as it expands.
-  const pillRadius = panelOpen ? "24px" : "999px";
+  // Soften only the BOTTOM corners when the panel is open so the revealed
+  // region tucks under the same surface; the top stays a stable pill. This is
+  // a small, gentle change — not the old full 999px→24px morph.
+  const pillRadius = panelOpen ? "24px 24px 22px 22px" : "999px";
   // The surface is comfortably wide so the multi-column menu (incl. the 4
   // Products image cards) sits cleanly; it grows taller, not wider, on open.
   const pillMaxWidth = "1100px";
 
-  // Nav row foreground colors flip from light-on-glass to dark-on-light as the
-  // surface morphs to the expanded light panel.
-  const navText = panelOpen ? PANEL.itemText : "rgba(255,255,255,0.85)";
-  const logoText = panelOpen ? PANEL.title : "#fff";
-  const navItemHoverBg = panelOpen ? "rgba(42,32,24,0.06)" : "rgba(255,255,255,0.12)";
-  const contactBg = panelOpen ? "rgba(42,32,24,0.06)" : "rgba(255,255,255,0.15)";
-  const contactBorder = panelOpen ? PANEL.border : "rgba(255,255,255,0.25)";
-  const contactText = panelOpen ? PANEL.itemText : "#fff";
+  // Nav row foreground colors stay constant — the row is always glass/dark, so
+  // there's no jarring light-on-glass → dark-on-light color flip on open.
+  const navText = "rgba(255,255,255,0.85)";
+  const logoText = "#fff";
+  const navItemHoverBg = "rgba(255,255,255,0.12)";
+  const contactBg = "rgba(255,255,255,0.15)";
+  const contactBorder = "rgba(255,255,255,0.25)";
+  const contactText = "#fff";
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50" style={css("padding: 16px 24px")}>
@@ -218,7 +214,7 @@ export default function Navbar() {
           scheduleClose();
         }}
         style={css(
-          `max-width: ${pillMaxWidth}; margin: 0 auto; border-radius: ${pillRadius}; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid ${pillBorder}; background: ${pillBg}; box-shadow: ${pillShadow}; overflow: hidden; transition: background 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, border-radius 0.22s ease`,
+          `max-width: ${pillMaxWidth}; margin: 0 auto; border-radius: ${pillRadius}; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid ${pillBorder}; background: ${pillBg}; box-shadow: ${pillShadow}; overflow: hidden; transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.3s cubic-bezier(0.4, 0, 0.2, 1)`,
         )}
       >
         {/* Top nav row */}

@@ -7,8 +7,8 @@ import { css } from "@/lib/css";
 
 const featureBoxes = [
   { label: "Learn", desc: "Explore articles, guides, and resources on Islamic faith and practice", href: "/f/learn", Icon: BookOpen, color: "maroon" as const },
-  { label: "Convert", desc: "Take the next step on your journey with guidance and support", href: "/f/convert", Icon: Compass, color: "green" as const },
-  { label: "Buy", desc: "Books, prayer cards, and resources for your journey", href: "/f/shop", Icon: ShoppingBag, color: "deep" as const },
+  { label: "Convert", desc: "Take the next step on your journey with guidance and support", href: "/f/convert", Icon: Compass, color: "gold" as const },
+  { label: "Buy", desc: "Books, prayer cards, and resources for your journey", href: "/f/shop", Icon: ShoppingBag, color: "green" as const },
 ];
 
 const articles = [
@@ -17,7 +17,7 @@ const articles = [
   { title: "Islam and Other Faiths", category: "Belief", time: "8 min read", href: "/f/learn/islam-and-other-faiths", img: "https://www.beingmuslim.org/wp-content/uploads/2022/03/oneGodmanynames.jpeg" },
 ];
 
-const articleColors = ["gold", "maroon", "green"] as const;
+const articleColors = ["maroon", "gold", "green"] as const;
 
 const products = [
   { title: "Being Muslim: A Practical Guide", price: "$14.95", badge: "Bestseller", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg", href: "/f/shop/book" },
@@ -170,7 +170,7 @@ export default function ConceptFHome() {
                   <div style={css("aspect-ratio: 1; background: #fff; border-radius: 20px; overflow: hidden; margin-bottom: 16px; position: relative; box-shadow: 0 6px 20px rgba(29,43,41,0.08)")}>
                     {product.img ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={product.img} alt={product.title} className="product-img" style={css("width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 500ms")} />
+                      <img src={product.img} alt={product.title} className="product-img" style={css("width: 100%; height: 100%; object-fit: cover; display: block")} />
                     ) : (
                       <div style={css("width: 100%; height: 100%; display: flex; align-items: center; justify-content: center")}>
                         <BookOpen className="h-10 w-10" style={css("color: #c8c0b4")} />

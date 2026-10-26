@@ -25,9 +25,11 @@ export const ORDER_TOPICS = new Set(["orders/create", "orders/updated", "orders/
 
 async function resolveUserId(order: OrderPayload): Promise<string | null> {
   const tagged = order.note_attributes?.find((a) => a.name === USER_ATTRIBUTE)?.value;
+  // The account tag is only trusted when the order email matches that
+  // account, so a stale or tampered tag cannot file someone else's order.
   if (tagged) {
-    const u = await db.query.user.findFirst({ where: eq(schema.user.id, tagged), columns: { id: true } });
-    if (u) return u.id;
+    const u = await db.query.user.findFirst({ where: eq(schema.user.id, tagged), columns: { id: true, email: true } });
+    if (u && order.email && u.email.toLowerCase() === order.email.toLowerCase()) return u.id;
   }
   // Guest checkouts are matched by email, but only to verified addresses, so
   // nobody can see another person's orders by registering their email.

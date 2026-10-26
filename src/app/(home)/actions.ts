@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { addLine, prepareCheckout, updateLine } from "@/lib/shopify/cart";
+import { addLine, clearCart, prepareCheckout, updateLine } from "@/lib/shopify/cart";
 import { getSession } from "@/lib/auth";
 
 export async function addToCart(formData: FormData) {
@@ -25,4 +25,9 @@ export async function checkout() {
   const url = await prepareCheckout(session ? { id: session.user.id, email: session.user.email } : null);
   if (!url) redirect("/cart/");
   redirect(url);
+}
+
+// Called on sign-out so the next person on this browser starts a fresh cart.
+export async function forgetCart() {
+  await clearCart();
 }

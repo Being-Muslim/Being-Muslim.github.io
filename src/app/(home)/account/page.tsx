@@ -12,12 +12,23 @@ export const metadata: Metadata = { title: "Account · Being Muslim" };
 
 type Props = { searchParams: Promise<{ next?: string }> };
 
+// Only ever redirect within this site: resolve against a fixed origin and
+// keep the result only if it stays there (rejects //evil.com, /\evil.com).
+function sameSitePath(next: string | undefined) {
+  const base = "https://site.invalid";
+  if (!next || /[\\\u0000-\u001f]/.test(next)) return "/account/";
+  try {
+    const url = new URL(next, base);
+    return url.origin === base ? url.pathname + url.search + url.hash : "/account/";
+  } catch {
+    return "/account/";
+  }
+}
+
 export default async function AccountPage({ searchParams }: Props) {
   const session = await getSession();
   if (!session) {
-    const next = (await searchParams).next;
-    // Only same-site paths, never an open redirect
-    const safeNext = next && next.startsWith("/") && !next.startsWith("//") ? next : "/account/";
+    const safeNext = sameSitePath((await searchParams).next);
     return (
       <div className="st-page narrow">
         <p className="st-kicker">Account</p>

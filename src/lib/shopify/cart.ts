@@ -78,17 +78,19 @@ export async function updateLine(lineId: string, quantity: number) {
 export async function prepareCheckout(user: { id: string; email: string } | null): Promise<string | null> {
   const cart = await getCart();
   if (!cart || cart.totalQuantity === 0) return null;
+  // Always rewrite the account tag, so a cart left behind on a shared
+  // computer never files the next person's order under the last account.
+  const attrs = await storefront<{ cartAttributesUpdate: { userErrors: UserError[] } }>(CART_ATTRIBUTES_UPDATE, {
+    cartId: cart.id,
+    attributes: [{ key: USER_ATTRIBUTE, value: user?.id ?? "" }],
+  });
+  check(attrs.cartAttributesUpdate.userErrors);
   if (user) {
     const identity = await storefront<{ cartBuyerIdentityUpdate: { userErrors: UserError[] } }>(
       CART_BUYER_IDENTITY_UPDATE,
       { cartId: cart.id, buyerIdentity: { email: user.email } },
     );
     check(identity.cartBuyerIdentityUpdate.userErrors);
-    const attrs = await storefront<{ cartAttributesUpdate: { userErrors: UserError[] } }>(CART_ATTRIBUTES_UPDATE, {
-      cartId: cart.id,
-      attributes: [{ key: USER_ATTRIBUTE, value: user.id }],
-    });
-    check(attrs.cartAttributesUpdate.userErrors);
   }
   return cart.checkoutUrl;
 }

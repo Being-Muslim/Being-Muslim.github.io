@@ -12,8 +12,12 @@ embedded = false
 
 [webhooks]
 api_version = "2026-10"
-# Order/fulfillment/refund subscriptions are added once the site has a
-# server URL (Cloudflare preview) to receive them.
+
+# Order history for site accounts. orders/updated also fires on payment,
+# fulfillment and refunds. Points at the Cloudflare preview until launch.
+[[webhooks.subscriptions]]
+topics = ["orders/create", "orders/updated", "orders/cancelled"]
+uri = "https://being-muslim-site.basil-763.workers.dev/api/shopify/webhooks/"
 
 [access_scopes]
 scopes = "read_products,read_orders,read_customers"

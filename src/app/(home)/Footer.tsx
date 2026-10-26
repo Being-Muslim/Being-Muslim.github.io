@@ -9,10 +9,10 @@ const socials = [
 ];
 
 const columns = [
-  { heading: "Learn", links: [{ label: "Articles", href: "/a/learn" }, { label: "Courses", href: "/a/learn" }, { label: "Resources", href: "/a/learn" }] },
-  { heading: "Products", links: [{ label: "The Book", href: "/a/shop" }, { label: "Boxed Set", href: "/a/shop" }, { label: "Prayer Cards", href: "/a/shop" }, { label: "eBook", href: "/a/shop" }] },
-  { heading: "Support", links: [{ label: "Donate", href: "/a/support" }, { label: "Request Donation", href: "/a/support" }, { label: "Volunteer", href: "/a/support" }] },
-  { heading: "Company", links: [{ label: "About Us", href: "/a/contact" }, { label: "Contact", href: "/a/contact" }, { label: "Convert", href: "/a/convert" }, { label: "Privacy Policy", href: "/a" }] },
+  { heading: "Learn", links: [{ label: "Articles", href: "/learn" }, { label: "Courses", href: "/learn" }, { label: "Resources", href: "/learn" }] },
+  { heading: "Products", links: [{ label: "The Book", href: "/shop" }, { label: "Boxed Set", href: "/shop" }, { label: "Prayer Cards", href: "/shop" }, { label: "eBook", href: "/shop" }] },
+  { heading: "Support", links: [{ label: "Donate", href: "/support" }, { label: "Request Donation", href: "/support" }, { label: "Volunteer", href: "/support" }] },
+  { heading: "Company", links: [{ label: "About Us", href: "/contact" }, { label: "Contact", href: "/contact" }, { label: "Convert", href: "/convert" }, { label: "Privacy Policy", href: "/" }] },
 ];
 
 export default function Footer() {
@@ -22,7 +22,7 @@ export default function Footer() {
         <div className="bm-grid-footer">
           {/* Brand */}
           <div>
-            <Link href="/a" style={css("display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 16px")}>
+            <Link href="/" style={css("display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 16px")}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png" alt="Being Muslim" style={css("height: 32px; width: 32px")} />
               <span style={css("font-family: 'Source Serif 4', serif; font-size: 18px; color: #fff")}>Being Muslim</span>
@@ -59,9 +59,9 @@ export default function Footer() {
         <div style={css("border-top: 1px solid rgba(255,255,255,0.08); padding: 20px 0; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px")}>
           <p style={css("font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(255,255,255,0.3)")}>&copy; 2026 The Being Muslim Project. All rights reserved.</p>
           <div style={css("display: flex; gap: 24px")}>
-            <Link href="/a" className="bm-footer-link" style={css("font-size: 12px; color: rgba(255,255,255,0.3)")}>Privacy</Link>
-            <Link href="/a" className="bm-footer-link" style={css("font-size: 12px; color: rgba(255,255,255,0.3)")}>Terms</Link>
-            <Link href="/a/contact" className="bm-footer-link" style={css("font-size: 12px; color: rgba(255,255,255,0.3)")}>Contact</Link>
+            <Link href="/" className="bm-footer-link" style={css("font-size: 12px; color: rgba(255,255,255,0.3)")}>Privacy</Link>
+            <Link href="/" className="bm-footer-link" style={css("font-size: 12px; color: rgba(255,255,255,0.3)")}>Terms</Link>
+            <Link href="/contact" className="bm-footer-link" style={css("font-size: 12px; color: rgba(255,255,255,0.3)")}>Contact</Link>
           </div>
         </div>
       </div>

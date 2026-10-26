@@ -17,24 +17,24 @@ const megaMenus: Record<string, MegaMenu> = {
       {
         heading: "Resources",
         links: [
-          { label: "Articles", href: "/a/learn", desc: "In-depth guides on faith and practice" },
-          { label: "Courses", href: "/a/learn", desc: "Structured learning at your own pace" },
-          { label: "Brief Overview of Islam", href: "/a/learn/brief-overview-of-islam", desc: "Core beliefs, practices, and history" },
+          { label: "Articles", href: "/learn", desc: "In-depth guides on faith and practice" },
+          { label: "Courses", href: "/learn", desc: "Structured learning at your own pace" },
+          { label: "Brief Overview of Islam", href: "/learn/brief-overview-of-islam", desc: "Core beliefs, practices, and history" },
         ],
       },
       {
         heading: "Popular Topics",
         links: [
-          { label: "Beginner's Guide", href: "/a/learn/beginners-guide", desc: "First steps for new Muslims" },
-          { label: "Islam and Other Faiths", href: "/a/learn/islam-and-other-faiths", desc: "Common ground and key differences" },
-          { label: "View All Resources", href: "/a/learn" },
+          { label: "Beginner's Guide", href: "/learn/beginners-guide", desc: "First steps for new Muslims" },
+          { label: "Islam and Other Faiths", href: "/learn/islam-and-other-faiths", desc: "Common ground and key differences" },
+          { label: "View All Resources", href: "/learn" },
         ],
       },
     ],
     featured: {
       title: "Foundations of Faith",
       desc: "A 24-lesson course covering the essentials.",
-      href: "/a/learn",
+      href: "/learn",
       img: "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&q=80&auto=format&fit=crop",
     },
   },
@@ -43,17 +43,17 @@ const megaMenus: Record<string, MegaMenu> = {
       {
         heading: "Your Journey",
         links: [
-          { label: "Ready to Convert?", href: "/a/convert", desc: "Take the next step with guidance and support" },
-          { label: "What to Expect", href: "/a/convert", desc: "Understanding the process and what comes after" },
-          { label: "FAQ for New Muslims", href: "/a/convert", desc: "Answers to the most common questions" },
+          { label: "Ready to Convert?", href: "/convert", desc: "Take the next step with guidance and support" },
+          { label: "What to Expect", href: "/convert", desc: "Understanding the process and what comes after" },
+          { label: "FAQ for New Muslims", href: "/convert", desc: "Answers to the most common questions" },
         ],
       },
       {
         heading: "Support",
         links: [
-          { label: "Find a Community", href: "/a/convert", desc: "Connect with Muslims near you" },
-          { label: "Mentorship Program", href: "/a/convert", desc: "One-on-one guidance from experienced Muslims" },
-          { label: "Start Your Journey", href: "/a/convert" },
+          { label: "Find a Community", href: "/convert", desc: "Connect with Muslims near you" },
+          { label: "Mentorship Program", href: "/convert", desc: "One-on-one guidance from experienced Muslims" },
+          { label: "Start Your Journey", href: "/convert" },
         ],
       },
     ],
@@ -63,17 +63,17 @@ const megaMenus: Record<string, MegaMenu> = {
       {
         heading: "Products",
         links: [
-          { label: "Being Muslim: A Practical Guide", href: "/a/shop/book", desc: "The bestselling book" },
-          { label: "The Complete Boxed Set", href: "/a/shop/boxed-set", desc: "Book, prayer cards, and more" },
-          { label: "Prayer Reference Cards", href: "/a/shop/prayer-cards", desc: "Keep by your prayer mat" },
-          { label: "Digital Edition (eBook)", href: "/a/shop/ebook", desc: "Read anywhere, instantly" },
+          { label: "Being Muslim: A Practical Guide", href: "/shop/book", desc: "The bestselling book" },
+          { label: "The Complete Boxed Set", href: "/shop/boxed-set", desc: "Book, prayer cards, and more" },
+          { label: "Prayer Reference Cards", href: "/shop/prayer-cards", desc: "Keep by your prayer mat" },
+          { label: "Digital Edition (eBook)", href: "/shop/ebook", desc: "Read anywhere, instantly" },
         ],
       },
     ],
     featured: {
       title: "The Complete Boxed Set",
       desc: "Everything you need in one beautiful package.",
-      href: "/a/shop/boxed-set",
+      href: "/shop/boxed-set",
       img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg",
     },
   },
@@ -82,10 +82,10 @@ const megaMenus: Record<string, MegaMenu> = {
       {
         heading: "Get Involved",
         links: [
-          { label: "Donate", href: "/a/support", desc: "Help fund resources for new Muslims" },
-          { label: "Sponsor a Boxed Set", href: "/a/support", desc: "Gift a set to someone in need" },
-          { label: "Volunteer", href: "/a/support", desc: "Join our team of contributors" },
-          { label: "Support the Mission", href: "/a/support" },
+          { label: "Donate", href: "/support", desc: "Help fund resources for new Muslims" },
+          { label: "Sponsor a Boxed Set", href: "/support", desc: "Gift a set to someone in need" },
+          { label: "Volunteer", href: "/support", desc: "Join our team of contributors" },
+          { label: "Support the Mission", href: "/support" },
         ],
       },
     ],
@@ -93,11 +93,11 @@ const megaMenus: Record<string, MegaMenu> = {
 };
 
 const navLinks = [
-  { label: "Home", href: "/a" },
-  { label: "Learn", href: "/a/learn" },
-  { label: "Convert", href: "/a/convert" },
-  { label: "Products", href: "/a/shop" },
-  { label: "Support", href: "/a/support" },
+  { label: "Home", href: "/" },
+  { label: "Learn", href: "/learn" },
+  { label: "Convert", href: "/convert" },
+  { label: "Products", href: "/shop" },
+  { label: "Support", href: "/support" },
 ];
 
 export default function Navbar() {
@@ -135,7 +135,7 @@ export default function Navbar() {
     >
       <nav className="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between px-6 lg:px-10">
         {/* Logo */}
-        <Link href="/a" className="flex items-center gap-2.5">
+        <Link href="/" className="flex items-center gap-2.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png"
@@ -176,7 +176,7 @@ export default function Navbar() {
 
         {/* Desktop CTA */}
         <Link
-          href="/a/contact"
+          href="/contact"
           className={`hidden md:inline-flex items-center px-6 py-2.5 rounded-full text-[14px] font-medium transition-all ${
             scrolled || activeMenu ? "" : "bg-white text-text-primary hover:bg-white/90"
           }`}
@@ -259,7 +259,7 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link href="/a/contact" className="block mt-3 text-center bg-text-primary text-white py-2.5 rounded-full font-medium">
+          <Link href="/contact" className="block mt-3 text-center bg-text-primary text-white py-2.5 rounded-full font-medium">
             Contact
           </Link>
         </div>

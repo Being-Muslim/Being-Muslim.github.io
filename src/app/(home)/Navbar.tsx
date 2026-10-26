@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Menu, ShoppingBag, User, X } from "lucide-react";
 import { css } from "@/lib/css";
 
 type MegaLink = { label: string; href: string; desc?: string };
@@ -102,6 +103,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const closeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -123,7 +125,9 @@ export default function Navbar() {
     if (closeTimeout.current) clearTimeout(closeTimeout.current);
   }
 
-  const solid = scrolled || !!activeMenu || mobileOpen;
+  // Only the homepage has a photo hero for the header to float over.
+  const raised = scrolled || pathname !== "/";
+  const solid = raised || !!activeMenu || mobileOpen;
   const menu = activeMenu ? megaMenus[activeMenu] : null;
 
   return (
@@ -140,12 +144,12 @@ export default function Navbar() {
           <img
             src="https://www.beingmuslim.org/wp-content/uploads/2022/01/tree-logo-inverse.png"
             alt="Being Muslim"
-            className={`h-8 w-8 ${scrolled || activeMenu || mobileOpen ? "invert" : ""}`}
+            className={`h-8 w-8 ${raised || activeMenu || mobileOpen ? "invert" : ""}`}
             style={css("transition: filter 0.3s")}
           />
           <span
             className={`text-lg font-bold transition-colors font-display ${
-              scrolled || activeMenu || mobileOpen ? "text-text-primary" : "text-white"
+              raised || activeMenu || mobileOpen ? "text-text-primary" : "text-white"
             }`}
           >
             Being Muslim
@@ -164,7 +168,7 @@ export default function Navbar() {
               <Link
                 href={link.href}
                 className={`text-[14px] font-medium transition-colors py-6 inline-block ${
-                  scrolled || activeMenu ? "text-text-primary hover:text-black" : "text-white/80 hover:text-white"
+                  raised || activeMenu ? "text-text-primary hover:text-black" : "text-white/80 hover:text-white"
                 }`}
                 style={css("font-family: 'DM Sans', sans-serif")}
               >
@@ -174,20 +178,39 @@ export default function Navbar() {
           ))}
         </div>
 
+        <div className="hidden md:flex items-center gap-3">
+          {/* Account + cart */}
+          {[
+            { href: "/account/", label: "Account", Icon: User },
+            { href: "/cart/", label: "Cart", Icon: ShoppingBag },
+          ].map(({ href, label, Icon }) => (
+            <Link
+              key={href}
+              href={href}
+              aria-label={label}
+              className={`rounded-full p-2.5 transition-colors ${
+                raised || activeMenu ? "text-text-primary hover:bg-black/5" : "text-white/85 hover:text-white hover:bg-white/10"
+              }`}
+            >
+              <Icon className="h-5 w-5" aria-hidden="true" />
+            </Link>
+          ))}
+
         {/* Desktop CTA */}
         <Link
           href="/contact"
-          className={`hidden md:inline-flex items-center px-6 py-2.5 rounded-full text-[14px] font-medium transition-all ${
-            scrolled || activeMenu ? "" : "bg-white text-text-primary hover:bg-white/90"
+          className={`inline-flex items-center px-6 py-2.5 rounded-full text-[14px] font-medium transition-all ${
+            raised || activeMenu ? "" : "bg-white text-text-primary hover:bg-white/90"
           }`}
-          style={css(`font-family: 'DM Sans', sans-serif;${scrolled || activeMenu ? " background: #2a2018; color: #fff;" : ""}`)}
+          style={css(`font-family: 'DM Sans', sans-serif;${raised || activeMenu ? " background: #2a2018; color: #fff;" : ""}`)}
         >
           Contact
         </Link>
+        </div>
 
         {/* Mobile Menu Button */}
         <button
-          className={`rounded-lg p-2 md:hidden ${scrolled || activeMenu || mobileOpen ? "text-text-primary" : "text-white"}`}
+          className={`rounded-lg p-2 md:hidden ${raised || activeMenu || mobileOpen ? "text-text-primary" : "text-white"}`}
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -259,6 +282,12 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+          <Link href="/account/" className="block py-2.5 text-text-primary font-medium" onClick={() => setMobileOpen(false)}>
+            Account
+          </Link>
+          <Link href="/cart/" className="block py-2.5 text-text-primary font-medium" onClick={() => setMobileOpen(false)}>
+            Cart
+          </Link>
           <Link href="/contact" className="block mt-3 text-center bg-text-primary text-white py-2.5 rounded-full font-medium">
             Contact
           </Link>

@@ -1,0 +1,7 @@
+{
+  "name": "being-muslim-shopify-app",
+  "private": true,
+  "scripts": {
+    "deploy": "shopify app deploy"
+  }
+}

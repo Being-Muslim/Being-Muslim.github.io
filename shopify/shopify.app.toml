@@ -1,0 +1,22 @@
+# Shopify app for the Being Muslim site. Shopify is the order backend only:
+# our Next.js server reads products/orders with this app's token (client
+# credentials grant), and the warehouse fulfils orders in the Shopify admin.
+# Docs: https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "25d0b693aeaf43cc798a68859d974076"
+name = "being-muslim-site"
+application_url = "https://being-muslim.github.io/"
+embedded = false
+
+[build]
+
+[webhooks]
+api_version = "2026-10"
+# Order/fulfillment/refund subscriptions are added once the site has a
+# server URL (Cloudflare preview) to receive them.
+
+[access_scopes]
+scopes = "read_products,read_orders,read_customers"
+
+[auth]
+redirect_urls = [ "https://being-muslim.github.io/" ]

@@ -11,6 +11,14 @@ export default defineConfig({
     },
     env: {
       ASSETS: bindings.assets(),
+      // Accounts, sessions and mirrored Shopify orders
+      DB: bindings.d1({ name: "being-muslim", id: "22f212fc-8f5b-494b-9563-e45bac1c1598" }),
+      SITE_URL: bindings.text(process.env.SITE_URL ?? "http://localhost:3001"),
+      // Values live in 1Password; locally: op run --env-file=.env.op
+      BETTER_AUTH_SECRET: bindings.secret(),
+      SHOPIFY_CLIENT_ID: bindings.secret(),
+      SHOPIFY_CLIENT_SECRET: bindings.secret(),
+      SHOPIFY_STOREFRONT_PRIVATE_TOKEN: bindings.secret(),
     },
   }),
 });

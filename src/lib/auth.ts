@@ -16,6 +16,7 @@ export const auth = betterAuth({
       session: schema.session,
       account: schema.account,
       verification: schema.verification,
+      rateLimit: schema.rateLimit,
     },
   }),
   emailAndPassword: {
@@ -24,9 +25,25 @@ export const auth = betterAuth({
     // Turn on with email verification once a transactional email provider is set up.
     requireEmailVerification: false,
   },
+  // Slow down password guessing and sign-up spam. Better Auth also applies
+  // stricter defaults to the sign-in and sign-up routes.
+  rateLimit: {
+    enabled: true,
+    storage: "database",
+    window: 60,
+    max: 60,
+    customRules: {
+      "/sign-in/email": { window: 60, max: 5 },
+      "/sign-up/email": { window: 3600, max: 5 },
+    },
+  },
   session: {
     expiresIn: 60 * 60 * 24 * 30,
     updateAge: 60 * 60 * 24,
+  },
+  advanced: {
+    // Cloudflare puts the real client IP here; rate limits key on it.
+    ipAddress: { ipAddressHeaders: ["cf-connecting-ip"] },
   },
   plugins: [nextCookies()],
 });

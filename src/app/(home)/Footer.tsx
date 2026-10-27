@@ -10,7 +10,7 @@ const socials = [
 
 const columns = [
   { heading: "Learn", links: [{ label: "Articles", href: "/learn" }, { label: "Courses", href: "/learn" }, { label: "Resources", href: "/learn" }] },
-  { heading: "Products", links: [{ label: "The Book", href: "/shop" }, { label: "Boxed Set", href: "/shop" }, { label: "Prayer Cards", href: "/shop" }, { label: "eBook", href: "/shop" }] },
+  { heading: "Products", links: [{ label: "The Book", href: "/shop/being-muslim-a-practical-guide-paperback/" }, { label: "Boxed Set", href: "/shop/the-boxed-set/" }, { label: "Prayer Cards", href: "/shop/the-daily-prayer-pocket-reference-card-25-pack-1/" }, { label: "eBook", href: "/shop/being-muslim-a-practical-guide-ebook/" }] },
   { heading: "Support", links: [{ label: "Donate", href: "/support" }, { label: "Request Donation", href: "/support" }, { label: "Volunteer", href: "/support" }] },
   { heading: "Company", links: [{ label: "About Us", href: "/contact" }, { label: "Contact", href: "/contact" }, { label: "Convert", href: "/convert" }, { label: "Privacy Policy", href: "/" }] },
 ];

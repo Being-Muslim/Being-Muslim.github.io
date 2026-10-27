@@ -21,9 +21,9 @@ async function validHmac(body: string, hmac: string | null) {
 }
 
 // Shopify order webhooks. The delivery is stored before it is processed and
-// we only answer 200 once it is stored, so Shopify keeps retrying (for 48h)
-// anything we could not record. Processing failures stay in webhook_event
-// with last_error for a retry.
+// we only answer 200 once it is stored and processed. On any failure we
+// answer 500, so Shopify redelivers (for up to 48h); the stored copy is
+// deduped by event id and reprocessed. last_error keeps the reason.
 export async function POST(req: Request) {
   const body = await req.text();
   if (!(await validHmac(body, req.headers.get("x-shopify-hmac-sha256")))) {
@@ -42,6 +42,7 @@ export async function POST(req: Request) {
     await processEvent(id);
   } catch (err) {
     console.error("shopify webhook processing failed", topic, id, err);
+    return new Response("processing failed", { status: 500 });
   }
   return new Response("ok");
 }

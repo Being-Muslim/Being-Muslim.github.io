@@ -63,6 +63,14 @@ export const verification = sqliteTable(
   (t) => [index("verification_identifier_idx").on(t.identifier)],
 );
 
+// Better Auth rate limiting, shared across Worker isolates.
+export const rateLimit = sqliteTable("rate_limit", {
+  id: text("id").primaryKey(),
+  key: text("key").notNull().unique(),
+  count: integer("count").notNull(),
+  lastRequest: integer("last_request").notNull(),
+});
+
 // Shopify orders mirrored from webhooks. Shopify stays the source of truth;
 // this copy powers the account area's order history.
 export const shopOrder = sqliteTable(

@@ -18,21 +18,21 @@ const articles = [
 ];
 
 const products = [
-  { title: "Being Muslim: A Practical Guide", price: "$14.95", badge: "Bestseller", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg", href: "/shop/book" },
-  { title: "The Complete Boxed Set", price: "$85.00", badge: "Most Popular", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg", href: "/shop/boxed-set" },
-  { title: "Prayer Reference Cards", price: "$37.50", badge: "", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-prayer-card-900x610.jpeg", href: "/shop/prayer-cards" },
-  { title: "Digital Edition (eBook)", price: "$9.00", badge: "", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/BM-E-Book-900x1200.png", href: "/shop/ebook" },
+  { title: "Being Muslim: A Practical Guide", price: "$14.95", badge: "", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/being-muslim-book.jpeg", href: "/shop/being-muslim-a-practical-guide-paperback/" },
+  { title: "The Complete Boxed Set", price: "$85.00", badge: "", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-boxed-set-900x1200.jpeg", href: "/shop/the-boxed-set/" },
+  { title: "Prayer Reference Cards", price: "$37.50", badge: "", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/the-prayer-card-900x610.jpeg", href: "/shop/the-daily-prayer-pocket-reference-card-25-pack-1/" },
+  { title: "Digital Edition (eBook)", price: "$9.00", badge: "", img: "https://www.beingmuslim.org/wp-content/uploads/2021/08/BM-E-Book-900x1200.png", href: "/shop/being-muslim-a-practical-guide-ebook/" },
 ];
 
+// Verbatim from Drive "Website: Conversion FAQs" (source of truth). Q5 is left
+// out until Drive names its article ("TITLE HERE WITH LINK").
 const faqs = [
-  { q: "My family is not supportive of my conversion. What do you advise?", a: "This is a common challenge many new Muslims face. We recommend patience, maintaining loving relationships, and leading by positive example. Our community forum has many discussions from people who have navigated this successfully." },
-  { q: "Can you help me find a mosque or community of Muslims near me?", a: "We can help connect you with local communities. Reach out through our Contact page and we will do our best to help you find a welcoming community in your area." },
-  { q: "My previous faith was very dear to me. If I am now a Muslim, do I have to reject it entirely?", a: "Islam acknowledges and respects the earlier prophets and scriptures. Many of the values you cherished in your previous faith are shared in Islam. Your journey enriches rather than erases your spiritual history." },
-  { q: "My spouse or significant other is not a Muslim. How does becoming Muslim impact my marriage?", a: "This is a nuanced topic that depends on your specific situation. We recommend speaking with a knowledgeable scholar who can provide guidance tailored to your circumstances. Reach out through our Contact page." },
-  { q: "I just converted, what do I do next?", a: "Congratulations and may God bless your path ahead! We have written an article that offers some advice and important first steps: “A Beginner's Guide to Being a Muslim.” You can find it on our Learn page." },
-  { q: "I believe Islam to be true and revealed by God, but I can't live up to its teachings. What should I do?", a: "This feeling is more common than you might think. Islam teaches that God is the Most Merciful and that no one is expected to be perfect. Begin with what you can, be sincere in your intention, and trust that growth comes with time. The door to God is always open." },
-  { q: "I want to convert, but I am finding it difficult to change my lifestyle including the way that I dress, what I eat/drink, relationships. Can I still become Muslim?", a: "Absolutely. Islam teaches that faith is a journey, not a destination. You do not need to be perfect to begin. Start with the essentials and grow at your own pace — God is patient and merciful." },
-  { q: "Do I need to change my name now that I have become Muslim?", a: "No, changing your name is not required in Islam. Many Muslims keep their birth names. Some choose to adopt a new name as a personal expression of their new identity, but this is entirely optional." },
+  { q: "What is required to become a Muslim?", a: "The process itself is quite simple. You only have to believe in and declare the Testimony of Faith: “I bear witness that there is nothing worthy of worship except Allah (God) and that Muhammad is the messenger of Allah (God).” This declaration means that you affirm the truth of everything that the Prophet Muhammad ﷺ brought and taught, including the Quran. If you want to arrange for someone to officiate your declaration of faith, let us know!" },
+  { q: "What should I learn about Islam before converting?", a: "If you properly understand what the absolute oneness of God without division or partner and the finality of Prophet Muhammad ﷺ mean, that is sufficient. However, it is also important to have a basic understanding of Islamic beliefs and how they may vary from other belief systems, as well a familiarity with the duties of each believer, such as the Five Pillars of Islamic practice." },
+  { q: "My family is not supportive of my conversion. What do you advise?", a: "It can be challenging when family members are not supportive of your decision. Remember, this was the case with the first community of believers, as well. Try to be wise and use your best judgment, while also having a degree of compassion for how challenging it must be for your family to feel like their loved one is changing or choosing another path. When possible, try to have open and respectful conversations with them about your beliefs and reasons for converting, while resisting the temptation to preach to them too soon. Remember to seek support from the Muslim community and find strength in your faith." },
+  { q: "My previous faith was very dear to me. If I am now a Muslim, do I have to reject it entirely?", a: "Islam teaches respect for all religions and holds that many of the world’s great religions were originally based in divine guidance through prophets, even if unknown to us. You do not need to reject all of the wisdom from your previous faith and can appreciate its positive aspects while embracing Islam as the perfect and ultimate criterion of truth to help you sift out any problematic aspects." },
+  { q: "I know Islam to be true and revealed by God, but I feel like I can’t live up to its teachings. What should I do?", a: "Keep in mind that the Islamic conception of humanity acknowledges inherent imperfection and the continuous struggle for self-improvement. One should not be discouraged from beginning the journey out of a false spiritual perfectionism. God’s most central attributes are found in the opening of essentially every chapter in the Quran, In the name of God, the Compassionate, the Merciful. As long as we continuously seek forgiveness for our shortcomings and work to improve, we are promised to be met with divine mercy. At the same time, it is critical to surround yourself with good company who can provide guidance and encouragement." },
+  { q: "Do I need to change my name now that I have become Muslim?", a: "No. Unless your name has a negative or inappropriate meaning, there is no imperative to change one’s name. You are free to keep your name although some may choose a new one with a positive meaning for various reasons, sometimes treating it as a second or unofficial name." },
 ];
 
 export default function ConceptAHome() {
@@ -77,7 +77,7 @@ export default function ConceptAHome() {
               <div>
                 <h2 style={css("font-family: 'Source Serif 4', serif; font-size: 36px; font-weight: 400; color: #2a2018; margin: 0 0 16px; line-height: 1.15")}>Explore your path</h2>
                 <p style={css("font-family: 'DM Sans', sans-serif; font-size: 15px; color: #5a5248; line-height: 1.6; margin: 0")}>
-                  Discover Islam through courses, articles, and guides. Whether you&apos;re curious, converting, or deepening your practice — find resources made for you.
+                  Discover Islam through courses, articles, and guides. Whether you&apos;re curious, converting, or deepening your practice, find resources made for you.
                 </p>
               </div>
               <div style={css("margin-top: 24px")}>
